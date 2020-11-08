@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ActiveWordZone } from '../game/ActiveWordZone';
 import { WordBashState } from '../WordBashState';
+import { AnswerWordZone } from './AnswerWordZone';
 import { LetterPool } from './LetterPool';
 
 import './wb-game.scss';
@@ -22,8 +23,17 @@ export class WBGame extends React.Component<WBGameProps> {
     const { wbState } = this.props;
     return (
       <div className={'wb-game'}>
-        <LetterPool wbState={wbState} />
-        <ActiveWordZone wbState={wbState} />
+        <div className={'wb-game__left'}>
+          <div className={'wbg-left-top'}>
+            <LetterPool wbState={wbState} />
+          </div>
+          <div className={'wbg-left-bot'}>
+            <ActiveWordZone wbState={wbState} />
+          </div>
+        </div>
+        <div className={'wb-game__right'}>
+          <AnswerWordZone />
+        </div>
       </div>
     );
   }

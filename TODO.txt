@@ -1,0 +1,8 @@
+PLAYGROUND:
+- App Cards: hover behaviour; enlarge on hover, reveal description text
+ (item grows, other list items shrink/move)
+
+ WORD BASH:
+ - Design game screen layout
+ - Better game state separation
+ - Input manager - decide where to put it

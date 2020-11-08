@@ -1,8 +1,8 @@
-import {action, observable} from 'mobx';
+import { action, observable } from 'mobx';
 
 export enum AppState {
   PLAYGROUND,
-  WORD_BASH
+  WORD_BASH,
 }
 
 export class PlaygroundState {

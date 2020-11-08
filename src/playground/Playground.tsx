@@ -10,7 +10,7 @@ import { AppState, PlaygroundState } from './PlaygroundState';
 export class Playground extends React.Component {
   private pgState = new PlaygroundState();
   public render() {
-    switch(this.pgState.appState) {
+    switch (this.pgState.appState) {
       case AppState.PLAYGROUND:
         return <AppList pgState={this.pgState} />;
       case AppState.WORD_BASH:

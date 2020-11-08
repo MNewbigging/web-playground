@@ -22,11 +22,6 @@ export class WordBash extends React.Component {
         break;
     }
 
-
-    return (
-      <div className={'word-bash'}>
-        {toRender}
-      </div>
-    );
+    return <div className={'word-bash'}>{toRender}</div>;
   }
 }

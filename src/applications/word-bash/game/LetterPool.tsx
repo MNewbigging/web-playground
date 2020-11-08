@@ -16,8 +16,8 @@ export class LetterPool extends React.Component<LetterPoolProps> {
   public render() {
     const { wbState } = this.props;
     const letters: JSX.Element[] = [];
-    wbState.letterPool.forEach((letter) => {
-      letters.push(<LetterTile {...letter} />);
+    wbState.letterPool.forEach((letter, idx) => {
+      letters.push(<LetterTile key={'lt-' + idx} {...letter} />);
     });
 
     return <div className={'letter-pool'}>{letters}</div>;

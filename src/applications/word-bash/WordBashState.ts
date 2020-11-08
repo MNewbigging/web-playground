@@ -18,7 +18,8 @@ export interface ILetterTile {
 
 export class WordBashState {
   @observable public wbScreen: WBScreen = WBScreen.MENU;
-  @observable public letterPool: ILetterTile[] = [];
+  @observable public letterPool: ILetterTile[] = []; // current letters in play
+  @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
   private letters: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
   @action public toWbScreen(wbState: WBScreen) {
@@ -30,20 +31,39 @@ export class WordBashState {
     this.toWbScreen(WBScreen.GAME);
   }
 
-  public pressKey(key: string) {
-    // Check for standard behaviour keys first (backspace, enter etc)
+  @action public pressKey(key: string) {
+    switch (key) {
+      case 'Backspace':
+        this.undoLastLetter();
+        break;
+      case 'Enter':
+        console.log('hit enter');
+        break;
+      default:
+        this.checkKeyCharacter(key);
+        break;
+    }
+  }
 
+  private checkKeyCharacter(key: string) {
     // Only valid if letter exists in normal state
     const validLetter = this.letterPool.findIndex(
       (l) => l.letter.toLowerCase() === key.toLowerCase() && l.status === LetterTileStatus.NORMAL
     );
     if (validLetter >= 0) {
       this.letterPool[validLetter].status = LetterTileStatus.ACTIVE;
+      this.lastPickedLetters.push(validLetter);
     }
   }
 
   private undoLastLetter() {
+    if (!this.lastPickedLetters.length) {
+      return;
+    }
     // on backspace, remove last activated letter
+    const lpl = this.lastPickedLetters[this.lastPickedLetters.length - 1];
+    this.letterPool[lpl].status = LetterTileStatus.NORMAL;
+    this.lastPickedLetters.pop();
   }
 
   private prepLetterPool() {

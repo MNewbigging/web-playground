@@ -19,6 +19,7 @@ export class WBGame extends React.Component<WBGameProps> {
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onKeyPressed);
   }
+
   public render() {
     const { wbState } = this.props;
     return (

@@ -37,7 +37,7 @@ export class WordBashState {
         this.undoLastLetter();
         break;
       case 'Enter':
-        console.log('hit enter');
+        this.checkWord();
         break;
       default:
         this.checkKeyCharacter(key);
@@ -64,6 +64,18 @@ export class WordBashState {
     const lpl = this.lastPickedLetters[this.lastPickedLetters.length - 1];
     this.letterPool[lpl].status = LetterTileStatus.NORMAL;
     this.lastPickedLetters.pop();
+  }
+
+  private checkWord() {
+    if (!this.lastPickedLetters.length) {
+      return;
+    }
+    // Get the word
+    let word: string = '';
+    this.lastPickedLetters.forEach((lpl) => {
+      word += this.letterPool[lpl].letter.toLowerCase();
+    });
+    console.log('word: ', word);
   }
 
   private prepLetterPool() {

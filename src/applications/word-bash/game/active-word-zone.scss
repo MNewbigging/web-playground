@@ -1,5 +1,8 @@
 .active-word-zone {
   width: 50%;
   height: 20%;
+  padding: 20px;
   background-color: lightyellow;
+  display: flex;
+  flex-direction: row;
 }

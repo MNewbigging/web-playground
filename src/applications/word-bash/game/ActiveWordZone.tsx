@@ -1,15 +1,27 @@
 import React from 'react';
 
-import { WordBashState } from '../WordBashState';
+import { observer } from 'mobx-react';
+
+import { LetterTileStatus, WordBashState } from '../WordBashState';
+import { LetterTile } from './LetterTile';
+
+import './active-word-zone.scss';
 
 interface AWZProps {
   wbState: WordBashState;
 }
 
-import './active-word-zone.scss';
-
+@observer
 export class ActiveWordZone extends React.Component<AWZProps> {
   public render() {
-    return <div className={'active-word-zone'}>ACTIVE WORD ZONE</div>;
+    const { wbState } = this.props;
+    const letters: JSX.Element[] = [];
+    wbState.letterPool.forEach((letter) => {
+      if (letter.status === LetterTileStatus.ACTIVE) {
+        letters.push(<LetterTile {...letter} />);
+      }
+    });
+
+    return <div className={'active-word-zone'}>{letters}</div>;
   }
 }

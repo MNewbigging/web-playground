@@ -7,4 +7,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.normal {
+  }
+
+  &.active {
+    background-color: gold;
+  }
+
+  &.inactive {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+  }
 }

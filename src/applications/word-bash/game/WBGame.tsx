@@ -11,6 +11,13 @@ interface WBGameProps {
 }
 
 export class WBGame extends React.Component<WBGameProps> {
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeyPressed);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyPressed);
+  }
   public render() {
     const { wbState } = this.props;
     return (
@@ -20,4 +27,8 @@ export class WBGame extends React.Component<WBGameProps> {
       </div>
     );
   }
+
+  private onKeyPressed = (evt: KeyboardEvent) => {
+    this.props.wbState.pressKey(evt.key);
+  };
 }

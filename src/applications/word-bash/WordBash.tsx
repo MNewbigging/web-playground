@@ -2,6 +2,7 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { WBGame } from './game/WBGame';
 import { WBMenu } from './menu/WBMenu';
 import { WBScreen, WordBashState } from './WordBashState';
 
@@ -17,7 +18,7 @@ export class WordBash extends React.Component {
         toRender = <WBMenu wbState={this.wbState} />;
         break;
       case WBScreen.GAME:
-        toRender = <div>GAME</div>;
+        toRender = <WBGame wbState={this.wbState} />;
         break;
     }
 

@@ -1,13 +1,21 @@
 import React from 'react';
 
-import { Card } from '@blueprintjs/core';
+import { AppCard } from './AppCard';
+import { AppState, PlaygroundState } from './PlaygroundState';
 
-export class AppList extends React.Component {
+import './app-list.scss';
+
+interface AppListProps {
+  pgState: PlaygroundState;
+}
+
+export class AppList extends React.Component<AppListProps> {
   public render() {
+    const { pgState } = this.props;
     return (
-      <Card>
-        <div>I'm a card</div>
-      </Card>
+      <div className={'app-list'}>
+        <AppCard title={'Word Bash'} toApp={() => pgState.toApp(AppState.WORD_BASH)} />
+      </div>
     );
   }
 }

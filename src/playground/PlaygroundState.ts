@@ -8,7 +8,7 @@ export enum AppState {
 export class PlaygroundState {
   @observable public appState: AppState = AppState.PLAYGROUND;
 
-  @action setAppState(appState: AppState) {
+  @action toApp(appState: AppState) {
     this.appState = appState;
   }
 }

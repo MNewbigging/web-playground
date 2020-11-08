@@ -11,11 +11,8 @@ import './app.scss';
 class App {
   // Perform app setup here
   constructor(parent: HTMLElement) {
-
-    // Create top-level app component with state
     const app = React.createElement(Playground);
 
-    // Render it to DOM
     ReactDOM.render(app, parent);
   }
 }

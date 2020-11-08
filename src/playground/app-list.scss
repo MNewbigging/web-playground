@@ -1,0 +1,14 @@
+// Includes styling for app cards
+
+.app-list {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+
+  .app-card {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+  }
+}

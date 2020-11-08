@@ -14,5 +14,5 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["dom", "es5", "es6"]
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "prettier.config.js"]
 }

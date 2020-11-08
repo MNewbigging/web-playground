@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ActiveWordZone } from '../game/ActiveWordZone';
 import { WordBashState } from '../WordBashState';
 import { LetterPool } from './LetterPool';
 
@@ -15,6 +16,7 @@ export class WBGame extends React.Component<WBGameProps> {
     return (
       <div className={'wb-game'}>
         <LetterPool wbState={wbState} />
+        <ActiveWordZone wbState={wbState} />
       </div>
     );
   }

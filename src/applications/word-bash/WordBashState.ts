@@ -97,6 +97,7 @@ export class WordBashState {
     // Search dictionary
     if (this.lookupWord(dictionary, word)) {
       this.acceptAnswer(word);
+      this.setChosenLettersInactive();
     }
   }
 
@@ -117,6 +118,7 @@ export class WordBashState {
   }
 
   @action private acceptAnswer(answer: string) {
+    // Add answer to array for display
     const len = answer.length;
     switch (true) {
       case len < 5:
@@ -132,6 +134,13 @@ export class WordBashState {
         this.answers9Plus.push(answer);
         break;
     }
+  }
+
+  private setChosenLettersInactive() {
+    this.lastPickedLetters.forEach((lpl) => {
+      this.letterPool[lpl].status = LetterTileStatus.INACTIVE;
+    });
+    this.lastPickedLetters = [];
   }
 
   private prepLetterPool() {

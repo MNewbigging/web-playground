@@ -32,11 +32,13 @@ export class WordBashState {
   }
 
   @action public pressKey(key: string) {
+    console.log('checking key: ', key);
     switch (key) {
       case 'Backspace':
         this.undoLastLetter();
         break;
       case 'Enter':
+        console.log('hit enter');
         this.checkWord();
         break;
       default:
@@ -66,16 +68,38 @@ export class WordBashState {
     this.lastPickedLetters.pop();
   }
 
-  private checkWord() {
+  private async checkWord() {
     if (!this.lastPickedLetters.length) {
       return;
     }
+
     // Get the word
     let word: string = '';
     this.lastPickedLetters.forEach((lpl) => {
       word += this.letterPool[lpl].letter.toLowerCase();
     });
-    console.log('word: ', word);
+
+    // Build file path for lookup
+    const filePath: string = '/dist/assets/word-data/' + word[0] + '.txt';
+
+    // Get txt file
+    const fileContents = await this.lookupWord(filePath, word);
+    const dictionary = fileContents.split('\n');
+
+    // Search dictionary
+    // tslint:disable-next-line: prefer-for-of
+    for (let i: number = 0; i < dictionary.length; i++) {
+      if (dictionary[i] === word) {
+        console.log('found match');
+        break;
+      }
+    }
+  }
+
+  private async lookupWord(filePath: string, word: string) {
+    console.log('looking up word: ', word);
+    const response = await fetch(filePath);
+    return response.text(); // contains entire txt file in a string
   }
 
   private prepLetterPool() {

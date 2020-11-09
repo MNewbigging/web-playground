@@ -20,7 +20,11 @@ export class WordBashState {
   @observable public wbScreen: WBScreen = WBScreen.MENU;
   @observable public letterPool: ILetterTile[] = []; // current letters in play
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
-  @observable public answerWords = new Map<number, string[]>(); // accepted answers - length: answers
+  // Accepted answers
+  @observable public answers3To4: string[] = [];
+  @observable public answers5To6: string[] = [];
+  @observable public answers7To8: string[] = [];
+  @observable public answers9Plus: string[] = [];
   private letters: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
   @action public toWbScreen(wbState: WBScreen) {
@@ -78,6 +82,11 @@ export class WordBashState {
       word += this.letterPool[lpl].letter.toLowerCase();
     });
 
+    // Exit if word too short
+    if (word.length < 3) {
+      return;
+    }
+
     // Build file path for lookup
     const filePath: string = '/dist/assets/word-data/' + word[0] + '.txt';
 
@@ -107,13 +116,22 @@ export class WordBashState {
     return false;
   }
 
-  private acceptAnswer(answer: string) {
-    // Get list of accepted answers for this answer length
-    const existingAnswers = this.answerWords.get(answer.length) ?? [];
-    // Add this answer
-    existingAnswers.push(answer);
-    // Update answer map
-    this.answerWords.set(answer.length, existingAnswers);
+  @action private acceptAnswer(answer: string) {
+    const len = answer.length;
+    switch (true) {
+      case len < 5:
+        this.answers3To4.push(answer);
+        break;
+      case len < 7:
+        this.answers5To6.push(answer);
+        break;
+      case len < 9:
+        this.answers7To8.push(answer);
+        break;
+      case len >= 9:
+        this.answers9Plus.push(answer);
+        break;
+    }
   }
 
   private prepLetterPool() {

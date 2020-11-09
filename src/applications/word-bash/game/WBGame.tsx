@@ -33,7 +33,7 @@ export class WBGame extends React.Component<WBGameProps> {
           </div>
         </div>
         <div className={'wb-game__right'}>
-          <AnswerWordZone />
+          <AnswerWordZone wbState={wbState} />
         </div>
       </div>
     );

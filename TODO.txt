@@ -8,3 +8,4 @@ PLAYGROUND:
  - Answer Zone
  - Letter pool generation algorithm/rules
  - Change WordBashState.letters into string from array
+ - Adding/removing answers forces whole answer pool rebuild - streamline

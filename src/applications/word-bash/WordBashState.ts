@@ -20,7 +20,8 @@ export class WordBashState {
   @observable public wbScreen: WBScreen = WBScreen.MENU;
   @observable public letterPool: ILetterTile[] = []; // current letters in play
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
-  private letters: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  @observable public answerWords = new Map<number, string[]>(); // accepted answers - length: answers
+  private letters: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
   @action public toWbScreen(wbState: WBScreen) {
     this.wbScreen = wbState;
@@ -32,13 +33,11 @@ export class WordBashState {
   }
 
   @action public pressKey(key: string) {
-    console.log('checking key: ', key);
     switch (key) {
       case 'Backspace':
         this.undoLastLetter();
         break;
       case 'Enter':
-        console.log('hit enter');
         this.checkWord();
         break;
       default:
@@ -82,24 +81,39 @@ export class WordBashState {
     // Build file path for lookup
     const filePath: string = '/dist/assets/word-data/' + word[0] + '.txt';
 
-    // Get txt file
-    const fileContents = await this.lookupWord(filePath, word);
+    // Get dictionary txt file for this word
+    const fileContents = await this.getDictionary(filePath);
     const dictionary = fileContents.split('\n');
 
     // Search dictionary
+    if (this.lookupWord(dictionary, word)) {
+      this.acceptAnswer(word);
+    }
+  }
+
+  private async getDictionary(filePath: string) {
+    const response = await fetch(filePath);
+    return response.text(); // contains entire txt file in a string
+  }
+
+  private lookupWord(dictionary: string[], word: string) {
     // tslint:disable-next-line: prefer-for-of
     for (let i: number = 0; i < dictionary.length; i++) {
       if (dictionary[i] === word) {
         console.log('found match');
-        break;
+        return true;
       }
     }
+    return false;
   }
 
-  private async lookupWord(filePath: string, word: string) {
-    console.log('looking up word: ', word);
-    const response = await fetch(filePath);
-    return response.text(); // contains entire txt file in a string
+  private acceptAnswer(answer: string) {
+    // Get list of accepted answers for this answer length
+    const existingAnswers = this.answerWords.get(answer.length) ?? [];
+    // Add this answer
+    existingAnswers.push(answer);
+    // Update answer map
+    this.answerWords.set(answer.length, existingAnswers);
   }
 
   private prepLetterPool() {

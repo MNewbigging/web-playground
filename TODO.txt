@@ -3,6 +3,8 @@ PLAYGROUND:
  (item grows, other list items shrink/move)
 
  WORD BASH:
- - Design game screen layout
  - Better game state separation
  - Input manager - decide where to put it
+ - Answer Zone
+ - Letter pool generation algorithm/rules
+ - Change WordBashState.letters into string from array

@@ -3,7 +3,6 @@ PLAYGROUND:
  (item grows, other list items shrink/move)
 
  WORD BASH:
- - Better game state separation
- - Input manager - decide where to put it
  - Adding/removing answers forces whole answer pool rebuild - streamline
- - Answer words as tiles - style
+ - Active word zone styling
+ - Notify when wrong word entered

@@ -25,7 +25,11 @@ export class WordBashState {
   @observable public answers5To6: string[] = [];
   @observable public answers7To8: string[] = [];
   @observable public answers9Plus: string[] = [];
-  private letters: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  private readonly letters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  private readonly vowels: string = 'AEIOU';
+  private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZ';
+  private readonly letterPoolSizeLimit: number = 30;
+  private readonly consonantVowelRatio: number = 3;
 
   @action public toWbScreen(wbState: WBScreen) {
     this.wbScreen = wbState;
@@ -145,11 +149,21 @@ export class WordBashState {
 
   private prepLetterPool() {
     this.letterPool = [];
-    this.letters.forEach((l) => {
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i: number = 0; i < this.letterPoolSizeLimit; i++) {
+      let char: string = '';
+      // Vowels every n consonants
+      if (i % this.consonantVowelRatio === 0) {
+        char = this.vowels[Math.floor(Math.random() * this.vowels.length)];
+      } else {
+        char = this.consonants[Math.floor(Math.random() * this.consonants.length)];
+      }
+
       this.letterPool.push({
-        letter: l,
+        letter: char,
         status: LetterTileStatus.NORMAL,
       });
-    });
+    }
   }
 }

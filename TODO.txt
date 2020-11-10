@@ -5,8 +5,5 @@ PLAYGROUND:
  WORD BASH:
  - Better game state separation
  - Input manager - decide where to put it
- - Answer Zone
- - Letter pool generation algorithm/rules
- - Change WordBashState.letters into string from array
  - Adding/removing answers forces whole answer pool rebuild - streamline
- - Answer words as tiles
+ - Answer words as tiles - style

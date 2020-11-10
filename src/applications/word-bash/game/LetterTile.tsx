@@ -11,9 +11,10 @@ export class LetterTile extends React.Component<ILetterTile> {
   public render() {
     const { letter, status } = this.props;
     // need a div inside this so the circle is centererd
+    const letterStr = status === LetterTileStatus.INACTIVE ? '' : letter;
     return (
       <div className={'letter-tile ' + status}>
-        {status !== LetterTileStatus.INACTIVE && <div>{letter}</div>}
+        <div className={'lt-inner'}>{letterStr}</div>
       </div>
     );
   }

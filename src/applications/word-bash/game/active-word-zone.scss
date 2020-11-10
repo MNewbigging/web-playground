@@ -9,8 +9,18 @@
   display: flex;
   flex-direction: row;
 
+  // special style rules for tiles within active word zone
   .letter-tile {
     margin: 2px;
     align-self: center;
+  }
+
+  // on wrong word entered
+  &.warning {
+    border: 2px solid red;
+  }
+
+  &.correct {
+    border: 2px solid green;
   }
 }

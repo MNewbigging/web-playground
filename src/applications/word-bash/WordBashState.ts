@@ -21,7 +21,11 @@ export class WordBashState {
   @observable public letterPool: ILetterTile[] = []; // current letters in play
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
 
-  // Accepted answers
+  // Answer values
+  @observable public wrongAnswer: boolean = false;
+  private wrongAnswerDelay: number = 1000;
+  @observable public rightAnswer: boolean = false;
+  private rightAnswerDelay: number = 500;
   @observable public answers3To4: string[] = [];
   @observable public answers5To6: string[] = [];
   @observable public answers7To8: string[] = [];
@@ -104,6 +108,7 @@ export class WordBashState {
 
   private async checkWord() {
     if (!this.lastPickedLetters.length) {
+      this.rejectAnswer();
       return;
     }
 
@@ -115,6 +120,7 @@ export class WordBashState {
 
     // Exit if word too short
     if (word.length < 3) {
+      this.rejectAnswer();
       return;
     }
 
@@ -126,10 +132,13 @@ export class WordBashState {
     const dictionary = fileContents.split('\n');
 
     // Search dictionary
-    if (this.lookupWord(dictionary, word)) {
-      this.acceptAnswer(word);
-      this.setChosenLettersInactive();
+    if (!this.lookupWord(dictionary, word)) {
+      this.rejectAnswer();
+      return;
     }
+
+    this.acceptAnswer(word);
+    this.setChosenLettersInactive();
   }
 
   private async getDictionary(filePath: string) {
@@ -169,6 +178,15 @@ export class WordBashState {
     }
     // Add to answer map with position of letters in pool
     this.allAnswers.set(answer, this.lastPickedLetters);
+
+    // Update classes for visual cue
+    this.rightAnswer = true;
+    setTimeout(() => (this.rightAnswer = false), this.rightAnswerDelay);
+  }
+
+  @action private rejectAnswer() {
+    this.wrongAnswer = true;
+    setTimeout(() => (this.wrongAnswer = false), this.wrongAnswerDelay);
   }
 
   private setChosenLettersInactive() {

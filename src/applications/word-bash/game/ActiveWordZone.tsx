@@ -21,6 +21,9 @@ export class ActiveWordZone extends React.Component<AWZProps> {
       letters.push(<LetterTile key={'at-' + idx} {...letter} />);
     });
 
-    return <div className={'active-word-zone'}>{letters}</div>;
+    let alertClassName = wbState.rightAnswer ? 'correct' : '';
+    alertClassName = wbState.wrongAnswer ? 'warning' : alertClassName;
+
+    return <div className={'active-word-zone ' + alertClassName}>{letters}</div>;
   }
 }

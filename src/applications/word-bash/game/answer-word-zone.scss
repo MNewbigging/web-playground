@@ -15,5 +15,10 @@
     height: 24%;
     width: 90%;
     flex: 0 1 auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: auto;
   }
 }

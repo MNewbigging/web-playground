@@ -35,19 +35,19 @@ export class AnswerWordZone extends React.Component<AWZProps> {
     const answers9Plus: JSX.Element[] = [];
 
     wbState.answers3To4.forEach((ans) => {
-      answers3To4.push(<AnswerWord word={ans} />);
+      answers3To4.push(<AnswerWord word={ans} wbState={wbState} />);
     });
 
     wbState.answers5To6.forEach((ans) => {
-      answers5To6.push(<AnswerWord word={ans} />);
+      answers5To6.push(<AnswerWord word={ans} wbState={wbState} />);
     });
 
     wbState.answers7To8.forEach((ans) => {
-      answers7To8.push(<AnswerWord word={ans} />);
+      answers7To8.push(<AnswerWord word={ans} wbState={wbState} />);
     });
 
     wbState.answers9Plus.forEach((ans) => {
-      answers9Plus.push(<AnswerWord word={ans} />);
+      answers9Plus.push(<AnswerWord word={ans} wbState={wbState} />);
     });
 
     return [answers3To4, answers5To6, answers7To8, answers9Plus];

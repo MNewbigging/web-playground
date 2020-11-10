@@ -20,12 +20,15 @@ export class WordBashState {
   @observable public wbScreen: WBScreen = WBScreen.MENU;
   @observable public letterPool: ILetterTile[] = []; // current letters in play
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
+
   // Accepted answers
   @observable public answers3To4: string[] = [];
   @observable public answers5To6: string[] = [];
   @observable public answers7To8: string[] = [];
   @observable public answers9Plus: string[] = [];
-  private readonly letters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  private allAnswers = new Map<string, number[]>(); // answer string: index into letter pool
+
+  // Letter pool generation values
   private readonly vowels: string = 'AEIOU';
   private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZ';
   private readonly letterPoolSizeLimit: number = 30;
@@ -52,6 +55,30 @@ export class WordBashState {
         this.checkKeyCharacter(key);
         break;
     }
+  }
+
+  @action public removeAnswer(answer: string) {
+    // Remove from answers array to update answer pool
+    const length = answer.length;
+    switch (true) {
+      case length < 5:
+        this.answers3To4 = this.answers3To4.filter((ans) => ans !== answer);
+        break;
+      case length < 7:
+        this.answers5To6 = this.answers5To6.filter((ans) => ans !== answer);
+        break;
+      case length < 9:
+        this.answers7To8 = this.answers7To8.filter((ans) => ans !== answer);
+        break;
+      case length >= 9:
+        this.answers9Plus = this.answers9Plus.filter((ans) => ans !== answer);
+        break;
+    }
+    // Make those letters active again
+    const answerLetterPositions = this.allAnswers.get(answer);
+    answerLetterPositions.forEach((alp) => {
+      this.letterPool[alp].status = LetterTileStatus.NORMAL;
+    });
   }
 
   private checkKeyCharacter(key: string) {
@@ -137,7 +164,11 @@ export class WordBashState {
       case len >= 9:
         this.answers9Plus.push(answer);
         break;
+      default:
+        return;
     }
+    // Add to answer map with position of letters in pool
+    this.allAnswers.set(answer, this.lastPickedLetters);
   }
 
   private setChosenLettersInactive() {

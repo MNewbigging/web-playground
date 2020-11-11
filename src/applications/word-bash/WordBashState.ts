@@ -18,8 +18,20 @@ export interface ILetterTile {
   status: LetterTileStatus;
 }
 
+interface Lifelines {
+  vowels: number;
+  consonants: number;
+}
+
 export class WordBashState {
   private letterGenerator = new LetterGenerator();
+
+  // Player lifeline abilities
+  private lifelines: Lifelines = {
+    vowels: 1,
+    consonants: 1,
+  };
+
   @observable public wbScreen: WBScreen = WBScreen.MENU;
   @observable public letterPool: ILetterTile[] = []; // current letters in play
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool

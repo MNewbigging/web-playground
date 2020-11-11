@@ -4,6 +4,7 @@ import { ActiveWordZone } from '../game/ActiveWordZone';
 import { WordBashState } from '../WordBashState';
 import { AnswerWordZone } from './AnswerWordZone';
 import { LetterPool } from './LetterPool';
+import { InGameMenu } from './InGameMenu';
 
 import './wb-game.scss';
 
@@ -26,10 +27,15 @@ export class WBGame extends React.Component<WBGameProps> {
       <div className={'wb-game'}>
         <div className={'wb-game__left'}>
           <div className={'wbg-left-top'}>
-            <LetterPool wbState={wbState} />
+            <InGameMenu />
           </div>
           <div className={'wbg-left-bot'}>
-            <ActiveWordZone wbState={wbState} />
+            <div className={'wbg-lb-top'}>
+              <LetterPool wbState={wbState} />
+            </div>
+            <div className={'wbg-lb-bot'}>
+              <ActiveWordZone wbState={wbState} />
+            </div>
           </div>
         </div>
         <div className={'wb-game__right'}>

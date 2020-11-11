@@ -15,43 +15,39 @@ export interface ConsonantsWeight {
 }
 
 export class LetterGenerator {
-  private minVowelRatio: number = 0.25;
+  private minVowelRatio: number = 0.28;
   private maxVowelRatio: number = 0.42;
-  private poolSize: number = 40;
-
-  constructor() {
-    // const weight: ConsonantsWeight = {
-    //   common: 3,
-    //   uncommon: 2,
-    //   rare: 1,
-    // };
-    // const consonants: string = this.getConsonants(weight);
-    // console.log('consonants: ', consonants);
-    // const vowelCount: number = this.getVowelCount(this.poolSize);
-    // console.log('vowelRatio: ', vowelCount);
-    // const gameVowels: string = this.generateVowels(vowelCount);
-    // console.log('game vowels: ', gameVowels);
-    // const gameConsonants: string = this.generateConsonants(consonants, this.poolSize, vowelCount);
-    // console.log('game consonants: ', gameConsonants);
-  }
+  private gameVowels: string = '';
+  private gameConsonants: string = '';
 
   public generateLetters(poolSize: number, weight: ConsonantsWeight) {
     const consonants: string = this.getConsonants(weight);
     console.log('consonants: ', consonants);
 
-    const vowelCount: number = this.getVowelCount(this.poolSize);
+    const vowelCount: number = this.getVowelCount(poolSize);
     console.log('vowelRatio: ', vowelCount);
 
     const gameVowels: string = this.generateVowels(vowelCount);
     console.log('game vowels: ', gameVowels);
 
-    const gameConsonants: string = this.generateConsonants(consonants, this.poolSize, vowelCount);
+    const gameConsonants: string = this.generateConsonants(consonants, poolSize, vowelCount);
     console.log('game consonants: ', gameConsonants);
 
     const shuffledLetters: string = this.shuffleLetters(gameVowels, gameConsonants);
     console.log('shuffled letters: ', shuffledLetters);
 
+    this.gameVowels = gameVowels;
+    this.gameConsonants = gameConsonants;
+
     return shuffledLetters;
+  }
+
+  public getRandomVowel() {
+    return Vowels.ALL[Math.floor(Math.random() * Vowels.ALL.length)];
+  }
+
+  public getRandomConsonant() {
+    return this.gameConsonants[Math.floor(Math.random() * this.gameConsonants.length)];
   }
 
   // Take in weight, build consonants string
@@ -92,7 +88,7 @@ export class LetterGenerator {
   private generateConsonants(consonants: string, poolSize: number, vowelCount: number) {
     let gameCons = '';
     const consCount = poolSize - vowelCount; // Remainder of pool after vowels are consonants
-    console.log(`pool size ${this.poolSize} - vowels ${vowelCount} = ${consCount}`);
+    console.log(`pool size ${poolSize} - vowels ${vowelCount} = ${consCount}`);
     for (let i: number = 0; i < consCount; i++) {
       gameCons += consonants[Math.floor(Math.random() * consonants.length)];
     }

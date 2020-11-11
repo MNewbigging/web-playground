@@ -1,4 +1,5 @@
 .in-game-menu {
+  z-index: 10;
   height: 60px;
   width: 100%;
   border-bottom: 1px solid #1d3557;
@@ -11,5 +12,6 @@
 
   .button {
     margin: 8px;
+    z-index: 10;
   }
 }

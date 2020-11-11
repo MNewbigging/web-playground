@@ -20,7 +20,7 @@ export class AnswerWord extends React.Component<AnswerWordProps> {
 
     return (
       <div className={'answer-word'}>
-        <Tag large={true} onRemove={() => wbState.removeAnswer(word)}>
+        <Tag key={word} large={true} onRemove={() => wbState.removeAnswer(word)}>
           {upperWord}
         </Tag>
       </div>

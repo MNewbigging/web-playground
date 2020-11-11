@@ -18,10 +18,10 @@ export class AnswerWordZone extends React.Component<AWZProps> {
 
     return (
       <div className={'answer-word-zone'}>
-        <div className={'answer-pool'}>3-4 {answers[0]}</div>
-        <div className={'answer-pool'}>5-6 {answers[1]}</div>
-        <div className={'answer-pool'}>7-8 {answers[2]}</div>
-        <div className={'answer-pool'}>9+ {answers[3]}</div>
+        <div className={'answer-pool'}>{answers[0]}</div>
+        <div className={'answer-pool'}>{answers[1]}</div>
+        <div className={'answer-pool'}>{answers[2]}</div>
+        <div className={'answer-pool'}>{answers[3]}</div>
       </div>
     );
   }

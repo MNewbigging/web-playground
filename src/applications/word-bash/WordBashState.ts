@@ -34,8 +34,8 @@ export class WordBashState {
 
   // Letter pool generation values
   private readonly vowels: string = 'AEIOU';
-  private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZ';
-  private readonly letterPoolSizeLimit: number = 30;
+  private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZBCDFGHJKLMNPRSTVWY';
+  private readonly letterPoolSizeLimit: number = 40;
   private readonly consonantVowelRatio: number = 3;
 
   @action public toWbScreen(wbState: WBScreen) {
@@ -202,10 +202,12 @@ export class WordBashState {
     // tslint:disable-next-line: prefer-for-of
     for (let i: number = 0; i < this.letterPoolSizeLimit; i++) {
       let char: string = '';
-      // Vowels every n consonants
-      if (i % this.consonantVowelRatio === 0) {
+      const rnd: number = Math.random();
+      if (rnd < 0.33) {
+        // vowel
         char = this.vowels[Math.floor(Math.random() * this.vowels.length)];
       } else {
+        // consonant
         char = this.consonants[Math.floor(Math.random() * this.consonants.length)];
       }
 
@@ -214,5 +216,30 @@ export class WordBashState {
         status: LetterTileStatus.NORMAL,
       });
     }
+  }
+
+  private getLetter(vowel: boolean) {
+    let char: string = '';
+    if (vowel) {
+      // vowel list
+      char = this.vowels[Math.floor(Math.random() * this.vowels.length)];
+    } else {
+      // consonant list
+      char = this.consonants[Math.floor(Math.random() * this.consonants.length)];
+    }
+
+    // Limit to 2 of a kind max
+    let currentCharCount = 0;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i: number = 0; i < this.letterPool.length; i++) {
+      if (this.letterPool[i].letter === char) {
+        currentCharCount++;
+      }
+    }
+    if (currentCharCount >= 2) {
+      char = this.getLetter(vowel);
+    }
+
+    return char;
   }
 }

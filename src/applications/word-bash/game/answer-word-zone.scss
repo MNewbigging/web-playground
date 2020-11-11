@@ -1,7 +1,6 @@
 .answer-word-zone {
   width: 100%;
   height: 100%;
-  background-color: mediumaquamarine;
 
   display: flex;
   flex-direction: column;
@@ -10,7 +9,7 @@
 
   .answer-pool {
     box-sizing: border-box;
-    border: 1px solid grey;
+    border: 1px solid #1d3557;
     border-radius: 6px;
     height: 24%;
     width: 90%;

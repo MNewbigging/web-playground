@@ -4,5 +4,13 @@ PLAYGROUND:
 
  WORD BASH:
  - Adding/removing answers forces whole answer pool rebuild - streamline
- - Active word zone styling
- - Notify when wrong word entered
+ - Proper style for the game
+ - SFX
+ - Further game UI on top of screen
+ - Menu screen
+ - Better letter algorithm - less dupes
+ - Active word zone to wrap content and enlarge on loads of letters
+ - Move active word area to bottom, have bucket border for tiles (flex-end so they appear at bottom)
+ - Position transition animation - tiles fall from top of screen into position
+ - Flashy winning anmation
+ - No duplicate word answers

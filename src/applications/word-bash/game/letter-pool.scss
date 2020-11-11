@@ -1,7 +1,7 @@
 // .letter-pool {
 //   // Letter tiles
 //   display: flex;
-//   flex-direction: row;
+//   flex-direction: row row-reverse;
 //   flex-wrap: wrap;
 //   justify-content: center;
 //   align-content: center;
@@ -13,4 +13,40 @@
   grid-template-rows: repeat(7, 50px);
   row-gap: 10px;
   column-gap: 10px;
+
+  // :nth-child(-n + 10) {
+  //   grid-row: 7;
+  // }
+
+  // :nth-child(-n + 11):nth-child(-n + 20) {
+  //   grid-row: 6;
+  // }
+
+  :nth-child(n + 0):nth-child(-n + 10) {
+    grid-row: 7;
+  }
+
+  :nth-child(n + 11):nth-child(-n + 20) {
+    grid-row: 6;
+  }
+
+  :nth-child(n + 21):nth-child(-n + 30) {
+    grid-row: 5;
+  }
+
+  :nth-child(n + 31):nth-child(-n + 40) {
+    grid-row: 4;
+  }
+
+  :nth-child(n + 41):nth-child(-n + 50) {
+    grid-row: 3;
+  }
+
+  :nth-child(n + 51):nth-child(-n + 60) {
+    grid-row: 2;
+  }
+
+  :nth-child(n + 61):nth-child(-n + 70) {
+    grid-row: 1;
+  }
 }

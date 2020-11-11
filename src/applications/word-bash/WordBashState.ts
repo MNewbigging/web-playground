@@ -16,6 +16,8 @@ export enum LetterTileStatus {
 export interface ILetterTile {
   letter: string;
   status: LetterTileStatus;
+  row: number;
+  column: number;
 }
 
 interface Lifelines {
@@ -28,8 +30,8 @@ export class WordBashState {
 
   // Player lifeline abilities
   @observable public lifeline: Lifelines = {
-    vowels: 1,
-    consonants: 1,
+    vowels: 100,
+    consonants: 100,
   };
 
   @observable public wbScreen: WBScreen = WBScreen.MENU;
@@ -68,7 +70,11 @@ export class WordBashState {
       this.letterPool.push({
         letter: gameLetters[i],
         status: LetterTileStatus.NORMAL,
+        row: 0,
+        column: 0,
       });
+
+      // sort out row/col values
     }
 
     this.toWbScreen(WBScreen.GAME);
@@ -246,9 +252,15 @@ export class WordBashState {
   }
 
   private addLetterToPool(letter: string) {
+    if (this.letterPool.length >= 70) {
+      return;
+    }
+
     this.letterPool.push({
       letter,
       status: LetterTileStatus.NORMAL,
+      row: 0,
+      column: 0,
     });
   }
 }

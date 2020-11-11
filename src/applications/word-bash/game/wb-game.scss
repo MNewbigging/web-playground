@@ -14,22 +14,24 @@
     flex-direction: column;
     justify-content: space-between;
 
+    // This is the game menu bar
     .wbg-left-top {
       height: 80px;
-      //flex: 0 0 auto;
-      //margin-bottom: 30px;
     }
 
+    // letter pool and active answer zone container
     .wbg-left-bot {
       flex: 1 0 auto;
-      //margin-bottom: 20px;
-      //height: 80px;
+
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
 
       .wbg-lb-top {
         margin-bottom: 20px;
+        // center grid inside this
+        display: flex;
+        justify-content: center;
       }
 
       .wbg-lb-bot {

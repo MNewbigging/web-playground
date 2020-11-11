@@ -1,8 +1,16 @@
+// .letter-pool {
+//   // Letter tiles
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   align-content: center;
+// }
+
 .letter-pool {
-  // Letter tiles
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(7, 50px);
+  row-gap: 10px;
+  column-gap: 10px;
 }

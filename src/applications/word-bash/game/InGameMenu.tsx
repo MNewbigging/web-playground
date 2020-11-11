@@ -1,9 +1,38 @@
 import React from 'react';
 
+import { observer } from 'mobx-react';
+
+import { Button } from '@blueprintjs/core';
+import { WordBashState } from '../WordBashState';
+
 import './in-game-menu.scss';
 
-export class InGameMenu extends React.Component {
+interface IGMProps {
+  wbState: WordBashState;
+}
+
+@observer
+export class InGameMenu extends React.Component<IGMProps> {
   public render() {
-    return <div className={'in-game-menu'}>I'm the game menu!</div>;
+    const { wbState } = this.props;
+    const vowelCount: number = wbState.lifeline.vowels;
+    const consCount: number = wbState.lifeline.consonants;
+
+    return (
+      <div className={'in-game-menu'}>
+        <Button
+          className={'button'}
+          minimal={true}
+          text={`+1 Vowel (${vowelCount})`}
+          onClick={() => wbState.getExtraVowel()}
+        />
+        <Button
+          className={'button'}
+          minimal={true}
+          text={`+1 Consonant (${consCount})`}
+          onClick={() => wbState.getExtraConsonant()}
+        />
+      </div>
+    );
   }
 }

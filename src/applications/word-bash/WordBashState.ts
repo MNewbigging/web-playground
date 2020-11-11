@@ -27,7 +27,7 @@ export class WordBashState {
   private letterGenerator = new LetterGenerator();
 
   // Player lifeline abilities
-  private lifelines: Lifelines = {
+  @observable public lifeline: Lifelines = {
     vowels: 1,
     consonants: 1,
   };
@@ -47,9 +47,7 @@ export class WordBashState {
   @observable public answers9Plus: string[] = [];
   private allAnswers = new Map<string, number[]>(); // answer string: index into letter pool
 
-  // Letter pool generation values
-  private readonly vowels: string[] = ['A', 'E', 'I', 'O', 'U'];
-  private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZBCDFGHJKLMNPRSTVWYBCDFGHKLMNPRST';
+  // Letter generation values
   private readonly letterPoolSizeLimit: number = 40;
   private weight: ConsonantsWeight = {
     common: 3,
@@ -65,6 +63,7 @@ export class WordBashState {
     // Get game letters
     const gameLetters = this.letterGenerator.generateLetters(this.letterPoolSizeLimit, this.weight);
     // setup letter pool
+    // tslint:disable-next-line: prefer-for-of
     for (let i: number = 0; i < gameLetters.length; i++) {
       this.letterPool.push({
         letter: gameLetters[i],
@@ -111,6 +110,28 @@ export class WordBashState {
     answerLetterPositions.forEach((alp) => {
       this.letterPool[alp].status = LetterTileStatus.NORMAL;
     });
+  }
+
+  public getExtraVowel() {
+    // Check how many vowels left in lifelines
+    if (this.lifeline.vowels > 0) {
+      const extraVowel = this.letterGenerator.getRandomVowel();
+      this.addLetterToPool(extraVowel);
+      this.lifeline.vowels--;
+    } else {
+      // highlight button red
+    }
+  }
+
+  public getExtraConsonant() {
+    // Check how many consonants left in lifelines
+    if (this.lifeline.consonants > 0) {
+      const extraCons = this.letterGenerator.getRandomConsonant();
+      this.addLetterToPool(extraCons);
+      this.lifeline.consonants--;
+    } else {
+      // highlight button red
+    }
   }
 
   private checkKeyCharacter(key: string) {
@@ -222,5 +243,12 @@ export class WordBashState {
       this.letterPool[lpl].status = LetterTileStatus.INACTIVE;
     });
     this.lastPickedLetters = [];
+  }
+
+  private addLetterToPool(letter: string) {
+    this.letterPool.push({
+      letter,
+      status: LetterTileStatus.NORMAL,
+    });
   }
 }

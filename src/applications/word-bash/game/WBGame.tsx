@@ -3,8 +3,8 @@ import React from 'react';
 import { ActiveWordZone } from '../game/ActiveWordZone';
 import { WordBashState } from '../WordBashState';
 import { AnswerWordZone } from './AnswerWordZone';
-import { LetterPool } from './LetterPool';
 import { InGameMenu } from './InGameMenu';
+import { LetterPool } from './LetterPool';
 
 import './wb-game.scss';
 
@@ -27,7 +27,7 @@ export class WBGame extends React.Component<WBGameProps> {
       <div className={'wb-game'}>
         <div className={'wb-game__left'}>
           <div className={'wbg-left-top'}>
-            <InGameMenu />
+            <InGameMenu wbState={wbState} />
           </div>
           <div className={'wbg-left-bot'}>
             <div className={'wbg-lb-top'}>

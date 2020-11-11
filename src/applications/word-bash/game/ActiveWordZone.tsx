@@ -3,7 +3,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 import { WordBashState } from '../WordBashState';
-import { LetterTile } from './LetterTile';
+import { AnswerLetterTile } from './AnswerLetterTile';
 
 import './active-word-zone.scss';
 
@@ -17,8 +17,8 @@ export class ActiveWordZone extends React.Component<AWZProps> {
     const { wbState } = this.props;
     const letters: JSX.Element[] = [];
     wbState.lastPickedLetters.forEach((lpl, idx) => {
-      const letter = wbState.letterPool[lpl];
-      letters.push(<LetterTile key={'at-' + idx} {...letter} />);
+      const iletter = wbState.letterPool[lpl];
+      letters.push(<AnswerLetterTile key={'at-' + idx} letter={iletter.letter} />);
     });
 
     let alertClassName = wbState.rightAnswer ? 'correct' : '';

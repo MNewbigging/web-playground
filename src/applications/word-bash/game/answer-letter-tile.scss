@@ -1,0 +1,15 @@
+.answer-letter-tile {
+  width: 50px;
+  height: 50px;
+  flex: 0 1 auto;
+  background-color: #c59849;
+  color: white;
+  border-radius: 3px;
+  margin: 0px 1px;
+  // To center letter
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // to center itself in active word zone
+  align-self: center;
+}

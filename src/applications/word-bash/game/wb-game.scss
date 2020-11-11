@@ -8,23 +8,24 @@
 
   &__left {
     width: 50%;
-    flex: 0 0 50%;
+
     // Two main panels, split top-bottom
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
 
     .wbg-left-top {
-      flex: 0 0 auto;
+      //flex: 0 0 auto;
       margin-bottom: 30px;
     }
 
     .wbg-left-bot {
       margin-bottom: 20px;
+      height: 80px;
     }
   }
 
   &__right {
-    flex: 0 0 50%;
+    width: 50%;
   }
 }

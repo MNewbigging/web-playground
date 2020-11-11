@@ -1,5 +1,7 @@
 import { action, observable } from 'mobx';
 
+import { LetterGenerator } from './LetterGenerator';
+
 export enum WBScreen {
   MENU,
   GAME,
@@ -17,6 +19,7 @@ export interface ILetterTile {
 }
 
 export class WordBashState {
+  private letterGenerator = new LetterGenerator();
   @observable public wbScreen: WBScreen = WBScreen.MENU;
   @observable public letterPool: ILetterTile[] = []; // current letters in play
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
@@ -33,10 +36,9 @@ export class WordBashState {
   private allAnswers = new Map<string, number[]>(); // answer string: index into letter pool
 
   // Letter pool generation values
-  private readonly vowels: string = 'AEIOU';
-  private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZBCDFGHJKLMNPRSTVWY';
+  private readonly vowels: string[] = ['A', 'E', 'I', 'O', 'U'];
+  private readonly consonants: string = 'BCDFGHJKLMNPQRSTVWXYZBCDFGHJKLMNPRSTVWYBCDFGHKLMNPRST';
   private readonly letterPoolSizeLimit: number = 40;
-  private readonly consonantVowelRatio: number = 3;
 
   @action public toWbScreen(wbState: WBScreen) {
     this.wbScreen = wbState;
@@ -218,28 +220,51 @@ export class WordBashState {
     }
   }
 
-  private getLetter(vowel: boolean) {
-    let char: string = '';
-    if (vowel) {
-      // vowel list
-      char = this.vowels[Math.floor(Math.random() * this.vowels.length)];
-    } else {
-      // consonant list
-      char = this.consonants[Math.floor(Math.random() * this.consonants.length)];
-    }
+  // Looks at generated letters, tidies up outliers
+  private preenLetters() {
+    const vowelRatio: number = 6;
+    const maxVowelDupes = Math.floor(this.letterPoolSizeLimit / vowelRatio);
 
-    // Limit to 2 of a kind max
-    let currentCharCount = 0;
-    // tslint:disable-next-line: prefer-for-of
-    for (let i: number = 0; i < this.letterPool.length; i++) {
-      if (this.letterPool[i].letter === char) {
-        currentCharCount++;
+    const toSwapOut: string[] = [];
+    const toSwapCount: number[] = [];
+
+    for (let i: number = 0; i < this.vowels.length; i++) {
+      const searchLetter = this.vowels[i];
+      const count = this.getLetterCount(searchLetter);
+      if (count > maxVowelDupes) {
+        toSwapOut.push(searchLetter);
+        toSwapCount.push(count - maxVowelDupes);
       }
     }
-    if (currentCharCount >= 2) {
-      char = this.getLetter(vowel);
-    }
 
-    return char;
+    // now we have vowels that are too many; replace with others
+    const availableVowels: string[] = this.vowels.filter((v) => !toSwapOut.includes(v));
+    toSwapOut.forEach((swap, idx) => {
+      // How many times to swap out letter
+      for (let i: number = 0; i < toSwapCount[idx]; i++) {
+        // find a new letter
+        const rnd = Math.random();
+      }
+    });
+  }
+
+  private getLetterCount(letter: string) {
+    let count = 0;
+
+    this.letterPool.forEach((lp) => {
+      if (lp.letter === letter) {
+        count++;
+      }
+    });
+
+    return count;
+  }
+
+  private replaceLetter(from: string, to: string) {
+    for (let i: number = 0; i < this.letterPool.length; i++) {
+      if (this.letterPool[i].letter === from) {
+        this.letterPool[i].letter = to;
+      }
+    }
   }
 }

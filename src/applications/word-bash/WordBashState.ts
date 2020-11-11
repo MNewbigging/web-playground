@@ -16,8 +16,7 @@ export enum LetterTileStatus {
 export interface ILetterTile {
   letter: string;
   status: LetterTileStatus;
-  row: number;
-  column: number;
+  delay: number;
 }
 
 interface Lifelines {
@@ -57,6 +56,8 @@ export class WordBashState {
     rare: 1,
   };
 
+  private letterAnimDelayStep: number = 0.1;
+
   @action public toWbScreen(wbState: WBScreen) {
     this.wbScreen = wbState;
   }
@@ -70,8 +71,7 @@ export class WordBashState {
       this.letterPool.push({
         letter: gameLetters[i],
         status: LetterTileStatus.NORMAL,
-        row: 0,
-        column: 0,
+        delay: this.letterAnimDelayStep * i,
       });
 
       // sort out row/col values
@@ -259,8 +259,7 @@ export class WordBashState {
     this.letterPool.push({
       letter,
       status: LetterTileStatus.NORMAL,
-      row: 0,
-      column: 0,
+      delay: 0,
     });
   }
 }

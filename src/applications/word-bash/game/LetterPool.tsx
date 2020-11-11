@@ -17,9 +17,7 @@ export class LetterPool extends React.Component<LetterPoolProps> {
     const { wbState } = this.props;
     const letters: JSX.Element[] = [];
     wbState.letterPool.forEach((letter, idx) => {
-      // set delay for animation
-      const delay = 0.1 * idx;
-      letters.push(<LetterTile key={'lt-' + idx} {...letter} animDelay={delay} />);
+      letters.push(<LetterTile key={'lt-' + idx} {...letter} />);
     });
 
     return <div className={'letter-pool'}>{letters}</div>;

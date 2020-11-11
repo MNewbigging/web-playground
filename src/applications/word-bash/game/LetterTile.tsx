@@ -6,19 +6,15 @@ import { ILetterTile, LetterTileStatus } from '../WordBashState';
 
 import './letter-tile.scss';
 
-interface LetterTileProps extends ILetterTile {
-  animDelay?: number;
-}
-
 @observer
-export class LetterTile extends React.Component<LetterTileProps> {
+export class LetterTile extends React.Component<ILetterTile> {
   public render() {
-    const { animDelay, letter, status } = this.props;
+    const { delay, letter, status } = this.props;
     // need a div inside this so the circle is centererd
     const letterStr = status === LetterTileStatus.INACTIVE ? '' : letter;
-    console.log('anim delay: ', animDelay);
+    console.log('anim delay: ', delay);
     const style = {
-      animationDelay: `${animDelay}s`,
+      animationDelay: `${delay}s`,
     };
 
     return (

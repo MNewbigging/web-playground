@@ -61,15 +61,10 @@ export class WordBashState {
   @action public startGame() {
     // Get game letters
     const gameLetters = this.letterGenerator.generateLetters(this.letterPoolSizeLimit, this.weight);
+
     // setup letter pool
-    // tslint:disable-next-line: prefer-for-of
-    for (let i: number = 0; i < gameLetters.length; i++) {
-      this.letterPool.push({
-        letter: gameLetters[i],
-        status: LetterTileStatus.NORMAL,
-        delay: this.letterAnimDelayStep * i,
-      });
-    }
+    this.setupLetterPool(gameLetters);
+
     // Move to game screen
     this.toWbScreen(WBScreen.GAME);
   }
@@ -135,6 +130,30 @@ export class WordBashState {
       this.lifeline.consonants--;
     } else {
       // highlight button red
+    }
+  }
+
+  // On start game, preps letter pool
+  private setupLetterPool(letters: string) {
+    // Assign delay for cascade animation of letters
+    const rowDelayStep: number = 0.2;
+    const colDelayStep: number = 0.1;
+    let col: number = 1;
+    let row: number = 1;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i: number = 0; i < letters.length; i++) {
+      const delay = col * colDelayStep + row * rowDelayStep;
+      if (col === 10) {
+        col = 0;
+        row++;
+      }
+      col++;
+
+      this.letterPool.push({
+        letter: letters[i],
+        status: LetterTileStatus.NORMAL,
+        delay,
+      });
     }
   }
 

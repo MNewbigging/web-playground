@@ -4,11 +4,9 @@ PLAYGROUND:
 
  WORD BASH:
  - Adding/removing answers forces whole answer pool rebuild - streamline
- - Proper style for the game
  - SFX
  - Further game UI on top of screen
+ - Style answer words
+ - Responsive answer word zone
  - Menu screen
- - Flashy winning anmation
- - Better game stage definition, for css mostly
- - Prevent typing while tiles are falling
- - Tooltip class
+ - Tooltips - wrong word entry, dupe answer attempt etc

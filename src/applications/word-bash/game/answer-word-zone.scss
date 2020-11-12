@@ -4,17 +4,16 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  //justify-content: space-evenly;
   align-items: center;
 
   .answer-pool {
     box-sizing: border-box;
     border: 1px solid #1d3557;
     border-radius: 0px 10px 0px 10px;
-    height: 24%;
     width: 90%;
     flex: 0 1 auto;
-
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

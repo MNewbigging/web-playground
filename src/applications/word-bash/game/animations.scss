@@ -14,16 +14,60 @@
 }
 
 .fall-in {
-  // appear animation
   animation: fallin 0.5s ease-out 1;
   animation-fill-mode: backwards;
 
   @keyframes fallin {
     from {
-      transform: translate((0, -200vh));
+      transform: translate(0, -200vh);
     }
     to {
       transform: translate(0, 0);
+    }
+  }
+}
+
+.fly-out {
+  animation: flyout 0.5s ease-in 1;
+  animation-fill-mode: forwards;
+
+  @keyframes flyout {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(0, -200vh);
+    }
+  }
+}
+
+.pulse-flyout {
+  box-shadow: 0 0 0 0 rgba(197, 152, 73, 1);
+  animation: pulseflyout 2s 1;
+  animation-fill-mode: forwards;
+
+  @keyframes pulseflyout {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgb(247, 231, 14);
+      background-color: #93b1a7;
+    }
+
+    35% {
+      transform: scale(2);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+      background-color: #c59849;
+    }
+
+    50% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      background-color: rgb(247, 231, 14);
+      transform: translate(0, 0);
+    }
+
+    100% {
+      transform: translate(0, -200vh);
     }
   }
 }

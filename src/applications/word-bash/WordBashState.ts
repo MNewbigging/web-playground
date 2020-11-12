@@ -25,6 +25,7 @@ interface Lifelines {
 }
 
 export class WordBashState {
+  @observable public wonGame: boolean = false;
   private letterGenerator = new LetterGenerator();
 
   // Player lifeline abilities
@@ -220,6 +221,8 @@ export class WordBashState {
 
     this.acceptAnswer(word);
     this.setChosenLettersInactive();
+
+    this.checkForEndGame();
   }
 
   // Reads local dictionary txt file
@@ -295,5 +298,18 @@ export class WordBashState {
 
   @action private toWbScreen(wbState: WBScreen) {
     this.wbScreen = wbState;
+  }
+
+  @action private checkForEndGame() {
+    let allInactive: boolean = true;
+    this.letterPool.forEach((lpl) => {
+      if (lpl.status !== LetterTileStatus.INACTIVE) {
+        allInactive = false;
+      }
+    });
+
+    if (allInactive) {
+      this.wonGame = true;
+    }
   }
 }

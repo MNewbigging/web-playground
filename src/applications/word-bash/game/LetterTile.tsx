@@ -7,13 +7,20 @@ import { ILetterTile, LetterTileStatus } from '../WordBashState';
 import './animations.scss';
 import './letter-tile.scss';
 
-@observer
-export class LetterTile extends React.Component<ILetterTile> {
-  public render() {
-    const { delay, letter, status } = this.props;
+interface LetterTileProps extends ILetterTile {
+  wonGame: boolean;
+}
 
-    // Spin when inactive
-    const anim = status === LetterTileStatus.INACTIVE ? 'spin' : '';
+@observer
+export class LetterTile extends React.Component<LetterTileProps> {
+  public render() {
+    const { delay, letter, status, wonGame } = this.props;
+
+    // Check for win
+    const winAnim = wonGame ? 'pulse-flyout' : '';
+
+    // Spin and pulse when inactive
+    const anims = status === LetterTileStatus.INACTIVE ? 'spin' : '';
 
     // Don't show the letter when inactive
     const letterStr = status === LetterTileStatus.INACTIVE ? '' : letter;
@@ -23,10 +30,10 @@ export class LetterTile extends React.Component<ILetterTile> {
       animationDelay: `${delay}s`,
     };
 
-    const classes: string[] = ['lt-inner', status, anim];
+    const classes: string[] = ['lt-inner', status, anims, winAnim];
     return (
       <div className={'letter-tile fall-in'} style={style}>
-        <div className={classes.join(' ')}>
+        <div className={classes.join(' ')} style={style}>
           <div>{letterStr}</div>
         </div>
       </div>

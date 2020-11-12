@@ -12,6 +12,5 @@ PLAYGROUND:
  - Flashy winning anmation
  - Better intro animation - delay step per row
  - Better game stage definition, for css mostly
- - Lose focus on buttons after pressing
  - Prevent typing while tiles are falling
  - Tooltip class

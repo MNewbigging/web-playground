@@ -22,10 +22,10 @@ export class InGameMenu extends React.Component<IGMProps> {
     return (
       <div className={'in-game-menu'}>
         <div className={'button'} onClick={() => wbState.getExtraVowel()}>
-          +1 Vowel {vowelCount}
+          +1 Vowel ({vowelCount})
         </div>
         <div className={'button'} onClick={() => wbState.getExtraConsonant()}>
-          +1 Consonant {consCount}
+          +1 Consonant ({consCount})
         </div>
       </div>
     );

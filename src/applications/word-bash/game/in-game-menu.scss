@@ -13,5 +13,11 @@
   .button {
     margin: 8px;
     z-index: 10;
+    border-radius: 3px;
+    color: white;
+    font-size: 12pt;
+    background-color: #56766b;
+    padding: 8px;
+    cursor: pointer;
   }
 }

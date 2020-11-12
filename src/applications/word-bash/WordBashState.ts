@@ -29,8 +29,8 @@ export class WordBashState {
 
   // Player lifeline abilities
   @observable public lifeline: Lifelines = {
-    vowels: 100,
-    consonants: 100,
+    vowels: 5,
+    consonants: 5,
   };
 
   @observable public wbScreen: WBScreen = WBScreen.MENU;

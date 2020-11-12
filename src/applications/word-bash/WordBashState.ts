@@ -55,13 +55,9 @@ export class WordBashState {
     uncommon: 2,
     rare: 1,
   };
-
   private letterAnimDelayStep: number = 0.1;
 
-  @action public toWbScreen(wbState: WBScreen) {
-    this.wbScreen = wbState;
-  }
-
+  // Called from menu
   @action public startGame() {
     // Get game letters
     const gameLetters = this.letterGenerator.generateLetters(this.letterPoolSizeLimit, this.weight);
@@ -73,13 +69,12 @@ export class WordBashState {
         status: LetterTileStatus.NORMAL,
         delay: this.letterAnimDelayStep * i,
       });
-
-      // sort out row/col values
     }
-
+    // Move to game screen
     this.toWbScreen(WBScreen.GAME);
   }
 
+  // Called on every key press in game
   @action public pressKey(key: string) {
     switch (key) {
       case 'Backspace':
@@ -94,6 +89,7 @@ export class WordBashState {
     }
   }
 
+  // Answer tag X callback
   @action public removeAnswer(answer: string) {
     // Remove from answers array to update answer pool
     const length = answer.length;
@@ -118,6 +114,7 @@ export class WordBashState {
     });
   }
 
+  // GUI +1 vowel button callback
   public getExtraVowel() {
     // Check how many vowels left in lifelines
     if (this.lifeline.vowels > 0) {
@@ -129,6 +126,7 @@ export class WordBashState {
     }
   }
 
+  // GUI +1 consonant button callback
   public getExtraConsonant() {
     // Check how many consonants left in lifelines
     if (this.lifeline.consonants > 0) {
@@ -140,6 +138,7 @@ export class WordBashState {
     }
   }
 
+  // Character keyboard press
   private checkKeyCharacter(key: string) {
     // Only valid if letter exists in normal state
     const validLetter = this.letterPool.findIndex(
@@ -151,6 +150,7 @@ export class WordBashState {
     }
   }
 
+  // Backspace keyboard press
   private undoLastLetter() {
     if (!this.lastPickedLetters.length) {
       return;
@@ -161,6 +161,7 @@ export class WordBashState {
     this.lastPickedLetters.pop();
   }
 
+  // Enter keyboard press
   private async checkWord() {
     if (!this.lastPickedLetters.length) {
       this.rejectAnswer();
@@ -192,16 +193,24 @@ export class WordBashState {
       return;
     }
 
+    // Ensure no duplicate answers
+    if (this.allAnswers.has(word)) {
+      this.rejectAnswer();
+      return;
+    }
+
     this.acceptAnswer(word);
     this.setChosenLettersInactive();
   }
 
-  private async getDictionary(filePath: string) {
+  // Reads local dictionary txt file
+  private async getDictionary(filePath: string): Promise<string> {
     const response = await fetch(filePath);
     return response.text(); // contains entire txt file in a string
   }
 
-  private lookupWord(dictionary: string[], word: string) {
+  // Searches dictionary words for target word
+  private lookupWord(dictionary: string[], word: string): boolean {
     // tslint:disable-next-line: prefer-for-of
     for (let i: number = 0; i < dictionary.length; i++) {
       if (dictionary[i] === word) {
@@ -239,11 +248,13 @@ export class WordBashState {
     setTimeout(() => (this.rightAnswer = false), this.rightAnswerDelay);
   }
 
+  // Sets bool true then false on delay, for css effects
   @action private rejectAnswer() {
     this.wrongAnswer = true;
     setTimeout(() => (this.wrongAnswer = false), this.wrongAnswerDelay);
   }
 
+  // When accepting an answer
   private setChosenLettersInactive() {
     this.lastPickedLetters.forEach((lpl) => {
       this.letterPool[lpl].status = LetterTileStatus.INACTIVE;
@@ -255,11 +266,15 @@ export class WordBashState {
     if (this.letterPool.length >= 70) {
       return;
     }
-
+    // Newly added letters have no animation delay
     this.letterPool.push({
       letter,
       status: LetterTileStatus.NORMAL,
       delay: 0,
     });
+  }
+
+  @action private toWbScreen(wbState: WBScreen) {
+    this.wbScreen = wbState;
   }
 }

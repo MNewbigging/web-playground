@@ -10,8 +10,8 @@ PLAYGROUND:
  - Menu screen
  - Better letter algorithm - less dupes? (extra chars offsets this)
  - Flashy winning anmation
- - No duplicate word answers
- - Better intro animation
+ - Better intro animation - delay step per row
  - Better game stage definition, for css mostly
  - Lose focus on buttons after pressing
  - Prevent typing while tiles are falling
+ - Tooltip class

@@ -17,36 +17,24 @@ export interface ConsonantsWeight {
 export class LetterGenerator {
   private minVowelRatio: number = 0.28;
   private maxVowelRatio: number = 0.42;
-  // should really reconstruct this every time rather than overwriting these vars
   private gameConsonants: string = '';
   private gameLetters: string = '';
 
-  // constructor() {
-  //   const consonants: string = this.getConsonants(weight);
-  //   const vowelCount: number = this.getVowelCount(poolSize);
-  //   const gameVowels: string = this.generateVowels(vowelCount);
-  //   const gameConsonants: string = this.generateConsonants(consonants, poolSize, vowelCount);
-  //   const shuffledLetters: string = this.shuffleLetters(gameVowels, gameConsonants);
-  //   this.gameConsonants = gameConsonants;
-  // }
-
   public generateLetters(poolSize: number, weight: ConsonantsWeight) {
+    // Get weighted consonants string
     const consonants: string = this.getConsonants(weight);
-    console.log('consonants: ', consonants);
-
+    // Random vowel count within range, relative to pool size
     const vowelCount: number = this.getVowelCount(poolSize);
-    console.log('vowelRatio: ', vowelCount);
-
+    // Get that many random vowels
     const gameVowels: string = this.generateVowels(vowelCount);
-    console.log('game vowels: ', gameVowels);
-
+    // Remainder of pool size is taken from weighted consonants string at random
     const gameConsonants: string = this.generateConsonants(consonants, poolSize, vowelCount);
-    console.log('game consonants: ', gameConsonants);
-
+    // Joins vowels and consonants strings and shuffles
     const shuffledLetters: string = this.shuffleLetters(gameVowels, gameConsonants);
-    console.log('shuffled letters: ', shuffledLetters);
 
+    // Cache values
     this.gameConsonants = gameConsonants;
+    this.gameLetters = shuffledLetters;
 
     return shuffledLetters;
   }

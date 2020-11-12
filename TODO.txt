@@ -8,7 +8,10 @@ PLAYGROUND:
  - SFX
  - Further game UI on top of screen
  - Menu screen
- - Better letter algorithm - less dupes
- - Position transition animation - tiles fall from top of screen into position
+ - Better letter algorithm - less dupes? (extra chars offsets this)
  - Flashy winning anmation
  - No duplicate word answers
+ - Better intro animation
+ - Better game stage definition, for css mostly
+ - Lose focus on buttons after pressing
+ - Prevent typing while tiles are falling

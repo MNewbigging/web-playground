@@ -2,10 +2,11 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Button } from '@blueprintjs/core';
 import { WordBashState } from '../WordBashState';
 
 import './in-game-menu.scss';
+
+type RME = React.MouseEvent<HTMLElement, MouseEvent>;
 
 interface IGMProps {
   wbState: WordBashState;
@@ -20,18 +21,12 @@ export class InGameMenu extends React.Component<IGMProps> {
 
     return (
       <div className={'in-game-menu'}>
-        <Button
-          className={'button'}
-          minimal={true}
-          text={`+1 Vowel (${vowelCount})`}
-          onClick={() => wbState.getExtraVowel()}
-        />
-        <Button
-          className={'button'}
-          minimal={true}
-          text={`+1 Consonant (${consCount})`}
-          onClick={() => wbState.getExtraConsonant()}
-        />
+        <div className={'button'} onClick={() => wbState.getExtraVowel()}>
+          +1 Vowel {vowelCount}
+        </div>
+        <div className={'button'} onClick={() => wbState.getExtraConsonant()}>
+          +1 Consonant {consCount}
+        </div>
       </div>
     );
   }

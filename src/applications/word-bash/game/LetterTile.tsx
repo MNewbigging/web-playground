@@ -4,22 +4,29 @@ import { observer } from 'mobx-react';
 
 import { ILetterTile, LetterTileStatus } from '../WordBashState';
 
+import './animations.scss';
 import './letter-tile.scss';
 
 @observer
 export class LetterTile extends React.Component<ILetterTile> {
   public render() {
     const { delay, letter, status } = this.props;
-    // need a div inside this so the circle is centererd
+
+    // Spin when inactive
+    const anim = status === LetterTileStatus.INACTIVE ? 'spin' : '';
+
+    // Don't show the letter when inactive
     const letterStr = status === LetterTileStatus.INACTIVE ? '' : letter;
-    console.log('anim delay: ', delay);
+
+    // Each tile has a delay to their fall-in animation (for cascade effect)
     const style = {
       animationDelay: `${delay}s`,
     };
 
+    const classes: string[] = ['lt-inner', status, anim];
     return (
-      <div className={'letter-tile'} style={style}>
-        <div className={'lt-inner ' + status}>
+      <div className={'letter-tile fall-in'} style={style}>
+        <div className={classes.join(' ')}>
           <div>{letterStr}</div>
         </div>
       </div>

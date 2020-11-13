@@ -24,33 +24,53 @@ export class AnswerWordZone extends React.Component<AWZProps> {
     const ans3to4 = this.getAnswers3To4();
     if (ans3to4.length) {
       answerPools.push(
-        <div key={'ap1'} className={'answer-pool'}>
-          {ans3to4}
-        </div>
+        <>
+          <div key={'hd1'} className={'ap-heading'}>
+            +1
+          </div>
+          <div key={'ap1'} className={'answer-pool'}>
+            {ans3to4}
+          </div>
+        </>
       );
     }
     const ans5to6 = this.getAnswers5To6();
     if (ans5to6.length) {
       answerPools.push(
-        <div key={'ap2'} className={'answer-pool'}>
-          {ans5to6}
-        </div>
+        <>
+          <div key={'hd2'} className={'ap-heading'}>
+            +2
+          </div>
+          <div key={'ap2'} className={'answer-pool'}>
+            {ans5to6}
+          </div>
+        </>
       );
     }
     const ans7to8 = this.getAnswers7To8();
     if (ans7to8.length) {
       answerPools.push(
-        <div key={'ap3'} className={'answer-pool'}>
-          {ans7to8}
-        </div>
+        <>
+          <div key={'h3'} className={'ap-heading'}>
+            +3
+          </div>
+          <div key={'ap3'} className={'answer-pool'}>
+            {ans7to8}
+          </div>
+        </>
       );
     }
     const ans9p = this.getAnswers9Plus();
     if (ans9p.length) {
       answerPools.push(
-        <div key={'ap4'} className={'answer-pool'}>
-          {ans9p}
-        </div>
+        <>
+          <div key={'h4'} className={'ap-heading'}>
+            +4
+          </div>
+          <div key={'ap4'} className={'answer-pool'}>
+            {ans9p}
+          </div>
+        </>
       );
     }
 

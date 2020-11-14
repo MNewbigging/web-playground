@@ -13,6 +13,7 @@ import { ConsonantsWeight, LetterGenerator } from './LetterGenerator';
 export class WordBashState {
   @observable public wonGame: boolean = false;
   @observable public pausedGame: boolean = false;
+  @observable public gameScore: number = 0;
 
   // Player lifeline abilities
   @observable public lifeline: Lifelines = {
@@ -34,7 +35,7 @@ export class WordBashState {
   private allAnswers = new Map<string, number[]>(); // answer string: index into letter pool
 
   // Letter generation values
-  private readonly letterPoolSizeLimit: number = 40;
+  private readonly letterPoolSize: number = 40;
   private weight: ConsonantsWeight = {
     common: 3,
     uncommon: 2,
@@ -43,112 +44,19 @@ export class WordBashState {
 
   private letterGenerator = new LetterGenerator();
 
-  // Called from main menu
+  //--------- MENU BUTTON FUNCTIONS ---------//
   @action public startGame() {
     // Get game letters
-    const gameLetters = this.letterGenerator.generateLetters(this.letterPoolSizeLimit, this.weight);
+    const gameLetters = this.letterGenerator.generateLetters(this.letterPoolSize, this.weight);
 
     // setup letter pool
     this.setupLetterPool(gameLetters);
 
     // Move to game screen
     this.toWbScreen(WBScreen.GAME);
-  }
 
-  // In-game menu button
-  @action public pauseGame() {
-    this.pausedGame = true;
-    this.toWbScreen(WBScreen.MENU);
-  }
-
-  @action public resumeGame() {
-    this.pausedGame = false;
-    this.toWbScreen(WBScreen.GAME);
-  }
-
-  @action public endGame() {
-    // Reset to default values
-    this.wonGame = false;
-    this.pausedGame = false;
-    this.letterPool = [];
-    this.lastPickedLetters = [];
-    this.wrongAnswer = false;
-    this.rightAnswer = false;
-    this.answers3To4 = [];
-    this.answers5To6 = [];
-    this.answers7To8 = [];
-    this.answers9Plus = [];
-    this.allAnswers.clear();
-    this.letterGenerator = new LetterGenerator();
-
-    this.toWbScreen(WBScreen.MENU);
-  }
-
-  // Called on every key press in game
-  @action public pressKey(key: string) {
-    switch (key) {
-      case 'Backspace':
-        this.undoLastLetter();
-        break;
-      case 'Enter':
-        this.checkWord();
-        break;
-      default:
-        this.checkKeyCharacter(key);
-        break;
-    }
-  }
-
-  // Answer word click callback
-  @action public removeAnswer(answer: string) {
-    // Remove from answers array to update answer pool
-    const length = answer.length;
-    switch (true) {
-      case length < 5:
-        this.answers3To4 = this.answers3To4.filter((ans) => ans !== answer);
-        break;
-      case length < 7:
-        this.answers5To6 = this.answers5To6.filter((ans) => ans !== answer);
-        break;
-      case length < 9:
-        this.answers7To8 = this.answers7To8.filter((ans) => ans !== answer);
-        break;
-      case length >= 9:
-        this.answers9Plus = this.answers9Plus.filter((ans) => ans !== answer);
-        break;
-    }
-    // Make those letters active again
-    const answerLetterPositions = this.allAnswers.get(answer);
-    answerLetterPositions.forEach((alp) => {
-      this.letterPool[alp].status = LetterTileStatus.NORMAL;
-    });
-
-    // Remove from answers map
-    this.allAnswers.delete(answer);
-  }
-
-  // GUI +1 vowel button callback
-  public getExtraVowel() {
-    // Check how many vowels left in lifelines
-    if (this.lifeline.vowels > 0) {
-      const extraVowel = this.letterGenerator.getRandomVowel();
-      this.addLetterToPool(extraVowel);
-      this.lifeline.vowels--;
-    } else {
-      // highlight button red
-    }
-  }
-
-  // GUI +1 consonant button callback
-  public getExtraConsonant() {
-    // Check how many consonants left in lifelines
-    if (this.lifeline.consonants > 0) {
-      const extraCons = this.letterGenerator.getRandomConsonant();
-      this.addLetterToPool(extraCons);
-      this.lifeline.consonants--;
-    } else {
-      // highlight button red
-    }
+    // TESTING
+    this.winGame();
   }
 
   // On start game, preps letter pool
@@ -175,15 +83,89 @@ export class WordBashState {
     }
   }
 
-  // Character keyboard press
-  private checkKeyCharacter(key: string) {
-    // Only valid if letter exists in normal state
-    const validLetter = this.letterPool.findIndex(
-      (l) => l.letter.toLowerCase() === key.toLowerCase() && l.status === LetterTileStatus.NORMAL
-    );
-    if (validLetter >= 0) {
-      this.letterPool[validLetter].status = LetterTileStatus.ACTIVE;
-      this.lastPickedLetters.push(validLetter);
+  @action private toWbScreen(wbState: WBScreen) {
+    this.wbScreen = wbState;
+  }
+
+  @action public pauseGame() {
+    this.pausedGame = true;
+    this.toWbScreen(WBScreen.MENU);
+  }
+
+  @action public endGame() {
+    // Reset to default values
+    this.wonGame = false;
+    this.pausedGame = false;
+    this.letterPool = [];
+    this.lastPickedLetters = [];
+    this.wrongAnswer = false;
+    this.rightAnswer = false;
+    this.answers3To4 = [];
+    this.answers5To6 = [];
+    this.answers7To8 = [];
+    this.answers9Plus = [];
+    this.allAnswers.clear();
+    this.letterGenerator = new LetterGenerator();
+
+    this.toWbScreen(WBScreen.MENU);
+  }
+
+  //--------- IN-GAME MENU BUTTON FUNCTIONS ---------//
+  @action public resumeGame() {
+    this.pausedGame = false;
+    this.toWbScreen(WBScreen.GAME);
+  }
+
+  // GUI +1 vowel button callback
+  public getExtraVowel() {
+    // Check how many vowels left in lifelines
+    if (this.lifeline.vowels > 0) {
+      const extraVowel = this.letterGenerator.getRandomVowel();
+      this.addLetterToPool(extraVowel);
+      this.lifeline.vowels--;
+    } else {
+      // highlight button red
+    }
+  }
+
+  // GUI +1 consonant button callback
+  public getExtraConsonant() {
+    // Check how many consonants left in lifelines
+    if (this.lifeline.consonants > 0) {
+      const extraCons = this.letterGenerator.getRandomConsonant();
+      this.addLetterToPool(extraCons);
+      this.lifeline.consonants--;
+    } else {
+      // highlight button red
+    }
+  }
+
+  private addLetterToPool(letter: string) {
+    if (this.letterPool.length >= 70) {
+      return;
+    }
+    // Newly added letters have no animation delay
+    this.letterPool.push({
+      letter,
+      status: LetterTileStatus.NORMAL,
+      delay: 0,
+    });
+  }
+
+  //--------- KEYBOARD INPUT ---------//
+
+  // Called on every key press in game
+  @action public pressKey(key: string) {
+    switch (key) {
+      case 'Backspace':
+        this.undoLastLetter();
+        break;
+      case 'Enter':
+        this.checkWord();
+        break;
+      default:
+        this.checkKeyCharacter(key);
+        break;
     }
   }
 
@@ -196,6 +178,18 @@ export class WordBashState {
     const lpl = this.lastPickedLetters[this.lastPickedLetters.length - 1];
     this.letterPool[lpl].status = LetterTileStatus.NORMAL;
     this.lastPickedLetters.pop();
+  }
+
+  // Character keyboard press
+  private checkKeyCharacter(key: string) {
+    // Only valid if letter exists in normal state
+    const validLetter = this.letterPool.findIndex(
+      (l) => l.letter.toLowerCase() === key.toLowerCase() && l.status === LetterTileStatus.NORMAL
+    );
+    if (validLetter >= 0) {
+      this.letterPool[validLetter].status = LetterTileStatus.ACTIVE;
+      this.lastPickedLetters.push(validLetter);
+    }
   }
 
   // Enter keyboard press
@@ -240,6 +234,12 @@ export class WordBashState {
     this.setChosenLettersInactive();
 
     this.checkForEndGame();
+  }
+
+  // Sets bool true then false on delay, for css effects
+  @action private rejectAnswer() {
+    this.wrongAnswer = true;
+    setTimeout(() => (this.wrongAnswer = false), wrongAnswerDelay);
   }
 
   // Reads local dictionary txt file
@@ -287,34 +287,12 @@ export class WordBashState {
     setTimeout(() => (this.rightAnswer = false), rightAnswerDelay);
   }
 
-  // Sets bool true then false on delay, for css effects
-  @action private rejectAnswer() {
-    this.wrongAnswer = true;
-    setTimeout(() => (this.wrongAnswer = false), wrongAnswerDelay);
-  }
-
   // When accepting an answer
   private setChosenLettersInactive() {
     this.lastPickedLetters.forEach((lpl) => {
       this.letterPool[lpl].status = LetterTileStatus.INACTIVE;
     });
     this.lastPickedLetters = [];
-  }
-
-  private addLetterToPool(letter: string) {
-    if (this.letterPool.length >= 70) {
-      return;
-    }
-    // Newly added letters have no animation delay
-    this.letterPool.push({
-      letter,
-      status: LetterTileStatus.NORMAL,
-      delay: 0,
-    });
-  }
-
-  @action private toWbScreen(wbState: WBScreen) {
-    this.wbScreen = wbState;
   }
 
   @action private checkForEndGame() {
@@ -326,7 +304,56 @@ export class WordBashState {
     });
 
     if (allInactive) {
-      this.wonGame = true;
+      this.winGame();
     }
+  }
+
+  @action private winGame() {
+    this.wonGame = true;
+    this.scoreAnswers();
+  }
+
+  private scoreAnswers() {
+    // Scoring:
+    // 3-4 words just get 1 point per letter used
+    // 5-6 gets the same, plus 1 point per word
+    // 7-8 as above, plus 2 per word
+    // 9+ as above, plus 3 per word
+
+    // We know that there's 1 point per letter, so:
+    let basePoints = this.letterPoolSize;
+    basePoints += this.answers5To6.length;
+    basePoints += this.answers7To8.length * 2;
+    basePoints += this.answers9Plus.length * 3;
+
+    this.gameScore = basePoints;
+  }
+
+  // Answer word click callback
+  @action public removeAnswer(answer: string) {
+    // Remove from answers array to update answer pool
+    const length = answer.length;
+    switch (true) {
+      case length < 5:
+        this.answers3To4 = this.answers3To4.filter((ans) => ans !== answer);
+        break;
+      case length < 7:
+        this.answers5To6 = this.answers5To6.filter((ans) => ans !== answer);
+        break;
+      case length < 9:
+        this.answers7To8 = this.answers7To8.filter((ans) => ans !== answer);
+        break;
+      case length >= 9:
+        this.answers9Plus = this.answers9Plus.filter((ans) => ans !== answer);
+        break;
+    }
+    // Make those letters active again
+    const answerLetterPositions = this.allAnswers.get(answer);
+    answerLetterPositions.forEach((alp) => {
+      this.letterPool[alp].status = LetterTileStatus.NORMAL;
+    });
+
+    // Remove from answers map
+    this.allAnswers.delete(answer);
   }
 }

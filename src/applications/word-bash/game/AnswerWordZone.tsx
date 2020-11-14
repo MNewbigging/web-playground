@@ -26,7 +26,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
       answerPools.push(
         <>
           <div key={'hd1'} className={'ap-heading'}>
-            +1
+            +0
           </div>
           <div key={'ap1'} className={'answer-pool'}>
             {ans3to4}
@@ -39,7 +39,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
       answerPools.push(
         <>
           <div key={'hd2'} className={'ap-heading'}>
-            +2
+            +1
           </div>
           <div key={'ap2'} className={'answer-pool'}>
             {ans5to6}
@@ -52,7 +52,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
       answerPools.push(
         <>
           <div key={'h3'} className={'ap-heading'}>
-            +3
+            +2
           </div>
           <div key={'ap3'} className={'answer-pool'}>
             {ans7to8}
@@ -65,7 +65,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
       answerPools.push(
         <>
           <div key={'h4'} className={'ap-heading'}>
-            +4
+            +3
           </div>
           <div key={'ap4'} className={'answer-pool'}>
             {ans9p}

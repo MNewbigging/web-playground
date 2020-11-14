@@ -1,11 +1,17 @@
 .answer-word {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 5px;
   height: 50px;
-  //min-width: 80px;
-}
+  border-radius: 3px;
+  color: white;
+  font-size: 12pt;
+  background-color: #56766b;
+  padding: 8px;
+  cursor: pointer;
 
-.bp3-tag {
-  background-color: #334740;
+  &:hover {
+    background-color: #c59849;
+  }
 }

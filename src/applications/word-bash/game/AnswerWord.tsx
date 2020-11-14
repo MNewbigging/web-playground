@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Tag } from '@blueprintjs/core';
-
 import { WordBashState } from '../WordBashState';
 
 import './answer-word.scss';
@@ -20,9 +18,9 @@ export class AnswerWord extends React.Component<AnswerWordProps> {
 
     return (
       <div className={'answer-word'}>
-        <Tag key={word} large={true} onRemove={() => wbState.removeAnswer(word)}>
+        <div key={word} onClick={() => wbState.removeAnswer(word)}>
           {upperWord}
-        </Tag>
+        </div>
       </div>
     );
   }

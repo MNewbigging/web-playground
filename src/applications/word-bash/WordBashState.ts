@@ -108,6 +108,9 @@ export class WordBashState {
     answerLetterPositions.forEach((alp) => {
       this.letterPool[alp].status = LetterTileStatus.NORMAL;
     });
+
+    // Remove from answers map
+    this.allAnswers.delete(answer);
   }
 
   // GUI +1 vowel button callback

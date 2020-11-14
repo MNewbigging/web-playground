@@ -19,5 +19,9 @@
     background-color: #56766b;
     padding: 8px;
     cursor: pointer;
+
+    &:hover {
+      background-color: #c59849;
+    }
   }
 }

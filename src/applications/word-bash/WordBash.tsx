@@ -2,9 +2,10 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { WBScreen } from './fixed';
 import { WBGame } from './game/WBGame';
 import { WBMenu } from './menu/WBMenu';
-import { WBScreen, WordBashState } from './WordBashState';
+import { WordBashState } from './WordBashState';
 
 import './word-bash.scss';
 

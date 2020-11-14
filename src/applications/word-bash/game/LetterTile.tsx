@@ -2,7 +2,7 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { ILetterTile, LetterTileStatus } from '../WordBashState';
+import { ILetterTile, LetterTileStatus } from '../fixed';
 
 import './animations.scss';
 import './letter-tile.scss';

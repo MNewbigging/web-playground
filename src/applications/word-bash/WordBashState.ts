@@ -1,32 +1,18 @@
 import { action, observable } from 'mobx';
 
+import {
+  ILetterTile,
+  LetterTileStatus,
+  Lifelines,
+  rightAnswerDelay,
+  WBScreen,
+  wrongAnswerDelay,
+} from './fixed';
 import { ConsonantsWeight, LetterGenerator } from './LetterGenerator';
-
-export enum WBScreen {
-  MENU,
-  GAME,
-}
-
-export enum LetterTileStatus {
-  INACTIVE = 'inactive',
-  NORMAL = 'normal',
-  ACTIVE = 'active',
-}
-
-export interface ILetterTile {
-  letter: string;
-  status: LetterTileStatus;
-  delay: number;
-}
-
-interface Lifelines {
-  vowels: number;
-  consonants: number;
-}
 
 export class WordBashState {
   @observable public wonGame: boolean = false;
-  private letterGenerator = new LetterGenerator();
+  @observable public pausedGame: boolean = false;
 
   // Player lifeline abilities
   @observable public lifeline: Lifelines = {
@@ -40,9 +26,7 @@ export class WordBashState {
 
   // Answer values
   @observable public wrongAnswer: boolean = false;
-  private wrongAnswerDelay: number = 1000;
   @observable public rightAnswer: boolean = false;
-  private rightAnswerDelay: number = 500;
   @observable public answers3To4: string[] = [];
   @observable public answers5To6: string[] = [];
   @observable public answers7To8: string[] = [];
@@ -56,9 +40,10 @@ export class WordBashState {
     uncommon: 2,
     rare: 1,
   };
-  private letterAnimDelayStep: number = 0.1;
 
-  // Called from menu
+  private letterGenerator = new LetterGenerator();
+
+  // Called from main menu
   @action public startGame() {
     // Get game letters
     const gameLetters = this.letterGenerator.generateLetters(this.letterPoolSizeLimit, this.weight);
@@ -68,6 +53,23 @@ export class WordBashState {
 
     // Move to game screen
     this.toWbScreen(WBScreen.GAME);
+  }
+
+  // In-game menu button
+  @action public pauseGame() {
+    this.pausedGame = true;
+    this.toWbScreen(WBScreen.MENU);
+  }
+
+  @action public resumeGame() {
+    this.pausedGame = false;
+    this.toWbScreen(WBScreen.GAME);
+  }
+
+  @action public endGame() {
+    // end the game
+    this.pausedGame = false;
+    this.toWbScreen(WBScreen.MENU);
   }
 
   // Called on every key press in game
@@ -85,7 +87,7 @@ export class WordBashState {
     }
   }
 
-  // Answer tag X callback
+  // Answer word click callback
   @action public removeAnswer(answer: string) {
     // Remove from answers array to update answer pool
     const length = answer.length;
@@ -270,13 +272,13 @@ export class WordBashState {
 
     // Update classes for visual cue
     this.rightAnswer = true;
-    setTimeout(() => (this.rightAnswer = false), this.rightAnswerDelay);
+    setTimeout(() => (this.rightAnswer = false), rightAnswerDelay);
   }
 
   // Sets bool true then false on delay, for css effects
   @action private rejectAnswer() {
     this.wrongAnswer = true;
-    setTimeout(() => (this.wrongAnswer = false), this.wrongAnswerDelay);
+    setTimeout(() => (this.wrongAnswer = false), wrongAnswerDelay);
   }
 
   // When accepting an answer

@@ -1,14 +1,11 @@
 .in-game-menu {
   z-index: 10;
-  height: 60px;
   width: 100%;
   border-bottom: 1px solid #1d3557;
   align-self: flex-start;
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
 
   .button {
     margin: 8px;
@@ -23,5 +20,10 @@
     &:hover {
       background-color: #c59849;
     }
+  }
+
+  .menu {
+    align-self: flex-start;
+    margin-right: 20%;
   }
 }

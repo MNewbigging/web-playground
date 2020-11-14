@@ -2,6 +2,8 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { Icon } from '@blueprintjs/core';
+
 import { WordBashState } from '../WordBashState';
 
 import './in-game-menu.scss';
@@ -21,6 +23,9 @@ export class InGameMenu extends React.Component<IGMProps> {
 
     return (
       <div className={'in-game-menu'}>
+        <div className={'button menu'} onClick={() => wbState.pauseGame()}>
+          <Icon icon={'menu'} />
+        </div>
         <div className={'button'} onClick={() => wbState.getExtraVowel()}>
           +1 Vowel ({vowelCount})
         </div>

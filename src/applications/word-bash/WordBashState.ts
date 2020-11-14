@@ -25,8 +25,8 @@ export class WordBashState {
   @observable public lastPickedLetters: number[] = []; // stores picked letters as indices into letter pool
 
   // Answer values
-  @observable public wrongAnswer: boolean = false;
-  @observable public rightAnswer: boolean = false;
+  @observable public wrongAnswer: boolean = false; // controls when css classes active
+  @observable public rightAnswer: boolean = false; // controls when css classes active
   @observable public answers3To4: string[] = [];
   @observable public answers5To6: string[] = [];
   @observable public answers7To8: string[] = [];
@@ -67,8 +67,20 @@ export class WordBashState {
   }
 
   @action public endGame() {
-    // end the game
+    // Reset to default values
+    this.wonGame = false;
     this.pausedGame = false;
+    this.letterPool = [];
+    this.lastPickedLetters = [];
+    this.wrongAnswer = false;
+    this.rightAnswer = false;
+    this.answers3To4 = [];
+    this.answers5To6 = [];
+    this.answers7To8 = [];
+    this.answers9Plus = [];
+    this.allAnswers.clear();
+    this.letterGenerator = new LetterGenerator();
+
     this.toWbScreen(WBScreen.MENU);
   }
 

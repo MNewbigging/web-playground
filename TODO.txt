@@ -6,7 +6,7 @@ PLAYGROUND:
  - Adding/removing answers forces whole answer pool rebuild - streamline
  - SFX
  - Further game UI on top of screen
- - Style answer words
- - Responsive answer word zone
- - Menu screen
+ - Menu screen - style
  - Tooltips - wrong word entry, dupe answer attempt etc
+ - End game animations and score display
+ - Scoring to take extra vowels/consonants into account

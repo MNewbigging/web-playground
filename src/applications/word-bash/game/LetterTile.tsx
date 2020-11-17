@@ -8,28 +8,29 @@ import './animations.scss';
 import './letter-tile.scss';
 
 interface LetterTileProps extends ILetterTile {
-  className: string;
+  outerClass?: string; // css class name applied to outer tile container
+  anims?: string; // additional css class names for anims come from pool
 }
 
 @observer
 export class LetterTile extends React.Component<LetterTileProps> {
   public render() {
-    const { delay, letter, status, className } = this.props;
+    const { delay, letter, status, anims, outerClass } = this.props;
 
-    // Spin and pulse when inactive
-    const anims = status === LetterTileStatus.INACTIVE ? 'spin' : '';
+    // Spin when inactive
+    const spin = status === LetterTileStatus.INACTIVE ? 'spin' : '';
 
     // Don't show the letter when inactive
     const letterStr = status === LetterTileStatus.INACTIVE ? '' : letter;
 
-    // Each tile has a delay to their fall-in animation (for cascade effect)
+    // Each tile has a delay to their animation (for cascade effect)
     const style = {
       animationDelay: `${delay}s`,
     };
 
-    const classes: string[] = ['lt-inner', status, anims, className];
+    const classes: string[] = ['lt-inner', status, spin, anims];
     return (
-      <div className={'letter-tile fall-in'} style={style}>
+      <div className={'letter-tile fall-in ' + outerClass} style={style}>
         <div className={classes.join(' ')} style={style}>
           <div>{letterStr}</div>
         </div>

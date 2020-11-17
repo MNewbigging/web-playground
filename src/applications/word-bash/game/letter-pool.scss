@@ -43,7 +43,11 @@
   }
 
   .win-msg {
-    grid-column-start: 6;
-    grid-row: 5;
+    //grid-column-start: 6;
+    grid-row: 4 !important;
+  }
+
+  .score-msg {
+    grid-row: 5 !important;
   }
 }

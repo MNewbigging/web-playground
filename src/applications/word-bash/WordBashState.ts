@@ -11,6 +11,8 @@ import {
 import { ConsonantsWeight, LetterGenerator } from './LetterGenerator';
 
 export class WordBashState {
+  @observable public startWinAnims: boolean = false;
+  private winAnimDelay: number = 3000; // how long to wait for win anim to finish in ms
   @observable public wonGame: boolean = false;
   @observable public pausedGame: boolean = false;
   @observable public gameScore: number = 0;
@@ -56,7 +58,7 @@ export class WordBashState {
     this.toWbScreen(WBScreen.GAME);
 
     // TESTING
-    this.winGame();
+    //this.winGame();
   }
 
   // On start game, preps letter pool
@@ -95,6 +97,7 @@ export class WordBashState {
   @action public endGame() {
     // Reset to default values
     this.wonGame = false;
+    this.startWinAnims = false;
     this.pausedGame = false;
     this.letterPool = [];
     this.lastPickedLetters = [];
@@ -156,12 +159,17 @@ export class WordBashState {
 
   // Called on every key press in game
   @action public pressKey(key: string) {
+    console.log('key perssed', key);
     switch (key) {
       case 'Backspace':
         this.undoLastLetter();
         break;
       case 'Enter':
         this.checkWord();
+        break;
+      case ' ':
+        console.log('pressed space');
+        this.winGame();
         break;
       default:
         this.checkKeyCharacter(key);
@@ -296,21 +304,16 @@ export class WordBashState {
   }
 
   @action private checkForEndGame() {
-    let allInactive: boolean = true;
-    this.letterPool.forEach((lpl) => {
-      if (lpl.status !== LetterTileStatus.INACTIVE) {
-        allInactive = false;
-      }
-    });
-
-    if (allInactive) {
+    const nonInactive = this.letterPool.find((lpl) => lpl.status !== LetterTileStatus.INACTIVE);
+    if (!nonInactive) {
       this.winGame();
     }
   }
 
   @action private winGame() {
-    this.wonGame = true;
     this.scoreAnswers();
+    this.startWinAnims = true;
+    setTimeout(() => (this.wonGame = true), this.winAnimDelay);
   }
 
   private scoreAnswers() {
@@ -321,12 +324,12 @@ export class WordBashState {
     // 9+ as above, plus 3 per word
 
     // We know that there's 1 point per letter, so:
-    let basePoints = this.letterPoolSize;
-    basePoints += this.answers5To6.length;
-    basePoints += this.answers7To8.length * 2;
-    basePoints += this.answers9Plus.length * 3;
+    let points = this.letterPoolSize;
+    points += this.answers5To6.length;
+    points += this.answers7To8.length * 2;
+    points += this.answers9Plus.length * 3;
 
-    this.gameScore = basePoints;
+    this.gameScore = points;
   }
 
   // Answer word click callback

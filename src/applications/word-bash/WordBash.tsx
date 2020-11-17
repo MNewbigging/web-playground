@@ -9,14 +9,20 @@ import { WordBashState } from './WordBashState';
 
 import './word-bash.scss';
 
+interface WBProps {
+  toApp: () => void;
+}
+
 @observer
-export class WordBash extends React.Component {
+export class WordBash extends React.Component<WBProps> {
   private wbState = new WordBashState();
   public render() {
+    const { toApp } = this.props;
+
     let toRender: JSX.Element;
     switch (this.wbState.wbScreen) {
       case WBScreen.MENU:
-        toRender = <WBMenu wbState={this.wbState} />;
+        toRender = <WBMenu wbState={this.wbState} toApp={toApp} />;
         break;
       case WBScreen.GAME:
         toRender = <WBGame wbState={this.wbState} />;

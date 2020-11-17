@@ -168,10 +168,6 @@ export class WordBashState {
       case 'Enter':
         this.checkWord();
         break;
-      case ' ':
-        console.log('pressed space');
-        this.winGame();
-        break;
       default:
         this.checkKeyCharacter(key);
         break;

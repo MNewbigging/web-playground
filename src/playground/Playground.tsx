@@ -14,7 +14,7 @@ export class Playground extends React.Component {
       case AppState.PLAYGROUND:
         return <AppList pgState={this.pgState} />;
       case AppState.WORD_BASH:
-        return <WordBash />;
+        return <WordBash toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
     }
   }
 }

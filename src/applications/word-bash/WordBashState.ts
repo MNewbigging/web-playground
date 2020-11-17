@@ -96,6 +96,8 @@ export class WordBashState {
 
   @action public endGame() {
     // Reset to default values
+    this.lifeline.vowels = 5;
+    this.lifeline.consonants = 5;
     this.wonGame = false;
     this.startWinAnims = false;
     this.gameScore = 0;
@@ -332,6 +334,9 @@ export class WordBashState {
     points += this.answers7To8.length * 2;
     points += this.answers9Plus.length * 3;
 
+    // If at end game, subtract points for lifelines used
+    const extrasUsed = 5 - this.lifeline.vowels + 5 - this.lifeline.consonants;
+    points -= extrasUsed;
     this.gameScore = points;
   }
 
@@ -361,5 +366,8 @@ export class WordBashState {
 
     // Remove from answers map
     this.allAnswers.delete(answer);
+
+    // Re-calculate score
+    this.scoreAnswers();
   }
 }

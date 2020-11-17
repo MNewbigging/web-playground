@@ -26,8 +26,8 @@ export class WBMenu extends React.Component<WBMenuProps> {
     const { wbState } = this.props;
     return (
       <>
-        <Button text={'START'} onClick={() => wbState.startGame()} />
-        <Button text={'OPTIONS'} />
+        <Button className={'button'} text={'START'} onClick={() => wbState.startGame()} />
+        <Button className={'button'} text={'OPTIONS'} />
       </>
     );
   }
@@ -36,9 +36,9 @@ export class WBMenu extends React.Component<WBMenuProps> {
     const { wbState } = this.props;
     return (
       <>
-        <Button text={'RESUME'} onClick={() => wbState.resumeGame()} />
-        <Button text={'END GAME'} onClick={() => wbState.endGame()} />
-        <Button text={'OPTIONS'} />
+        <Button className={'button'} text={'RESUME'} onClick={() => wbState.resumeGame()} />
+        <Button className={'button'} text={'END GAME'} onClick={() => wbState.endGame()} />
+        <Button className={'button'} text={'OPTIONS'} />
       </>
     );
   }

@@ -26,12 +26,16 @@ export class InGameMenu extends React.Component<IGMProps> {
         <div className={'button menu'} onClick={() => wbState.pauseGame()}>
           <Icon icon={'menu'} />
         </div>
-        <div className={'button'} onClick={() => wbState.getExtraVowel()}>
-          +1 Vowel ({vowelCount})
+        <div className={'button-holder'}>
+          <div className={'button'} onClick={() => wbState.getExtraVowel()}>
+            +1 Vowel ({vowelCount})
+          </div>
+          <div className={'button'} onClick={() => wbState.getExtraConsonant()}>
+            +1 Consonant ({consCount})
+          </div>
         </div>
-        <div className={'button'} onClick={() => wbState.getExtraConsonant()}>
-          +1 Consonant ({consCount})
-        </div>
+
+        <div className={'score'}>{wbState.gameScore}</div>
       </div>
     );
   }

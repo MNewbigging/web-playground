@@ -56,15 +56,5 @@ export class LetterPool extends React.Component<LetterPoolProps> {
       };
       letters.push(<LetterTile key={'sslt' + i} {...lt} outerClass={'score-msg'} />);
     }
-
-    const winMsg: string[] = ['Y', 'O', 'U', ' ', 'W', 'O', 'N', '!'];
-    winMsg.forEach((char, idx) => {
-      const lt: ILetterTile = {
-        letter: char,
-        status: LetterTileStatus.NORMAL,
-        delay: 0.1 * idx, // 2 should actually be 0.5 per row
-      };
-      letters.push(<LetterTile key={'lt' + idx} {...lt} outerClass={'win-msg'} />);
-    });
   }
 }

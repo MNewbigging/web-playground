@@ -98,6 +98,7 @@ export class WordBashState {
     // Reset to default values
     this.wonGame = false;
     this.startWinAnims = false;
+    this.gameScore = 0;
     this.pausedGame = false;
     this.letterPool = [];
     this.lastPickedLetters = [];
@@ -240,7 +241,7 @@ export class WordBashState {
 
     this.acceptAnswer(word);
     this.setChosenLettersInactive();
-
+    this.scoreAnswers();
     this.checkForEndGame();
   }
 
@@ -311,20 +312,26 @@ export class WordBashState {
   }
 
   @action private winGame() {
-    this.scoreAnswers();
     this.startWinAnims = true;
+    this.scoreAnswers();
     setTimeout(() => (this.wonGame = true), this.winAnimDelay);
   }
 
   private scoreAnswers() {
     // Scoring:
+    // 1 point per letter
     // 3-4 words just get 1 point per letter used
     // 5-6 gets the same, plus 1 point per word
     // 7-8 as above, plus 2 per word
     // 9+ as above, plus 3 per word
 
-    // We know that there's 1 point per letter, so:
-    let points = this.letterPoolSize;
+    let points = 0;
+    // Add 1 point per letter
+    this.allAnswers.forEach((ans) => {
+      points += ans.length;
+    });
+
+    // Add extra points for long answers
     points += this.answers5To6.length;
     points += this.answers7To8.length * 2;
     points += this.answers9Plus.length * 3;

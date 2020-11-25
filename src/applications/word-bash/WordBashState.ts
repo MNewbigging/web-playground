@@ -56,12 +56,8 @@ export class WordBashState {
 
     // Move to game screen
     this.toWbScreen(WBScreen.GAME);
-
-    // TESTING
-    //this.winGame();
   }
 
-  // On start game, preps letter pool
   private setupLetterPool(letters: string) {
     // Assign delay for cascade animation of letters
     const rowDelayStep: number = 0.2;
@@ -129,8 +125,6 @@ export class WordBashState {
       const extraVowel = this.letterGenerator.getRandomVowel();
       this.addLetterToPool(extraVowel);
       this.lifeline.vowels--;
-    } else {
-      // highlight button red
     }
   }
 
@@ -141,8 +135,6 @@ export class WordBashState {
       const extraCons = this.letterGenerator.getRandomConsonant();
       this.addLetterToPool(extraCons);
       this.lifeline.consonants--;
-    } else {
-      // highlight button red
     }
   }
 

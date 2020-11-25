@@ -32,29 +32,44 @@ export class WBMenu extends React.Component<WBMenuProps> {
   private renderMainMenu() {
     const { wbState } = this.props;
     return (
-      <>
-        <Button className={'button'} text={'START'} onClick={() => wbState.startGame()} />
-      </>
+      <div key={'main'}>
+        <Button
+          key={'start'}
+          className={'button'}
+          text={'START'}
+          onClick={() => wbState.startGame()}
+        />
+      </div>
     );
   }
 
   private renderPauseMenu() {
     const { wbState } = this.props;
     return (
-      <>
-        <Button className={'button'} text={'RESUME'} onClick={() => wbState.resumeGame()} />
-        <Button className={'button'} text={'END GAME'} onClick={() => wbState.endGame()} />
-      </>
+      <div key={'pause'}>
+        <Button
+          key={'resume'}
+          className={'button'}
+          text={'RESUME'}
+          onClick={() => wbState.resumeGame()}
+        />
+        <Button
+          key={'endgame'}
+          className={'button'}
+          text={'END GAME'}
+          onClick={() => wbState.endGame()}
+        />
+      </div>
     );
   }
 
   private renderCommonButtons() {
-    const { wbState, toApp } = this.props;
+    const { toApp } = this.props;
     return (
-      <>
-        <Button className={'button'} text={'OPTIONS'} />
-        <Button className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
-      </>
+      <div key={'common'}>
+        <Button key={'options'} className={'button'} text={'OPTIONS'} />
+        <Button key={'exitgame'} className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
+      </div>
     );
   }
 }

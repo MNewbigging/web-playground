@@ -1,0 +1,103 @@
+/**
+ * These weighting values are based on figures given here: https://en.wikipedia.org/wiki/Letter_frequency
+ * We pick random numbers up to weight total and pick letters based on where rng falls within range attributed
+ * to each letter. 
+ * The problem with this approach is there is little variation; with very specific chances given to each letter
+ * it means the odds of variability lie in the consistency factor of Math.random()
+ * The fuzzier the statistics attributed to each letter, the greater the variation.
+ */
+const consonants: string = 'BCDFGHJKLMNPQRSTVWXYZ';
+const consonantWeightsTotal: number = 62.79;
+const consonantWeights: number[] = [
+  2,
+  4,
+  3.8,
+  1.4,
+  3,
+  2.3,
+  0.21,
+  0.97,
+  5.3,
+  2.7,
+  7.2,
+  2.8,
+  0.19,
+  7.3,
+  8.7,
+  6.7,
+  1,
+  0.91,
+  0.27,
+  1.6,
+  0.44,
+];
+
+const vowels: string = 'AEIOU';
+const vowelWeights: number[] = [7.8, 11, 8.6, 6.1, 3.3];
+const vowelWeightsTotal: number = 36.8;
+
+  private generateVowelsWeighted(count: number) {
+    const randomChoices: number[] = [];
+    for (let i: number = 0; i < count; i++) {
+      randomChoices.push(Math.random() * vowelWeightsTotal);
+    }
+    console.log('random choices: ', randomChoices);
+    randomChoices.sort((a, b) => {
+      return a - b;
+    });
+    console.log('sorted choices: ', randomChoices);
+    let gameVowels: string = '';
+    let totalWeight = 0;
+    for (let i: number = 0; i < vowelWeights.length; i++) {
+      totalWeight += vowelWeights[i];
+
+      let toSplice = 0;
+      for (let j: number = 0; j < randomChoices.length; j++) {
+        if (totalWeight >= randomChoices[j]) {
+          gameVowels += vowels[i];
+          toSplice++;
+        } else {
+          break;
+        }
+      }
+      randomChoices.splice(0, toSplice);
+    }
+
+    console.log('game vowels: ', gameVowels);
+    return gameVowels;
+  }
+
+  private generateConsonantsWeighted(count: number) {
+    const randomChoices: number[] = [];
+    for (let i: number = 0; i < count; i++) {
+      const rng = Math.random() * consonantWeightsTotal;
+      randomChoices.push(rng);
+    }
+    console.log('cons random choices: ', randomChoices);
+    randomChoices.sort((a, b) => {
+      return a - b;
+    });
+
+    console.log('cons sorted choices: ', randomChoices);
+
+    let gameCons: string = '';
+    let total: number = 0;
+    for (let i: number = 0; i < consonantWeights.length; i++) {
+      total += consonantWeights[i];
+
+      let toSplice = 0;
+      for (let j: number = 0; j < randomChoices.length; j++) {
+        if (total >= randomChoices[j]) {
+          // get the consonant for this range
+          gameCons += consonants[i];
+          toSplice++;
+        } else {
+          break;
+        }
+      }
+      randomChoices.splice(0, toSplice);
+    }
+
+    console.log('game cons: ', gameCons);
+    return gameCons;
+  }

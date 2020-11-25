@@ -2,10 +2,11 @@ enum Vowels {
   ALL = 'AEIOU',
 }
 
+// Consonant commonality: SRNTLCDGMPHBYFVKWZJQX
 enum Consonants {
-  COMMON = 'BCDFGHKLMNPRST',
-  UNCOMMON = 'JVWY',
-  RARE = 'QXZ',
+  COMMON = 'SRNTLCDGMPH', // 3
+  UNCOMMON = 'YFVB', // 2
+  RARE = 'KWZJQX', // 1
 }
 
 export interface ConsonantsWeight {
@@ -15,8 +16,8 @@ export interface ConsonantsWeight {
 }
 
 export class LetterGenerator {
-  private minVowelRatio: number = 0.28;
-  private maxVowelRatio: number = 0.42;
+  private minVowelRatio: number = 0.3;
+  private maxVowelRatio: number = 0.43;
   private gameConsonants: string = '';
   private gameLetters: string = '';
 

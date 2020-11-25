@@ -3,10 +3,9 @@ PLAYGROUND:
  (item grows, other list items shrink/move)
 
  WORD BASH:
- - Adding/removing answers forces whole answer pool rebuild - streamline
  - SFX
- - Further game UI on top of screen
- - Menu screen - style
  - Tooltips - wrong word entry, dupe answer attempt etc
- - End game animations and score display
  - Scoring to take extra vowels/consonants into account
+ - On-click events for letters to support keyboardless play
+ - Preset game sizes
+ - Re-apply anim delay when winning, so additional letters move off in time with originals

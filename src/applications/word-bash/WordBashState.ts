@@ -150,7 +150,7 @@ export class WordBashState {
     });
   }
 
-  //--------- KEYBOARD INPUT ---------//
+  //--------- KEYBOARD/MOUSE INPUT ---------//
 
   // Called on every key press in game
   @action public pressKey(key: string) {
@@ -174,9 +174,15 @@ export class WordBashState {
       return;
     }
     // on backspace, remove last activated letter
-    const lpl = this.lastPickedLetters[this.lastPickedLetters.length - 1];
-    this.letterPool[lpl].status = LetterTileStatus.NORMAL;
-    this.lastPickedLetters.pop();
+    const lastPickedIdx = this.lastPickedLetters.length - 1;
+    this.undoLetterTile(lastPickedIdx);
+  }
+
+  // Rejecting a chosen answer letter
+  public undoLetterTile(lastPickedIdx: number) {
+    const poolIdx = this.lastPickedLetters[lastPickedIdx];
+    this.letterPool[poolIdx].status = LetterTileStatus.NORMAL;
+    this.lastPickedLetters.splice(lastPickedIdx, 1);
   }
 
   // Character keyboard press
@@ -186,13 +192,21 @@ export class WordBashState {
       (l) => l.letter.toLowerCase() === key.toLowerCase() && l.status === LetterTileStatus.NORMAL
     );
     if (validLetter >= 0) {
-      this.letterPool[validLetter].status = LetterTileStatus.ACTIVE;
-      this.lastPickedLetters.push(validLetter);
+      this.selectLetterTile(validLetter);
+    }
+  }
+
+  // When clicking/tapping on a letter tile
+  public selectLetterTile(idx: number) {
+    // Only valid if letter is in normal state
+    if (this.letterPool[idx].status === LetterTileStatus.NORMAL) {
+      this.letterPool[idx].status = LetterTileStatus.ACTIVE;
+      this.lastPickedLetters.push(idx);
     }
   }
 
   // Enter keyboard press
-  private async checkWord() {
+  public async checkWord() {
     if (!this.lastPickedLetters.length) {
       this.rejectAnswer();
       return;

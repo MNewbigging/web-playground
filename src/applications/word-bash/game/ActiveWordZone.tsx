@@ -2,6 +2,8 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { Icon } from '@blueprintjs/core';
+
 import { WordBashState } from '../WordBashState';
 import { AnswerLetterTile } from './AnswerLetterTile';
 
@@ -18,12 +20,26 @@ export class ActiveWordZone extends React.Component<AWZProps> {
     const letters: JSX.Element[] = [];
     wbState.lastPickedLetters.forEach((lpl, idx) => {
       const iletter = wbState.letterPool[lpl];
-      letters.push(<AnswerLetterTile key={'at-' + idx} letter={iletter.letter} />);
+      letters.push(
+        <AnswerLetterTile
+          key={'at-' + idx}
+          letter={iletter.letter}
+          select={() => wbState.undoLetterTile(idx)}
+        />
+      );
     });
 
     let alertClassName = wbState.rightAnswer ? 'correct' : '';
     alertClassName = wbState.wrongAnswer ? 'warning' : alertClassName;
 
-    return <div className={'active-word-zone ' + alertClassName}>{letters}</div>;
+    return (
+      <div className={'active-word-zone ' + alertClassName}>
+        <div className={'letters'}>{letters}</div>
+
+        <div className={'enter-icon'} onClick={() => wbState.checkWord()}>
+          <Icon icon={'caret-right'} iconSize={24} />
+        </div>
+      </div>
+    );
   }
 }

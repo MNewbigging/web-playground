@@ -10,6 +10,7 @@ import './letter-tile.scss';
 interface LetterTileProps extends ILetterTile {
   outerClass?: string; // css class name applied to outer tile container
   anims?: string; // additional css class names for anims come from pool
+  select?: () => void;
 }
 
 @observer
@@ -28,13 +29,17 @@ export class LetterTile extends React.Component<LetterTileProps> {
       animationDelay: `${delay}s`,
     };
 
-    const classes: string[] = ['lt-inner', status, spin, anims];
+    const innerClasses: string[] = ['lt-inner', status, spin, anims];
     return (
       <div className={'letter-tile fall-in ' + outerClass} style={style}>
-        <div className={classes.join(' ')} style={style}>
+        <div className={innerClasses.join(' ')} style={style} onClick={this.onInnerClick}>
           <div>{letterStr}</div>
         </div>
       </div>
     );
   }
+
+  private onInnerClick = () => {
+    this.props.select?.();
+  };
 }

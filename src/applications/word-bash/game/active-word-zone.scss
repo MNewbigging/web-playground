@@ -1,15 +1,15 @@
 .active-word-zone {
   width: 100%;
   height: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 
   box-sizing: border-box;
   border: 2px solid #1d3557;
   border-radius: 0px 0px 10px 10px;
 
   display: flex;
-
+  justify-content: space-between;
   // on wrong word entered
   &.warning {
     border: 2px solid #e3655b;
@@ -18,5 +18,32 @@
   // on right word entered
   &.correct {
     border: 2px solid #157145;
+  }
+
+  .letters {
+    width: 90%;
+    display: flex;
+  }
+
+  .enter-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    color: white;
+    background-color: #56766b;
+    border-radius: 3px;
+    align-self: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > span {
+      height: 24px;
+    }
+
+    &:hover {
+      background-color: #c59849;
+    }
   }
 }

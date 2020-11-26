@@ -26,7 +26,14 @@ export class LetterPool extends React.Component<LetterPoolProps> {
       const anims: string = wbState.startWinAnims ? 'pulse-flyout' : '';
 
       wbState.letterPool.forEach((letter, idx) => {
-        letters.push(<LetterTile key={'lt-' + idx} {...letter} anims={anims} />);
+        letters.push(
+          <LetterTile
+            key={'lt-' + idx}
+            {...letter}
+            anims={anims}
+            select={() => wbState.selectLetterTile(idx)}
+          />
+        );
       });
     }
 

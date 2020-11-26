@@ -86,7 +86,7 @@ export class LetterGenerator {
   private generateConsonants(consonants: string, poolSize: number, vowelCount: number) {
     let gameCons = '';
     const consCount = poolSize - vowelCount; // Remainder of pool after vowels are consonants
-    console.log(`pool size ${poolSize} - vowels ${vowelCount} = ${consCount}`);
+
     for (let i: number = 0; i < consCount; i++) {
       gameCons += consonants[Math.floor(Math.random() * consonants.length)];
     }

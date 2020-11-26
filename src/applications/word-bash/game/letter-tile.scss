@@ -44,3 +44,15 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .letter-tile {
+    width: 42px;
+    height: 42px;
+
+    .lt-inner {
+      width: 42px;
+      height: 42px;
+    }
+  }
+}

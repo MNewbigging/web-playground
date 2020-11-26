@@ -6,6 +6,5 @@ PLAYGROUND:
  - SFX
  - Tooltips - wrong word entry, dupe answer attempt etc
  - Scoring to take extra vowels/consonants into account
- - On-click events for letters to support keyboardless play
  - Preset game sizes
  - Re-apply anim delay when winning, so additional letters move off in time with originals

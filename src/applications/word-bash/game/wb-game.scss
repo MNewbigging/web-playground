@@ -1,6 +1,6 @@
 .wb-game {
-  width: 90%;
-  height: 90%;
+  width: 95%;
+  height: 95%;
   background-color: #e7eeec;
   //background-image: linear-gradient(to bottom, #cfd9df 0%, #e2ebf0 100%);
   font-weight: bold;
@@ -46,5 +46,11 @@
 
   &__right {
     width: 50%;
+  }
+}
+
+@media (max-height: 768px) {
+  .app-root {
+    height: 80%;
   }
 }

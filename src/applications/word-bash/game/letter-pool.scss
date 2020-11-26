@@ -1,12 +1,3 @@
-// .letter-pool {
-//   // Letter tiles
-//   display: flex;
-//   flex-direction: row row-reverse;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   align-content: center;
-// }
-
 .letter-pool {
   display: grid;
   grid-template-columns: repeat(10, 50px);
@@ -44,5 +35,15 @@
 
   .score-msg {
     grid-row: 4 !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .letter-pool {
+    display: grid;
+    grid-template-columns: repeat(10, 42px);
+    grid-template-rows: repeat(7, 42px);
+    row-gap: 8px;
+    column-gap: 8px;
   }
 }

@@ -4,38 +4,37 @@ import { observer } from 'mobx-react';
 
 import { Icon } from '@blueprintjs/core';
 
-import { WordBashState } from '../WordBashState';
+import { WBGameState } from '../WBGameState';
 
 import './in-game-menu.scss';
 
-type RME = React.MouseEvent<HTMLElement, MouseEvent>;
-
 interface IGMProps {
-  wbState: WordBashState;
+  gameState: WBGameState;
+  pauseGame: () => void;
 }
 
 @observer
 export class InGameMenu extends React.Component<IGMProps> {
   public render() {
-    const { wbState } = this.props;
-    const vowelCount: number = wbState.lifeline.vowels;
-    const consCount: number = wbState.lifeline.consonants;
+    const { gameState, pauseGame } = this.props;
+    const vowelCount: number = gameState.lifelines.vowels;
+    const consCount: number = gameState.lifelines.consonants;
 
     return (
       <div className={'in-game-menu'}>
-        <div className={'button menu'} onClick={() => wbState.pauseGame()}>
+        <div className={'button menu'} onClick={() => pauseGame()}>
           <Icon icon={'menu'} />
         </div>
         <div className={'button-holder'}>
-          <div className={'button'} onClick={() => wbState.getExtraVowel()}>
+          <div className={'button'} onClick={() => gameState.getExtraVowel()}>
             +1 Vowel ({vowelCount})
           </div>
-          <div className={'button'} onClick={() => wbState.getExtraConsonant()}>
+          <div className={'button'} onClick={() => gameState.getExtraConsonant()}>
             +1 Consonant ({consCount})
           </div>
         </div>
 
-        <div className={'score'}>{wbState.gameScore}</div>
+        <div className={'score'}>{gameState.gameScore}</div>
       </div>
     );
   }

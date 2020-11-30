@@ -2,13 +2,13 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { WordBashState } from '../WordBashState';
+import { WBGameState } from '../WBGameState';
 import { AnswerWord } from './AnswerWord';
 
 import './answer-word-zone.scss';
 
 interface AWZProps {
-  wbState: WordBashState;
+  gameState: WBGameState;
 }
 
 @observer
@@ -78,7 +78,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
   }
 
   private getAnswers3To4() {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     const answers3To4: JSX.Element[] = [];
     wbState.answers3To4.forEach((ans) => {
       answers3To4.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
@@ -87,7 +87,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
   }
 
   private getAnswers5To6() {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     const answers5To6: JSX.Element[] = [];
     wbState.answers5To6.forEach((ans) => {
       answers5To6.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
@@ -96,7 +96,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
   }
 
   private getAnswers7To8() {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     const answers7To8: JSX.Element[] = [];
     wbState.answers7To8.forEach((ans) => {
       answers7To8.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
@@ -105,7 +105,7 @@ export class AnswerWordZone extends React.Component<AWZProps> {
   }
 
   private getAnswers9Plus() {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     const answers9Plus: JSX.Element[] = [];
     wbState.answers9Plus.forEach((ans) => {
       answers9Plus.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);

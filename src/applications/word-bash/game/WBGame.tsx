@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ActiveWordZone } from '../game/ActiveWordZone';
-import { WordBashState } from '../WordBashState';
+import { WBGameState } from '../WBGameState';
 import { AnswerWordZone } from './AnswerWordZone';
 import { InGameMenu } from './InGameMenu';
 import { LetterPool } from './LetterPool';
@@ -9,43 +9,32 @@ import { LetterPool } from './LetterPool';
 import './wb-game.scss';
 
 interface WBGameProps {
-  wbState: WordBashState;
+  gameState: WBGameState;
+  pauseGame: () => void;
 }
 
 export class WBGame extends React.Component<WBGameProps> {
-  componentDidMount() {
-    document.addEventListener('keydown', this.onKeyPressed);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.onKeyPressed);
-  }
-
   public render() {
-    const { wbState } = this.props;
+    const { gameState, pauseGame } = this.props;
     return (
       <div className={'wb-game'}>
         <div className={'wb-game__left'}>
           <div className={'wbg-left-top'}>
-            <InGameMenu wbState={wbState} />
+            <InGameMenu gameState={gameState} pauseGame={() => pauseGame()} />
           </div>
           <div className={'wbg-left-bot'}>
             <div className={'wbg-lb-top'}>
-              <LetterPool wbState={wbState} />
+              <LetterPool gameState={gameState} />
             </div>
             <div className={'wbg-lb-bot'}>
-              <ActiveWordZone wbState={wbState} />
+              <ActiveWordZone gameState={gameState} />
             </div>
           </div>
         </div>
         <div className={'wb-game__right'}>
-          <AnswerWordZone wbState={wbState} />
+          <AnswerWordZone gameState={gameState} />
         </div>
       </div>
     );
   }
-
-  private onKeyPressed = (evt: KeyboardEvent) => {
-    this.props.wbState.pressKey(evt.key);
-  };
 }

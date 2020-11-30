@@ -4,19 +4,19 @@ import { observer } from 'mobx-react';
 
 import { Icon } from '@blueprintjs/core';
 
-import { WordBashState } from '../WordBashState';
+import { WBGameState } from '../WBGameState';
 import { AnswerLetterTile } from './AnswerLetterTile';
 
 import './active-word-zone.scss';
 
 interface AWZProps {
-  wbState: WordBashState;
+  gameState: WBGameState;
 }
 
 @observer
 export class ActiveWordZone extends React.Component<AWZProps> {
   public render() {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     const letters: JSX.Element[] = [];
     wbState.lastPickedLetters.forEach((lpl, idx) => {
       const iletter = wbState.letterPool[lpl];

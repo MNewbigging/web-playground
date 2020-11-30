@@ -16,6 +16,15 @@ interface WBProps {
 @observer
 export class WordBash extends React.Component<WBProps> {
   private wbState = new WordBashState();
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeyPressed);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyPressed);
+  }
+
   public render() {
     const { toApp } = this.props;
 
@@ -25,10 +34,14 @@ export class WordBash extends React.Component<WBProps> {
         toRender = <WBMenu wbState={this.wbState} toApp={toApp} />;
         break;
       case WBScreen.GAME:
-        toRender = <WBGame wbState={this.wbState} />;
+        toRender = <WBGame gameState={this.wbState.gameState} pauseGame={this.wbState.pauseGame} />;
         break;
     }
 
     return <div className={'word-bash'}>{toRender}</div>;
   }
+
+  private onKeyPressed = (evt: KeyboardEvent) => {
+    this.wbState.pressKey(evt.key);
+  };
 }

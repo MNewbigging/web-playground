@@ -20,6 +20,12 @@ export interface Lifelines {
   consonants: number;
 }
 
+export enum PoolSize {
+  SMALL = 30,
+  MEDIUM = 50,
+  LARGE = 70,
+}
+
 // Delay on bool switch, determines length of time css class is applied
 export const wrongAnswerDelay: number = 1000;
 export const rightAnswerDelay: number = 500;

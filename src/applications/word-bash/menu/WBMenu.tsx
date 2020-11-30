@@ -2,7 +2,7 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Button } from '@blueprintjs/core';
+import { Button, Radio, RadioGroup } from '@blueprintjs/core';
 
 import { WordBashState } from '../WordBashState';
 
@@ -33,6 +33,11 @@ export class WBMenu extends React.Component<WBMenuProps> {
     const { wbState } = this.props;
     return (
       <div key={'main'}>
+        {/* <RadioGroup>
+          <Radio />
+          <Radio />
+          <Radio />
+        </RadioGroup> */}
         <Button
           key={'start'}
           className={'button'}

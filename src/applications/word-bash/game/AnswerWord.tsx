@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { WordBashState } from '../WordBashState';
+import { WBGameState } from '../WBGameState';
 
 import './answer-word.scss';
 
@@ -8,7 +8,7 @@ type RME = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 
 interface AnswerWordProps {
   word: string;
-  wbState: WordBashState;
+  wbState: WBGameState;
 }
 
 export class AnswerWord extends React.Component<AnswerWordProps> {

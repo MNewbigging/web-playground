@@ -3,19 +3,19 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 import { ILetterTile, LetterTileStatus } from '../fixed';
-import { WordBashState } from '../WordBashState';
+import { WBGameState } from '../WBGameState';
 import { LetterTile } from './LetterTile';
 
 import './letter-pool.scss';
 
 interface LetterPoolProps {
-  wbState: WordBashState;
+  gameState: WBGameState;
 }
 
 @observer
 export class LetterPool extends React.Component<LetterPoolProps> {
   public render() {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     const letters: JSX.Element[] = []; // the letters to display in pool
 
     // If game is won, don't show normal letters - show winning message letters
@@ -41,7 +41,7 @@ export class LetterPool extends React.Component<LetterPoolProps> {
   }
 
   private addGameScore(letters: JSX.Element[]) {
-    const { wbState } = this.props;
+    const { gameState: wbState } = this.props;
     // Score text
     const scoreMsg: string[] = ['S', 'C', 'O', 'R', 'E', ':'];
     scoreMsg.forEach((char, idx) => {

@@ -78,37 +78,37 @@ export class AnswerWordZone extends React.Component<AWZProps> {
   }
 
   private getAnswers3To4() {
-    const { gameState: wbState } = this.props;
+    const { gameState } = this.props;
     const answers3To4: JSX.Element[] = [];
-    wbState.answers3To4.forEach((ans) => {
-      answers3To4.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
+    gameState.answers3To4.forEach((ans) => {
+      answers3To4.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={gameState} />);
     });
     return answers3To4;
   }
 
   private getAnswers5To6() {
-    const { gameState: wbState } = this.props;
+    const { gameState } = this.props;
     const answers5To6: JSX.Element[] = [];
-    wbState.answers5To6.forEach((ans) => {
-      answers5To6.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
+    gameState.answers5To6.forEach((ans) => {
+      answers5To6.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={gameState} />);
     });
     return answers5To6;
   }
 
   private getAnswers7To8() {
-    const { gameState: wbState } = this.props;
+    const { gameState } = this.props;
     const answers7To8: JSX.Element[] = [];
-    wbState.answers7To8.forEach((ans) => {
-      answers7To8.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
+    gameState.answers7To8.forEach((ans) => {
+      answers7To8.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={gameState} />);
     });
     return answers7To8;
   }
 
   private getAnswers9Plus() {
-    const { gameState: wbState } = this.props;
+    const { gameState } = this.props;
     const answers9Plus: JSX.Element[] = [];
-    wbState.answers9Plus.forEach((ans) => {
-      answers9Plus.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={wbState} />);
+    gameState.answers9Plus.forEach((ans) => {
+      answers9Plus.push(<AnswerWord key={'aw-' + ans} word={ans} wbState={gameState} />);
     });
     return answers9Plus;
   }

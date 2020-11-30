@@ -16,27 +16,27 @@ interface AWZProps {
 @observer
 export class ActiveWordZone extends React.Component<AWZProps> {
   public render() {
-    const { gameState: wbState } = this.props;
+    const { gameState } = this.props;
     const letters: JSX.Element[] = [];
-    wbState.lastPickedLetters.forEach((lpl, idx) => {
-      const iletter = wbState.letterPool[lpl];
+    gameState.lastPickedLetters.forEach((lpl, idx) => {
+      const iletter = gameState.letterPool[lpl];
       letters.push(
         <AnswerLetterTile
           key={'at-' + idx}
           letter={iletter.letter}
-          select={() => wbState.undoLetterTile(idx)}
+          select={() => gameState.undoLetterTile(idx)}
         />
       );
     });
 
-    let alertClassName = wbState.rightAnswer ? 'correct' : '';
-    alertClassName = wbState.wrongAnswer ? 'warning' : alertClassName;
+    let alertClassName = gameState.rightAnswer ? 'correct' : '';
+    alertClassName = gameState.wrongAnswer ? 'warning' : alertClassName;
 
     return (
       <div className={'active-word-zone ' + alertClassName}>
         <div className={'letters'}>{letters}</div>
 
-        <div className={'enter-icon'} onClick={() => wbState.checkWord()}>
+        <div className={'enter-icon'} onClick={() => gameState.checkWord()}>
           <Icon icon={'caret-right'} iconSize={24} />
         </div>
       </div>

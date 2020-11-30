@@ -12,7 +12,7 @@ import { ConsonantsWeight, LetterGenerator } from './LetterGenerator';
 
 export class WBGameState {
   // Game setup values
-  public letterPoolSize: PoolSize;
+  private letterPoolSize: PoolSize;
   private consonantsWeight: ConsonantsWeight;
   private letterGenerator = new LetterGenerator();
 

@@ -7,6 +7,7 @@ import { WBGameState } from '../WBGameState';
 import { LetterTile } from './LetterTile';
 
 import './letter-pool.scss';
+import { parseConfigFileTextToJson } from 'typescript';
 
 interface LetterPoolProps {
   gameState: WBGameState;
@@ -15,26 +16,14 @@ interface LetterPoolProps {
 @observer
 export class LetterPool extends React.Component<LetterPoolProps> {
   public render() {
-    const { gameState: wbState } = this.props;
+    const { gameState } = this.props;
     const letters: JSX.Element[] = []; // the letters to display in pool
 
     // If game is won, don't show normal letters - show winning message letters
-    if (wbState.wonGame) {
+    if (gameState.wonGame) {
       this.addGameScore(letters);
     } else {
-      // End game animations
-      const anims: string = wbState.startWinAnims ? 'pulse-flyout' : '';
-
-      wbState.letterPool.forEach((letter, idx) => {
-        letters.push(
-          <LetterTile
-            key={'lt-' + idx}
-            {...letter}
-            anims={anims}
-            select={() => wbState.selectLetterTile(idx)}
-          />
-        );
-      });
+      this.addGameLetters(letters);
     }
 
     return <div className={'letter-pool'}>{letters}</div>;
@@ -63,5 +52,21 @@ export class LetterPool extends React.Component<LetterPoolProps> {
       };
       letters.push(<LetterTile key={'sslt' + i} {...lt} outerClass={'score-msg'} />);
     }
+  }
+
+  private addGameLetters(letters: JSX.Element[]) {
+    const { gameState } = this.props;
+    // End game animations
+    const anims: string = gameState.startWinAnims ? 'pulse-flyout' : '';
+    gameState.letterPool.forEach((letter, idx) => {
+      letters.push(
+        <LetterTile
+          key={'lt-' + idx}
+          {...letter}
+          anims={anims}
+          select={() => gameState.selectLetterTile(idx)}
+        />
+      );
+    });
   }
 }

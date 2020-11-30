@@ -9,17 +9,14 @@ import './letter-tile.scss';
 
 interface LetterTileProps extends ILetterTile {
   outerClass?: string; // css class name applied to outer tile container
-  anims?: string; // additional css class names for anims come from pool
+  innerClass?: string; // additional css class names for anims come from pool
   select?: () => void;
 }
 
 @observer
 export class LetterTile extends React.Component<LetterTileProps> {
   public render() {
-    const { delay, letter, status, anims, outerClass } = this.props;
-
-    // Spin when inactive
-    const spin = status === LetterTileStatus.INACTIVE ? 'spin' : '';
+    const { delay, letter, status, innerClass, outerClass } = this.props;
 
     // Don't show the letter when inactive
     const letterStr = status === LetterTileStatus.INACTIVE ? '' : letter;
@@ -29,9 +26,11 @@ export class LetterTile extends React.Component<LetterTileProps> {
       animationDelay: `${delay}s`,
     };
 
-    const innerClasses: string[] = ['lt-inner', status, spin, anims];
+    const outerClasses: string[] = ['letter-tile', 'fall-in', outerClass];
+    const innerClasses: string[] = ['lt-inner', status, innerClass];
+
     return (
-      <div className={'letter-tile fall-in ' + outerClass} style={style}>
+      <div className={outerClasses.join(' ')} style={style}>
         <div className={innerClasses.join(' ')} style={style} onClick={this.onInnerClick}>
           <div>{letterStr}</div>
         </div>

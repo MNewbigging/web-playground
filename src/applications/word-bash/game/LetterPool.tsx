@@ -7,7 +7,6 @@ import { WBGameState } from '../WBGameState';
 import { LetterTile } from './LetterTile';
 
 import './letter-pool.scss';
-import { parseConfigFileTextToJson } from 'typescript';
 
 interface LetterPoolProps {
   gameState: WBGameState;
@@ -63,7 +62,7 @@ export class LetterPool extends React.Component<LetterPoolProps> {
         <LetterTile
           key={'lt-' + idx}
           {...letter}
-          anims={anims}
+          innerClass={anims}
           select={() => gameState.selectLetterTile(idx)}
         />
       );

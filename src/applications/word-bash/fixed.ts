@@ -4,7 +4,7 @@ export enum WBScreen {
 }
 
 export enum LetterTileStatus {
-  INACTIVE = 'inactive',
+  INACTIVE = 'inactive spin',
   NORMAL = 'normal',
   ACTIVE = 'active',
 }

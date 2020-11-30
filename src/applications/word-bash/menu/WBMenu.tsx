@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 
 import { Button, Radio, RadioGroup } from '@blueprintjs/core';
 
+import { PoolSize } from '../fixed';
 import { WordBashState } from '../WordBashState';
 
 import './wb-menu.scss';
@@ -33,11 +34,17 @@ export class WBMenu extends React.Component<WBMenuProps> {
     const { wbState } = this.props;
     return (
       <div key={'main'}>
-        {/* <RadioGroup>
-          <Radio />
-          <Radio />
-          <Radio />
-        </RadioGroup> */}
+        <RadioGroup
+          label={'Game size:'}
+          onChange={(event: React.FormEvent<HTMLInputElement>) =>
+            wbState.setGameSize(parseInt(event.currentTarget.value, 10))
+          }
+          selectedValue={wbState.gameSize}
+        >
+          <Radio label={`Small: ${PoolSize.SMALL} tiles`} value={PoolSize.SMALL} />
+          <Radio label={`Medium: ${PoolSize.MEDIUM} tiles`} value={PoolSize.MEDIUM} />
+          <Radio label={`Large: ${PoolSize.LARGE} tiles`} value={PoolSize.LARGE} />
+        </RadioGroup>
         <Button
           key={'start'}
           className={'button'}

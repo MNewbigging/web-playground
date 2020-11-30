@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
 
-import { WBScreen } from './fixed';
+import { PoolSize, WBScreen } from './fixed';
 import { ConsonantsWeight } from './LetterGenerator';
 import { WBGameState } from './WBGameState';
 
@@ -10,6 +10,7 @@ export class WordBashState {
   @observable public pausedGame: boolean = false;
 
   // Letter generation values
+  @observable public gameSize: number = PoolSize.MEDIUM;
   private readonly letterPoolSize: number = 40;
   private weight: ConsonantsWeight = {
     common: 3,
@@ -17,8 +18,12 @@ export class WordBashState {
     rare: 1,
   };
 
+  @action public setGameSize(poolSize: number) {
+    this.gameSize = poolSize;
+  }
+
   @action public startGame() {
-    this.gameState = new WBGameState(this.letterPoolSize, this.weight);
+    this.gameState = new WBGameState(this.gameSize, this.weight);
     this.toWbScreen(WBScreen.GAME);
   }
 

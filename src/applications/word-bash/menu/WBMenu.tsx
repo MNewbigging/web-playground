@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 import { Button, Radio, RadioGroup } from '@blueprintjs/core';
 
-import { PoolSize } from '../fixed';
+import { PoolSize, WBScreen } from '../fixed';
 import { WordBashState } from '../WordBashState';
 
 import './wb-menu.scss';
@@ -76,10 +76,15 @@ export class WBMenu extends React.Component<WBMenuProps> {
   }
 
   private renderCommonButtons() {
-    const { toApp } = this.props;
+    const { wbState, toApp } = this.props;
     return (
       <div key={'common'}>
-        <Button key={'options'} className={'button'} text={'OPTIONS'} />
+        <Button
+          key={'options'}
+          className={'button'}
+          text={'OPTIONS'}
+          onClick={() => wbState.toWbScreen(WBScreen.OPTIONS)}
+        />
         <Button key={'exitgame'} className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
       </div>
     );

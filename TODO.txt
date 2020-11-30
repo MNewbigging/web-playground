@@ -7,5 +7,9 @@ PLAYGROUND:
  - Tooltips - wrong word entry, dupe answer attempt etc
  - Scoring to take extra vowels/consonants into account
  - Re-apply anim delay when winning, so additional letters move off in time with originals
+ - Options; consonant rarity and weighting
+ - Better scoring algorithm! 
+ - Local session high scores
+ - Indexeddb or localstorage for highscores
 
 

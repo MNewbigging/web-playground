@@ -55,7 +55,7 @@ export class WordBashState {
     }
   }
 
-  @action private toWbScreen(wbState: WBScreen) {
+  @action public toWbScreen(wbState: WBScreen) {
     this.wbScreen = wbState;
   }
 }

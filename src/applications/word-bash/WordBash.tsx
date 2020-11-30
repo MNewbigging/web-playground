@@ -8,6 +8,7 @@ import { WBMenu } from './menu/WBMenu';
 import { WordBashState } from './WordBashState';
 
 import './word-bash.scss';
+import { WBOptions } from './menu/WBOptions';
 
 interface WBProps {
   toApp: () => void;
@@ -35,6 +36,9 @@ export class WordBash extends React.Component<WBProps> {
         break;
       case WBScreen.GAME:
         toRender = <WBGame gameState={this.wbState.gameState} pauseGame={this.wbState.pauseGame} />;
+        break;
+      case WBScreen.OPTIONS:
+        toRender = <WBOptions wbState={this.wbState} />;
         break;
     }
 

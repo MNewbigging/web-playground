@@ -76,12 +76,10 @@ export class WBMenu extends React.Component<WBMenuProps> {
   }
 
   private renderCommonButtons() {
-    const x = window.innerWidth;
-    const y = window.innerHeight;
     const { toApp } = this.props;
     return (
       <div key={'common'}>
-        <Button key={`size ${x}, ${y}`} className={'button'} text={`size ${x}, ${y}`} />
+        <Button key={'options'} className={'button'} text={'OPTIONS'} />
         <Button key={'exitgame'} className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
       </div>
     );

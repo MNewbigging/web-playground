@@ -117,7 +117,6 @@ export class WBGameState {
   // INPUT
   // Called on every key press in game
   @action public pressKey(key: string) {
-    console.log('key perssed', key);
     switch (key) {
       case 'Backspace':
         this.undoLastLetter();

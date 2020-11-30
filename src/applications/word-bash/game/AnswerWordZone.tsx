@@ -24,53 +24,53 @@ export class AnswerWordZone extends React.Component<AWZProps> {
     const ans3to4 = this.getAnswers3To4();
     if (ans3to4.length) {
       answerPools.push(
-        <>
+        <React.Fragment key={'ans3to4'}>
           <div key={'hd1'} className={'ap-heading'}>
             +0
           </div>
           <div key={'ap1'} className={'answer-pool'}>
             {ans3to4}
           </div>
-        </>
+        </React.Fragment>
       );
     }
     const ans5to6 = this.getAnswers5To6();
     if (ans5to6.length) {
       answerPools.push(
-        <>
+        <React.Fragment key={'ans5to6'}>
           <div key={'hd2'} className={'ap-heading'}>
             +1
           </div>
           <div key={'ap2'} className={'answer-pool'}>
             {ans5to6}
           </div>
-        </>
+        </React.Fragment>
       );
     }
     const ans7to8 = this.getAnswers7To8();
     if (ans7to8.length) {
       answerPools.push(
-        <>
+        <React.Fragment key={'ans7to8'}>
           <div key={'h3'} className={'ap-heading'}>
             +2
           </div>
           <div key={'ap3'} className={'answer-pool'}>
             {ans7to8}
           </div>
-        </>
+        </React.Fragment>
       );
     }
     const ans9p = this.getAnswers9Plus();
     if (ans9p.length) {
       answerPools.push(
-        <>
+        <React.Fragment key={'ans9plus'}>
           <div key={'h4'} className={'ap-heading'}>
             +3
           </div>
           <div key={'ap4'} className={'answer-pool'}>
             {ans9p}
           </div>
-        </>
+        </React.Fragment>
       );
     }
 

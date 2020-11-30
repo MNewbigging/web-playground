@@ -6,8 +6,6 @@ PLAYGROUND:
  - SFX
  - Tooltips - wrong word entry, dupe answer attempt etc
  - Scoring to take extra vowels/consonants into account
- - Preset game sizes
  - Re-apply anim delay when winning, so additional letters move off in time with originals
- - Review css anims and class names, all the vars necessary for them (can i replace vars with 1-off anims?)
 
 

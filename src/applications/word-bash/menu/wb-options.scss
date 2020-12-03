@@ -1,0 +1,113 @@
+$blue-1: #1cb5be;
+$blue-2: #006e85;
+$blue-3: #175373;
+
+$beige-1: #faf5eb;
+$beige-2: #f7efe4;
+$beige-3: #a0a1a3;
+$beige-a: #e4ddd2;
+
+$brown-1: #b69992;
+$brown-2: #7f6c78;
+$brown-3: #574c65;
+$brown-4: #b8a7a3;
+
+.wb-options {
+  width: 100%;
+  height: 100%;
+
+  .back-wall {
+    width: 100%;
+    height: 60%;
+    background-color: #335b96;
+  }
+
+  .desk {
+    width: 100%;
+    height: 40%;
+    background-color: #966f33;
+  }
+
+  .computer {
+    z-index: 1;
+    width: 45%;
+    height: 70%;
+    position: absolute;
+    bottom: 25%;
+    left: 2%;
+    background-color: $brown-1;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .computer-screen {
+      background-color: $blue-2;
+      width: 90%;
+      height: 90%;
+      border-radius: 8% / 6%;
+      //border-radius: 5px;
+      border-top: 6px solid $brown-3;
+      border-left: 7px solid $brown-2;
+      border-right: 7px solid $brown-2;
+      border-bottom: 10px solid $brown-4;
+    }
+  }
+
+  .computer-base {
+    width: 47%;
+    height: 20%;
+    position: absolute;
+    bottom: 6%;
+    left: 1%;
+    border-radius: 10px 10px 3px 3px;
+    box-sizing: border-box;
+    background-color: $beige-2;
+    border-top: 10px solid $brown-4;
+  }
+
+  .monitor {
+    z-index: 1;
+    width: 40%;
+    height: 60%;
+    position: absolute;
+    bottom: 35%;
+    right: 3%;
+    background-color: $brown-1;
+
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .monitor-screen {
+      width: 92%;
+      height: 92%;
+      background-color: $blue-2;
+      border-radius: 5px;
+      border-top: 6px solid $brown-3;
+      border-left: 7px solid $brown-2;
+      border-right: 7px solid $brown-2;
+      border-bottom: 10px solid $brown-4;
+    }
+  }
+
+  .monitor-stand {
+    width: 5%;
+    height: 30%;
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    background-color: $brown-3;
+  }
+
+  .monitor-stand-foot {
+    width: 18%;
+    height: 1%;
+    position: absolute;
+    bottom: 19%;
+    right: 13.5%;
+    background-color: $brown-3;
+  }
+}

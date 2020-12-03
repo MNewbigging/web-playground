@@ -26,10 +26,11 @@ export class WordHackState {
 
   private bootComputer() {
     this.osState = OSState.BOOTING;
-    const loadInterval: number = 30;
+    const loadInterval: number = 20 + Math.floor(Math.random() * 40);
     const int = setInterval(() => {
       if (this.osBootProgress >= 100) {
         clearInterval(int);
+        setTimeout(() => (this.osState = OSState.RUNNING), 1000);
       } else {
         this.osBootProgress++;
       }
@@ -38,5 +39,6 @@ export class WordHackState {
 
   private powerDownComputer() {
     this.osState = OSState.OFF;
+    this.osBootProgress = 0;
   }
 }

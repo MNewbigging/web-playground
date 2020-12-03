@@ -25,12 +25,13 @@ export class ComputerGUI extends React.Component<CGUIProps> {
 
   private renderBootScreen() {
     const { whState } = this.props;
-    const loadPercent: string = whState.osBootProgress + '%';
+    const progressDone = whState.osBootProgress >= 100 ? ' done' : '';
     const progressStyle = {
       width: whState.osBootProgress + '%',
     };
+
     return (
-      <div className={'boot-screen'}>
+      <div className={'boot-screen' + progressDone}>
         <div className={'loading-msg'}>LOADING</div>
         <div className={'loading-bar'}>
           <div className={'progress'} style={progressStyle}></div>

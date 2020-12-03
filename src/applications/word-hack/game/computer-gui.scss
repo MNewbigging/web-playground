@@ -25,11 +25,15 @@
     width: 30%;
     height: 5%;
     border: 1px solid white;
-
     .progress {
       height: 100%;
       background-color: white;
     }
+  }
+
+  &.done {
+    animation: fadeout 1s ease-in 1;
+    animation-fill-mode: forwards;
   }
 }
 
@@ -40,5 +44,15 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

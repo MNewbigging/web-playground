@@ -83,7 +83,7 @@ export class WBMenu extends React.Component<WBMenuProps> {
           key={'options'}
           className={'button'}
           text={'OPTIONS'}
-          onClick={() => wbState.toWbScreen(WBScreen.OPTIONS)}
+          onClick={() => wbState.testGame()}
         />
         <Button key={'exitgame'} className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
       </div>

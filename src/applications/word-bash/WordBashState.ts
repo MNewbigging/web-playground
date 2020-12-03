@@ -27,6 +27,11 @@ export class WordBashState {
     this.toWbScreen(WBScreen.GAME);
   }
 
+  @action public testGame() {
+    this.gameState = new WBGameState(this.gameSize, this.weight);
+    this.toWbScreen(WBScreen.OPTIONS);
+  }
+
   @action public pauseGame = () => {
     this.pausedGame = true;
     this.toWbScreen(WBScreen.MENU);

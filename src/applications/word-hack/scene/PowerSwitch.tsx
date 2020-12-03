@@ -17,8 +17,15 @@ export class PowerSwitch extends React.Component<PWProps> {
     const powerOn: string = whState.computerOn ? 'on' : 'off';
 
     return (
-      <div className={'power-switch ' + powerOn}>
-        <div className={'button'} onClick={this.onPowerSwitchClick}></div>
+      <div className={'power-switch'}>
+        <div className={'button-area ' + powerOn}>
+          <div className={'button'} onClick={this.onPowerSwitchClick}></div>
+        </div>
+
+        <div className={'button-symbols'}>
+          <div>0</div>
+          <div>1</div>
+        </div>
       </div>
     );
   }

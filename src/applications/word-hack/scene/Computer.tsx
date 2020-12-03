@@ -2,6 +2,7 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { ComputerGUI } from '../game/ComputerGUI';
 import { WordHackState } from '../WordHackState';
 import { PowerSwitch } from './PowerSwitch';
 
@@ -23,6 +24,7 @@ export class Computer extends React.Component<CProps> {
         <div className={'computer'}>
           <div className={screenClasses.join(' ')}>
             <div className={'screenOffEffect'}></div>
+            <ComputerGUI whState={whState} />
           </div>
         </div>
         <div className={'computer-base'}>

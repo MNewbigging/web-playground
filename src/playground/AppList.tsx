@@ -15,6 +15,7 @@ export class AppList extends React.Component<AppListProps> {
     return (
       <div className={'app-list'}>
         <AppCard title={'Word Bash'} toApp={() => pgState.toApp(AppState.WORD_BASH)} />
+        <AppCard title={'Word Hack'} toApp={() => pgState.toApp(AppState.WORD_HACK)} />
       </div>
     );
   }

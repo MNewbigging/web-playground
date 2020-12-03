@@ -5,10 +5,10 @@ import { observer } from 'mobx-react';
 import { WBScreen } from './fixed';
 import { WBGame } from './game/WBGame';
 import { WBMenu } from './menu/WBMenu';
+import { WBOptions } from './menu/WBOptions';
 import { WordBashState } from './WordBashState';
 
 import './word-bash.scss';
-import { WBOptions } from './menu/WBOptions';
 
 interface WBProps {
   toApp: () => void;

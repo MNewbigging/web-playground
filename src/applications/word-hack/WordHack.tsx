@@ -1,17 +1,15 @@
 import React from 'react';
 
-import { WordBashState } from '../WordBashState';
+import './word-hack.scss';
 
-import './wb-options.scss';
-
-interface WBOProps {
-  wbState: WordBashState;
+interface WHProps {
+  toApp: () => void;
 }
 
-export class WBOptions extends React.Component<WBOProps> {
+export class WordHack extends React.Component<WHProps> {
   public render() {
     return (
-      <div className={'wb-options'}>
+      <div className={'word-hack'}>
         <div className={'back-wall'}></div>
         <div className={'desk'}></div>
         <div className={'computer'}>

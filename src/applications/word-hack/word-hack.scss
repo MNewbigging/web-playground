@@ -70,6 +70,40 @@ $brown-4: #b8a7a3;
     box-sizing: border-box;
     background-color: $beige-a;
     border-top: 10px solid $brown-4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .cb-front {
+      width: 96%;
+      height: 80%;
+      border: 2px solid $brown-3;
+      border-radius: 6px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      .cb-grille {
+        width: 40%;
+        height: 80%;
+        background-color: #555555;
+      }
+
+      .cb-power {
+        width: 10%;
+        height: 30%;
+        background-color: #555555;
+
+        .power-switch {
+          width: 50%;
+          height: 95%;
+          background-color: #fa4646;
+        }
+      }
+    }
   }
 
   .monitor {

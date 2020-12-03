@@ -15,7 +15,14 @@ export class WordHack extends React.Component<WHProps> {
         <div className={'computer'}>
           <div className={'computer-screen'}>I AM SOME TEXT</div>
         </div>
-        <div className={'computer-base'}></div>
+        <div className={'computer-base'}>
+          <div className={'cb-front'}>
+            <div className={'cb-grille'}></div>
+            <div className={'cb-power'}>
+              <div className={'power-switch'}></div>
+            </div>
+          </div>
+        </div>
         <div className={'monitor'}>
           <div className={'monitor-screen'}></div>
         </div>

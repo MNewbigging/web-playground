@@ -1,0 +1,31 @@
+.power-switch {
+  width: 10%;
+  height: 30%;
+  background-color: #555555;
+  padding: 1px;
+
+  display: flex;
+  align-items: center;
+
+  .button:hover {
+    cursor: pointer;
+  }
+
+  &.on {
+    justify-content: flex-end;
+
+    .button {
+      width: 50%;
+      height: 95%;
+      background-color: #1bcf60;
+    }
+  }
+
+  &.off {
+    .button {
+      width: 50%;
+      height: 95%;
+      background-color: #fa4646;
+    }
+  }
+}

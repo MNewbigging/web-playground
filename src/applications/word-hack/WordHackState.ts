@@ -18,17 +18,25 @@ export class WordHackState {
 
     // If turning on
     if (this.computerOn) {
-      this.osState = OSState.BOOTING;
       this.bootComputer();
     } else {
-      this.osState = OSState.OFF;
+      this.powerDownComputer();
     }
   }
 
   private bootComputer() {
-    this.osBootProgress++;
-    if (this.osBootProgress < 100) {
-      setTimeout(this.bootComputer, 300);
-    }
+    this.osState = OSState.BOOTING;
+    const loadInterval: number = 30;
+    const int = setInterval(() => {
+      if (this.osBootProgress >= 100) {
+        clearInterval(int);
+      } else {
+        this.osBootProgress++;
+      }
+    }, loadInterval);
+  }
+
+  private powerDownComputer() {
+    this.osState = OSState.OFF;
   }
 }

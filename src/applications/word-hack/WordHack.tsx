@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PowerSwitch } from './scene/PowerSwitch';
+import { Computer } from './scene/Computer';
 import { WordHackState } from './WordHackState';
 
 import './word-hack.scss';
@@ -16,15 +16,7 @@ export class WordHack extends React.Component<WHProps> {
       <div className={'word-hack'}>
         <div className={'back-wall'}></div>
         <div className={'desk'}></div>
-        <div className={'computer'}>
-          <div className={'computer-screen'}>I AM SOME TEXT</div>
-        </div>
-        <div className={'computer-base'}>
-          <div className={'cb-front'}>
-            <div className={'cb-grille'}></div>
-            <PowerSwitch whState={this.whState} />
-          </div>
-        </div>
+        <Computer whState={this.whState} />
         <div className={'monitor'}>
           <div className={'monitor-screen'}></div>
         </div>

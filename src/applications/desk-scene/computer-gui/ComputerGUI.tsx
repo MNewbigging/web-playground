@@ -2,12 +2,12 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { OSState, WordHackState } from '../WordHackState';
+import { OSState, DeskSceneState } from '../DeskSceneState';
 
 import './computer-gui.scss';
 
 interface CGUIProps {
-  whState: WordHackState;
+  whState: DeskSceneState;
 }
 
 @observer

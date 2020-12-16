@@ -2,12 +2,12 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { WordHackState } from '../WordHackState';
+import { DeskSceneState } from '../DeskSceneState';
 
 import './power-switch.scss';
 
 interface PWProps {
-  whState: WordHackState;
+  whState: DeskSceneState;
 }
 
 @observer

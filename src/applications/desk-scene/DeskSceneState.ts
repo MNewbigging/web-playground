@@ -6,7 +6,7 @@ export enum OSState {
   RUNNING,
 }
 
-export class WordHackState {
+export class DeskSceneState {
   @observable public computerOn: boolean = false;
   @observable public computerTurningOff: boolean = false;
   @observable public osState = OSState.OFF;

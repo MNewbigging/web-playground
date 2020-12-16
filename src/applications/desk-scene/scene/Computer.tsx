@@ -2,14 +2,14 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { ComputerGUI } from '../game/ComputerGUI';
-import { WordHackState } from '../WordHackState';
+import { ComputerGUI } from '../computer-gui/ComputerGUI';
+import { DeskSceneState } from '../DeskSceneState';
 import { PowerSwitch } from './PowerSwitch';
 
 import './computer.scss';
 
 interface CProps {
-  whState: WordHackState;
+  whState: DeskSceneState;
 }
 
 @observer

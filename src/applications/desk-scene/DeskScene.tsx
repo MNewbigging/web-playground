@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { Computer } from './scene/Computer';
-import { WordHackState } from './WordHackState';
+import { DeskSceneState } from './DeskSceneState';
 
-import './word-hack.scss';
+import './desk-scene.scss';
 
 interface WHProps {
   toApp: () => void;
 }
 
-export class WordHack extends React.Component<WHProps> {
-  private whState = new WordHackState();
+export class DeskScene extends React.Component<WHProps> {
+  private whState = new DeskSceneState();
   public render() {
     return (
       <div className={'word-hack'}>

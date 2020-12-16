@@ -3,7 +3,7 @@ import { action, observable } from 'mobx';
 export enum AppState {
   PLAYGROUND,
   WORD_BASH,
-  WORD_HACK,
+  DESK_SCENE,
 }
 
 export class PlaygroundState {

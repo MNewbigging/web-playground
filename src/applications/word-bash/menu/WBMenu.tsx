@@ -76,15 +76,9 @@ export class WBMenu extends React.Component<WBMenuProps> {
   }
 
   private renderCommonButtons() {
-    const { wbState, toApp } = this.props;
+    const { toApp } = this.props;
     return (
       <div key={'common'}>
-        <Button
-          key={'options'}
-          className={'button'}
-          text={'OPTIONS'}
-          onClick={() => wbState.testGame()}
-        />
         <Button key={'exitgame'} className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
       </div>
     );

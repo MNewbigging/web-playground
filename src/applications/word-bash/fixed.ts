@@ -1,7 +1,6 @@
 export enum WBScreen {
   MENU,
   GAME,
-  OPTIONS,
 }
 
 export enum LetterTileStatus {

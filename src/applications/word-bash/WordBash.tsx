@@ -5,7 +5,6 @@ import { observer } from 'mobx-react';
 import { WBScreen } from './fixed';
 import { WBGame } from './game/WBGame';
 import { WBMenu } from './menu/WBMenu';
-import { WBOptions } from './menu/WBOptions';
 import { WordBashState } from './WordBashState';
 
 import './word-bash.scss';
@@ -36,9 +35,6 @@ export class WordBash extends React.Component<WBProps> {
         break;
       case WBScreen.GAME:
         toRender = <WBGame gameState={this.wbState.gameState} pauseGame={this.wbState.pauseGame} />;
-        break;
-      case WBScreen.OPTIONS:
-        toRender = <WBOptions wbState={this.wbState} />;
         break;
     }
 

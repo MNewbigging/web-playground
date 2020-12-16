@@ -10,5 +10,10 @@
     width: 100px;
     height: 100px;
     margin: 5px;
+    padding: 0px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

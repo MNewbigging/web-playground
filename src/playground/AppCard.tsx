@@ -13,7 +13,7 @@ export class AppCard extends React.Component<AppCardProps> {
     const { title, toApp, classname } = this.props;
     return (
       <Card className={'app-card ' + classname} elevation={2} onClick={() => toApp()}>
-        {title}
+        <div className={'app-card-title'}>{title}</div>
       </Card>
     );
   }

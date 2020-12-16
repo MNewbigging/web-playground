@@ -13,7 +13,7 @@ export class DeskScene extends React.Component<WHProps> {
   private whState = new DeskSceneState();
   public render() {
     return (
-      <div className={'word-hack'}>
+      <div className={'desk-scene'}>
         <div className={'back-wall'}></div>
         <div className={'desk'}></div>
         <Computer whState={this.whState} />
@@ -22,6 +22,10 @@ export class DeskScene extends React.Component<WHProps> {
         </div>
         <div className={'monitor-stand'}></div>
         <div className={'monitor-stand-foot'}></div>
+
+        <div className={'leave-button'} onClick={() => this.props.toApp()}>
+          LEAVE
+        </div>
       </div>
     );
   }

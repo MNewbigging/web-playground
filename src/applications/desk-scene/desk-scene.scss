@@ -12,9 +12,24 @@ $brown-2: #7f6c78;
 $brown-3: #574c65;
 $brown-4: #b8a7a3;
 
-.word-hack {
+.desk-scene {
   width: 100%;
   height: 100%;
+
+  .leave-button {
+    position: absolute;
+    bottom: 6%;
+    left: 10%;
+    width: 5%;
+    height: 5%;
+    background-color: #fa4646;
+    color: white;
+    font-family: monospace;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   .back-wall {
     width: 100%;
@@ -25,7 +40,6 @@ $brown-4: #b8a7a3;
   .desk {
     width: 100%;
     height: 25%;
-    //background-color: #966f33;
     background: linear-gradient(
       0deg,
       rgba(133, 94, 66, 1) 0%,

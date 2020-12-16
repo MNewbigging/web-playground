@@ -18,6 +18,8 @@ export class ComputerGUI extends React.Component<CGUIProps> {
     let screenToRender: JSX.Element;
     if (whState.osState === OSState.BOOTING) {
       screenToRender = this.renderBootScreen();
+    } else if (whState.osState === OSState.RUNNING) {
+      screenToRender = this.renderWIPScreen();
     }
 
     return <div className={'screen'}>{screenToRender}</div>;
@@ -36,6 +38,15 @@ export class ComputerGUI extends React.Component<CGUIProps> {
         <div className={'loading-bar'}>
           <div className={'progress'} style={progressStyle}></div>
         </div>
+      </div>
+    );
+  }
+
+  private renderWIPScreen() {
+    return (
+      <div className={'boot-screen'}>
+        <div className={'loading-msg'}>Work in progress, check back later...</div>
+        <div className={'loading-msg'}>Press Leave button below to go back</div>
       </div>
     );
   }

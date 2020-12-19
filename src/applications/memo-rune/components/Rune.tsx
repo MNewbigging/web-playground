@@ -17,9 +17,16 @@ export class Rune extends React.Component<RuneProps> {
 
   public render() {
     const { rune } = this.props;
+    const bgPos = this.hover
+      ? `${rune.hoverX}px ${rune.hoverY}px`
+      : `${rune.posX}px ${rune.posY}px`;
     const style = {
-      backgroundPosition: `${rune.posX}px ${rune.posY}px`,
+      backgroundPosition: bgPos,
     };
+
+    if (this.hover) {
+      console.log('rune: ', rune);
+    }
 
     return (
       <div className={'rune-holder'}>

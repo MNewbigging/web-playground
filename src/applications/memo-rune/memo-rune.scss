@@ -10,13 +10,15 @@
 
   .rune-area {
     width: 90%;
-    height: 90%;
+    // need preset rune area sizes... or a css grid
 
     border: 2px solid black;
     border-radius: 8px;
     padding: 20px;
 
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .mr-menu {

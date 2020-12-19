@@ -12,7 +12,7 @@ export class MemoRuneState {
   @observable.ref public gameState?: MRGameState;
 
   @action startGame() {
-    this.gameState = new MRGameState(3);
+    this.gameState = new MRGameState(30);
     this.mrScreen = MRScreen.GAME;
   }
 }

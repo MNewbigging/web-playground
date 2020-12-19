@@ -60,16 +60,13 @@ export class MemoRune extends React.Component<MRProps> {
   }
 
   // Player panel is the panel to left of rune area
+  // TODO should make these sub components so whole thing doesn't re-render
   private renderPlayerPanel() {
     const { gameState } = this.mrState;
     const dangerRunes: JSX.Element[] = [];
-
-    // for (let i = 0; i < 4; i++) {
-    //   const r = gameState.runes[i];
-    //   dangerRunes.push(
-    //     <Rune key={'dr' + r.posX + r.posY} rune={r} selectRune={gameState.selectRune} />
-    //   );
-    // }
+    gameState.dangerRunes.forEach((dr) => {
+      dangerRunes.push(<Rune key={'dr' + dr.id} rune={dr} />);
+    });
 
     const pairRunes: JSX.Element[] = [];
     gameState.pairedRunes.forEach((pr) => {

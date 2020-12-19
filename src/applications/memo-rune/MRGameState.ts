@@ -5,10 +5,12 @@ import { action, observable } from 'mobx';
 export class MRGameState {
   @observable selectedRunes: IRune[] = [];
   @observable pairedRunes: IRune[] = [];
+  @observable dangerRunes: IRune[] = [];
   @observable public runes: IRune[];
 
-  constructor(runeCount: number) {
+  constructor(public runeCount: number) {
     this.runes = RuneUtils.getNRunes(runeCount);
+    this.setupDangerRunes();
   }
 
   @action selectRune = (runeId: number) => {
@@ -77,4 +79,18 @@ export class MRGameState {
 
     this.selectedRunes = [];
   };
+
+  private setupDangerRunes() {
+    // Pick up to 4 random runes to make up float
+    // Can pick from ids 0 up to game size (rest are dupes)
+    const availableRunes = this.runes.filter((r) => r.id < this.runeCount);
+    const floatLength = Math.min(this.runeCount / 2 - 2, 5);
+
+    for (let i = 0; i < floatLength; i++) {
+      const rnd = Math.floor(Math.random() * availableRunes.length);
+      const rune = Object.assign({}, availableRunes[rnd]); // deep copy, don't want to affect runes
+      rune.state = RuneState.FACE_UP;
+      this.dangerRunes.push(rune);
+    }
+  }
 }

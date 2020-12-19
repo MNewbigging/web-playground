@@ -9,8 +9,11 @@
   align-items: center;
 
   .left-panel {
-    width: 40%;
-    height: 90%;
+    min-width: 350px;
+    min-height: 500px;
+    width: 30%;
+    max-width: 500px;
+
     border: 2px solid black;
     border-radius: 8px;
     margin-right: 3%;
@@ -21,37 +24,35 @@
     align-items: center;
 
     .ui-bar {
-      width: 95%;
-      height: 10%; // needs to be a specific height
-      // border-bottom: 2px solid black;
-      // border-radius: 8px;
+      border-bottom: 2px solid black;
+      border-radius: 8px;
     }
 
     .danger-runes {
-      width: 95%;
-      height: 32%;
       border-bottom: 2px solid black;
       border-top: 2px solid black;
       border-radius: 8px;
+
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-template-rows: repeat(1, 100px);
+      column-gap: 6px;
     }
 
     .rune-pairs {
-      width: 95%;
-      height: 52%;
       border-top: 2px solid black;
       border-bottom: 2px solid black;
       border-radius: 8px;
+
+      display: grid;
+      grid-template-columns: repeat(5, 60px);
+      grid-template-rows: repeat(3, 100px);
+      column-gap: 6px;
     }
   }
 
   .rune-area {
-    width: 500px;
-    height: 90%;
-
-    // border-top: 2px solid black;
-    // border-bottom: 2px solid black;
-    // border-radius: 8px;
-
+    min-width: 500px;
     display: grid;
     grid-template-columns: repeat(8, 60px);
     grid-template-rows: repeat(4, 100px);

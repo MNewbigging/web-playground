@@ -50,7 +50,7 @@ export class MemoRune extends React.Component<MRProps> {
         <div key={'left-panel'} className={'left-panel'}>
           {this.renderPlayerPanel()}
         </div>
-        <div className={'rune-contianer'}>
+        <div>
           <div key={'rune-area'} className={'rune-area'}>
             {runes}
           </div>
@@ -61,13 +61,31 @@ export class MemoRune extends React.Component<MRProps> {
 
   // Player panel is the panel to left of rune area
   private renderPlayerPanel() {
+    const { gameState } = this.mrState;
+    const dangerRunes: JSX.Element[] = [];
+
+    for (let i = 0; i < 4; i++) {
+      const r = gameState.runes[i];
+      dangerRunes.push(<Rune key={'dr' + r.posX + r.posY} rune={r} />);
+    }
+
+    const pairRunes: JSX.Element[] = [];
+    for (let i = 0; i < 15; i++) {
+      const r = gameState.runes[i];
+      pairRunes.push(<Rune key={'pr' + r.posX + r.posY} rune={r} />);
+    }
+
     return (
       <React.Fragment key={'player-panel'}>
         <div className={'ui-bar'}>
           <MRGameUI pauseGame={() => this.mrState.pauseGame()} />
         </div>
-        <div className={'danger-runes'}></div>
-        <div className={'rune-pairs'}></div>
+        <div>
+          <div className={'danger-runes'}>{dangerRunes}</div>
+        </div>
+        <div>
+          <div className={'rune-pairs'}>{pairRunes}</div>
+        </div>
       </React.Fragment>
     );
   }

@@ -27,6 +27,11 @@ export class AppList extends React.Component<AppListProps> {
           title={'DESK SCENE'}
           toApp={() => pgState.toApp(AppState.DESK_SCENE)}
         />
+        <AppCard
+          classname={'memo-rune-card'}
+          title={'MEMO RUNE'}
+          toApp={() => pgState.toApp(AppState.MEMO_RUNE)}
+        />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 PLAYGROUND:
-- App Cards: hover behaviour; enlarge on hover, reveal description text
+- App Cards: hover behaviour; enlarge on hover, reveal description text, or info button top right of card that opens popover for info
  (item grows, other list items shrink/move)
 
  WORD BASH:
@@ -7,9 +7,9 @@ PLAYGROUND:
  - Tooltips - wrong word entry, dupe answer attempt etc
  - Scoring to take extra vowels/consonants into account
  - Re-apply anim delay when winning, so additional letters move off in time with originals
- - Options; consonant rarity and weighting
  - Better scoring algorithm! 
  - Local session high scores
  - Indexeddb or localstorage for highscores
+ 
 
 

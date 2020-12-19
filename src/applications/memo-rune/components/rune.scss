@@ -1,0 +1,22 @@
+.rune-holder {
+  width: 60px;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .rune {
+    // These match sprite dimensions exactly
+    width: 52px;
+    height: 89px;
+
+    background: url('/dist/assets/memo-rune/runeGrey_slab_sheet.png');
+
+    &:hover {
+      background: url('/dist//assets/memo-rune/runeGrey_slabOutline_sheet.png');
+      width: 56px;
+      height: 93px;
+    }
+  }
+}

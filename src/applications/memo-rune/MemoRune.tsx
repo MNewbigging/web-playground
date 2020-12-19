@@ -2,8 +2,6 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Button } from '@blueprintjs/core';
-
 import { MemoRuneState, MRScreen } from './MemoRuneState';
 import { Rune } from './components/Rune';
 import { MRGameUI } from './components/MRGameUI';
@@ -23,7 +21,7 @@ export class MemoRune extends React.Component<MRProps> {
 
     switch (this.mrState.mrScreen) {
       case MRScreen.MENU:
-        toRender.push(this.renderMenu());
+        toRender.push(<MRMenu key={'mrmenu'} mrState={this.mrState} />);
         break;
       case MRScreen.GAME:
         toRender.push(this.renderGame());
@@ -34,15 +32,6 @@ export class MemoRune extends React.Component<MRProps> {
       <div key={'memo-rune'} className={'memo-rune'}>
         {toRender}
       </div>
-    );
-  }
-
-  private renderMenu() {
-    return (
-      <MRMenu mrState={this.mrState} />
-      // <div key={'mr-menu'} className={'mr-menu'}>
-      //   <Button key={'start-btn'} text={'Start'} onClick={() => this.mrState.startGame()} />
-      // </div>
     );
   }
 
@@ -72,7 +61,7 @@ export class MemoRune extends React.Component<MRProps> {
     return (
       <React.Fragment key={'player-panel'}>
         <div className={'ui-bar'}>
-          <MRGameUI />
+          <MRGameUI pauseGame={() => this.mrState.pauseGame()} />
         </div>
         <div className={'danger-runes'}></div>
         <div className={'rune-pairs'}></div>

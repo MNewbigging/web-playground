@@ -15,11 +15,23 @@ interface MenuProps {
 @observer
 export class MRMenu extends React.Component<MenuProps> {
   public render() {
-    const { mrState } = this.props;
     return (
       <div key={'mr-menu'} className={'mr-menu'}>
-        <Button key={'start-btn'} text={'Start'} onClick={() => mrState.startGame()} />
+        {this.renderNormalMenu()}
       </div>
     );
   }
+
+  // for when no game is in progress
+  private renderNormalMenu() {
+    const { mrState } = this.props;
+    return (
+      <React.Fragment key={'normal-menu'}>
+        <Button key={'start-btn'} text={'Start'} onClick={() => mrState.startGame()} />
+      </React.Fragment>
+    );
+  }
+
+  // for when a game is in progress, has different buttons
+  private renderInGameMenu() {}
 }

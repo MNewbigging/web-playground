@@ -11,12 +11,13 @@ interface UIProps {
 }
 
 @observer
-export class MRGameUI extends React.Component {
+export class MRGameUI extends React.Component<UIProps> {
   public render() {
+    const { pauseGame } = this.props;
     return (
       <div key={'mr-ui'} className={'mr-ui'}>
         <div className={'button-outer'}>
-          <div className={'button'}>
+          <div className={'button'} onClick={() => pauseGame()}>
             <Icon icon={'menu'} iconSize={24} />
           </div>
         </div>

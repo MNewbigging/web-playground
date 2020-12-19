@@ -9,9 +9,10 @@ export enum MRScreen {
 
 export class MemoRuneState {
   @observable public mrScreen: MRScreen = MRScreen.MENU;
-  private gameState?: MRGameState;
+  @observable.ref public gameState?: MRGameState;
 
   @action startGame() {
+    this.gameState = new MRGameState(3);
     this.mrScreen = MRScreen.GAME;
   }
 }

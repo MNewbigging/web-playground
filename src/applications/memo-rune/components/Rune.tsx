@@ -1,20 +1,45 @@
 import React from 'react';
 
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+
+import { IRune } from '../RuneUtils';
+
 import './rune.scss';
 
-// Needs to accept sprite sheet position as a prop
-// Should go into style.backgroundPosition attribute on rune class
+interface RuneProps {
+  rune: IRune;
+}
 
-export class Rune extends React.Component {
+@observer
+export class Rune extends React.Component<RuneProps> {
+  @observable private hover: boolean = false;
+
   public render() {
-    const bgPosition = '0px 0px';
+    const { rune } = this.props;
     const style = {
-      backgroundPosition: bgPosition,
+      backgroundPosition: `${rune.posX}px ${rune.posY}px`,
     };
+
     return (
       <div className={'rune-holder'}>
-        <div className={'rune'} style={style}></div>
+        <div
+          className={'rune'}
+          style={style}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        ></div>
       </div>
     );
   }
+
+  private handleMouseEnter = () => {
+    console.log('enter');
+    this.hover = true;
+  };
+
+  private handleMouseLeave = () => {
+    console.log('leave');
+    this.hover = false;
+  };
 }

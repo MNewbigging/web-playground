@@ -24,7 +24,7 @@ export class MemoRune extends React.Component<MRProps> {
         toRender.push(this.renderMenu());
         break;
       case MRScreen.GAME:
-        toRender.push(this.renderRuneTest());
+        toRender.push(this.renderGame());
         break;
     }
 
@@ -39,11 +39,15 @@ export class MemoRune extends React.Component<MRProps> {
     );
   }
 
-  private renderRuneTest() {
-    return (
-      <div className={'rune-area'}>
-        <Rune />
-      </div>
-    );
+  private renderGame() {
+    const { gameState } = this.mrState;
+
+    const runes: JSX.Element[] = [];
+
+    gameState.runes.forEach((r) => {
+      runes.push(<Rune rune={r} />);
+    });
+
+    return <div className={'rune-area'}>{runes}</div>;
   }
 }

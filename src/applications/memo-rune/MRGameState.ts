@@ -4,6 +4,7 @@ import { action, observable } from 'mobx';
 
 export class MRGameState {
   @observable selectedRunes: IRune[] = [];
+  @observable pairedRunes: IRune[] = [];
   @observable public runes: IRune[];
 
   constructor(runeCount: number) {
@@ -66,6 +67,10 @@ export class MRGameState {
   };
 
   private pairSelectedRunes = () => {
+    // Make a deep copy of this rune for the paired runes list
+    // Don't want further changes to affect this (like state)
+    this.pairedRunes.push(Object.assign({}, this.selectedRunes[0]));
+
     this.selectedRunes.forEach((r) => {
       r.state = RuneState.PAIRED;
     });

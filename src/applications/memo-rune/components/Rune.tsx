@@ -9,7 +9,7 @@ import './rune.scss';
 
 interface RuneProps {
   rune: IRune;
-  selectRune: (runeId: number) => void;
+  selectRune?: (runeId: number) => void;
 }
 
 @observer

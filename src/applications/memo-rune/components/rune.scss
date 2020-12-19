@@ -18,5 +18,10 @@
       width: 56px;
       height: 93px;
     }
+
+    &.paired {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
   }
 }

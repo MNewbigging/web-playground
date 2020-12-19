@@ -33,6 +33,8 @@ export class Rune extends React.Component<RuneProps> {
         pos = `${rune.posX}px ${rune.posY}px`;
         break;
       case RuneState.PAIRED:
+        pos = `${rune.posX}px ${rune.posY}px`;
+        classes.push('paired');
         break;
     }
 

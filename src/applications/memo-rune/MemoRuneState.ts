@@ -7,12 +7,21 @@ export enum MRScreen {
   GAME,
 }
 
+export enum MRGameSize {
+  XL = 16,
+  L = 14,
+  M = 12,
+  S = 10,
+  XS = 8,
+}
+
 export class MemoRuneState {
   @observable public mrScreen: MRScreen = MRScreen.MENU;
   @observable.ref public gameState?: MRGameState;
+  @observable public gameSize = MRGameSize.M;
 
   @action startGame() {
-    this.gameState = new MRGameState(32);
+    this.gameState = new MRGameState(this.gameSize);
     this.mrScreen = MRScreen.GAME;
   }
 
@@ -26,5 +35,9 @@ export class MemoRuneState {
 
   @action endGame() {
     this.gameState = undefined;
+  }
+
+  @action setGameSize(size: number) {
+    this.gameSize = size;
   }
 }

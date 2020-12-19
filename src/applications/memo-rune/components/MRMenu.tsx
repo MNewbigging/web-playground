@@ -2,9 +2,9 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { Button } from '@blueprintjs/core';
+import { Button, Radio, RadioGroup } from '@blueprintjs/core';
 
-import { MemoRuneState } from '../MemoRuneState';
+import { MemoRuneState, MRGameSize } from '../MemoRuneState';
 
 import './mr-menu.scss';
 
@@ -33,6 +33,19 @@ export class MRMenu extends React.Component<MenuProps> {
     const { mrState } = this.props;
     return (
       <React.Fragment key={'normal-menu'}>
+        <RadioGroup
+          label={'Game size:'}
+          onChange={(event: React.FormEvent<HTMLInputElement>) =>
+            mrState.setGameSize(parseInt(event.currentTarget.value, 10))
+          }
+          selectedValue={mrState.gameSize}
+        >
+          <Radio label={`XL: ${MRGameSize.XL} pairs`} value={MRGameSize.XL} />
+          <Radio label={`L: ${MRGameSize.L} pairs`} value={MRGameSize.L} />
+          <Radio label={`M: ${MRGameSize.M} pairs`} value={MRGameSize.M} />
+          <Radio label={`S: ${MRGameSize.S} pairs`} value={MRGameSize.S} />
+          <Radio label={`XS: ${MRGameSize.XS} pairs`} value={MRGameSize.XS} />
+        </RadioGroup>
         <div className={'btn-container'}>
           <Button
             key={'start-btn'}

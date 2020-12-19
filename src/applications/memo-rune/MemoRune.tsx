@@ -70,10 +70,10 @@ export class MemoRune extends React.Component<MRProps> {
     }
 
     const pairRunes: JSX.Element[] = [];
-    for (let i = 0; i < 15; i++) {
-      const r = gameState.runes[i];
-      pairRunes.push(<Rune key={'pr' + r.posX + r.posY} rune={r} />);
-    }
+    // for (let i = 0; i < 15; i++) {
+    //   const r = gameState.runes[i];
+    //   pairRunes.push(<Rune key={'pr' + r.posX + r.posY} rune={r} />);
+    // }
 
     return (
       <React.Fragment key={'player-panel'}>

@@ -26,7 +26,8 @@ export class RuneUtils {
       allRunePositions.splice(runeIdx, 1);
     }
 
-    return chosenRunes;
+    // chosen runes are unique, double them to make pairs
+    return [...chosenRunes, ...chosenRunes];
   }
 
   private static getRunePositions() {
@@ -44,6 +45,10 @@ export class RuneUtils {
     }
     // Add in the extra rune from row 1
     const extraRunePos = [52, 0, 56, 0];
+
+    // First rune is the empty one, not valid here
+    console.log('removed: ', positions.shift());
+
     positions.push(extraRunePos);
 
     return positions;

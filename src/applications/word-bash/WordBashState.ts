@@ -11,7 +11,7 @@ export class WordBashState {
 
   // Letter generation values
   @observable public gameSize: number = PoolSize.MEDIUM;
-  private readonly letterPoolSize: number = 40;
+
   private weight: ConsonantsWeight = {
     common: 3,
     uncommon: 2,

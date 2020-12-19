@@ -17,11 +17,12 @@ interface MRProps {
 export class MemoRune extends React.Component<MRProps> {
   private mrState = new MemoRuneState();
   public render() {
+    const { toApp } = this.props;
     const toRender: JSX.Element[] = [];
 
     switch (this.mrState.mrScreen) {
       case MRScreen.MENU:
-        toRender.push(<MRMenu key={'mrmenu'} mrState={this.mrState} />);
+        toRender.push(<MRMenu key={'mrmenu'} mrState={this.mrState} toApp={toApp} />);
         break;
       case MRScreen.GAME:
         toRender.push(this.renderGame());

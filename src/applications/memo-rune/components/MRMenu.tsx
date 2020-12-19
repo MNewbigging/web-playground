@@ -10,6 +10,7 @@ import './mr-menu.scss';
 
 interface MenuProps {
   mrState: MemoRuneState;
+  toApp: () => void;
 }
 
 @observer
@@ -41,6 +42,7 @@ export class MRMenu extends React.Component<MenuProps> {
             onClick={() => mrState.startGame()}
           />
         </div>
+        {this.renderExitButton()}
       </React.Fragment>
     );
   }
@@ -69,7 +71,23 @@ export class MRMenu extends React.Component<MenuProps> {
             onClick={() => mrState.endGame()}
           />
         </div>
+        {this.renderExitButton()}
       </React.Fragment>
+    );
+  }
+
+  private renderExitButton() {
+    const { toApp } = this.props;
+    return (
+      <div className={'btn-container'}>
+        <Button
+          key={'exit-btn'}
+          className={'menu-btn'}
+          minimal={true}
+          text={'Exit game'}
+          onClick={() => toApp()}
+        />
+      </div>
     );
   }
 }

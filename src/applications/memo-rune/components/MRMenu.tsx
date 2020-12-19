@@ -32,13 +32,15 @@ export class MRMenu extends React.Component<MenuProps> {
     const { mrState } = this.props;
     return (
       <React.Fragment key={'normal-menu'}>
-        <Button
-          key={'start-btn'}
-          className={'menu-btn'}
-          minimal={true}
-          text={'Start'}
-          onClick={() => mrState.startGame()}
-        />
+        <div className={'btn-container'}>
+          <Button
+            key={'start-btn'}
+            className={'menu-btn'}
+            minimal={true}
+            text={'Start'}
+            onClick={() => mrState.startGame()}
+          />
+        </div>
       </React.Fragment>
     );
   }
@@ -48,20 +50,25 @@ export class MRMenu extends React.Component<MenuProps> {
     const { mrState } = this.props;
     return (
       <React.Fragment key={'ingame-menu'}>
-        <Button
-          key={'resume-btn'}
-          className={'menu-btn'}
-          minimal={true}
-          text={'Resume'}
-          onClick={() => mrState.resumeGame()}
-        />
-        <Button
-          key={'endgame-btn'}
-          className={'menu-btn'}
-          minimal={true}
-          text={'End game'}
-          onClick={() => mrState.endGame()}
-        />
+        <div className={'btn-container'}>
+          <Button
+            key={'resume-btn'}
+            className={'menu-btn'}
+            minimal={true}
+            text={'Resume'}
+            onClick={() => mrState.resumeGame()}
+          />
+        </div>
+
+        <div className={'btn-container'}>
+          <Button
+            key={'endgame-btn'}
+            className={'menu-btn'}
+            minimal={true}
+            text={'End game'}
+            onClick={() => mrState.endGame()}
+          />
+        </div>
       </React.Fragment>
     );
   }

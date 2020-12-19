@@ -50,8 +50,10 @@ export class MemoRune extends React.Component<MRProps> {
         <div key={'left-panel'} className={'left-panel'}>
           {this.renderPlayerPanel()}
         </div>
-        <div key={'rune-area'} className={'rune-area'}>
-          {runes}
+        <div className={'rune-contianer'}>
+          <div key={'rune-area'} className={'rune-area'}>
+            {runes}
+          </div>
         </div>
       </React.Fragment>
     );

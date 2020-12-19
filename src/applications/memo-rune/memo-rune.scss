@@ -13,7 +13,7 @@
     height: 90%;
     border: 2px solid black;
     border-radius: 8px;
-    margin-right: 5%;
+    margin-right: 3%;
 
     display: flex;
     flex-direction: column;
@@ -45,16 +45,16 @@
   }
 
   .rune-area {
-    width: 50%;
+    width: 500px;
     height: 90%;
 
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    border-radius: 8px;
-    padding: 20px;
+    // border-top: 2px solid black;
+    // border-bottom: 2px solid black;
+    // border-radius: 8px;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(4, 100px);
+    column-gap: 4px;
   }
 }

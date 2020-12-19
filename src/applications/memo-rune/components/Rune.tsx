@@ -24,10 +24,6 @@ export class Rune extends React.Component<RuneProps> {
       backgroundPosition: bgPos,
     };
 
-    if (this.hover) {
-      console.log('rune: ', rune);
-    }
-
     return (
       <div className={'rune-holder'}>
         <div
@@ -41,12 +37,10 @@ export class Rune extends React.Component<RuneProps> {
   }
 
   private handleMouseEnter = () => {
-    console.log('enter');
     this.hover = true;
   };
 
   private handleMouseLeave = () => {
-    console.log('leave');
     this.hover = false;
   };
 }

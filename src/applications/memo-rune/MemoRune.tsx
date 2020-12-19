@@ -33,8 +33,8 @@ export class MemoRune extends React.Component<MRProps> {
 
   private renderMenu() {
     return (
-      <div className={'mr-menu'}>
-        <Button text={'Start'} onClick={() => this.mrState.startGame()} />
+      <div key={'mr-menu'} className={'mr-menu'}>
+        <Button key={'start-btn'} text={'Start'} onClick={() => this.mrState.startGame()} />
       </div>
     );
   }
@@ -45,9 +45,13 @@ export class MemoRune extends React.Component<MRProps> {
     const runes: JSX.Element[] = [];
 
     gameState.runes.forEach((r) => {
-      runes.push(<Rune rune={r} />);
+      runes.push(<Rune key={r.posX + r.posY} rune={r} />);
     });
 
-    return <div className={'rune-area'}>{runes}</div>;
+    return (
+      <div key={'rune-area'} className={'rune-area'}>
+        {runes}
+      </div>
+    );
   }
 }

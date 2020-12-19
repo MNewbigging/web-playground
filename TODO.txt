@@ -10,6 +10,11 @@ PLAYGROUND:
  - Better scoring algorithm! 
  - Local session high scores
  - Indexeddb or localstorage for highscores
+
+
+ MEMO RUNE:
+ - save empty rune as separate
+ - further game state
  
 
 

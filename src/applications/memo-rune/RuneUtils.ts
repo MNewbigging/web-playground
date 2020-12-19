@@ -42,6 +42,10 @@ export class RuneUtils {
         positions.push(pos);
       }
     }
+    // Add in the extra rune from row 1
+    const extraRunePos = [52, 0, 56, 0];
+    positions.push(extraRunePos);
+
     return positions;
   }
 }

@@ -6,6 +6,8 @@ import { Button } from '@blueprintjs/core';
 
 import { MemoRuneState, MRScreen } from './MemoRuneState';
 import { Rune } from './components/Rune';
+import { MRGameUI } from './components/MRGameUI';
+import { MRMenu } from './components/MRMenu';
 
 import './memo-rune.scss';
 
@@ -37,9 +39,10 @@ export class MemoRune extends React.Component<MRProps> {
 
   private renderMenu() {
     return (
-      <div key={'mr-menu'} className={'mr-menu'}>
-        <Button key={'start-btn'} text={'Start'} onClick={() => this.mrState.startGame()} />
-      </div>
+      <MRMenu mrState={this.mrState} />
+      // <div key={'mr-menu'} className={'mr-menu'}>
+      //   <Button key={'start-btn'} text={'Start'} onClick={() => this.mrState.startGame()} />
+      // </div>
     );
   }
 
@@ -54,10 +57,25 @@ export class MemoRune extends React.Component<MRProps> {
 
     return (
       <React.Fragment key={'container'}>
-        <div key={'left-panel'} className={'left-panel'}></div>
+        <div key={'left-panel'} className={'left-panel'}>
+          {this.renderPlayerPanel()}
+        </div>
         <div key={'rune-area'} className={'rune-area'}>
           {runes}
         </div>
+      </React.Fragment>
+    );
+  }
+
+  // Player panel is the panel to left of rune area
+  private renderPlayerPanel() {
+    return (
+      <React.Fragment key={'player-panel'}>
+        <div className={'ui-bar'}>
+          <MRGameUI />
+        </div>
+        <div className={'danger-runes'}></div>
+        <div className={'rune-pairs'}></div>
       </React.Fragment>
     );
   }

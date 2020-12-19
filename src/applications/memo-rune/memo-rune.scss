@@ -14,25 +14,47 @@
     border: 2px solid black;
     border-radius: 8px;
     margin-right: 5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .ui-bar {
+      width: 95%;
+      height: 10%; // needs to be a specific height
+      // border-bottom: 2px solid black;
+      // border-radius: 8px;
+    }
+
+    .danger-runes {
+      width: 95%;
+      height: 32%;
+      border-bottom: 2px solid black;
+      border-top: 2px solid black;
+      border-radius: 8px;
+    }
+
+    .rune-pairs {
+      width: 95%;
+      height: 52%;
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      border-radius: 8px;
+    }
   }
 
   .rune-area {
     width: 50%;
     height: 90%;
-    // need preset rune area sizes... or a css grid
 
-    border: 2px solid black;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
     border-radius: 8px;
     padding: 20px;
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  .mr-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }

@@ -15,4 +15,12 @@ export class MemoRuneState {
     this.gameState = new MRGameState(30);
     this.mrScreen = MRScreen.GAME;
   }
+
+  @action pauseGame() {
+    this.mrScreen = MRScreen.MENU;
+  }
+
+  @action resumeGame() {
+    this.mrScreen = MRScreen.GAME;
+  }
 }

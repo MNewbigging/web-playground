@@ -11,6 +11,7 @@ export enum RuneState {
   FACE_DOWN,
   FACE_UP,
   PAIRED,
+  DANGER_MATCH,
 }
 
 export class RuneUtils {

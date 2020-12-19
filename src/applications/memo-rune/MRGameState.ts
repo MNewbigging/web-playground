@@ -23,6 +23,7 @@ export class MRGameState {
     rune.state = RuneState.FACE_UP;
     this.selectedRunes.push(rune);
 
+    this.checkForDangerRuneMatch();
     this.checkForRuneMatch();
   };
 
@@ -60,14 +61,6 @@ export class MRGameState {
     }
   }
 
-  private clearSelectedRunes = () => {
-    this.selectedRunes.forEach((r) => {
-      r.state = RuneState.FACE_DOWN;
-    });
-
-    this.selectedRunes = [];
-  };
-
   private pairSelectedRunes = () => {
     // Make a deep copy of this rune for the paired runes list
     // Don't want further changes to affect this (like state)
@@ -78,6 +71,29 @@ export class MRGameState {
     });
 
     this.selectedRunes = [];
+  };
+
+  // If the uncovered runes match any 2 in danger runes, get negative points
+  private checkForDangerRuneMatch() {
+    this.selectedRunes.forEach((sr) => {
+      // Find any matches with danger runes
+      const match = this.dangerRunes.find((dr) => dr.posX === sr.posX && dr.posY === sr.posY);
+      if (match) {
+        match.state = RuneState.DANGER_MATCH;
+      }
+    });
+  }
+
+  private clearSelectedRunes = () => {
+    this.selectedRunes.forEach((r) => {
+      r.state = RuneState.FACE_DOWN;
+    });
+
+    this.selectedRunes = [];
+
+    this.dangerRunes.forEach((dr) => {
+      dr.state = RuneState.FACE_UP;
+    });
   };
 
   private setupDangerRunes() {
@@ -91,6 +107,7 @@ export class MRGameState {
       const rune = Object.assign({}, availableRunes[rnd]); // deep copy, don't want to affect runes
       rune.state = RuneState.FACE_UP;
       this.dangerRunes.push(rune);
+      availableRunes.splice(rnd, 1);
     }
   }
 }

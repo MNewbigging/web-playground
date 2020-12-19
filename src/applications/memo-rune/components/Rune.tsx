@@ -20,7 +20,7 @@ export class Rune extends React.Component<RuneProps> {
     const { rune, selectRune } = this.props;
 
     // Rune appearance depends on its state
-    let pos = '';
+    let pos = `${rune.posX}px ${rune.posY}px`;
     const classes = ['rune'];
     switch (rune.state) {
       case RuneState.FACE_DOWN:
@@ -30,11 +30,12 @@ export class Rune extends React.Component<RuneProps> {
         }
         break;
       case RuneState.FACE_UP:
-        pos = `${rune.posX}px ${rune.posY}px`;
         break;
       case RuneState.PAIRED:
-        pos = `${rune.posX}px ${rune.posY}px`;
         classes.push('paired');
+        break;
+      case RuneState.DANGER_MATCH:
+        classes.push('danger-match');
         break;
     }
 

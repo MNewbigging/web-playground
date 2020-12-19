@@ -23,5 +23,9 @@
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
     }
+
+    &.danger-match {
+      background: url('/dist/assets/memo-rune/runeBlack_slab_sheet.png');
+    }
   }
 }

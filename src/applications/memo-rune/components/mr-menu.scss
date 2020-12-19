@@ -1,5 +1,20 @@
 .mr-menu {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .menu-btn {
+    width: 105px;
+    height: 65px;
+    background: url('/dist/assets/memo-rune/runeGrey_tile_036.png') no-repeat;
+    background-size: 100px 60px;
+    margin: 10px;
+    color: white;
+
+    &:hover {
+      background: url('/dist/assets/memo-rune/runeGrey_tileOutline_036.png') no-repeat;
+      background-size: 104px 64px;
+    }
+  }
 }

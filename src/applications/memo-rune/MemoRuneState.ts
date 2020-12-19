@@ -23,4 +23,8 @@ export class MemoRuneState {
   @action resumeGame() {
     this.mrScreen = MRScreen.GAME;
   }
+
+  @action endGame() {
+    this.gameState = undefined;
+  }
 }

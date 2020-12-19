@@ -1,8 +1,16 @@
 export interface IRune {
+  id: number;
   posX: number;
   posY: number;
   hoverX: number;
   hoverY: number;
+  state: RuneState;
+}
+
+export enum RuneState {
+  FACE_DOWN,
+  FACE_UP,
+  PAIRED,
 }
 
 export class RuneUtils {
@@ -16,18 +24,22 @@ export class RuneUtils {
       const runePos = allRunePositions[runeIdx];
       // Add to list
       const rune: IRune = {
+        id: 0, // set id properly in shuffle method
         posX: runePos[0],
         posY: runePos[1],
         hoverX: runePos[2],
         hoverY: runePos[3],
+        state: RuneState.FACE_DOWN,
       };
       chosenRunes.push(rune);
       // Remove it from array so we don't pick it again
       allRunePositions.splice(runeIdx, 1);
     }
 
-    // chosen runes are unique, double them to make pairs
-    return [...chosenRunes, ...chosenRunes];
+    // chosen runes are unique, double them to make pairs (ensure a deep copy via object assign)
+    const runePairs: IRune[] = [...chosenRunes];
+    chosenRunes.forEach((r) => runePairs.push(Object.assign({}, r)));
+    return this.shuffleRunes(runePairs);
   }
 
   private static getRunePositions() {
@@ -47,10 +59,26 @@ export class RuneUtils {
     const extraRunePos = [52, 0, 56, 0];
 
     // First rune is the empty one, not valid here
-    console.log('removed: ', positions.shift());
+    positions.shift();
 
     positions.push(extraRunePos);
 
     return positions;
+  }
+
+  private static shuffleRunes(runes: IRune[]) {
+    // Assign proper ids to runes
+    runes.forEach((r, i) => {
+      r.id = i;
+    });
+    // Random shuffle
+    for (let i = runes.length - 1; i > 0; i--) {
+      const newPos = Math.floor(Math.random() * (i + 1));
+      const temp = runes[i];
+      runes[i] = runes[newPos];
+      runes[newPos] = temp;
+    }
+
+    return runes;
   }
 }

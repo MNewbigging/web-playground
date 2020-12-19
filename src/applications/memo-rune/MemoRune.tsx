@@ -42,7 +42,7 @@ export class MemoRune extends React.Component<MRProps> {
     const runes: JSX.Element[] = [];
 
     gameState.runes.forEach((r) => {
-      runes.push(<Rune key={r.posX + r.posY} rune={r} />);
+      runes.push(<Rune key={'rune-' + r.id} rune={r} selectRune={gameState.selectRune} />);
     });
 
     return (
@@ -64,10 +64,12 @@ export class MemoRune extends React.Component<MRProps> {
     const { gameState } = this.mrState;
     const dangerRunes: JSX.Element[] = [];
 
-    for (let i = 0; i < 4; i++) {
-      const r = gameState.runes[i];
-      dangerRunes.push(<Rune key={'dr' + r.posX + r.posY} rune={r} />);
-    }
+    // for (let i = 0; i < 4; i++) {
+    //   const r = gameState.runes[i];
+    //   dangerRunes.push(
+    //     <Rune key={'dr' + r.posX + r.posY} rune={r} selectRune={gameState.selectRune} />
+    //   );
+    // }
 
     const pairRunes: JSX.Element[] = [];
     // for (let i = 0; i < 15; i++) {

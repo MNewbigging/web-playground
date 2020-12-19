@@ -28,7 +28,11 @@ export class MemoRune extends React.Component<MRProps> {
         break;
     }
 
-    return <div className={'memo-rune'}>{toRender}</div>;
+    return (
+      <div key={'memo-rune'} className={'memo-rune'}>
+        {toRender}
+      </div>
+    );
   }
 
   private renderMenu() {
@@ -49,9 +53,12 @@ export class MemoRune extends React.Component<MRProps> {
     });
 
     return (
-      <div key={'rune-area'} className={'rune-area'}>
-        {runes}
-      </div>
+      <React.Fragment key={'container'}>
+        <div key={'left-panel'} className={'left-panel'}></div>
+        <div key={'rune-area'} className={'rune-area'}>
+          {runes}
+        </div>
+      </React.Fragment>
     );
   }
 }

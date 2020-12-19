@@ -8,8 +8,17 @@
   justify-content: center;
   align-items: center;
 
+  .left-panel {
+    width: 40%;
+    height: 90%;
+    border: 2px solid black;
+    border-radius: 8px;
+    margin-right: 5%;
+  }
+
   .rune-area {
-    width: 90%;
+    width: 50%;
+    height: 90%;
     // need preset rune area sizes... or a css grid
 
     border: 2px solid black;

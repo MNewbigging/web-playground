@@ -7,7 +7,7 @@ export enum MRScreen {
   GAME,
 }
 
-export enum MRGameSize {
+export enum MRPairCount {
   XL = 16,
   L = 14,
   M = 12,
@@ -18,7 +18,7 @@ export enum MRGameSize {
 export class MemoRuneState {
   @observable public mrScreen: MRScreen = MRScreen.MENU;
   @observable.ref public gameState?: MRGameState;
-  @observable public gameSize = MRGameSize.M;
+  @observable public gameSize = MRPairCount.M;
 
   @action startGame() {
     this.gameState = new MRGameState(this.gameSize);

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 import { Button, Radio, RadioGroup } from '@blueprintjs/core';
 
-import { MemoRuneState, MRGameSize } from '../MemoRuneState';
+import { MemoRuneState, MRPairCount } from '../MemoRuneState';
 
 import './mr-menu.scss';
 
@@ -40,11 +40,11 @@ export class MRMenu extends React.Component<MenuProps> {
           }
           selectedValue={mrState.gameSize}
         >
-          <Radio label={`XL: ${MRGameSize.XL} pairs`} value={MRGameSize.XL} />
-          <Radio label={`L: ${MRGameSize.L} pairs`} value={MRGameSize.L} />
-          <Radio label={`M: ${MRGameSize.M} pairs`} value={MRGameSize.M} />
-          <Radio label={`S: ${MRGameSize.S} pairs`} value={MRGameSize.S} />
-          <Radio label={`XS: ${MRGameSize.XS} pairs`} value={MRGameSize.XS} />
+          <Radio label={`XL: ${MRPairCount.XL} pairs`} value={MRPairCount.XL} />
+          <Radio label={`L: ${MRPairCount.L} pairs`} value={MRPairCount.L} />
+          <Radio label={`M: ${MRPairCount.M} pairs`} value={MRPairCount.M} />
+          <Radio label={`S: ${MRPairCount.S} pairs`} value={MRPairCount.S} />
+          <Radio label={`XS: ${MRPairCount.XS} pairs`} value={MRPairCount.XS} />
         </RadioGroup>
         <div className={'btn-container'}>
           <Button

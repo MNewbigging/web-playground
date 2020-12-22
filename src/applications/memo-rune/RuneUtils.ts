@@ -15,11 +15,11 @@ export enum RuneState {
 }
 
 export class RuneUtils {
-  public static getNRunes(runeCount: number) {
+  public static getNRunes(pairCount: number) {
     const allRunePositions = this.getRunePositions();
     const chosenRunes: IRune[] = [];
 
-    for (let i = 0; i < runeCount; i++) {
+    for (let i = 0; i < pairCount; i++) {
       // Pick a random rune
       const runeIdx = Math.floor(Math.random() * allRunePositions.length);
       const runePos = allRunePositions[runeIdx];
@@ -48,6 +48,27 @@ export class RuneUtils {
 
     // Shuffle runes so pairs aren't always neighbours
     return this.shuffleRunes(runePairs);
+  }
+
+  public static getDangerRunes(runes: IRune[], pairCount: number) {
+    const dangerRunes: IRune[] = [];
+
+    // Can pick from ids 0 up to pair count (rest are dupes)
+    const availableRunes = runes.filter((r) => r.id < pairCount);
+
+    // Pick up to 4 random runes to make up float
+    const maxDangerRunes = 5;
+    const floatLength = Math.min(pairCount / 2 - 2, maxDangerRunes);
+
+    for (let i = 0; i < floatLength; i++) {
+      const rnd = Math.floor(Math.random() * availableRunes.length);
+      const dangerRune = Object.assign({}, availableRunes[rnd]); // deep copy, don't want to affect runes
+      dangerRune.state = RuneState.FACE_UP;
+      dangerRunes.push(dangerRune);
+      availableRunes.splice(rnd, 1); // remove so not picked again
+    }
+
+    return dangerRunes;
   }
 
   private static getRunePositions() {

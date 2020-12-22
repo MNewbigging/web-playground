@@ -8,12 +8,12 @@ export class MRGameState {
   @observable dangerRunes: IRune[] = [];
   @observable public runes: IRune[];
 
-  constructor(public runeCount: number) {
-    this.runes = RuneUtils.getNRunes(runeCount);
-    this.setupDangerRunes();
+  constructor(public pairCount: number) {
+    this.runes = RuneUtils.getNRunes(pairCount);
+    this.dangerRunes = RuneUtils.getDangerRunes(this.runes, pairCount);
   }
 
-  @action selectRune = (runeId: number) => {
+  @action public selectRune = (runeId: number) => {
     const rune = this.runes.find((r) => r.id === runeId);
 
     if (!this.runeSelectionValid(rune)) {
@@ -73,8 +73,8 @@ export class MRGameState {
     this.selectedRunes = [];
   };
 
-  // If the uncovered runes match any 2 in danger runes, get negative points
   private checkForDangerRuneMatch() {
+    // If the uncovered runes match any 2 in danger runes, get negative points
     this.selectedRunes.forEach((sr) => {
       // Find any matches with danger runes
       const match = this.dangerRunes.find((dr) => dr.posX === sr.posX && dr.posY === sr.posY);
@@ -95,19 +95,4 @@ export class MRGameState {
       dr.state = RuneState.FACE_UP;
     });
   };
-
-  private setupDangerRunes() {
-    // Pick up to 4 random runes to make up float
-    // Can pick from ids 0 up to game size (rest are dupes)
-    const availableRunes = this.runes.filter((r) => r.id < this.runeCount);
-    const floatLength = Math.min(this.runeCount / 2 - 2, 5);
-
-    for (let i = 0; i < floatLength; i++) {
-      const rnd = Math.floor(Math.random() * availableRunes.length);
-      const rune = Object.assign({}, availableRunes[rnd]); // deep copy, don't want to affect runes
-      rune.state = RuneState.FACE_UP;
-      this.dangerRunes.push(rune);
-      availableRunes.splice(rnd, 1);
-    }
-  }
 }

@@ -20,8 +20,8 @@ export class MemoRuneState {
   @observable.ref public gameState?: MRGameState;
   @observable public gameSize = MRPairCount.M;
 
-  @action startGame() {
-    this.gameState = new MRGameState(this.gameSize);
+  @action startGame(playerCount: number) {
+    this.gameState = new MRGameState(this.gameSize, playerCount);
     this.mrScreen = MRScreen.GAME;
   }
 

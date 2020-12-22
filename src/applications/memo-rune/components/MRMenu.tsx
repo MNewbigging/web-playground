@@ -48,13 +48,23 @@ export class MRMenu extends React.Component<MenuProps> {
         </RadioGroup>
         <div className={'btn-container'}>
           <Button
-            key={'start-btn'}
+            key={'start1p-btn'}
             className={'menu-btn'}
             minimal={true}
-            text={'Start'}
-            onClick={() => mrState.startGame()}
+            text={'1 Player'}
+            onClick={() => mrState.startGame(1)}
           />
         </div>
+        <div className={'btn-container'}>
+          <Button
+            key={'start2p-btn'}
+            className={'menu-btn'}
+            minimal={true}
+            text={'2 Player'}
+            onClick={() => mrState.startGame(2)}
+          />
+        </div>
+
         {this.renderExitButton()}
       </React.Fragment>
     );

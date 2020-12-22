@@ -43,6 +43,31 @@
       &:first-of-type {
         margin-right: 20px;
       }
+
+      &.current-turn {
+        border-top: 2px solid black;
+        border-radius: 8px;
+        padding: 10px;
+        animation: borderPulse 3s ease-in-out infinite;
+      }
+
+      .negative-score {
+        color: red;
+      }
     }
+  }
+}
+
+@keyframes borderPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }

@@ -17,6 +17,7 @@ export enum RuneState {
 export class RuneUtils {
   public static pairRuneDelay: number = 1000;
   public static clearRuneDelay: number = 800;
+  public static changeTurnDelay: number = 1200; // must be bigger than other delays
 
   public static getNRunes(pairCount: number) {
     const allRunePositions = this.getRunePositions();

@@ -11,7 +11,7 @@ export class MRGameState {
   @observable public p1DangerRunes: number = 0;
   @observable public p2Pairs: number = 0;
   @observable public p2DangerRunes: number = 0;
-  private p1Turn: boolean = true;
+  @observable public p1Turn: boolean = true;
 
   constructor(public pairCount: number, public playerCount: number = 2) {
     this.runes = RuneUtils.getNRunes(pairCount);
@@ -32,7 +32,7 @@ export class MRGameState {
     this.selectedRunes.push(rune);
 
     // Update danger rune display for this selection
-    this.checkForDangerRuneMatch();
+    this.checkHighlightDangerRunes();
 
     // See if there's a pair
     this.checkForRuneMatch();
@@ -57,21 +57,15 @@ export class MRGameState {
     return true;
   }
 
-  private checkForDangerRuneMatch() {
+  private checkHighlightDangerRunes() {
     // Highlight a match with existing selected rune(s)
-    let matches = 0;
     this.selectedRunes.forEach((sr) => {
       // Find any matches with danger runes
       const match = this.dangerRunes.find((dr) => RuneUtils.isRunePair(sr, dr));
       if (match) {
         match.state = RuneState.DANGER_MATCH;
-        matches++;
       }
     });
-    // If the uncovered runes match any 2 in danger runes, get negative points
-    if (matches === 2) {
-      this.scoreDangerRune();
-    }
   }
 
   private checkForRuneMatch() {
@@ -90,6 +84,7 @@ export class MRGameState {
   }
 
   private pairSelectedRunes = () => {
+    console.log('pairing runes');
     // Make a deep copy of this rune for the paired runes list
     // Don't want further changes to affect this (like state)
     this.pairedRunes.push(Object.assign({}, this.selectedRunes[0]));
@@ -102,34 +97,44 @@ export class MRGameState {
 
     // Player scores
     this.scorePoint();
+
+    this.changeTurns();
   };
 
   private clearSelectedRunes = () => {
+    console.log('clearing runes');
+    // First check if we match with 2 danger runes
+    this.checkDangerRuneMatch();
+
     this.selectedRunes.forEach((r) => {
       r.state = RuneState.FACE_DOWN;
     });
 
     this.selectedRunes = [];
 
-    // Reset danger runes now that there are no selected runes
-    this.dangerRunes.forEach((dr) => {
-      dr.state = RuneState.FACE_UP;
-    });
+    this.changeTurns();
   };
+
+  private checkDangerRuneMatch() {
+    let matches = 0;
+    this.selectedRunes.forEach((sr) => {
+      const match = this.dangerRunes.some((dr) => RuneUtils.isRunePair(sr, dr));
+      if (match) {
+        matches++;
+      }
+    });
+
+    if (matches === 2) {
+      this.scoreDangerRune();
+    }
+  }
 
   private scorePoint() {
     // Award points to current player
-    // if 1 player game or if its 2 and p1turn
-    if (this.playerCount < 2) {
-      this.p1Pairs++;
+    if (this.playerCount === 2 && !this.p1Turn) {
+      this.p2Pairs++;
     } else {
-      if (this.p1Turn) {
-        this.p1Pairs++;
-        this.p1Turn = false; // no longer p1turn
-      } else {
-        this.p2Pairs++;
-        this.p1Turn = true; // now its p1turn
-      }
+      this.p1Pairs++;
     }
   }
 
@@ -141,4 +146,17 @@ export class MRGameState {
       this.p1DangerRunes++;
     }
   }
+
+  private changeTurns = () => {
+    console.log('changing turns');
+    // Reset danger runes now that there are no selected runes
+    this.dangerRunes.forEach((dr) => {
+      dr.state = RuneState.FACE_UP;
+    });
+
+    if (this.playerCount < 2) {
+      return;
+    }
+    this.p1Turn = !this.p1Turn;
+  };
 }

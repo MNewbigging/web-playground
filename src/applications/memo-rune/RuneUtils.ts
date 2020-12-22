@@ -54,15 +54,15 @@ export class RuneUtils {
     return this.shuffleRunes(runePairs);
   }
 
-  public static getDangerRunes(runes: IRune[], pairCount: number) {
+  public static getDangerRunes(runes: IRune[]) {
     const dangerRunes: IRune[] = [];
-
+    const pairs = Math.floor(runes.length / 2);
     // Can pick from ids 0 up to pair count (rest are dupes)
-    const availableRunes = runes.filter((r) => r.id < pairCount);
+    const availableRunes = runes.filter((r) => r.id < pairs);
 
     // Pick up to 4 random runes to make up float
     const maxDangerRunes = 5;
-    const floatLength = Math.min(pairCount / 2 - 2, maxDangerRunes);
+    const floatLength = Math.min(Math.floor(pairs / 2), maxDangerRunes);
 
     for (let i = 0; i < floatLength; i++) {
       const rnd = Math.floor(Math.random() * availableRunes.length);

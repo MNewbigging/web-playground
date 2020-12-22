@@ -15,7 +15,7 @@ export class MRGameState {
 
   constructor(public pairCount: number, public playerCount: number = 2) {
     this.runes = RuneUtils.getNRunes(pairCount);
-    this.dangerRunes = RuneUtils.getDangerRunes(this.runes, pairCount);
+    this.dangerRunes = RuneUtils.getDangerRunes(this.runes);
   }
 
   @action public selectRune = (runeId: number) => {
@@ -35,7 +35,7 @@ export class MRGameState {
     this.checkHighlightDangerRunes();
 
     // See if there's a pair
-    this.checkForRuneMatch();
+    this.checkSelectedRunes();
   };
 
   private runeSelectionValid(rune: IRune) {
@@ -68,7 +68,7 @@ export class MRGameState {
     });
   }
 
-  private checkForRuneMatch() {
+  private checkSelectedRunes() {
     if (this.selectedRunes.length <= 1) {
       return;
     }
@@ -84,13 +84,19 @@ export class MRGameState {
   }
 
   private pairSelectedRunes = () => {
-    console.log('pairing runes');
     // Make a deep copy of this rune for the paired runes list
     // Don't want further changes to affect this (like state)
     this.pairedRunes.push(Object.assign({}, this.selectedRunes[0]));
 
+    // Update pair selected runes
     this.selectedRunes.forEach((r) => {
       r.state = RuneState.PAIRED;
+      // If this also matched a danger rune, reset danger rune float
+      const match = this.dangerRunes.find((dr) => RuneUtils.isRunePair(r, dr));
+      if (match) {
+        const remainingRunes = this.runes.filter((r) => r.state !== RuneState.PAIRED);
+        this.dangerRunes = RuneUtils.getDangerRunes(remainingRunes);
+      }
     });
 
     this.selectedRunes = [];
@@ -102,7 +108,6 @@ export class MRGameState {
   };
 
   private clearSelectedRunes = () => {
-    console.log('clearing runes');
     // First check if we match with 2 danger runes
     this.checkDangerRuneMatch();
 
@@ -148,7 +153,6 @@ export class MRGameState {
   }
 
   private changeTurns = () => {
-    console.log('changing turns');
     // Reset danger runes now that there are no selected runes
     this.dangerRunes.forEach((dr) => {
       dr.state = RuneState.FACE_UP;

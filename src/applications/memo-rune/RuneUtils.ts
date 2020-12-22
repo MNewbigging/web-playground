@@ -15,6 +15,9 @@ export enum RuneState {
 }
 
 export class RuneUtils {
+  public static pairRuneDelay: number = 1000;
+  public static clearRuneDelay: number = 800;
+
   public static getNRunes(pairCount: number) {
     const allRunePositions = this.getRunePositions();
     const chosenRunes: IRune[] = [];
@@ -69,6 +72,11 @@ export class RuneUtils {
     }
 
     return dangerRunes;
+  }
+
+  public static isRunePair(ra: IRune, rb: IRune) {
+    // Runes are pairs if they have the same position on sprite sheet
+    return ra.posX === rb.posX && ra.posY === rb.posY;
   }
 
   private static getRunePositions() {

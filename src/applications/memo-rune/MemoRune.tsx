@@ -75,7 +75,7 @@ export class MemoRune extends React.Component<MRProps> {
     return (
       <React.Fragment key={'player-panel'}>
         <div className={'ui-bar'}>
-          <MRGameUI pauseGame={() => this.mrState.pauseGame()} />
+          <MRGameUI mrState={this.mrState} />
         </div>
         <div>
           <div className={'danger-runes'}>{dangerRunes}</div>

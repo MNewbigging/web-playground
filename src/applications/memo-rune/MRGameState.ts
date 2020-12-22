@@ -1,6 +1,7 @@
 import { IRune, RuneUtils, RuneState } from './RuneUtils';
 
 import { action, observable } from 'mobx';
+import { NumberLiteralType } from 'typescript';
 
 export class MRGameState {
   @observable public selectedRunes: IRune[] = [];
@@ -12,6 +13,7 @@ export class MRGameState {
   @observable public p2Pairs: number = 0;
   @observable public p2DangerRunes: number = 0;
   @observable public p1Turn: boolean = true;
+  @observable public winner?: number;
 
   constructor(public pairCount: number, public playerCount: number = 2) {
     this.runes = RuneUtils.getNRunes(pairCount);
@@ -158,9 +160,30 @@ export class MRGameState {
       dr.state = RuneState.FACE_UP;
     });
 
-    if (this.playerCount < 2) {
+    // Check for end game
+    this.checkForEndGame();
+
+    // Swap turns in a 2p game
+    if (this.playerCount === 2) {
+      this.p1Turn = !this.p1Turn;
+    }
+  };
+
+  private checkForEndGame() {
+    if (this.runes.some((r) => r.state !== RuneState.PAIRED)) {
       return;
     }
-    this.p1Turn = !this.p1Turn;
-  };
+
+    if (this.playerCount === 1) {
+      this.winner = 1;
+      return;
+    }
+
+    // For two players, compare scores
+    if (this.p1Pairs - this.p1DangerRunes > this.p2Pairs - this.p2DangerRunes) {
+      this.winner = 1;
+    } else {
+      this.winner = 2;
+    }
+  }
 }

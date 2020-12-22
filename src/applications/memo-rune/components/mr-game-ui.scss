@@ -51,6 +51,15 @@
         animation: borderPulse 3s ease-in-out infinite;
       }
 
+      &.winner {
+        background: linear-gradient(
+          10deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 1) 71%,
+          rgba(83, 215, 43, 1) 100%
+        );
+      }
+
       .negative-score {
         color: red;
       }

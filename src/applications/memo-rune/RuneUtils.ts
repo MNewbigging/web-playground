@@ -33,13 +33,20 @@ export class RuneUtils {
         state: RuneState.FACE_DOWN,
       };
       chosenRunes.push(rune);
-      // Remove it from array so we don't pick it again
+      // Remove it from positions array so we don't pick it again
       allRunePositions.splice(runeIdx, 1);
     }
 
     // chosen runes are unique, double them to make pairs (ensure a deep copy via object assign)
     const runePairs: IRune[] = [...chosenRunes];
     chosenRunes.forEach((r) => runePairs.push(Object.assign({}, r)));
+
+    // Runes each need uid, do so now we have all runes
+    runePairs.forEach((rp, i) => {
+      rp.id = i;
+    });
+
+    // Shuffle runes so pairs aren't always neighbours
     return this.shuffleRunes(runePairs);
   }
 
@@ -58,20 +65,15 @@ export class RuneUtils {
     }
     // Add in the extra rune from row 1
     const extraRunePos = [52, 0, 56, 0];
+    positions.push(extraRunePos);
 
     // First rune is the empty one, not valid here
     positions.shift();
-
-    positions.push(extraRunePos);
 
     return positions;
   }
 
   private static shuffleRunes(runes: IRune[]) {
-    // Assign proper ids to runes
-    runes.forEach((r, i) => {
-      r.id = i;
-    });
     // Random shuffle
     for (let i = runes.length - 1; i > 0; i--) {
       const newPos = Math.floor(Math.random() * (i + 1));

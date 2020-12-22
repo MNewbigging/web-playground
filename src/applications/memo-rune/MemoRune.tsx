@@ -40,7 +40,6 @@ export class MemoRune extends React.Component<MRProps> {
     const { gameState } = this.mrState;
 
     const runes: JSX.Element[] = [];
-
     gameState.runes.forEach((r) => {
       runes.push(<Rune key={'rune-' + r.id} rune={r} selectRune={gameState.selectRune} />);
     });

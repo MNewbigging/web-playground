@@ -13,8 +13,8 @@ PLAYGROUND:
 
 
  MEMO RUNE:
- - save empty rune as separate
- - further game state
+ - danger rune effect; score system
+ - local two player mode
  
 
 

@@ -1,7 +1,6 @@
 import { IRune, RuneUtils, RuneState } from './RuneUtils';
 
 import { action, observable } from 'mobx';
-import { NumberLiteralType } from 'typescript';
 
 export class MRGameState {
   @observable public selectedRunes: IRune[] = [];
@@ -79,37 +78,46 @@ export class MRGameState {
     const rune2 = this.selectedRunes[1];
 
     if (RuneUtils.isRunePair(rune1, rune2)) {
-      setTimeout(this.pairSelectedRunes, RuneUtils.pairRuneDelay);
+      setTimeout(this.gotRunePair, RuneUtils.pairRuneDelay);
     } else {
-      setTimeout(this.clearSelectedRunes, RuneUtils.clearRuneDelay);
+      setTimeout(this.noRunePair, RuneUtils.clearRuneDelay);
     }
   }
 
-  private pairSelectedRunes = () => {
+  private gotRunePair = () => {
+    // Update selected runes to be paired
+    this.selectedRunes.forEach((r) => {
+      r.state = RuneState.PAIRED;
+    });
+
+    for (const sr of this.selectedRunes) {
+      // If this also matched a danger rune, reset danger rune float (only 1 may match)
+      const match = this.dangerRunes.find((dr) => RuneUtils.isRunePair(sr, dr));
+      if (match) {
+        const remainingRunes = this.runes.filter((rr) => rr.state !== RuneState.PAIRED);
+        this.dangerRunes = RuneUtils.getDangerRunes(remainingRunes);
+        break;
+      }
+    }
+
     // Make a deep copy of this rune for the paired runes list
     // Don't want further changes to affect this (like state)
     this.pairedRunes.push(Object.assign({}, this.selectedRunes[0]));
 
-    // Update pair selected runes
-    this.selectedRunes.forEach((r) => {
-      r.state = RuneState.PAIRED;
-      // If this also matched a danger rune, reset danger rune float
-      const match = this.dangerRunes.find((dr) => RuneUtils.isRunePair(r, dr));
-      if (match) {
-        const remainingRunes = this.runes.filter((r) => r.state !== RuneState.PAIRED);
-        this.dangerRunes = RuneUtils.getDangerRunes(remainingRunes);
-      }
-    });
-
+    // Clear selected runes
     this.selectedRunes = [];
+
+    // Reset danger runes now that there are no selected runes
+    this.resetDangerRunes();
 
     // Player scores
     this.scorePoint();
 
-    this.changeTurns();
+    // Check for end game
+    this.checkForEndGame();
   };
 
-  private clearSelectedRunes = () => {
+  private noRunePair = () => {
     // First check if we match with 2 danger runes
     this.checkDangerRuneMatch();
 
@@ -117,7 +125,11 @@ export class MRGameState {
       r.state = RuneState.FACE_DOWN;
     });
 
+    // Clear selected runes
     this.selectedRunes = [];
+
+    // Reset danger runes now that there are no selected runes
+    this.resetDangerRunes();
 
     this.changeTurns();
   };
@@ -136,15 +148,6 @@ export class MRGameState {
     }
   }
 
-  private scorePoint() {
-    // Award points to current player
-    if (this.playerCount === 2 && !this.p1Turn) {
-      this.p2Pairs++;
-    } else {
-      this.p1Pairs++;
-    }
-  }
-
   private scoreDangerRune() {
     // Danger runes award negative points
     if (this.playerCount === 2 && !this.p1Turn) {
@@ -154,20 +157,27 @@ export class MRGameState {
     }
   }
 
+  private scorePoint() {
+    // Award points to current player
+    if (this.playerCount === 2 && !this.p1Turn) {
+      this.p2Pairs++;
+    } else {
+      this.p1Pairs++;
+    }
+  }
+
   private changeTurns = () => {
-    // Reset danger runes now that there are no selected runes
-    this.dangerRunes.forEach((dr) => {
-      dr.state = RuneState.FACE_UP;
-    });
-
-    // Check for end game
-    this.checkForEndGame();
-
     // Swap turns in a 2p game
     if (this.playerCount === 2) {
       this.p1Turn = !this.p1Turn;
     }
   };
+
+  private resetDangerRunes() {
+    this.dangerRunes.forEach((dr) => {
+      dr.state = RuneState.FACE_UP;
+    });
+  }
 
   private checkForEndGame() {
     if (this.runes.some((r) => r.state !== RuneState.PAIRED)) {

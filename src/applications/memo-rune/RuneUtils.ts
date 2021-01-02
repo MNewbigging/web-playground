@@ -56,20 +56,21 @@ export class RuneUtils {
 
   public static getDangerRunes(runes: IRune[]) {
     const dangerRunes: IRune[] = [];
-    const pairs = Math.floor(runes.length / 2);
-    // Can pick from ids 0 up to pair count (rest are dupes)
-    const availableRunes = runes.filter((r) => r.id < pairs);
 
     // Pick up to 4 random runes to make up float
+    const pairs = Math.floor(runes.length / 2);
     const maxDangerRunes = 5;
     const floatLength = Math.min(Math.floor(pairs / 2), maxDangerRunes);
 
-    for (let i = 0; i < floatLength; i++) {
-      const rnd = Math.floor(Math.random() * availableRunes.length);
-      const dangerRune = Object.assign({}, availableRunes[rnd]); // deep copy, don't want to affect runes
-      dangerRune.state = RuneState.FACE_UP;
-      dangerRunes.push(dangerRune);
-      availableRunes.splice(rnd, 1); // remove so not picked again
+    while (dangerRunes.length < floatLength) {
+      const rnd = Math.floor(Math.random() * runes.length); // pick a random rune
+      // Ensure we haven't got this rune already (runes has dupes since there are pairs)
+      const exists = dangerRunes.some((dr) => this.isRunePair(runes[rnd], dr));
+      if (!exists) {
+        const dangerRune = Object.assign({}, runes[rnd]); // deep copy, don't want to affect runes
+        dangerRune.state = RuneState.FACE_UP; // flip it
+        dangerRunes.push(dangerRune); // add it to float
+      }
     }
 
     return dangerRunes;

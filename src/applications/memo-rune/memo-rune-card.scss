@@ -1,0 +1,16 @@
+.memo-rune-card {
+  background: url('/dist/assets/memo-rune/runeGrey_tile_036.png') no-repeat;
+  background-size: 100px 100px;
+
+  &:hover {
+    background: url('/dist/assets/memo-rune/runeGrey_tileOutline_036.png') no-repeat;
+    background-size: 100px 100px;
+  }
+
+  .app-card-title {
+    color: white;
+    font-size: 16pt;
+    font-weight: 400;
+    padding: 18%;
+  }
+}

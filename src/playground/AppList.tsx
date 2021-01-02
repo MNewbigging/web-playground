@@ -7,6 +7,7 @@ import './app-list.scss';
 // Import the styles for each app card from their application folder
 import '../applications/desk-scene/desk-scene-card.scss';
 import '../applications/word-bash/word-bash-card.scss';
+import '../applications/memo-rune/memo-rune-card.scss';
 
 interface AppListProps {
   pgState: PlaygroundState;

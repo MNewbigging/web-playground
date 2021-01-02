@@ -1,9 +1,8 @@
 PLAYGROUND:
-- App Cards: hover behaviour; enlarge on hover, reveal description text, or info button top right of card that opens popover for info
- (item grows, other list items shrink/move)
+- How to play drawer on existing games
+- Info button on app cards
 
  WORD BASH:
- - SFX
  - Tooltips - wrong word entry, dupe answer attempt etc
  - Scoring to take extra vowels/consonants into account
  - Re-apply anim delay when winning, so additional letters move off in time with originals
@@ -13,8 +12,9 @@ PLAYGROUND:
 
 
  MEMO RUNE:
- - danger rune effect; score system
- - local two player mode
+ - app card styling
+
+
  
 
 

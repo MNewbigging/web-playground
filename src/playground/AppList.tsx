@@ -3,6 +3,11 @@ import React from 'react';
 import { AppCard } from './AppCard';
 import { AppState, PlaygroundState } from './PlaygroundState';
 
+// Popover content for each app card
+import { WBInfoPopover } from '../applications/word-bash/WBInfoPopover';
+import { MRInfoPopover } from '../applications/memo-rune/MRInfoPopover';
+import { DSInfoPopover } from '../applications/desk-scene/DSInfoPopover';
+
 import './app-list.scss';
 // Import the styles for each app card from their application folder
 import '../applications/desk-scene/desk-scene-card.scss';
@@ -22,19 +27,19 @@ export class AppList extends React.Component<AppListProps> {
           classname={'word-bash-card'}
           title={'WORD BASH'}
           toApp={() => pgState.toApp(AppState.WORD_BASH)}
-          popoverContent={<div>TODO</div>}
+          popoverContent={<WBInfoPopover />}
         />
         <AppCard
           classname={'desk-scene-card'}
           title={'DESK SCENE'}
           toApp={() => pgState.toApp(AppState.DESK_SCENE)}
-          popoverContent={<div>TODO</div>}
+          popoverContent={<DSInfoPopover />}
         />
         <AppCard
           classname={'memo-rune-card'}
           title={'MEMO RUNE'}
           toApp={() => pgState.toApp(AppState.MEMO_RUNE)}
-          popoverContent={<div>TODO</div>}
+          popoverContent={<MRInfoPopover />}
         />
       </div>
     );

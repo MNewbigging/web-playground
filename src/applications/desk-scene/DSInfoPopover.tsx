@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const DSInfoPopover: React.FunctionComponent = ({}) => {
+export const DSInfoPopover: React.FunctionComponent = () => {
   return (
     <div className={'wb-info'} style={{ padding: '10px' }}>
       <h3>Desk Scene</h3>

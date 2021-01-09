@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-import { Button, Radio, RadioGroup } from '@blueprintjs/core';
+import { Button, Drawer, Radio, RadioGroup } from '@blueprintjs/core';
 
-import { PoolSize, WBScreen } from '../fixed';
+import { PoolSize } from '../fixed';
 import { WordBashState } from '../WordBashState';
 
 import './wb-menu.scss';
@@ -16,6 +17,8 @@ interface WBMenuProps {
 
 @observer
 export class WBMenu extends React.Component<WBMenuProps> {
+  @observable private drawerOpen: boolean = false;
+
   public render() {
     const { wbState } = this.props;
     const toRender: JSX.Element[] = [];
@@ -26,6 +29,9 @@ export class WBMenu extends React.Component<WBMenuProps> {
       : toRender.push(this.renderMainMenu());
     // Common menu buttons
     toRender.push(this.renderCommonButtons());
+
+    // How to play drawer
+    toRender.push(this.renderDrawer());
 
     return <div className={'wb-menu'}>{toRender}</div>;
   }
@@ -79,8 +85,27 @@ export class WBMenu extends React.Component<WBMenuProps> {
     const { toApp } = this.props;
     return (
       <div key={'common'}>
+        <Button
+          key={'how-to'}
+          className={'button'}
+          text={'HOW TO PLAY'}
+          onClick={() => (this.drawerOpen = !this.drawerOpen)}
+        />
         <Button key={'exitgame'} className={'button'} text={'EXIT GAME'} onClick={() => toApp()} />
       </div>
+    );
+  }
+
+  private renderDrawer() {
+    return (
+      <Drawer
+        isOpen={this.drawerOpen}
+        canEscapeKeyClose={true}
+        canOutsideClickClose={true}
+        onClose={() => (this.drawerOpen = !this.drawerOpen)}
+      >
+        <div>TEST CONTENT</div>
+      </Drawer>
     );
   }
 }

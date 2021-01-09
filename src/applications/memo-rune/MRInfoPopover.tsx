@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const MRInfoPopover: React.FunctionComponent = ({}) => {
+export const MRInfoPopover: React.FunctionComponent = () => {
   return (
     <div style={{ padding: '10px' }}>
       <h3>Memo Rune</h3>

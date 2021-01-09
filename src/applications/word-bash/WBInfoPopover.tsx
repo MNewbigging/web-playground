@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const WBInfoPopover: React.FunctionComponent = ({}) => {
+export const WBInfoPopover: React.FunctionComponent = () => {
   return (
     <div style={{ padding: '10px' }}>
       <h3>Word Bash</h3>

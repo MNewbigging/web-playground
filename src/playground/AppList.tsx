@@ -4,15 +4,15 @@ import { AppCard } from './AppCard';
 import { AppState, PlaygroundState } from './PlaygroundState';
 
 // Popover content for each app card
-import { WBInfoPopover } from '../applications/word-bash/WBInfoPopover';
-import { MRInfoPopover } from '../applications/memo-rune/MRInfoPopover';
 import { DSInfoPopover } from '../applications/desk-scene/DSInfoPopover';
+import { MRInfoPopover } from '../applications/memo-rune/MRInfoPopover';
+import { WBInfoPopover } from '../applications/word-bash/WBInfoPopover';
 
-import './app-list.scss';
 // Import the styles for each app card from their application folder
 import '../applications/desk-scene/desk-scene-card.scss';
-import '../applications/word-bash/word-bash-card.scss';
 import '../applications/memo-rune/memo-rune-card.scss';
+import '../applications/word-bash/word-bash-card.scss';
+import './app-list.scss';
 
 interface AppListProps {
   pgState: PlaygroundState;

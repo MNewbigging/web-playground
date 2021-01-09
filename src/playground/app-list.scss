@@ -11,9 +11,29 @@
     height: 100px;
     margin: 5px;
     padding: 0px;
+    position: relative;
 
     &:hover {
       cursor: pointer;
+
+      .help-button {
+        opacity: 0.5;
+        transition: opacity 0.4s linear;
+      }
+    }
+
+    .help-button {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      opacity: 0;
+      color: white;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }

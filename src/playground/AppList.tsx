@@ -22,16 +22,19 @@ export class AppList extends React.Component<AppListProps> {
           classname={'word-bash-card'}
           title={'WORD BASH'}
           toApp={() => pgState.toApp(AppState.WORD_BASH)}
+          popoverContent={<div>TODO</div>}
         />
         <AppCard
           classname={'desk-scene-card'}
           title={'DESK SCENE'}
           toApp={() => pgState.toApp(AppState.DESK_SCENE)}
+          popoverContent={<div>TODO</div>}
         />
         <AppCard
           classname={'memo-rune-card'}
           title={'MEMO RUNE'}
           toApp={() => pgState.toApp(AppState.MEMO_RUNE)}
+          popoverContent={<div>TODO</div>}
         />
       </div>
     );

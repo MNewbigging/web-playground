@@ -2,10 +2,10 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
-import { MemoRuneState, MRScreen } from './MemoRuneState';
-import { Rune } from './components/Rune';
 import { MRGameUI } from './components/MRGameUI';
 import { MRMenu } from './components/MRMenu';
+import { Rune } from './components/Rune';
+import { MemoRuneState, MRScreen } from './MemoRuneState';
 
 import './memo-rune.scss';
 

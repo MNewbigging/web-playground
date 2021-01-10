@@ -5,6 +5,7 @@ export enum AppState {
   WORD_BASH,
   DESK_SCENE,
   MEMO_RUNE,
+  CONNECT_FOUR,
 }
 
 export class PlaygroundState {

@@ -1,14 +1,16 @@
 import React from 'react';
 
-import Testing from '../../../dist/assets/icons/round.svg';
+import './c4-char-select.scss';
+
+import Bear from '../../../dist/assets/icons/Bear.svg';
+import Bison from '../../../dist/assets/icons/Bison.svg';
 
 export class C4CharSelect extends React.Component {
   public render() {
     return (
       <>
-        <div>CHAR SELECT!:</div>
-
-        <Testing />
+        <Bear className={'anim-icon'} />
+        <Bison className={'anim-icon'} />
       </>
     );
   }

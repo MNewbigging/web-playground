@@ -99,13 +99,37 @@ export class WBMenu extends React.Component<WBMenuProps> {
   private renderDrawer() {
     return (
       <Drawer
+        key={'drawer'}
         isOpen={this.drawerOpen}
         canEscapeKeyClose={true}
         canOutsideClickClose={true}
         onClose={() => (this.drawerOpen = !this.drawerOpen)}
       >
-        <div>TEST CONTENT</div>
+        {this.drawerContent()}
       </Drawer>
+    );
+  }
+
+  private drawerContent() {
+    return (
+      <div className={'drawer-content'}>
+        <h2>How to play Word Bash</h2>
+        <p>
+          In Word Bash, you are given a pool of random letters, called tiles, which you use to make
+          words.
+        </p>
+        <p>Choose your game size to determine how many letter tiles you want to play with.</p>
+        <p>To win, you must use all the letter tiles in the pool in as many words as you like.</p>
+        <p>You cannot use the same word twice; each word accepted must be unique.</p>
+        <p>
+          Click on a word you have already accepted to remove it and return those letters to the
+          pool.
+        </p>
+        <p>
+          You are awarded points based on the length of your accepted words - try to get as many
+          long words as you can!
+        </p>
+      </div>
     );
   }
 }

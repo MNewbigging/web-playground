@@ -1,0 +1,14 @@
+.connect-four {
+  width: 100%;
+  height: 100%;
+
+  .c4-menu {
+    width: 300px;
+    height: 50px;
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

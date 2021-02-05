@@ -1,4 +1,6 @@
+@import '../task-log-colours.scss';
+
 .tl-panel {
-  background-color: rgba(0, 0, 0, 0.25);
-  border-left: 4px solid rgba(255, 255, 255, 0.25);
+  background-color: $color-panel-bg;
+  border-left: 4px solid $color-panel-border;
 }

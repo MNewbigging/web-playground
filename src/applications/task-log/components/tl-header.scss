@@ -1,3 +1,19 @@
-.ts-header {
-  grid-area: 'header';
+@import '../task-log-colours.scss';
+
+.tl-header {
+  grid-area: header;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  &__time {
+    color: $color-text;
+    align-self: flex-end;
+    font-size: 14pt;
+  }
+
+  &__hr {
+    width: 90%;
+    align-self: flex-end;
+  }
 }

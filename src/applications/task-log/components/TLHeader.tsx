@@ -8,9 +8,11 @@ interface HeaderProps {
 
 export const TLHeader: React.FC<HeaderProps> = ({ time }) => {
   return (
-    <header className={'tl-header'}>
-      {time}
-      <hr />
-    </header>
+    <div className={'tl-header'}>
+      <div className={'tl-header__time'}>{time}</div>
+      <div className={'tl-header__hr'}>
+        <hr />
+      </div>
+    </div>
   );
 };

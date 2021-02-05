@@ -11,6 +11,7 @@ export class C4CharSelect extends React.Component {
       <>
         <Bear className={'anim-icon'} />
         <Bison className={'anim-icon'} />
+        <Bison width={200} height={200} />
       </>
     );
   }

@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { ConnectFour } from '../applications/connect-four/ConnectFour';
 import { DeskScene } from '../applications/desk-scene/DeskScene';
 import { MemoRune } from '../applications/memo-rune/MemoRune';
+import { TaskLog } from '../applications/task-log/TaskLog';
 import { WordBash } from '../applications/word-bash/WordBash';
 import { AppList } from './AppList';
 import { AppState, PlaygroundState } from './PlaygroundState';
@@ -24,6 +25,8 @@ export class Playground extends React.Component {
         return <MemoRune toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
       case AppState.CONNECT_FOUR:
         return <ConnectFour toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
+      case AppState.TASK_LOG:
+        return <TaskLog />;
     }
   }
 }

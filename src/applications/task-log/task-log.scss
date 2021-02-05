@@ -1,0 +1,19 @@
+.task-log-background {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url('../../../dist/assets/task-log/earthFromSpace.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+
+  &:before {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    background-color: rgba(0, 22, 41, 0.75);
+  }
+}

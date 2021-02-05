@@ -6,6 +6,7 @@ export enum AppState {
   DESK_SCENE,
   MEMO_RUNE,
   CONNECT_FOUR,
+  TASK_LOG,
 }
 
 export class PlaygroundState {

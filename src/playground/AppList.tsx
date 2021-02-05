@@ -47,6 +47,12 @@ export class AppList extends React.Component<AppListProps> {
           toApp={() => pgState.toApp(AppState.CONNECT_FOUR)}
           popoverContent={<div>TODO</div>}
         />
+        <AppCard
+          classname={'task-log-card'}
+          title={'Task Log'}
+          toApp={() => pgState.toApp(AppState.TASK_LOG)}
+          popoverContent={<div>todo</div>}
+        />
       </div>
     );
   }

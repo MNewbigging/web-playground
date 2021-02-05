@@ -14,6 +14,25 @@
 
   &__hr {
     width: 90%;
+    height: 20px;
     align-self: flex-end;
+
+    > hr {
+      transform-origin: 100% 50%;
+      animation: expand 0.5s ease-in-out;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes expand {
+  0% {
+    opacity: $opacity-hr;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: $opacity-hr;
+    transform: scalex(1);
   }
 }

@@ -31,7 +31,7 @@ export class TLNavbar extends React.PureComponent<TLNProps> {
           </div>
         </div>
         <div className={'tl-navbar__block mid'}>
-          <div>CREATE</div>
+          <div onClick={() => tlState.setCreateDialogOpen(true)}>CREATE</div>
         </div>
         <div className={'tl-navbar__block bot'}>
           <div

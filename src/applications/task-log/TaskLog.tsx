@@ -7,6 +7,8 @@ import { TLHeader } from './components/TLHeader';
 import { TLNavbar } from './components/TLNavbar';
 import { TaskLogState, TLScreen } from './TaskLogState';
 
+import { TLCreateDialog } from './components/TLCreateDialog';
+
 import './task-log.scss';
 
 @observer
@@ -15,6 +17,7 @@ export class TaskLog extends React.Component {
   public render() {
     return (
       <div className={'tl-background'}>
+        <TLCreateDialog tlState={this.tlState} />
         <TLHeader time={this.tlState.timeStr} />
         <TLNavbar tlState={this.tlState} />
         <div className={'tl-content'}>{this.renderContentPanel()}</div>

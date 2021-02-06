@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { TLList } from '../../core/list/TLList';
 import { TLPanel } from '../../core/TLPanel';
 
 import './tl-todo.scss';

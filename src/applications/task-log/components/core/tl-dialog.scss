@@ -1,0 +1,19 @@
+@import '../../task-log-colours.scss';
+
+.tl-dialog {
+  position: fixed;
+  top: 25%;
+  left: 40%;
+  min-width: 300px;
+  min-height: 300px;
+
+  box-sizing: border-box;
+  border: 1px solid white;
+  background-color: $color-dialog-bg;
+
+  display: none;
+
+  &.open {
+    display: block;
+  }
+}

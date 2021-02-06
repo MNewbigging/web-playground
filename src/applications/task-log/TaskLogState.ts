@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx';
 
 import { DialogState } from './components/core/TLDialog';
+import { tlDatabase } from './store/TLDatabase';
 
 export enum TLScreen {
   DASH = 'dash',
@@ -15,6 +16,7 @@ export class TaskLogState {
 
   constructor() {
     this.runClock();
+    tlDatabase.reset();
   }
 
   @action public setScreen(tlScreen: TLScreen) {

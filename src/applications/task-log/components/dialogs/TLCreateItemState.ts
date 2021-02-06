@@ -2,7 +2,7 @@ import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';
 import { ITodo } from '../../model/TLTodo';
-import { todoStore } from '../../store/TLTodoStore';
+import { tlDatabase } from '../../store/TLDatabase';
 
 export class TLCreateItemState {
   @observable public title = 'title';
@@ -23,6 +23,6 @@ export class TLCreateItemState {
       title: this.title,
       description: this.description,
     };
-    todoStore.addTodo(item);
+    tlDatabase.createTodo(item);
   }
 }

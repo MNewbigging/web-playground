@@ -1,12 +1,27 @@
+// Background image overlay colours
 $color-bg-overlay: rgba(0, 22, 41, 0.75);
 
+// General colours
+$color-text: rgba(255, 255, 255, 1);
+
+// Horizontal vars
 $opacity-hr: 0.5;
 $color-hr: rgba(255, 255, 255, $opacity-hr);
 
+// Panel vars
 $opacity-panel: 0.5;
 $color-panel-bg: rgba(0, 0, 0, $opacity-panel);
 $color-panel-border: rgba(255, 255, 255, $opacity-panel);
 
-$color-text: rgba(255, 255, 255, 1);
-
+// Dialog colours
 $color-dialog-bg: #001629;
+
+// Button accent colours
+$color-btn-blue-shadow: rgba(0, 170, 170, 0.5);
+$color-btn-blue-border: #0dd;
+
+$color-btn-red-shadow: rgba(251, 81, 81, 0.4);
+$color-btn-red-border: #fb5454;
+
+$color-btn-white-shadow: rgba(255, 255, 255, 0.3);
+$color-btn-white-border: #fff;

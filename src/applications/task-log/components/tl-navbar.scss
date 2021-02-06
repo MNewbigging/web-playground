@@ -1,5 +1,6 @@
+@import '../task-log-colours.scss';
+
 .tl-navbar {
-  z-index: 1;
   grid-area: nav;
   display: flex;
   flex-direction: column;
@@ -11,38 +12,26 @@
     flex-direction: column;
     padding: 20px;
 
-    .item {
-      box-sizing: border-box;
-      border: 1px solid white;
-      width: 90%;
-      margin-bottom: 20px;
-      height: 40px;
-
-      &:hover {
-        cursor: pointer;
-        border: 2px solid greenyellow;
-      }
-
-      &.active {
-        border: 1px solid greenyellow;
-        position: relative;
-
-        &::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          margin-left: -25px;
-          height: 100%;
-          border-left: 4px solid turquoise;
-          transition: all 1s ease;
-        }
+    .active {
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-left: -26px;
+        height: 100%;
+        border-left: 4px solid $color-btn-blue-border;
+        box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff, 0 0 35px #228dff,
+          0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
       }
     }
   }
 
   .top {
-    justify-content: flex-start;
+    .dash {
+      margin-bottom: 40px;
+    }
   }
 
   .bot {

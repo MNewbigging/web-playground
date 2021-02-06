@@ -13,7 +13,6 @@
   display: grid;
   grid-template-areas:
     'header header header header'
-    'nav  content content content'
     'nav  content content content';
   grid-template-rows: 1fr 9fr;
   grid-template-columns: 1fr 9fr;

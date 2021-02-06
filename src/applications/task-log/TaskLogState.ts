@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 
 export class TaskLogState {
   @observable.ref public timeStr: string;
@@ -7,7 +7,7 @@ export class TaskLogState {
     this.runClock();
   }
 
-  private runClock() {
+  @action private runClock() {
     const time = new Date();
     let hours = time.getHours().toString();
     let mins = time.getMinutes().toString();

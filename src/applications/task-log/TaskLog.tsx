@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
+import { TLDash } from './components/screens/dashboard/TLDash';
 import { TLHeader } from './components/TLHeader';
 import { TLNavbar } from './components/TLNavbar';
-import { TaskLogState } from './TaskLogState';
+import { TaskLogState, TLScreen } from './TaskLogState';
 
 import './task-log.scss';
 
@@ -15,8 +16,19 @@ export class TaskLog extends React.Component {
       <div className={'tl-background'}>
         <TLHeader time={this.tlState.timeStr} />
         <TLNavbar tlState={this.tlState} />
-        <div className={'tl-content'}></div>
+        <div className={'tl-content'}>{this.renderContentPanel()}</div>
       </div>
     );
+  }
+
+  private renderContentPanel() {
+    switch (this.tlState.tlScreen) {
+      case TLScreen.DASH:
+        return <TLDash />;
+      case TLScreen.TODO:
+        return <div>TODO</div>;
+      case TLScreen.SETTINGS:
+        return <div>SETTINGS</div>;
+    }
   }
 }

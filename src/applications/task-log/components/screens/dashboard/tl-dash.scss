@@ -1,0 +1,16 @@
+.tl-dashboard {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    'tracked stats'
+    'tracked recent'
+    'time time ';
+
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-columns: 3fr 2fr;
+}
+
+.tracked-items {
+  grid-area: tracked;
+}

@@ -14,9 +14,10 @@ interface DialogProps {
   state: DialogState;
   title: string;
   onCancel: () => void;
+  onAccept: () => void;
 }
 
-export const TLDialog: React.FC<DialogProps> = ({ children, state, title, onCancel }) => {
+export const TLDialog: React.FC<DialogProps> = ({ children, state, title, onCancel, onAccept }) => {
   return (
     <div className={'tl-dialog ' + state}>
       <div className={'header'}>
@@ -29,7 +30,10 @@ export const TLDialog: React.FC<DialogProps> = ({ children, state, title, onCanc
         <TLButton
           text={'ACCEPT'}
           intent={TLButtonIntent.ACCEPT}
-          onClick={() => console.log('accept')}
+          onClick={() => {
+            onAccept();
+            onCancel();
+          }}
         />
       </div>
     </div>

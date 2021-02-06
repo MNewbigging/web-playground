@@ -1,0 +1,28 @@
+import { action, observable } from 'mobx';
+
+import { RandomId } from '../../../../lib/RandomId';
+import { ITodo } from '../../model/TLTodo';
+import { todoStore } from '../../store/TLTodoStore';
+
+export class TLCreateItemState {
+  @observable public title = 'title';
+  @observable public description = 'desc';
+  private readonly id = RandomId.newId(5);
+
+  @action public setTitle(title: string) {
+    this.title = title;
+  }
+
+  @action public setDescription(desc: string) {
+    this.description = desc;
+  }
+
+  public createTodoItem() {
+    const item: ITodo = {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+    };
+    todoStore.addTodo(item);
+  }
+}

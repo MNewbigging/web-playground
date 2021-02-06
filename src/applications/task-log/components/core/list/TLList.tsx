@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ITodo } from '../../../model/Todo';
+import { ITodo } from '../../../model/TLTodo';
 
 import './tl-list.scss';
 

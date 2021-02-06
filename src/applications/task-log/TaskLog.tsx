@@ -7,7 +7,7 @@ import { TLHeader } from './components/TLHeader';
 import { TLNavbar } from './components/TLNavbar';
 import { TaskLogState, TLScreen } from './TaskLogState';
 
-import { TLCreateDialog } from './components/TLCreateDialog';
+import { TLCreateDialog } from './components/dialogs/TLCreateDialog';
 
 import './task-log.scss';
 

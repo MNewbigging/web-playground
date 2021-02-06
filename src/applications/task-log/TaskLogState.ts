@@ -1,4 +1,3 @@
-import { Dialog } from '@blueprintjs/core';
 import { action, observable } from 'mobx';
 
 import { DialogState } from './components/core/TLDialog';

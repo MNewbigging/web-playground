@@ -1,4 +1,5 @@
 .tl-navbar {
+  z-index: 1;
   grid-area: nav;
   display: flex;
   flex-direction: column;
@@ -13,7 +14,19 @@
     padding: 20px;
 
     .item {
+      box-sizing: border-box;
+      border: 1px solid white;
+      width: 90%;
       margin-bottom: 20px;
+
+      &:hover {
+        cursor: pointer;
+        border: 2px solid greenyellow;
+      }
+
+      &.active {
+        border: 1px solid greenyellow;
+      }
     }
   }
 

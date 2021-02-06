@@ -1,6 +1,7 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
-import { TaskLogState } from '../TaskLogState';
+import { TaskLogState, TLScreen } from '../TaskLogState';
 import { TLPanel } from './core/TLPanel';
 
 import './tl-navbar.scss';
@@ -9,21 +10,43 @@ interface TLNProps {
   tlState: TaskLogState;
 }
 
+@observer
 export class TLNavbar extends React.PureComponent<TLNProps> {
   public render() {
+    const { tlState } = this.props;
     return (
       <TLPanel className={'tl-navbar'}>
         <div className={'tl-navbar__block top'}>
-          <div className={'item'}>DASH</div>
-          <div className={'item'}>TODO</div>
+          <div
+            className={this.getItemClass(TLScreen.DASH)}
+            onClick={() => tlState.setScreen(TLScreen.DASH)}
+          >
+            DASH
+          </div>
+          <div
+            className={this.getItemClass(TLScreen.TODO)}
+            onClick={() => tlState.setScreen(TLScreen.TODO)}
+          >
+            TODO
+          </div>
         </div>
         <div className={'tl-navbar__block mid'}>
           <div>CREATE</div>
         </div>
         <div className={'tl-navbar__block bot'}>
-          <div>SETTINGS</div>
+          <div
+            className={this.getItemClass(TLScreen.SETTINGS)}
+            onClick={() => tlState.setScreen(TLScreen.SETTINGS)}
+          >
+            SETTINGS
+          </div>
         </div>
       </TLPanel>
     );
+  }
+
+  private getItemClass(item: TLScreen) {
+    const { tlState } = this.props;
+    return item === tlState.tlScreen ? 'item active' : 'item';
   }
 }

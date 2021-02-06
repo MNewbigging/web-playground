@@ -1,9 +1,9 @@
 import { action, observable } from 'mobx';
 
 export enum TLScreen {
-  DASH,
-  TODO,
-  SETTINGS,
+  DASH = 'dash',
+  TODO = 'todo',
+  SETTINGS = 'settings',
 }
 
 export class TaskLogState {
@@ -12,6 +12,11 @@ export class TaskLogState {
 
   constructor() {
     this.runClock();
+  }
+
+  @action public setScreen(tlScreen: TLScreen) {
+    this.tlScreen = tlScreen;
+    console.log('set screen: ', this.tlScreen);
   }
 
   @action private runClock() {

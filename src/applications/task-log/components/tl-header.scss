@@ -1,4 +1,5 @@
 @import '../task-log-colours.scss';
+@import '../task-log-anims.scss';
 
 .tl-header {
   grid-area: header;
@@ -19,20 +20,8 @@
 
     > hr {
       transform-origin: 100% 50%;
-      animation: expand 0.5s ease-in;
+      animation: hrExpand 0.5s ease-in;
       animation-fill-mode: both;
     }
-  }
-}
-
-@keyframes expand {
-  0% {
-    opacity: $opacity-hr;
-    transform: scaleX(0);
-  }
-
-  100% {
-    opacity: $opacity-hr;
-    transform: scalex(1);
   }
 }

@@ -1,4 +1,5 @@
 @import '../../task-log-colours.scss';
+@import '../../task-log-anims.scss';
 
 .tl-panel {
   height: 100%;
@@ -7,25 +8,6 @@
   box-sizing: border-box;
   border-left: 4px solid $color-panel-border;
   transform-origin: 0% 100%;
-  animation: expandRight 0.3s linear;
+  animation: panelExpand 0.3s linear;
   animation-fill-mode: both;
-}
-
-@keyframes expandRight {
-  0% {
-    opacity: $opacity-panel;
-    transform: scaleX(0.05) scaleY(0);
-  }
-  40% {
-    opacity: $opacity-panel;
-    transform: scaleX(0.05) scaleY(1);
-  }
-  50% {
-    opacity: $opacity-panel;
-    transform: scaleX(0.05) scaleY(1);
-  }
-  100% {
-    opacity: $opacity-panel;
-    transform: scaleX(1) scaleY(1);
-  }
 }

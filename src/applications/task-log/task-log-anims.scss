@@ -1,0 +1,45 @@
+@keyframes hrExpand {
+  0% {
+    opacity: $opacity-hr;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: $opacity-hr;
+    transform: scalex(1);
+  }
+}
+
+@keyframes panelExpand {
+  0% {
+    opacity: $opacity-panel;
+    transform: scaleX(0.05) scaleY(0);
+  }
+  30% {
+    opacity: $opacity-panel;
+    transform: scaleX(0.05) scaleY(1);
+  }
+  40% {
+    opacity: $opacity-panel;
+    transform: scaleX(0.05) scaleY(1);
+  }
+  100% {
+    opacity: $opacity-panel;
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@keyframes dialogOpen {
+  0% {
+    transform: scaleX(0.03) scaleY(0);
+  }
+  30% {
+    transform: scaleX(0.03) scaleY(1);
+  }
+  40% {
+    transform: scaleX(0.03) scaleY(1);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+}

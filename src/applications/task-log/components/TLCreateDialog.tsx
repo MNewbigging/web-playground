@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { TLDialog } from './core/TLDialog';
 import { TaskLogState } from '../TaskLogState';
+import { TLDialog } from './core/TLDialog';
 
 interface TLCDProps {
   tlState: TaskLogState;
@@ -12,7 +12,7 @@ interface TLCDProps {
 export class TLCreateDialog extends React.PureComponent<TLCDProps> {
   public render() {
     return (
-      <TLDialog open={this.props.tlState.createDialogOpen}>
+      <TLDialog open={this.props.tlState.createDialogOpen} title={'CREATE_ITEM'}>
         <div>Dialog children</div>
       </TLDialog>
     );

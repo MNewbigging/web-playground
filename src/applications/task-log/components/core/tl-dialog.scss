@@ -1,4 +1,5 @@
 @import '../../task-log-colours.scss';
+@import '../../task-log-anims.scss';
 
 .tl-dialog {
   position: fixed;
@@ -14,6 +15,37 @@
   display: none;
 
   &.open {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    animation: dialogOpen 0.3s linear;
+    transform-origin: 0% 100%;
+  }
+
+  .header {
+    width: 100%;
+    flex: 0 0 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .title {
+      color: $color-text;
+    }
+
+    > hr {
+      width: 80%;
+      align-self: flex-start;
+      margin: 0px;
+      margin-top: 6px;
+      transform-origin: 0% 50%;
+      animation: hrExpand 0.5s ease-in;
+      animation-fill-mode: both;
+    }
+  }
+
+  .children {
+    width: 100%;
+    flex: 1 1 auto;
   }
 }

@@ -2,6 +2,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TLDash } from './components/screens/dashboard/TLDash';
+import { TLTodo } from './components/screens/todo/TLTodo';
 import { TLHeader } from './components/TLHeader';
 import { TLNavbar } from './components/TLNavbar';
 import { TaskLogState, TLScreen } from './TaskLogState';
@@ -26,7 +27,7 @@ export class TaskLog extends React.Component {
       case TLScreen.DASH:
         return <TLDash />;
       case TLScreen.TODO:
-        return <div>TODO</div>;
+        return <TLTodo />;
       case TLScreen.SETTINGS:
         return <div>SETTINGS</div>;
     }

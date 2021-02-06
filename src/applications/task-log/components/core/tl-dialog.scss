@@ -3,6 +3,7 @@
 
 .tl-dialog {
   position: fixed;
+  z-index: 100;
   top: 25%;
   left: 40%;
   min-width: 300px;
@@ -11,14 +12,24 @@
   box-sizing: border-box;
   border: 1px solid white;
   background-color: $color-dialog-bg;
-
-  display: none;
+  transform-origin: 0% 100%;
 
   &.open {
     display: flex;
     flex-direction: column;
     animation: dialogOpen 0.3s linear;
-    transform-origin: 0% 100%;
+    animation-fill-mode: both;
+  }
+
+  &.closing {
+    display: flex;
+    flex-direction: column;
+    animation: dialogClose 0.3s linear;
+    animation-fill-mode: both;
+  }
+
+  &.closed {
+    display: none;
   }
 
   .header {
@@ -47,5 +58,12 @@
   .children {
     width: 100%;
     flex: 1 1 auto;
+  }
+
+  .footer {
+    flex: 0 0 60px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
   }
 }

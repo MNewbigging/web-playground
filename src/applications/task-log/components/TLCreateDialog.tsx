@@ -11,8 +11,13 @@ interface TLCDProps {
 @observer
 export class TLCreateDialog extends React.PureComponent<TLCDProps> {
   public render() {
+    const { tlState } = this.props;
     return (
-      <TLDialog open={this.props.tlState.createDialogOpen} title={'CREATE_ITEM'}>
+      <TLDialog
+        state={this.props.tlState.createDialogState}
+        title={'CREATE_ITEM'}
+        onCancel={() => tlState.closeCreateDialog()}
+      >
         <div>Dialog children</div>
       </TLDialog>
     );

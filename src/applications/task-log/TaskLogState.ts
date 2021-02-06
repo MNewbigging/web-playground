@@ -1,4 +1,7 @@
+import { Dialog } from '@blueprintjs/core';
 import { action, observable } from 'mobx';
+
+import { DialogState } from './components/core/TLDialog';
 
 export enum TLScreen {
   DASH = 'dash',
@@ -9,7 +12,7 @@ export enum TLScreen {
 export class TaskLogState {
   @observable.ref public timeStr: string;
   @observable public tlScreen = TLScreen.DASH;
-  @observable public createDialogOpen = false;
+  @observable public createDialogState = DialogState.CLOSED;
 
   constructor() {
     this.runClock();
@@ -19,9 +22,17 @@ export class TaskLogState {
     this.tlScreen = tlScreen;
   }
 
-  @action public setCreateDialogOpen(val: boolean) {
-    this.createDialogOpen = val;
-    console.log('dialog open: ', this.createDialogOpen);
+  @action public openCreateDialog() {
+    this.createDialogState = DialogState.OPEN;
+  }
+
+  @action public closeCreateDialog() {
+    this.createDialogState = DialogState.CLOSING;
+    setTimeout(() => {
+      if (this.createDialogState === DialogState.CLOSING) {
+        this.createDialogState = DialogState.CLOSED;
+      }
+    }, 500);
   }
 
   @action private runClock() {

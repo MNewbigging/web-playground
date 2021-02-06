@@ -1,8 +1,10 @@
 @import '../../task-log-colours.scss';
 
 .tl-panel {
+  height: 100%;
   color: $color-text;
   background-color: $color-panel-bg;
+  box-sizing: border-box;
   border-left: 4px solid $color-panel-border;
   transform-origin: 0% 100%;
   animation: expandRight 0.5s linear;

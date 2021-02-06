@@ -4,13 +4,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-wrap: nowrap;
 
   &__block {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
     padding: 20px;
 
     .item {
@@ -18,6 +16,7 @@
       border: 1px solid white;
       width: 90%;
       margin-bottom: 20px;
+      height: 40px;
 
       &:hover {
         cursor: pointer;
@@ -26,6 +25,18 @@
 
       &.active {
         border: 1px solid greenyellow;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          margin-left: -25px;
+          height: 100%;
+          border-left: 4px solid turquoise;
+          transition: all 1s ease;
+        }
       }
     }
   }

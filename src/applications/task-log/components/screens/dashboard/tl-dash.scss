@@ -5,12 +5,26 @@
   grid-template-areas:
     'tracked stats'
     'tracked recent'
-    'time time ';
+    'time time';
 
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-columns: 3fr 2fr;
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
 .tracked-items {
   grid-area: tracked;
+}
+
+.stats {
+  grid-area: stats;
+}
+
+.recent {
+  grid-area: recent;
+}
+
+.timeline {
+  grid-area: time;
 }

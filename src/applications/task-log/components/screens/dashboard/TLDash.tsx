@@ -9,7 +9,16 @@ export class TLDash extends React.PureComponent {
     return (
       <div className={'tl-dashboard'}>
         <TLPanel className={'tracked-items'}>
-          <div>TRACKED ITEMS</div>
+          <div>TRACKED_ITEMS</div>
+        </TLPanel>
+        <TLPanel className={'stats'}>
+          <div>STATS</div>
+        </TLPanel>
+        <TLPanel className={'recent'}>
+          <div>RECENT_ITEMS</div>
+        </TLPanel>
+        <TLPanel className={'timeline'}>
+          <div>TIMELINE</div>
         </TLPanel>
       </div>
     );

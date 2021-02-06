@@ -1,3 +1,4 @@
+import { timeStamp } from 'console';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -12,7 +13,7 @@ interface TLCDProps {
 
 @observer
 export class TLCreateDialog extends React.PureComponent<TLCDProps> {
-  private readonly ciState = new TLCreateItemState();
+  private ciState = new TLCreateItemState();
   public render() {
     const { tlState } = this.props;
     return (
@@ -20,10 +21,15 @@ export class TLCreateDialog extends React.PureComponent<TLCDProps> {
         state={this.props.tlState.createDialogState}
         title={'CREATE_ITEM'}
         onCancel={() => tlState.closeCreateDialog()}
-        onAccept={() => this.ciState.createTodoItem()}
+        onAccept={this.handleCreateItem}
       >
         <TLCreateItem ciState={this.ciState} />
       </TLDialog>
     );
   }
+
+  private readonly handleCreateItem = () => {
+    this.ciState.createTodoItem();
+    this.ciState = new TLCreateItemState();
+  };
 }

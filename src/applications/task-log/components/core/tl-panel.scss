@@ -1,0 +1,29 @@
+@import '../../task-log-colours.scss';
+
+.tl-panel {
+  color: $color-text;
+  background-color: $color-panel-bg;
+  border-left: 4px solid $color-panel-border;
+  transform-origin: 0% 100%;
+  animation: expandRight 0.5s linear;
+  animation-fill-mode: both;
+}
+
+@keyframes expandRight {
+  0% {
+    opacity: $opacity-panel;
+    transform: scaleX(0.05) scaleY(0);
+  }
+  40% {
+    opacity: $opacity-panel;
+    transform: scaleX(0.05) scaleY(1);
+  }
+  50% {
+    opacity: $opacity-panel;
+    transform: scaleX(0.05) scaleY(1);
+  }
+  100% {
+    opacity: $opacity-panel;
+    transform: scaleX(1) scaleY(1);
+  }
+}

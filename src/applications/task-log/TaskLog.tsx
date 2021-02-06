@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TLHeader } from './components/TLHeader';
-import { TLPanel } from './components/TLPanel';
+import { TLNavbar } from './components/TLNavbar';
 import { TaskLogState } from './TaskLogState';
 
 import './task-log.scss';
@@ -14,9 +14,7 @@ export class TaskLog extends React.Component {
     return (
       <div className={'tl-background'}>
         <TLHeader time={this.tlState.timeStr} />
-        <TLPanel className={'tl-navbar'}>
-          <div>I'm the panel content</div>
-        </TLPanel>
+        <TLNavbar tlState={this.tlState} />
         <div className={'tl-content'}></div>
       </div>
     );

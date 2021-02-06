@@ -1,7 +1,14 @@
 import { action, observable } from 'mobx';
 
+export enum TLScreen {
+  DASH,
+  TODO,
+  SETTINGS,
+}
+
 export class TaskLogState {
   @observable.ref public timeStr: string;
+  @observable public tlScreen = TLScreen.DASH;
 
   constructor() {
     this.runClock();

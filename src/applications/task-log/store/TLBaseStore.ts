@@ -11,7 +11,7 @@ export abstract class TLBaseStore<TContext> {
   public listeners = new Map<TContext, Listener[]>();
 
   public registerListener(context: TContext, callback: Listener) {
-    const currentListeners = this.listeners.get(context);
+    const currentListeners = this.listeners.get(context) ?? [];
     currentListeners.push(callback);
     this.listeners.set(context, currentListeners);
     this.reportIfLoaded(context, callback);

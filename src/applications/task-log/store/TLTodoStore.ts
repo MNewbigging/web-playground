@@ -14,9 +14,12 @@ class TLTodoStore extends TLBaseStore<TLTodoStoreContext> {
     }
   }
 
+  public getTodo(id: string) {
+    return this.allTodos.find((todo) => todo.id === id);
+  }
+
   public addTodo(todo: ITodo) {
     this.allTodos.push(todo);
-    console.log('added to todo store: ', this.allTodos);
     this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.CREATE, todo.id);
   }
 }

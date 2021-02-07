@@ -1,6 +1,12 @@
+import { action, observable } from 'mobx';
+
+import { ITodo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
+
 export class TLTodoState {
+  @observable public todos: ITodo[] = [];
+
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);
   }
@@ -11,7 +17,9 @@ export class TLTodoState {
         //
         break;
       case ChangeType.CREATE:
-        //
+        if (id) {
+          this.onNewTodo(id);
+        }
         break;
       case ChangeType.UPDATE:
         //
@@ -21,4 +29,13 @@ export class TLTodoState {
         break;
     }
   };
+
+  @action private onNewTodo(id: string) {
+    const todo = todoStore.getTodo(id);
+    if (!todo) {
+      return;
+    }
+
+    this.todos.push(todo);
+  }
 }

@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import { ITodo } from '../../../model/TLTodo';
@@ -9,16 +10,12 @@ interface ListProps {
   items: ITodo[];
 }
 
+@observer
 export class TLList extends React.PureComponent<ListProps> {
   public render() {
-    return <div className={'tl-list'}>{this.getDummyListItems()}</div>;
-  }
+    const { items } = this.props;
+    const listItems: JSX.Element[] = items.map((item) => <TLListItem key={item.id} todo={item} />);
 
-  private getDummyListItems() {
-    const listItems: JSX.Element[] = [];
-    for (let i = 0; i < 30; i++) {
-      listItems.push(<TLListItem key={'li-' + i} />);
-    }
-    return listItems;
+    return <div className={'tl-list'}>{listItems}</div>;
   }
 }

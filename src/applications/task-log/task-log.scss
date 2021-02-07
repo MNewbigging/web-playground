@@ -51,7 +51,6 @@ hr {
   background-color: $color-white-mid;
 }
 
-::-webkit-scrollbar-corner,
-::-webkit-scrollbar-button {
-  //opacity: 0;
+::-webkit-scrollbar-corner {
+  opacity: 0;
 }

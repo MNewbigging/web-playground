@@ -11,31 +11,13 @@
   color: $color-white-dim;
   width: 100%;
   min-width: 100%;
+  max-width: 100%;
+  max-height: 180px;
+  min-height: 20px;
+  resize: vertical;
 
   &:focus {
     border-bottom: 4px solid $color-white-mid;
     color: $color-white-mid;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    //border-left: 1px solid $color-white-mid;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: $color-white-dim;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: $color-white-mid;
-  }
-
-  ::-webkit-scrollbar-corner,
-  ::-webkit-scrollbar-button {
-    background: none;
-    border-color: $color-white-dim;
   }
 }

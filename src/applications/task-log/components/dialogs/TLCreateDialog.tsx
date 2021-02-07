@@ -31,10 +31,16 @@ export class TLCreateDialog extends React.PureComponent<TLCDProps> {
     const { tlState } = this.props;
     tlState.closeCreateDialog();
     this.ciState = new TLCreateItemState();
+    this.resizeTextArea();
   };
 
   private readonly handleCreateItem = () => {
     this.ciState.createTodoItem();
     this.ciState = new TLCreateItemState();
+    this.resizeTextArea();
   };
+
+  private resizeTextArea() {
+    document.getElementById('desc-text-area').style.height = '30px';
+  }
 }

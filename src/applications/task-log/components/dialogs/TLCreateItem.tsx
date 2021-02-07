@@ -25,6 +25,7 @@ export class TLCreateItem extends React.PureComponent<CreateItemProps> {
             placeholder={'DESCRIPTION'}
             onChange={ciState.setDescription}
             value={ciState.description}
+            id={'desc-text-area'}
           />
         </div>
       </div>

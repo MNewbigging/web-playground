@@ -1,12 +1,13 @@
 import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';
-import { ITodo } from '../../model/TLTodo';
+import { ITodo, TLPriority } from '../../model/TLTodo';
 import { tlDatabase } from '../../store/TLDatabase';
 
 export class TLCreateItemState {
   @observable public title = '';
   @observable public description = '';
+  @observable public priority = TLPriority.MID;
   private readonly id = RandomId.newId(5);
 
   @action public setTitle = (title: string) => {
@@ -15,6 +16,10 @@ export class TLCreateItemState {
 
   @action public setDescription = (desc: string) => {
     this.description = desc;
+  };
+
+  @action public setPriority = (prio: TLPriority) => {
+    this.priority = prio;
   };
 
   public createTodoItem() {

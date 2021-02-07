@@ -1,3 +1,9 @@
+export enum TLPriority {
+  LOW,
+  MID,
+  HI,
+}
+
 export interface ITodo {
   id: string;
   title: string;

@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
+import { TLPriority } from '../../model/TLTodo';
+import { TLPriorityInput } from '../core/input/TLPriorityInput';
 import { TLTextArea } from '../core/input/TLTextArea';
 import { TLTextInput } from '../core/input/TLTextInput';
 import { TLCreateItemState } from './TLCreateItemState';
@@ -26,6 +28,12 @@ export class TLCreateItem extends React.PureComponent<CreateItemProps> {
             onChange={ciState.setDescription}
             value={ciState.description}
             id={'desc-text-area'}
+          />
+        </div>
+        <div className={'input-block'}>
+          <TLPriorityInput
+            onSelect={(prio: TLPriority) => ciState.setPriority(prio)}
+            priority={ciState.priority}
           />
         </div>
       </div>

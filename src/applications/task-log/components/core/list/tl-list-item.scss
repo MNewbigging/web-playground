@@ -13,7 +13,7 @@
   align-items: center;
 
   svg {
-    fill: $color-white-mid;
+    fill: $color-white-dim;
   }
 
   .title {
@@ -24,6 +24,16 @@
     flex: 1 1 40px;
     padding: 5px;
     margin-right: 5px;
+
+    &.tracked {
+      svg {
+        fill: $color-white-bright;
+      }
+    }
+
+    // &.untracked {
+    //   fill: $color-white-mid;
+    // }
   }
 
   .priority {

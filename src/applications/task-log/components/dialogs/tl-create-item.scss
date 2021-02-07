@@ -7,5 +7,14 @@
 
   .input-block {
     margin-bottom: 20px;
+
+    .priority-tracked {
+      display: flex;
+      justify-content: flex-start;
+
+      .priority {
+        margin-right: 50px;
+      }
+    }
   }
 }

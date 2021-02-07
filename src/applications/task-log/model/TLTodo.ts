@@ -9,6 +9,7 @@ export interface ITodo {
   title: string;
   description: string;
   priority: TLPriority;
+  tracked: boolean;
   // recurring
   // deadline
   // priority

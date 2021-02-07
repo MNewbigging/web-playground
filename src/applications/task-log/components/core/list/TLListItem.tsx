@@ -16,11 +16,12 @@ interface TLItemProps {
 
 export class TLListItem extends React.PureComponent<TLItemProps> {
   public render() {
-    const { title, priority } = this.props.todo;
+    const { title, priority, tracked } = this.props.todo;
+    const trackedClass = tracked ? 'tracked' : 'untracked';
     return (
       <div className={'tl-list-item'}>
         <div className={'title'}>{title}</div>
-        <div className={'tracking'}>{this.getTrackingIcon(true)}</div>
+        <div className={'tracking ' + trackedClass}>{this.getTrackingIcon(tracked)}</div>
         <div className={'priority'}>{this.getPriorityIcon(priority)}</div>
       </div>
     );

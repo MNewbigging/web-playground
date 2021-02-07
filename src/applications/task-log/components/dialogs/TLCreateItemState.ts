@@ -8,6 +8,7 @@ export class TLCreateItemState {
   @observable public title = '';
   @observable public description = '';
   @observable public priority = TLPriority.MID;
+  @observable public tracked = false;
   private readonly id = RandomId.newId(5);
 
   @action public setTitle = (title: string) => {
@@ -22,12 +23,17 @@ export class TLCreateItemState {
     this.priority = prio;
   };
 
+  @action public setTracked = (track: boolean) => {
+    this.tracked = track;
+  };
+
   public createTodoItem() {
     const item: ITodo = {
       id: this.id,
       title: this.title,
       description: this.description,
       priority: this.priority,
+      tracked: this.tracked,
     };
     tlDatabase.createTodo(item);
   }

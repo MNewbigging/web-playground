@@ -2,10 +2,10 @@
 @import '../../task-log-anims.scss';
 
 .tl-panel {
-  color: $color-text;
-  background-color: $color-panel-bg;
+  color: $color-white-bright;
+  background-color: $color-black-dim;
   box-sizing: border-box;
-  border-left: 4px solid $color-panel-border;
+  border-left: 4px solid $color-white-dim;
   transform-origin: 0% 100%;
   animation: panelExpand 0.3s linear;
   animation-fill-mode: both;

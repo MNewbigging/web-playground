@@ -3,19 +3,16 @@ $color-bg-overlay: rgba(0, 22, 41, 0.75);
 $color-bg-overlay2: rgba(197, 107, 19, 0.35);
 
 // General colours
-$color-text: rgba(255, 255, 255, 1);
 $color-white-bright: rgba(255, 255, 255, 1);
 $color-white-mid: rgba(255, 255, 255, 0.75);
 $color-white-dim: rgba(255, 255, 255, 0.5);
 
-// Horizontal vars
-$opacity-hr: 0.5;
-$color-hr: rgba(255, 255, 255, $opacity-hr);
+$color-black-bright: rgba(0, 0, 0, 1);
+$color-black-mid: rgba(0, 0, 0, 0.75);
+$color-black-dim: rgba(0, 0, 0, 0.5);
 
 // Panel vars
 $opacity-panel: 0.5;
-$color-panel-bg: rgba(0, 0, 0, $opacity-panel);
-$color-panel-border: rgba(255, 255, 255, $opacity-panel);
 
 // Dialog colours
 $color-dialog-bg: #001629;

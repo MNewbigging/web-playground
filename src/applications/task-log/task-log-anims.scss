@@ -1,11 +1,11 @@
 @keyframes hrExpand {
   0% {
-    opacity: $opacity-hr;
+    opacity: 0.5;
     transform: scaleX(0);
   }
 
   100% {
-    opacity: $opacity-hr;
+    opacity: 0.5;
     transform: scalex(1);
   }
 }

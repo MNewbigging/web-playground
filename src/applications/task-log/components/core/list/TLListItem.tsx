@@ -22,7 +22,7 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
       <div className={'tl-list-item'}>
         <div className={'title'}>{title}</div>
         <div className={'tracking ' + trackedClass}>{this.getTrackingIcon(tracked)}</div>
-        <div className={'priority'}>{this.getPriorityIcon(priority)}</div>
+        <div className={'priority ' + trackedClass}>{this.getPriorityIcon(priority)}</div>
       </div>
     );
   }

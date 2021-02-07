@@ -24,20 +24,16 @@
     flex: 1 1 40px;
     padding: 5px;
     margin-right: 5px;
-
-    &.tracked {
-      svg {
-        fill: $color-white-bright;
-      }
-    }
-
-    // &.untracked {
-    //   fill: $color-white-mid;
-    // }
   }
 
   .priority {
     flex: 1 1 30px;
     padding: 5px;
+  }
+
+  .tracked {
+    svg {
+      fill: $color-white-bright;
+    }
   }
 }

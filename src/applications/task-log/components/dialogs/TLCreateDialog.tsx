@@ -15,13 +15,11 @@ interface TLCDProps {
 export class TLCreateDialog extends React.PureComponent<TLCDProps> {
   private ciState = new TLCreateItemState();
   public render() {
-    const { tlState } = this.props;
-    console.log('dialog render');
     return (
       <TLDialog
         state={this.props.tlState.createDialogState}
         title={'CREATE_ITEM'}
-        onCancel={() => tlState.closeCreateDialog()}
+        onCancel={this.handleCancel}
         onAccept={this.handleCreateItem}
       >
         <TLCreateItem ciState={this.ciState} />
@@ -29,9 +27,14 @@ export class TLCreateDialog extends React.PureComponent<TLCDProps> {
     );
   }
 
+  private readonly handleCancel = () => {
+    const { tlState } = this.props;
+    tlState.closeCreateDialog();
+    this.ciState = new TLCreateItemState();
+  };
+
   private readonly handleCreateItem = () => {
     this.ciState.createTodoItem();
     this.ciState = new TLCreateItemState();
-    console.log('new ci state');
   };
 }

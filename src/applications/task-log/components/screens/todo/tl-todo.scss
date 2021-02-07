@@ -5,8 +5,8 @@
   grid-template-areas:
     'filter detail'
     'list detail';
-  grid-template-rows: 1fr 4fr;
-  grid-template-columns: 2fr 3fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
   row-gap: 10px;
   column-gap: 10px;
 }

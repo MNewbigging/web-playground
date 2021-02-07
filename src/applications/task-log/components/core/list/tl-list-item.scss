@@ -1,0 +1,8 @@
+@import '../../../task-log-colours.scss';
+
+.tl-list-item {
+  flex: 0 0 40px;
+  width: 100%;
+  background-color: $color-dialog-bg;
+  color: $color-text;
+}

@@ -7,8 +7,8 @@
     'tracked recent'
     'time time';
 
-  grid-template-rows: 1fr 3fr 1fr;
-  grid-template-columns: 3fr 2fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   row-gap: 10px;
   column-gap: 10px;
 }

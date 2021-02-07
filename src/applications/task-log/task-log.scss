@@ -3,9 +3,7 @@
 .tl-background {
   width: 100%;
   height: 100%;
-  margin: 0;
   padding: 20px;
-  overflow: hidden;
   background-image: url('../../../dist/assets/task-log/earthFromSpace.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,8 +12,8 @@
   grid-template-areas:
     'header header header header'
     'nav  content content content';
-  grid-template-rows: 1fr 9fr;
-  grid-template-columns: 1fr 9fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 9fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 9fr);
 
   &:before {
     position: fixed;

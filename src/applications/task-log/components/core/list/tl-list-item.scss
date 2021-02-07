@@ -12,15 +12,22 @@
   justify-content: flex-start;
   align-items: center;
 
+  svg {
+    fill: $color-white-mid;
+  }
+
   .title {
-    flex: 1 1 80%;
+    flex: 1 1 100%;
   }
 
   .tracking {
-    flex: 1 1 10%;
+    flex: 1 1 40px;
+    padding: 5px;
+    margin-right: 5px;
   }
 
   .priority {
-    flex: 1 1 10%;
+    flex: 1 1 30px;
+    padding: 5px;
   }
 }

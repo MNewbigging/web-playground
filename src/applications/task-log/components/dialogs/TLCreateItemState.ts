@@ -27,6 +27,7 @@ export class TLCreateItemState {
       id: this.id,
       title: this.title,
       description: this.description,
+      priority: this.priority,
     };
     tlDatabase.createTodo(item);
   }

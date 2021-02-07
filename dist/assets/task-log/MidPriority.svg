@@ -1,0 +1,10 @@
+<svg id="Mid_Priority" data-name="Mid Priority" xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #333;
+      }
+    </style>
+  </defs>
+  <path id="Mid_Prio" data-name="Mid Prio" class="cls-1" d="M308,231l6,6-2,2-4-4-4,4-2-2,6-6m0,8,6,6-2,2-4-4-4,4-2-2,6-6" transform="translate(-302 -231)"/>
+</svg>

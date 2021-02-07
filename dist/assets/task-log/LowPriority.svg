@@ -1,0 +1,10 @@
+<svg id="Low_Priority" data-name="Low Priority" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #333;
+      }
+    </style>
+  </defs>
+  <path id="Chevron" class="cls-1" d="M239,235l6,6-2,2-4-4-4,4-2-2,6-6" transform="translate(-233 -235)"/>
+</svg>

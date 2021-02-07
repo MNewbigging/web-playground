@@ -1,0 +1,10 @@
+<svg id="Untracked" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #333;
+      }
+    </style>
+  </defs>
+  <path id="Untracked-2" data-name="Untracked" class="cls-1" d="M1002,308l6-6,2,2-4,4,4,4-2,2-6-6m-4,4,6,6-2,2-4-4-4,4-2-2,6-6m0-8-6-6,2-2,4,4,4-4,2,2-6,6m-4,4-6,6-2-2,4-4-4-4,2-2,6,6" transform="translate(-986 -296)"/>
+</svg>

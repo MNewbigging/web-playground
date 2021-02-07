@@ -1,0 +1,15 @@
+<svg id="Hi_Priority" data-name="Hi Priority" xmlns="http://www.w3.org/2000/svg" width="12" height="24" viewBox="0 0 12 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #333;
+      }
+    </style>
+  </defs>
+  <g id="Low_Priority" data-name="Low Priority">
+    <path id="Chevron" class="cls-1" d="M239,235l6,6-2,2-4-4-4,4-2-2,6-6" transform="translate(-233 -235)"/>
+  </g>
+  <g id="Mid_Prio" data-name="Mid Prio" transform="translate(0 8)">
+    <path id="Mid_Prio-2" data-name="Mid Prio" class="cls-1" d="M308,231l6,6-2,2-4-4-4,4-2-2,6-6m0,8,6,6-2,2-4-4-4,4-2-2,6-6" transform="translate(-302 -231)"/>
+  </g>
+</svg>

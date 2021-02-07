@@ -3,7 +3,7 @@
 .tl-list-item {
   flex: 0 0 40px;
   width: 100%;
-  padding: 5px;
+  padding: 5px 10px;
   background-color: black;
   color: $color-white-bright;
   margin-bottom: 2px;
@@ -11,4 +11,16 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  .title {
+    flex: 1 1 80%;
+  }
+
+  .tracking {
+    flex: 1 1 10%;
+  }
+
+  .priority {
+    flex: 1 1 10%;
+  }
 }

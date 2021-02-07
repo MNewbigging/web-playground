@@ -34,3 +34,26 @@ hr {
   grid-area: content;
   padding-left: 20px;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-sizing: border-box;
+  border-left: 1px solid $color-hr;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-btn-white-shadow;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+::-webkit-scrollbar-button {
+  // background-color: yellow;
+  // color: black;
+  // content: 'U';
+}

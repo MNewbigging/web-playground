@@ -1,5 +1,5 @@
-import { timeStamp } from 'console';
 import { observer } from 'mobx-react';
+
 import React from 'react';
 
 import { TaskLogState } from '../../TaskLogState';
@@ -16,6 +16,7 @@ export class TLCreateDialog extends React.PureComponent<TLCDProps> {
   private ciState = new TLCreateItemState();
   public render() {
     const { tlState } = this.props;
+    console.log('dialog render');
     return (
       <TLDialog
         state={this.props.tlState.createDialogState}
@@ -31,5 +32,6 @@ export class TLCreateDialog extends React.PureComponent<TLCDProps> {
   private readonly handleCreateItem = () => {
     this.ciState.createTodoItem();
     this.ciState = new TLCreateItemState();
+    console.log('new ci state');
   };
 }

@@ -1,0 +1,17 @@
+@import '../../../task-log-colours.scss';
+
+.tl-input {
+  background: none;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  padding-bottom: 7px;
+  border-bottom: 4px solid $color-white-dim;
+  color: $color-white-dim;
+  width: 100%;
+
+  &:focus {
+    border-bottom: 4px solid $color-white-mid;
+    color: $color-white-mid;
+  }
+}

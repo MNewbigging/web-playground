@@ -1,0 +1,41 @@
+@import '../../../task-log-colours.scss';
+
+.tl-text-area {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  line-height: 15px;
+  box-sizing: border-box;
+  border-bottom: 4px solid $color-white-dim;
+  color: $color-white-dim;
+  width: 100%;
+  min-width: 100%;
+
+  &:focus {
+    border-bottom: 4px solid $color-white-mid;
+    color: $color-white-mid;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    //border-left: 1px solid $color-white-mid;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $color-white-dim;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $color-white-mid;
+  }
+
+  ::-webkit-scrollbar-corner,
+  ::-webkit-scrollbar-button {
+    background: none;
+    border-color: $color-white-dim;
+  }
+}

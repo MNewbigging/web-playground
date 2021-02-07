@@ -5,17 +5,17 @@ import { ITodo } from '../../model/TLTodo';
 import { tlDatabase } from '../../store/TLDatabase';
 
 export class TLCreateItemState {
-  @observable public title = 'title';
-  @observable public description = 'desc';
+  @observable public title = '';
+  @observable public description = '';
   private readonly id = RandomId.newId(5);
 
-  @action public setTitle(title: string) {
+  @action public setTitle = (title: string) => {
     this.title = title;
-  }
+  };
 
-  @action public setDescription(desc: string) {
+  @action public setDescription = (desc: string) => {
     this.description = desc;
-  }
+  };
 
   public createTodoItem() {
     const item: ITodo = {

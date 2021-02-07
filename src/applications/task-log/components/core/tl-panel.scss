@@ -10,4 +10,14 @@
   transform-origin: 0% 100%;
   animation: panelExpand 0.3s linear;
   animation-fill-mode: both;
+
+  display: flex;
+  flex-direction: column;
+
+  .panel-title {
+    flex: 0 0 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+  }
 }

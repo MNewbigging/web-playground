@@ -58,3 +58,12 @@
     transform: scaleX(0.03) scaleY(0);
   }
 }
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

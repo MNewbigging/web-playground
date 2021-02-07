@@ -17,6 +17,7 @@
       &::before {
         content: '';
         position: absolute;
+        animation: grow 0.2s linear;
         left: 0;
         top: 0;
         margin-left: -26px;

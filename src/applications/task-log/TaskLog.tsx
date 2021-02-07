@@ -30,7 +30,7 @@ export class TaskLog extends React.Component {
       case TLScreen.DASH:
         return <TLDash />;
       case TLScreen.TODO:
-        return <TLTodo />;
+        return <TLTodo todoState={this.tlState.todoState} />;
       case TLScreen.SETTINGS:
         return <div>SETTINGS</div>;
     }

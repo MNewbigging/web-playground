@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx';
 
 import { DialogState } from './components/core/TLDialog';
+import { TLTodoState } from './components/screens/todo/TLTodoState';
 import { tlDatabase } from './store/TLDatabase';
 
 export enum TLScreen {
@@ -13,6 +14,8 @@ export class TaskLogState {
   @observable.ref public timeStr: string;
   @observable public tlScreen = TLScreen.DASH;
   @observable public createDialogState = DialogState.CLOSED;
+
+  public todoState = new TLTodoState();
 
   constructor() {
     this.runClock();

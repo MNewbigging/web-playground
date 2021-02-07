@@ -11,8 +11,11 @@ PLAYGROUND:
  - Indexeddb or localstorage for highscores
 
 
- MEMO RUNE:
- - app card styling
+- ADD SFX FROM MO!!!
+
+TASK LOG:
+- setup listener pattern in todoStore
+- todo list; list items, state to grab store data
 
 
  

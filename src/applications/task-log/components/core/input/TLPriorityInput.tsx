@@ -26,22 +26,23 @@ export class TLPriorityInput extends React.PureComponent<PrioProps> {
         onMouseEnter={this.onEnterInput}
         onMouseLeave={this.onLeaveInput}
       >
+        <div className={'label'}>PRIORITY</div>
         <div
-          className={this.getPriorityClass(TLPriority.HI)}
+          className={'chevron ' + this.getPriorityClass(TLPriority.HI)}
           onMouseEnter={() => this.setHoverPriority(TLPriority.HI)}
           onClick={() => this.setPriority(TLPriority.HI)}
         >
           <LowPriority />
         </div>
         <div
-          className={this.getPriorityClass(TLPriority.MID)}
+          className={'chevron ' + this.getPriorityClass(TLPriority.MID)}
           onMouseEnter={() => this.setHoverPriority(TLPriority.MID)}
           onClick={() => this.setPriority(TLPriority.MID)}
         >
           <LowPriority />
         </div>
         <div
-          className={this.getPriorityClass(TLPriority.LOW)}
+          className={'chevron ' + this.getPriorityClass(TLPriority.LOW)}
           onMouseEnter={() => this.setHoverPriority(TLPriority.LOW)}
           onClick={() => this.setPriority(TLPriority.LOW)}
         >

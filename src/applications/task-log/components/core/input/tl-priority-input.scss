@@ -3,8 +3,18 @@
 .tl-priority-input {
   display: flex;
   flex-direction: column;
-  width: 40px;
-  padding: 10px;
+  width: 60px;
+  padding: 5px;
+
+  .label {
+    color: $color-white-dim;
+    margin-bottom: 5px;
+  }
+
+  .chevron {
+    padding-left: 15px;
+    padding-right: 8px;
+  }
 
   .selected {
     svg {
@@ -24,11 +34,8 @@
         fill: $color-white-bright;
       }
     }
-
-    // .unselected {
-    //   svg {
-    //     fill: $color-white-dim;
-    //   }
-    // }
+    .label {
+      color: $color-white-bright;
+    }
   }
 }

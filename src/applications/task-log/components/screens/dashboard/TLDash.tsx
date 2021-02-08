@@ -20,15 +20,11 @@ export class TLDash extends React.PureComponent<DashProps> {
         <TLPanel className={'tracked-items'} title={'TRACKED_ITEMS'}>
           <TLList items={dashState.trackedTodos} />
         </TLPanel>
-        <TLPanel className={'stats'}>
-          <div>STATS</div>
+        <TLPanel className={'stats'} title={'STATS'}></TLPanel>
+        <TLPanel className={'recent'} title={'RECENT_ITEMS'}>
+          <TLList items={dashState.recentTodos} />
         </TLPanel>
-        <TLPanel className={'recent'}>
-          <div>RECENT_ITEMS</div>
-        </TLPanel>
-        <TLPanel className={'timeline'}>
-          <div>TIMELINE</div>
-        </TLPanel>
+        <TLPanel className={'timeline'} title={'TIMELINE'}></TLPanel>
       </div>
     );
   }

@@ -10,9 +10,7 @@ export interface ITodo {
   description: string;
   priority: TLPriority;
   tracked: boolean;
+  created: string;
   // recurring
   // deadline
-  // priority
-  // bullet list items
-  // tracked
 }

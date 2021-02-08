@@ -1,3 +1,4 @@
+import { create } from 'domain';
 import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';
@@ -28,12 +29,15 @@ export class TLCreateItemState {
   };
 
   public createTodoItem() {
+    const today = new Date();
+    const createdDate = today.getDate() + '/' + today.getMonth();
     const item: ITodo = {
       id: this.id,
       title: this.title,
       description: this.description,
       priority: this.priority,
       tracked: this.tracked,
+      created: createdDate,
     };
     tlDatabase.createTodo(item);
   }

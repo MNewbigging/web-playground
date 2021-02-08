@@ -17,15 +17,11 @@ export class TLTodo extends React.PureComponent<TodoProps> {
     const { todoState } = this.props;
     return (
       <div className={'tl-todo'}>
-        <TLPanel className={'todo-filter'}>
-          <div>FILTER</div>
-        </TLPanel>
+        <TLPanel className={'todo-filter'} title={'FILTER'}></TLPanel>
         <TLPanel className={'todo-list'} title={'TODO_ITEMS'}>
           <TLList items={todoState.todos} />
         </TLPanel>
-        <TLPanel className={'todo-detail'}>
-          <div>TODO_DETAILS</div>
-        </TLPanel>
+        <TLPanel className={'todo-detail'} title={'ITEM_DETAILS'}></TLPanel>
       </div>
     );
   }

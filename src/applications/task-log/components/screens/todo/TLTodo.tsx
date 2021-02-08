@@ -22,7 +22,7 @@ export class TLTodo extends React.PureComponent<TodoProps> {
         <TLPanel className={'todo-filter'} title={'FILTER'}></TLPanel>
         <TLItemsPanel todoState={todoState} />
         <TLPanel className={'todo-detail'} title={'ITEM_DETAILS'}>
-          {/* <TLItemDetails /> */}
+          <TLItemDetails todo={todoState.selectedTodo} />
         </TLPanel>
       </div>
     );

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 48 48">
+  <defs>
+
+  </defs>
+  <g id="Bullet_point_checked_-_1" data-name="Bullet point checked - 1" transform="translate(-278 -989)">
+    <path id="Path_346" data-name="Path 346" class="cls-1" d="M190,566l-10,10h-2v-2l10-10,2,2m-40,0,2-2,10,10v2h-2l-10-10m22,18,2,2v2h-2l-2-2-2,2h-2v-2l2-2-2-2v-2h2l2,2,2-2h2v2l-2,2m18,18-2,2-10-10v-2h2l10,10m-40,0,10-10h2v2l-10,10-2-2" transform="translate(132 429)"/>
+    <g id="Bullet_point_-_diamond" data-name="Bullet point - diamond" transform="translate(278 989)">
+      <path id="Bullet_point_-_diamond-2" data-name="Bullet point - diamond" class="cls-1" d="M32,491l24,24L32,539,8,515l24-24m-.05,2.85L10.8,515,32,536.2l21.15-21.15-21.2-21.2M30,513h4v4H30v-4" transform="translate(-8 -491)"/>
+    </g>
+  </g>
+</svg>

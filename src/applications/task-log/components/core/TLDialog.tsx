@@ -20,7 +20,7 @@ interface DialogProps {
 export const TLDialog: React.FC<DialogProps> = ({ children, state, title, onCancel, onAccept }) => {
   return (
     <>
-      <div className={'tl-dialog-backdrop ' + state}></div>
+      <div className={'tl-dialog-backdrop ' + state} onClick={() => onCancel()}></div>
       <div className={'tl-dialog ' + state}>
         <div className={'header'}>
           <div className={'title'}>{title}</div>

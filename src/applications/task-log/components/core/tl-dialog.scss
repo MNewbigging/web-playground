@@ -3,7 +3,6 @@
 
 .tl-dialog-backdrop {
   &.open {
-    opacity: 1;
     background-color: $color-black-dim;
     position: fixed;
     top: 0;

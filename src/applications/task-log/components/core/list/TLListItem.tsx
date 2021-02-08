@@ -14,16 +14,21 @@ import './tl-list-item.scss';
 
 interface TLItemProps {
   todo: ITodo;
+  onSelect?: () => void;
+  selected?: boolean;
 }
 
 @observer
 export class TLListItem extends React.PureComponent<TLItemProps> {
   public render() {
-    const { title, priority, tracked } = this.props.todo;
+    const { todo, onSelect, selected } = this.props;
+    const { title, priority, tracked } = todo;
     const trackedClass = tracked ? 'tracked' : 'untracked';
+    const selectedClass = selected ? 'selected' : '';
+
     console.log('render list item');
     return (
-      <div className={'tl-list-item'}>
+      <div className={'tl-list-item ' + selectedClass} onClick={() => onSelect()}>
         <div className={'title'}>{title}</div>
         <div className={'tracking ' + trackedClass} onClick={this.onTrackIconClick}>
           {this.getTrackingIcon(tracked)}

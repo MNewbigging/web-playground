@@ -1,8 +1,9 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { TLList } from '../../core/list/TLList';
 import { TLPanel } from '../../core/TLPanel';
+import { TLItemDetails } from '../../TLItemDetails';
+import { TLItemsPanel } from './TLItemsPanel';
 import { TLTodoState } from './TLTodoState';
 
 import './tl-todo.scss';
@@ -15,13 +16,14 @@ interface TodoProps {
 export class TLTodo extends React.PureComponent<TodoProps> {
   public render() {
     const { todoState } = this.props;
+    console.log('tltodo render');
     return (
       <div className={'tl-todo'}>
         <TLPanel className={'todo-filter'} title={'FILTER'}></TLPanel>
-        <TLPanel className={'todo-list'} title={'TODO_ITEMS'}>
-          <TLList items={todoState.todos} />
+        <TLItemsPanel todoState={todoState} />
+        <TLPanel className={'todo-detail'} title={'ITEM_DETAILS'}>
+          {/* <TLItemDetails /> */}
         </TLPanel>
-        <TLPanel className={'todo-detail'} title={'ITEM_DETAILS'}></TLPanel>
       </div>
     );
   }

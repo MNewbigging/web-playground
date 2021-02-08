@@ -4,13 +4,26 @@
   flex: 0 0 40px;
   width: 100%;
   padding: 5px 10px;
-  background-color: black;
+  background-color: $color-black-bright;
   color: $color-white-bright;
   margin-bottom: 2px;
+  box-sizing: border-box;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  &:hover {
+    padding: 4px 9px;
+    border: 1px solid $color-white-mid;
+    border-left: none;
+  }
+
+  &.selected {
+    padding: 4px 9px;
+    border: 1px solid $color-white-bright;
+    border-left: none;
+  }
 
   svg {
     fill: $color-white-dim;
@@ -24,6 +37,11 @@
     flex: 1 1 40px;
     padding: 5px;
     margin-right: 5px;
+    &:hover {
+      svg {
+        fill: $color-white-bright;
+      }
+    }
   }
 
   .priority {
@@ -33,7 +51,7 @@
 
   .tracked {
     svg {
-      fill: $color-white-bright;
+      fill: $color-white-mid;
     }
   }
 }

@@ -6,9 +6,14 @@ import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
 
 export class TLTodoState {
   @observable public todos: ITodo[] = [];
+  @observable public selectedTodo?: ITodo;
 
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);
+  }
+
+  @action public selectTodo(id: string) {
+    this.selectedTodo = this.todos.find((item) => item.id === id);
   }
 
   private readonly todoListener = (changeType: ChangeType, id?: string) => {

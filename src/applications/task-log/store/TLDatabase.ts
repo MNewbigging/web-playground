@@ -63,10 +63,15 @@ class TLDatabase {
     getReq.onsuccess = (_e: Event) => {
       // Copy over all values to data from todo that might have changed
       const data: ITodo = getReq.result;
-      todoStore.copyTodo(data, todo);
+      this.copyTodoValues(data, todo);
       const updateReq = objStore.put(data);
       updateReq.onerror = () => console.log('failed put');
     };
+  }
+
+  private copyTodoValues(old: ITodo, updated: ITodo) {
+    // For above update, needs to use same object so must copy values by hand
+    old.tracked = updated.tracked;
   }
 
   private load() {

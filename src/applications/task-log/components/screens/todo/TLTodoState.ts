@@ -44,12 +44,11 @@ export class TLTodoState {
     }
 
     // Find todo to update
-    const toUpdate = this.todos.find((old) => old.id === todo.id);
-    if (!toUpdate) {
+    const idx = this.todos.findIndex((old) => old.id === todo.id);
+    if (idx < 0) {
       return;
     }
 
-    // Copy over any values that might have changed
-    todoStore.copyTodo(toUpdate, todo);
+    this.todos[idx] = todo;
   }
 }

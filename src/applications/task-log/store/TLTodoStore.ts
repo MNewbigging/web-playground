@@ -29,13 +29,6 @@ class TLTodoStore extends TLBaseStore<TLTodoStoreContext> {
     );
     this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.UPDATE, replacement.id);
   }
-
-  public copyTodo(old: ITodo, updated: ITodo) {
-    // Copies over values from updated to old, avoids replacing objects (and ergo re-renders)
-    old.tracked = updated.tracked;
-
-    //return old;
-  }
 }
 
 export const todoStore = new TLTodoStore();

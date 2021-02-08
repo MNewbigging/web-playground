@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx';
 
 import { DialogState } from './components/core/TLDialog';
+import { TLDashState } from './components/screens/dashboard/TLDashState';
 import { TLTodoState } from './components/screens/todo/TLTodoState';
 import { tlDatabase } from './store/TLDatabase';
 
@@ -16,6 +17,7 @@ export class TaskLogState {
   @observable public createDialogState = DialogState.CLOSED;
 
   public todoState = new TLTodoState();
+  public dashState = new TLDashState();
 
   constructor() {
     this.runClock();

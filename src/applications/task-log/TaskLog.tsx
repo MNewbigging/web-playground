@@ -28,7 +28,7 @@ export class TaskLog extends React.Component {
   private renderContentPanel() {
     switch (this.tlState.tlScreen) {
       case TLScreen.DASH:
-        return <TLDash />;
+        return <TLDash dashState={this.tlState.dashState} />;
       case TLScreen.TODO:
         return <TLTodo todoState={this.tlState.todoState} />;
       case TLScreen.SETTINGS:

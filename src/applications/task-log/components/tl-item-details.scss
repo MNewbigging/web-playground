@@ -2,50 +2,49 @@
 
 .tl-item-details {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 40px);
   padding: 20px;
   background-color: $color-black-bright;
+  color: $color-white-mid;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+    'title complete tracked priority'
+    'title ... ... ...'
+    'desc desc desc desc';
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 8fr);
+  grid-template-columns: minmax(0, 10fr) repeat(3, minmax(0, 1fr));
 
-  .title-bar {
-    flex: 1 1 20%;
+  .title {
+    grid-area: title;
+    font-size: 2vw;
+  }
 
-    display: flex;
+  .complete {
+    grid-area: complete;
+  }
 
-    .title {
-      flex: 1 1 70%;
-      font-size: 2vw;
+  .tracked {
+    grid-area: tracked;
+  }
+
+  .priority {
+    grid-area: priority;
+    &.hi {
     }
-
-    .icon-bar {
-      flex: 1 1 30%;
-
-      display: flex;
-
-      svg {
-        fill: $color-white-mid;
-      }
-
-      .complete {
-        flex: 1 1 auto;
-      }
-
-      .tracked {
-        flex: 1 1 auto;
-        margin-left: 10px;
-      }
-
-      .priority {
-        flex: 0 1 70px;
-        margin-left: 10px;
-      }
+    &.mid {
+    }
+    &.low {
     }
   }
 
   .description-box {
-    flex: 1 1 80%;
+    grid-area: desc;
     font-size: 1.5vw;
+  }
+
+  svg {
+    fill: $color-white-mid;
+    max-height: 3vw;
   }
 }

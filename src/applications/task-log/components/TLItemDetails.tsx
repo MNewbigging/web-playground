@@ -33,16 +33,14 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
     const { todo } = this.props;
     return (
       <>
-        <div className={'title-bar'}>
-          <div className={'title'}>{todo.title}</div>
-          <div className={'icon-bar'}>
-            <div className={'complete'}>
-              <CompleteIcon />
-            </div>
-            <div className={'tracked'}>{this.getTrackingIcon(todo.tracked)}</div>
-            <div className={'priority'}>{this.getPriorityIcon(todo.priority)}</div>
-          </div>
+        <div className={'title'}>{todo.title}</div>
+
+        <div className={'complete'}>
+          <CompleteIcon />
         </div>
+        <div className={'tracked'}>{this.getTrackingIcon(todo.tracked)}</div>
+        <div className={'priority'}>{this.getPriorityIcon(todo.priority)}</div>
+
         <div className={'description-box'}>{todo.description}</div>
       </>
     );
@@ -55,11 +53,11 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
   private getPriorityIcon(prio: TLPriority) {
     switch (prio) {
       case TLPriority.HI:
-        return <HiPriority />;
+        return <HiPriority className={'hi'} />;
       case TLPriority.MID:
-        return <MidPriority />;
+        return <MidPriority className={'mid'} />;
       case TLPriority.LOW:
-        return <LowPriority />;
+        return <LowPriority className={'low'} />;
     }
   }
 }

@@ -17,7 +17,7 @@ class TLDatabase {
     };
   }
 
-  public createTodo(todo: ITodo): Promise<boolean> {
+  public createTodo(todo: ITodo) {
     if (!this.database) {
       return;
     }
@@ -25,11 +25,10 @@ class TLDatabase {
     // Open a readwrite transaction
     const transaction = this.database.transaction(this.todoStoreName, 'readwrite');
     transaction.oncomplete = (_e: Event) => {
-      console.log('transaction completed');
       todoStore.addTodo(todo);
     };
     transaction.onerror = (_e: Event) => {
-      console.log('transaction error ', transaction.error.code);
+      console.error('transaction error ', transaction.error.code);
     };
 
     // Get store to add to
@@ -44,6 +43,30 @@ class TLDatabase {
     //   getReq.onerror = (_ev: Event) => console.log('get request error: ', getReq.error.code);
     //   getReq.onsuccess = (_ev: Event) => console.log('get request result: ', getReq.result);
     // };
+  }
+
+  public updateTodo(todo: ITodo) {
+    // Open a readwrite transaction
+    const transaction = this.database.transaction(this.todoStoreName, 'readwrite');
+    transaction.oncomplete = (_e: Event) => {
+      todoStore.updateTodo(todo);
+    };
+    transaction.onerror = (_e: Event) => {
+      console.error('transaction error ', transaction.error.code);
+    };
+
+    // Get store to add to
+    const objStore = transaction.objectStore(this.todoStoreName);
+
+    // Get the existing todo item first
+    const getReq = objStore.get(todo.id);
+    getReq.onsuccess = (_e: Event) => {
+      // Copy over all values to data from todo that might have changed
+      const data: ITodo = getReq.result;
+      todoStore.copyTodo(data, todo);
+      const updateReq = objStore.put(data);
+      updateReq.onerror = () => console.log('failed put');
+    };
   }
 
   private load() {

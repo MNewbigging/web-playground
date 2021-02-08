@@ -17,12 +17,10 @@ export class TLTodoState {
         //
         break;
       case ChangeType.CREATE:
-        if (id) {
-          this.onNewTodo(id);
-        }
+        this.onNewTodo(id);
         break;
       case ChangeType.UPDATE:
-        //
+        this.onUpdateTodo(id);
         break;
       case ChangeType.DELETE:
         //
@@ -30,12 +28,28 @@ export class TLTodoState {
     }
   };
 
-  @action private onNewTodo(id: string) {
+  @action private onNewTodo(id?: string) {
     const todo = todoStore.getTodo(id);
     if (!todo) {
       return;
     }
 
     this.todos.push(todo);
+  }
+
+  @action private onUpdateTodo(id?: string) {
+    const todo = todoStore.getTodo(id);
+    if (!todo) {
+      return;
+    }
+
+    // Find todo to update
+    const toUpdate = this.todos.find((old) => old.id === todo.id);
+    if (!toUpdate) {
+      return;
+    }
+
+    // Copy over any values that might have changed
+    todoStore.copyTodo(toUpdate, todo);
   }
 }

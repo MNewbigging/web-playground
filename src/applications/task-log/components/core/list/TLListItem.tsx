@@ -1,6 +1,8 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import { ITodo, TLPriority } from '../../../model/TLTodo';
+import { tlDatabase } from '../../../store/TLDatabase';
 
 import HiPriority from '../../../../../../dist/assets/task-log/HiPriority.svg';
 import LowPriority from '../../../../../../dist/assets/task-log/LowPriority.svg';
@@ -14,14 +16,18 @@ interface TLItemProps {
   todo: ITodo;
 }
 
+@observer
 export class TLListItem extends React.PureComponent<TLItemProps> {
   public render() {
     const { title, priority, tracked } = this.props.todo;
     const trackedClass = tracked ? 'tracked' : 'untracked';
+    console.log('render list item');
     return (
       <div className={'tl-list-item'}>
         <div className={'title'}>{title}</div>
-        <div className={'tracking ' + trackedClass}>{this.getTrackingIcon(tracked)}</div>
+        <div className={'tracking ' + trackedClass} onClick={this.onTrackIconClick}>
+          {this.getTrackingIcon(tracked)}
+        </div>
         <div className={'priority ' + trackedClass}>{this.getPriorityIcon(priority)}</div>
       </div>
     );
@@ -30,6 +36,12 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
   private getTrackingIcon(tracked: boolean) {
     return tracked ? <Tracked /> : <Untracked />;
   }
+
+  private readonly onTrackIconClick = () => {
+    const { todo } = this.props;
+    todo.tracked = !todo.tracked;
+    tlDatabase.updateTodo(todo);
+  };
 
   private getPriorityIcon(prio: TLPriority) {
     switch (prio) {

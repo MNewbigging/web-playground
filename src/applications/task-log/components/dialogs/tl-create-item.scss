@@ -20,14 +20,15 @@
         width: 60px;
         padding: 5px;
 
+        &:hover {
+          .label {
+            color: $color-white-bright;
+          }
+        }
+
         .label {
           color: $color-white-dim;
           margin-bottom: 5px;
-        }
-
-        .tl-priority-input {
-          margin-left: 15px;
-          margin-right: 8px;
         }
       }
     }

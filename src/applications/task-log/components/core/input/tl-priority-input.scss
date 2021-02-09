@@ -1,19 +1,19 @@
 @import '../../../task-log-colours.scss';
 
 .tl-priority-input {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  width: 60px;
-  padding: 5px;
-
-  .label {
-    color: $color-white-dim;
-    margin-bottom: 5px;
-  }
 
   .chevron {
-    margin-left: 15px;
-    margin-right: 8px;
+    flex: 1 1 auto;
+    // min-height: 0;
+    // margin-bottom: 1px;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .selected {

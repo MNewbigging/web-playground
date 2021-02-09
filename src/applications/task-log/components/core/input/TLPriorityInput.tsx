@@ -8,6 +8,8 @@ import LowPriority from '../../../../../../dist/assets/task-log/LowPriority.svg'
 
 import './tl-priority-input.scss';
 
+type RME = React.MouseEvent<HTMLDivElement, MouseEvent>;
+
 interface PrioProps {
   onSelect: (prio: TLPriority) => void;
   priority: TLPriority;
@@ -26,25 +28,24 @@ export class TLPriorityInput extends React.PureComponent<PrioProps> {
         onMouseEnter={this.onEnterInput}
         onMouseLeave={this.onLeaveInput}
       >
-        <div className={'label'}>PRIORITY</div>
         <div
           className={'chevron ' + this.getPriorityClass(TLPriority.HI)}
           onMouseEnter={() => this.setHoverPriority(TLPriority.HI)}
-          onClick={() => this.setPriority(TLPriority.HI)}
+          onClick={(event: RME) => this.setPriority(event, TLPriority.HI)}
         >
           <LowPriority />
         </div>
         <div
           className={'chevron ' + this.getPriorityClass(TLPriority.MID)}
           onMouseEnter={() => this.setHoverPriority(TLPriority.MID)}
-          onClick={() => this.setPriority(TLPriority.MID)}
+          onClick={(event: RME) => this.setPriority(event, TLPriority.MID)}
         >
           <LowPriority />
         </div>
         <div
           className={'chevron ' + this.getPriorityClass(TLPriority.LOW)}
           onMouseEnter={() => this.setHoverPriority(TLPriority.LOW)}
-          onClick={() => this.setPriority(TLPriority.LOW)}
+          onClick={(event: RME) => this.setPriority(event, TLPriority.LOW)}
         >
           <LowPriority />
         </div>
@@ -65,8 +66,9 @@ export class TLPriorityInput extends React.PureComponent<PrioProps> {
     this.hoverPriority = prio;
   };
 
-  private readonly setPriority = (prio: TLPriority) => {
+  private readonly setPriority = (event: RME, prio: TLPriority) => {
     this.props.onSelect(prio);
+    event.stopPropagation();
   };
 
   private getPriorityClass(prio: TLPriority) {

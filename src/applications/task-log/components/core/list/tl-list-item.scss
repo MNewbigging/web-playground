@@ -1,7 +1,8 @@
 @import '../../../task-log-colours.scss';
 
 .tl-list-item {
-  flex: 0 0 40px;
+  flex: 0 0 60px;
+  min-height: 0;
   width: 100%;
   padding: 5px 10px;
   background-color: $color-black-bright;

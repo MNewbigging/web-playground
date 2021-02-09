@@ -34,6 +34,7 @@ export class TLCreateItem extends React.PureComponent<CreateItemProps> {
         <div className={'input-block'}>
           <div className={'priority-tracked'}>
             <div className={'priority'}>
+              <div className={'label'}>PRIORITY</div>
               <TLPriorityInput
                 onSelect={(prio: TLPriority) => ciState.setPriority(prio)}
                 priority={ciState.priority}

@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo } from '../model/TLTodo';
+import { ITodo, TLPriority } from '../model/TLTodo';
 
 import { tlDatabase } from '../store/TLDatabase';
+import { TLPriorityInput } from './core/input/TLPriorityInput';
 import { TLTrackerButton } from './core/input/TLTrackerButton';
 import { TLPriorityIcon } from './core/TLPriorityIcon';
 
@@ -43,9 +44,10 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
           <TLTrackerButton tracked={todo.tracked} onChange={this.onTrackIconClick} />
         </div>
         <div className={'priority'}>
-          <div className={'icon-container'}>
-            <TLPriorityIcon priority={todo.priority} />
-          </div>
+          {/* <div className={'icon-container'}> */}
+          {/* <TLPriorityIcon priority={todo.priority} /> */}
+          <TLPriorityInput priority={todo.priority} onSelect={this.onPriorityClick} />
+          {/* </div> */}
         </div>
 
         <div className={'description-box'}>{todo.description}</div>
@@ -56,6 +58,12 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
   private readonly onTrackIconClick = (val: boolean) => {
     const { todo } = this.props;
     todo.tracked = val;
+    tlDatabase.updateTodo(todo);
+  };
+
+  private readonly onPriorityClick = (prio: TLPriority) => {
+    const { todo } = this.props;
+    todo.priority = prio;
     tlDatabase.updateTodo(todo);
   };
 }

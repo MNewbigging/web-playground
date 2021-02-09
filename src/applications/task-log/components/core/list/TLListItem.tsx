@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo } from '../../../model/TLTodo';
+import { ITodo, TLPriority } from '../../../model/TLTodo';
 import { tlDatabase } from '../../../store/TLDatabase';
 import { TLTrackerButton } from '../input/TLTrackerButton';
 import { TLPriorityIcon } from '../TLPriorityIcon';
@@ -19,14 +19,13 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
   public render() {
     const { todo, onSelect, selected } = this.props;
     const { title, priority, tracked } = todo;
-    const trackedClass = tracked ? 'tracked' : 'untracked';
     const selectedClass = selected ? 'selected' : '';
 
     return (
       <div className={'tl-list-item ' + selectedClass} onClick={() => onSelect()}>
         <div className={'title'}>{title}</div>
         <TLTrackerButton tracked={tracked} onChange={this.onTrackIconClick} />
-        <div className={'priority ' + trackedClass}>
+        <div className={'priority'}>
           <TLPriorityIcon priority={priority} />
         </div>
       </div>

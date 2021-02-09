@@ -72,6 +72,7 @@ class TLDatabase {
   private copyTodoValues(old: ITodo, updated: ITodo) {
     // For above update, needs to use same object so must copy values by hand
     old.tracked = updated.tracked;
+    old.priority = updated.priority;
   }
 
   private load() {

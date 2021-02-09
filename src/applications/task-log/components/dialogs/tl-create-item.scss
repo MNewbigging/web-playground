@@ -1,3 +1,5 @@
+@import '../../task-log-colours.scss';
+
 .tl-create-item {
   width: 30vw;
   height: 100%;
@@ -15,6 +17,18 @@
 
       .priority {
         margin-right: 50px;
+        width: 60px;
+        padding: 5px;
+
+        .label {
+          color: $color-white-dim;
+          margin-bottom: 5px;
+        }
+
+        .tl-priority-input {
+          margin-left: 15px;
+          margin-right: 8px;
+        }
       }
     }
   }

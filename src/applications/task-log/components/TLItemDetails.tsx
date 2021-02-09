@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { ITodo, TLPriority } from '../model/TLTodo';
+import { ITodo } from '../model/TLTodo';
+
+import { TLPriorityIcon } from './TLPriorityIcon';
 
 import CompleteIcon from '../../../../dist/assets/task-log/bp.svg';
-import HiPriority from '../../../../dist/assets/task-log/HiPriority.svg';
-import LowPriority from '../../../../dist/assets/task-log/LowPriority.svg';
-import MidPriority from '../../../../dist/assets/task-log/MidPriority.svg';
 import Tracked from '../../../../dist/assets/task-log/Tracked.svg';
 import Untracked from '../../../../dist/assets/task-log/Untracked.svg';
 
@@ -40,7 +39,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
         </div>
         <div className={'tracked'}>{this.getTrackingIcon(todo.tracked)}</div>
         <div className={'priority'}>
-          <div className={'icon-container'}> {this.getPriorityIcon(todo.priority)}</div>
+          <div className={'icon-container'}>
+            <TLPriorityIcon priority={todo.priority} />
+          </div>
         </div>
 
         <div className={'description-box'}>{todo.description}</div>
@@ -50,16 +51,5 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
 
   private getTrackingIcon(tracked: boolean) {
     return tracked ? <Tracked /> : <Untracked />;
-  }
-
-  private getPriorityIcon(prio: TLPriority) {
-    switch (prio) {
-      case TLPriority.HI:
-        return <HiPriority />;
-      case TLPriority.MID:
-        return <MidPriority />;
-      case TLPriority.LOW:
-        return <LowPriority />;
-    }
   }
 }

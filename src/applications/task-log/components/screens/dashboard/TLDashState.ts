@@ -3,13 +3,32 @@ import { action, observable } from 'mobx';
 import { ITodo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
+import { tlDialogsState } from '../../dialogs/TLDialogsState';
 
 export class TLDashState {
   @observable public trackedTodos: ITodo[] = [];
   @observable public recentTodos: ITodo[] = [];
 
+  @observable public selectedTodo?: ITodo;
+
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);
+  }
+
+  @action public selectTrackedTodo(id: string) {
+    const todo = this.trackedTodos.find((item) => item.id === id);
+    if (todo) {
+      this.selectedTodo = todo;
+      tlDialogsState.openDetailsDialog();
+    }
+  }
+
+  @action public selectRecentTodo(id: string) {
+    const todo = this.recentTodos.find((item) => item.id === id);
+    if (todo) {
+      this.selectedTodo = todo;
+      tlDialogsState.openDetailsDialog();
+    }
   }
 
   private readonly todoListener = (changeType: ChangeType, id?: string) => {

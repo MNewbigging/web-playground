@@ -2,7 +2,8 @@
 
 .tl-item-details {
   width: 100%;
-  height: calc(100% - 40px);
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 20px;
   background-color: $color-black-bright;
   color: $color-white-mid;
@@ -45,6 +46,7 @@
   .description-box {
     grid-area: desc;
     font-size: 1.5vw;
+    overflow-y: auto;
   }
 
   svg {

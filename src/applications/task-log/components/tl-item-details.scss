@@ -26,15 +26,19 @@
 
   .tracked {
     grid-area: tracked;
+    margin-left: 0.5vw;
   }
 
   .priority {
     grid-area: priority;
-    &.hi {
-    }
-    &.mid {
-    }
-    &.low {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    height: 45px;
+
+    .icon-container {
+      width: 20px;
     }
   }
 

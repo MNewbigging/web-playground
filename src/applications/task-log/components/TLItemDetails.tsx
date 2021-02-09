@@ -39,7 +39,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
           <CompleteIcon />
         </div>
         <div className={'tracked'}>{this.getTrackingIcon(todo.tracked)}</div>
-        <div className={'priority'}>{this.getPriorityIcon(todo.priority)}</div>
+        <div className={'priority'}>
+          <div className={'icon-container'}> {this.getPriorityIcon(todo.priority)}</div>
+        </div>
 
         <div className={'description-box'}>{todo.description}</div>
       </>
@@ -53,11 +55,11 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
   private getPriorityIcon(prio: TLPriority) {
     switch (prio) {
       case TLPriority.HI:
-        return <HiPriority className={'hi'} />;
+        return <HiPriority />;
       case TLPriority.MID:
-        return <MidPriority className={'mid'} />;
+        return <MidPriority />;
       case TLPriority.LOW:
-        return <LowPriority className={'low'} />;
+        return <LowPriority />;
     }
   }
 }

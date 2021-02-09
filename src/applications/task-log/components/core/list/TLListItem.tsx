@@ -26,7 +26,6 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
     const trackedClass = tracked ? 'tracked' : 'untracked';
     const selectedClass = selected ? 'selected' : '';
 
-    console.log('render list item');
     return (
       <div className={'tl-list-item ' + selectedClass} onClick={() => onSelect()}>
         <div className={'title'}>{title}</div>
@@ -42,7 +41,8 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
     return tracked ? <Tracked /> : <Untracked />;
   }
 
-  private readonly onTrackIconClick = () => {
+  private readonly onTrackIconClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
     const { todo } = this.props;
     todo.tracked = !todo.tracked;
     tlDatabase.updateTodo(todo);

@@ -7,6 +7,8 @@ import { TLCreateItemState } from './TLCreateItemState';
 import { TLDialog } from './TLDialog';
 import { tlDialogsState } from './TLDialogsState';
 
+import './tl-create-dialog.scss';
+
 @observer
 export class TLCreateDialog extends React.PureComponent {
   private ciState = new TLCreateItemState();
@@ -17,6 +19,7 @@ export class TLCreateDialog extends React.PureComponent {
         title={'CREATE_ITEM'}
         onCancel={this.handleCancel}
         onAccept={this.handleCreateItem}
+        className={'create-dialog'}
       >
         <TLCreateItem ciState={this.ciState} />
       </TLDialog>

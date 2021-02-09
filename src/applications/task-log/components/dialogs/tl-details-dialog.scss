@@ -1,0 +1,10 @@
+@import '../../task-log-colours.scss';
+
+.details-dialog {
+  left: $details-dialog-left;
+}
+
+.details-dialog-children {
+  opacity: 0.6;
+  width: 45vw;
+}

@@ -10,14 +10,23 @@ interface DialogProps {
   title: string;
   onCancel: () => void;
   onAccept?: () => void;
+  className?: string;
 }
 
-export const TLDialog: React.FC<DialogProps> = ({ children, state, title, onCancel, onAccept }) => {
+export const TLDialog: React.FC<DialogProps> = ({
+  children,
+  state,
+  title,
+  onCancel,
+  onAccept,
+  className,
+}) => {
   const closeBtnText = onAccept ? 'CANCEL' : 'CLOSE';
+  const optClass = className ?? '';
   return (
     <>
       <div className={'tl-dialog-backdrop ' + state} onClick={() => onCancel()}></div>
-      <div className={'tl-dialog ' + state}>
+      <div className={'tl-dialog ' + [state, optClass].join(' ')}>
         <div className={'header'}>
           <div className={'title'}>{title}</div>
           <hr />

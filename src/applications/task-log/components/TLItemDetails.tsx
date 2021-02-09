@@ -39,7 +39,7 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
         <div className={'complete'}>
           <CompleteIcon />
         </div>
-        <div className={'tracked'}>
+        <div className={'tracking'}>
           <TLTrackerButton tracked={todo.tracked} onChange={this.onTrackIconClick} />
         </div>
         <div className={'priority'}>

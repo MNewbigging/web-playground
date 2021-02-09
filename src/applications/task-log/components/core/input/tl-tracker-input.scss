@@ -12,31 +12,13 @@
   }
 
   .track-icon {
-    margin-left: 17px;
+    margin-left: 18px;
     margin-right: 12px;
-    &.tracked {
-      svg {
-        fill: $color-white-mid;
-      }
-    }
-    &.untracked {
-      svg {
-        fill: $color-white-dim;
-      }
-    }
-
-    &:hover {
-      svg {
-        fill: $color-white-bright;
-      }
-    }
   }
 
   &:hover {
     .label {
       color: $color-white-bright;
-    }
-    .track-icon {
     }
   }
 }

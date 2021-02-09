@@ -3,12 +3,11 @@ import React from 'react';
 
 import { ITodo, TLPriority } from '../../../model/TLTodo';
 import { tlDatabase } from '../../../store/TLDatabase';
+import { TLTrackerButton } from '../input/TLTrackerButton';
 
 import HiPriority from '../../../../../../dist/assets/task-log/HiPriority.svg';
 import LowPriority from '../../../../../../dist/assets/task-log/LowPriority.svg';
 import MidPriority from '../../../../../../dist/assets/task-log/MidPriority.svg';
-import Tracked from '../../../../../../dist/assets/task-log/Tracked.svg';
-import Untracked from '../../../../../../dist/assets/task-log/Untracked.svg';
 
 import './tl-list-item.scss';
 
@@ -29,22 +28,16 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
     return (
       <div className={'tl-list-item ' + selectedClass} onClick={() => onSelect()}>
         <div className={'title'}>{title}</div>
-        <div className={'tracking ' + trackedClass} onClick={this.onTrackIconClick}>
-          {this.getTrackingIcon(tracked)}
-        </div>
+        <TLTrackerButton tracked={tracked} onChange={this.onTrackIconClick} />
         <div className={'priority ' + trackedClass}>{this.getPriorityIcon(priority)}</div>
       </div>
     );
   }
 
-  private getTrackingIcon(tracked: boolean) {
-    return tracked ? <Tracked /> : <Untracked />;
-  }
-
-  private readonly onTrackIconClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    event.stopPropagation();
+  private readonly onTrackIconClick = (val: boolean) => {
     const { todo } = this.props;
-    todo.tracked = !todo.tracked;
+    // Causes icon to change before item disappears; two renders
+    todo.tracked = val;
     tlDatabase.updateTodo(todo);
   };
 

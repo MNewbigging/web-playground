@@ -1,12 +1,13 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import { ITodo } from '../model/TLTodo';
 
-import { TLPriorityIcon } from './TLPriorityIcon';
+import { tlDatabase } from '../store/TLDatabase';
+import { TLTrackerButton } from './core/input/TLTrackerButton';
+import { TLPriorityIcon } from './core/TLPriorityIcon';
 
 import CompleteIcon from '../../../../dist/assets/task-log/bp.svg';
-import Tracked from '../../../../dist/assets/task-log/Tracked.svg';
-import Untracked from '../../../../dist/assets/task-log/Untracked.svg';
 
 import './tl-item-details.scss';
 
@@ -14,6 +15,7 @@ interface DetailsProps {
   todo?: ITodo;
 }
 
+@observer
 export class TLItemDetails extends React.PureComponent<DetailsProps> {
   public render() {
     const { todo } = this.props;
@@ -37,7 +39,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
         <div className={'complete'}>
           <CompleteIcon />
         </div>
-        <div className={'tracked'}>{this.getTrackingIcon(todo.tracked)}</div>
+        <div className={'tracked'}>
+          <TLTrackerButton tracked={todo.tracked} onChange={this.onTrackIconClick} />
+        </div>
         <div className={'priority'}>
           <div className={'icon-container'}>
             <TLPriorityIcon priority={todo.priority} />
@@ -49,7 +53,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
     );
   }
 
-  private getTrackingIcon(tracked: boolean) {
-    return tracked ? <Tracked /> : <Untracked />;
-  }
+  private readonly onTrackIconClick = (val: boolean) => {
+    const { todo } = this.props;
+    todo.tracked = val;
+    tlDatabase.updateTodo(todo);
+  };
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { TLPriority } from '../model/TLTodo';
+import { TLPriority } from '../../model/TLTodo';
 
-import HiPriority from '../../../../dist/assets/task-log/HiPriority.svg';
-import LowPriority from '../../../../dist/assets/task-log/LowPriority.svg';
-import MidPriority from '../../../../dist/assets/task-log/MidPriority.svg';
+import HiPriority from '../../../../../dist/assets/task-log/HiPriority.svg';
+import LowPriority from '../../../../../dist/assets/task-log/LowPriority.svg';
+import MidPriority from '../../../../../dist/assets/task-log/MidPriority.svg';
 
 interface PrioIconProps {
   priority: TLPriority;

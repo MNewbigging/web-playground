@@ -3,8 +3,8 @@ import React from 'react';
 
 import { ITodo } from '../../../model/TLTodo';
 import { tlDatabase } from '../../../store/TLDatabase';
-import { TLPriorityIcon } from '../../TLPriorityIcon';
 import { TLTrackerButton } from '../input/TLTrackerButton';
+import { TLPriorityIcon } from '../TLPriorityIcon';
 
 import './tl-list-item.scss';
 

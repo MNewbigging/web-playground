@@ -2,7 +2,6 @@ import { observer } from 'mobx-react';
 
 import React from 'react';
 
-import { TaskLogState } from '../../TaskLogState';
 import { TLCreateItem } from './TLCreateItem';
 import { TLCreateItemState } from './TLCreateItemState';
 import { TLDialog } from './TLDialog';

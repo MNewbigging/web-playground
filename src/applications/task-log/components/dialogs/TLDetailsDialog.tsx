@@ -2,20 +2,24 @@ import { observer } from 'mobx-react';
 
 import React from 'react';
 
-import { TaskLogState } from '../../TaskLogState';
 import { TLDialog } from './TLDialog';
-import { TLCreateItem } from './TLCreateItem';
-import { TLCreateItemState } from './TLCreateItemState';
+import { tlDialogsState } from './TLDialogsState';
 
-interface TLDDProps {
-  tlState: TaskLogState;
-}
-
-export class TLDetailsDialog extends React.PureComponent<TLDDProps> {
+@observer
+export class TLDetailsDialog extends React.PureComponent {
   public render() {
-    const { tlState } = this.props;
     return (
-
+      <TLDialog
+        state={tlDialogsState.detailsDialogState}
+        title={'ITEM_DETAILS'}
+        onCancel={this.handleCancel}
+      >
+        <div>I'm the details</div>
+      </TLDialog>
     );
   }
+
+  private readonly handleCancel = () => {
+    tlDialogsState.closeDetailsDialog();
+  };
 }

@@ -37,11 +37,6 @@
     flex: 1 1 40px;
     padding: 5px;
     margin-right: 5px;
-    &:hover {
-      svg {
-        fill: $color-white-bright;
-      }
-    }
   }
 
   .priority {

@@ -2,8 +2,9 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TaskLogState, TLScreen } from '../TaskLogState';
-import { TLPanel } from './core/TLPanel';
 import { TLButton, TLButtonIntent } from './core/TLButton';
+import { TLPanel } from './core/TLPanel';
+import { tlDialogsState } from './dialogs/TLDialogsState';
 
 import './tl-navbar.scss';
 
@@ -35,7 +36,7 @@ export class TLNavbar extends React.PureComponent<TLNProps> {
           <TLButton
             intent={TLButtonIntent.NEUTRAL}
             text={'CREATE'}
-            onClick={() => tlState.openCreateDialog()}
+            onClick={() => tlDialogsState.openCreateDialog()}
           />
         </div>
         <div className={'tl-navbar__block bot'}>

@@ -3,21 +3,18 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TaskLogState } from '../../TaskLogState';
-import { TLDialog } from '../core/TLDialog';
 import { TLCreateItem } from './TLCreateItem';
 import { TLCreateItemState } from './TLCreateItemState';
-
-interface TLCDProps {
-  tlState: TaskLogState;
-}
+import { TLDialog } from './TLDialog';
+import { tlDialogsState } from './TLDialogsState';
 
 @observer
-export class TLCreateDialog extends React.PureComponent<TLCDProps> {
+export class TLCreateDialog extends React.PureComponent {
   private ciState = new TLCreateItemState();
   public render() {
     return (
       <TLDialog
-        state={this.props.tlState.createDialogState}
+        state={tlDialogsState.createDialogState}
         title={'CREATE_ITEM'}
         onCancel={this.handleCancel}
         onAccept={this.handleCreateItem}
@@ -28,8 +25,7 @@ export class TLCreateDialog extends React.PureComponent<TLCDProps> {
   }
 
   private readonly handleCancel = () => {
-    const { tlState } = this.props;
-    tlState.closeCreateDialog();
+    tlDialogsState.closeCreateDialog();
     this.ciState = new TLCreateItemState();
     this.resizeTextArea();
   };

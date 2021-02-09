@@ -1,14 +1,9 @@
 import React from 'react';
 
-import { TLButton, TLButtonIntent } from './TLButton';
+import { TLButton, TLButtonIntent } from '../core/TLButton';
+import { DialogState } from './TLDialogsState';
 
 import './tl-dialog.scss';
-
-export enum DialogState {
-  OPEN = 'open',
-  CLOSING = 'closing',
-  CLOSED = 'closed',
-}
 
 interface DialogProps {
   state: DialogState;

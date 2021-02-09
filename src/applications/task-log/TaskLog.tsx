@@ -17,7 +17,7 @@ export class TaskLog extends React.Component {
   public render() {
     return (
       <div className={'tl-background'}>
-        <TLCreateDialog tlState={this.tlState} />
+        <TLCreateDialog />
         <TLHeader time={this.tlState.timeStr} />
         <TLNavbar tlState={this.tlState} />
         <div className={'tl-content'}>{this.renderContentPanel()}</div>

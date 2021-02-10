@@ -29,15 +29,14 @@ export class TLCreateItemState {
   };
 
   public createTodoItem() {
-    const today = new Date();
-    const createdDate = today.getDate() + '/' + today.getMonth();
+    const today = new Date().toUTCString();
     const item: ITodo = {
       id: this.id,
       title: this.title,
       description: this.description,
       priority: this.priority,
       tracked: this.tracked,
-      created: createdDate,
+      created: today,
     };
     tlDatabase.createTodo(item);
   }

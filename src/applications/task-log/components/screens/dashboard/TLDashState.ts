@@ -103,9 +103,11 @@ export class TLDashState {
   }
 
   private todoIsRecent(todo: ITodo): boolean {
-    const dayCreated = parseInt(todo.created.split('/')[0], 10);
-    const today = new Date().getDate();
-    if (today - dayCreated <= 1) {
+    const today = new Date();
+    const created = new Date(todo.created);
+    const dayInMs = 86400000;
+
+    if (today.getTime() - created.getTime() <= dayInMs) {
       return true;
     }
 

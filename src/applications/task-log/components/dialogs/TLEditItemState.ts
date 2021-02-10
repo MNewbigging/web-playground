@@ -54,8 +54,8 @@ export class TLEditItemState {
       priority: this.priority,
       tracked: this.tracked,
       created: dayCreated,
-      completed: this.todo.completed ?? false,
-      completedDate: this.todo.completedDate ?? '',
+      completed: this.todo?.completed ?? false,
+      completedDate: this.todo?.completedDate ?? '',
     };
   }
 }

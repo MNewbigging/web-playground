@@ -2,16 +2,18 @@ import { observer } from 'mobx-react';
 
 import React from 'react';
 
-import { TLCreateItem } from './TLCreateItem';
-import { TLCreateItemState } from './TLCreateItemState';
+import { tlDatabase } from '../../store/TLDatabase';
 import { TLDialog } from './TLDialog';
 import { tlDialogsState } from './TLDialogsState';
+import { TLEditItem } from './TLEditItem';
+import { TLEditItemState } from './TLEditItemState';
 
 import './tl-create-dialog.scss';
 
 @observer
 export class TLCreateDialog extends React.PureComponent {
-  private ciState = new TLCreateItemState();
+  private readonly editState = new TLEditItemState();
+
   public render() {
     return (
       <TLDialog
@@ -22,18 +24,17 @@ export class TLCreateDialog extends React.PureComponent {
         acceptText={'CREATE'}
         className={'create-dialog'}
       >
-        <TLCreateItem ciState={this.ciState} />
+        <TLEditItem editState={this.editState} />
       </TLDialog>
     );
   }
 
   private readonly handleCancel = () => {
     tlDialogsState.closeCreateDialog();
-    this.ciState = new TLCreateItemState();
   };
 
   private readonly handleCreateItem = () => {
-    this.ciState.createTodoItem();
-    this.ciState = new TLCreateItemState();
+    tlDatabase.createTodo(this.editState.getEditedTodo());
+    tlDialogsState.closeCreateDialog();
   };
 }

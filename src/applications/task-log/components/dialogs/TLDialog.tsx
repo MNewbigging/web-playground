@@ -10,7 +10,9 @@ interface DialogProps {
   title: string;
   onCancel: () => void;
   onAccept?: () => void;
+  acceptText?: string;
   className?: string;
+  keepOpen?: boolean;
 }
 
 export const TLDialog: React.FC<DialogProps> = ({
@@ -19,13 +21,19 @@ export const TLDialog: React.FC<DialogProps> = ({
   title,
   onCancel,
   onAccept,
+  acceptText,
   className,
+  keepOpen,
 }) => {
   const closeBtnText = onAccept ? 'CANCEL' : 'CLOSE';
+  const acceptBtnText = acceptText ?? 'ACCEPT';
   const optClass = className ?? '';
   return (
     <>
-      <div className={'tl-dialog-backdrop ' + state} onClick={() => onCancel()}></div>
+      <div
+        className={'tl-dialog-backdrop ' + [state, optClass].join(' ')}
+        onClick={() => onCancel()}
+      ></div>
       <div className={'tl-dialog ' + [state, optClass].join(' ')}>
         <div className={'header'}>
           <div className={'title'}>{title}</div>
@@ -36,11 +44,13 @@ export const TLDialog: React.FC<DialogProps> = ({
           <TLButton text={closeBtnText} intent={TLButtonIntent.REJECT} onClick={onCancel} />
           {onAccept && (
             <TLButton
-              text={'ACCEPT'}
+              text={acceptBtnText}
               intent={TLButtonIntent.ACCEPT}
               onClick={() => {
                 onAccept();
-                onCancel();
+                if (!keepOpen) {
+                  onCancel();
+                }
               }}
             />
           )}

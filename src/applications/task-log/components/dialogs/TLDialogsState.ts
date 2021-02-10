@@ -12,6 +12,8 @@ class TLDialogsState {
   @observable public createDialogState = DialogState.CLOSED;
   @observable public detailsDialogState = DialogState.CLOSED;
   public detailsTodo?: ITodo;
+  @observable public editDialogState = DialogState.CLOSED;
+  public editTodo?: ITodo;
 
   private readonly dialogCloseDelay = 500;
 
@@ -38,6 +40,20 @@ class TLDialogsState {
     setTimeout(() => {
       if (this.detailsDialogState === DialogState.CLOSING) {
         this.detailsDialogState = DialogState.CLOSED;
+      }
+    }, this.dialogCloseDelay);
+  }
+
+  @action public openEditdialog(todo: ITodo) {
+    this.editTodo = todo;
+    this.editDialogState = DialogState.OPEN;
+  }
+
+  @action public closeEditDialog() {
+    this.editDialogState = DialogState.CLOSING;
+    setTimeout(() => {
+      if (this.editDialogState === DialogState.CLOSING) {
+        this.editDialogState = DialogState.CLOSED;
       }
     }, this.dialogCloseDelay);
   }

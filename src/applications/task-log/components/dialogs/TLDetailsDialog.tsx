@@ -21,8 +21,11 @@ export class TLDetailsDialog extends React.PureComponent<TLDDProps> {
       <TLDialog
         state={tlDialogsState.detailsDialogState}
         title={'ITEM_DETAILS'}
-        onCancel={this.handleCancel}
+        onCancel={() => tlDialogsState.closeDetailsDialog()}
+        onAccept={() => tlDialogsState.openEditdialog(todo)}
+        acceptText={'EDIT'}
         className={'details-dialog'}
+        keepOpen
       >
         {todo === undefined ? this.renderNoTodo() : this.renderTodoDetails(todo)}
       </TLDialog>
@@ -40,8 +43,4 @@ export class TLDetailsDialog extends React.PureComponent<TLDDProps> {
       </div>
     );
   }
-
-  private readonly handleCancel = () => {
-    tlDialogsState.closeDetailsDialog();
-  };
 }

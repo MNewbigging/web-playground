@@ -19,6 +19,7 @@ export class TLCreateDialog extends React.PureComponent {
         title={'CREATE_ITEM'}
         onCancel={this.handleCancel}
         onAccept={this.handleCreateItem}
+        acceptText={'CREATE'}
         className={'create-dialog'}
       >
         <TLCreateItem ciState={this.ciState} />

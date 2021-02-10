@@ -4,6 +4,7 @@ import React from 'react';
 import { TLCreateDialog } from './TLCreateDialog';
 import { TLDetailsDialog } from './TLDetailsDialog';
 import { DialogState, tlDialogsState } from './TLDialogsState';
+import { TLEditDialog } from './TLEditDialog';
 
 @observer
 export class TLAllDialogs extends React.PureComponent {
@@ -12,6 +13,7 @@ export class TLAllDialogs extends React.PureComponent {
       <>
         {tlDialogsState.createDialogState !== DialogState.CLOSED && this.renderCreateDialog()}
         {tlDialogsState.detailsDialogState !== DialogState.CLOSED && this.renderDetailsDialog()}
+        {tlDialogsState.editDialogState !== DialogState.CLOSED && this.renderEditDialog()}
       </>
     );
   }
@@ -22,5 +24,9 @@ export class TLAllDialogs extends React.PureComponent {
 
   private renderDetailsDialog() {
     return <TLDetailsDialog todo={tlDialogsState.detailsTodo} />;
+  }
+
+  private renderEditDialog() {
+    return <TLEditDialog todo={tlDialogsState.editTodo} />;
   }
 }

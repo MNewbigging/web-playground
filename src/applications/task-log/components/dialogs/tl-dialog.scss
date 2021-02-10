@@ -9,13 +9,13 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 99;
+    z-index: $dialog-back-z;
   }
 }
 
 .tl-dialog {
   position: fixed;
-  z-index: 100;
+  z-index: $dialog-z;
   min-width: 300px;
   min-height: 300px;
   //max-height: 70vh;

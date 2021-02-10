@@ -1,0 +1,11 @@
+@import '../../task-log-colours.scss';
+
+.edit-dialog {
+  top: $edit-dialog-top;
+  left: $edit-diaog-left;
+  z-index: $edit-z;
+
+  &.tl-dialog-backdrop {
+    z-index: $edit-back-z;
+  }
+}

@@ -4,6 +4,7 @@
   top: $edit-dialog-top;
   left: $edit-diaog-left;
   z-index: $edit-z;
+  width: 45vw;
 
   &.tl-dialog-backdrop {
     z-index: $edit-back-z;

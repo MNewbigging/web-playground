@@ -3,6 +3,7 @@ import { action, observable } from 'mobx';
 import { ITodo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
+import { tlDialogsState } from '../../dialogs/TLDialogsState';
 
 export class TLTodoState {
   @observable public todos: ITodo[] = [];

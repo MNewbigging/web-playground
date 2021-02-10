@@ -4,8 +4,11 @@ import React from 'react';
 import { ITodo } from '../../model/TLTodo';
 import { TLDialog } from './TLDialog';
 import { tlDialogsState } from './TLDialogsState';
+import { TLEditItem } from './TLEditItem';
+import { TLEditItemState } from './TLEditItemState';
 
 import './tl-edit-dialog.scss';
+import { tlDatabase } from '../../store/TLDatabase';
 
 interface EditDialogProps {
   todo?: ITodo;
@@ -13,6 +16,7 @@ interface EditDialogProps {
 
 @observer
 export class TLEditDialog extends React.PureComponent<EditDialogProps> {
+  private readonly editState = new TLEditItemState(this.props.todo);
   public render() {
     const { todo } = this.props;
     return (
@@ -20,6 +24,7 @@ export class TLEditDialog extends React.PureComponent<EditDialogProps> {
         state={tlDialogsState.editDialogState}
         title={'EDIT_ITEM'}
         onCancel={() => tlDialogsState.closeEditDialog()}
+        onAccept={this.onEditItem}
         className={'edit-dialog'}
       >
         {todo === undefined ? this.renderNoTodo() : this.renderEditItem()}
@@ -32,6 +37,12 @@ export class TLEditDialog extends React.PureComponent<EditDialogProps> {
   }
 
   private renderEditItem() {
-    return <div>EDIT ITEM</div>;
+    return <TLEditItem editState={this.editState} />;
   }
+
+  private readonly onEditItem = () => {
+    const todo = this.editState.getEditedTodo();
+
+    tlDatabase.updateTodo(todo);
+  };
 }

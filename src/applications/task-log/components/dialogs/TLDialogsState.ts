@@ -11,7 +11,7 @@ export enum DialogState {
 class TLDialogsState {
   @observable public createDialogState = DialogState.CLOSED;
   @observable public detailsDialogState = DialogState.CLOSED;
-  public detailsTodo?: ITodo;
+  @observable public detailsTodo?: ITodo;
   @observable public editDialogState = DialogState.CLOSED;
   public editTodo?: ITodo;
 
@@ -42,6 +42,14 @@ class TLDialogsState {
         this.detailsDialogState = DialogState.CLOSED;
       }
     }, this.dialogCloseDelay);
+  }
+
+  @action public updateDetailsDialogTodo(todo: ITodo) {
+    console.log('updaing');
+    if (this.detailsTodo.id === todo.id) {
+      this.detailsTodo = todo;
+      console.log('updated');
+    }
   }
 
   @action public openEditdialog(todo: ITodo) {

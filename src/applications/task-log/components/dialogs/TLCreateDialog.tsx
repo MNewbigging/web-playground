@@ -30,16 +30,10 @@ export class TLCreateDialog extends React.PureComponent {
   private readonly handleCancel = () => {
     tlDialogsState.closeCreateDialog();
     this.ciState = new TLCreateItemState();
-    this.resizeTextArea();
   };
 
   private readonly handleCreateItem = () => {
     this.ciState.createTodoItem();
     this.ciState = new TLCreateItemState();
-    this.resizeTextArea();
   };
-
-  private resizeTextArea() {
-    document.getElementById('desc-text-area').style.height = '30px';
-  }
 }

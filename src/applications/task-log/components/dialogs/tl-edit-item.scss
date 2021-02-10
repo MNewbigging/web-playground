@@ -1,3 +1,30 @@
+@import '../../task-log-colours.scss';
+
 .tl-edit-item {
   height: 500px;
+  background-color: $color-black-mid;
+
+  display: grid;
+  grid-template-areas:
+    'title ... tracking priority'
+    'title ... ... ...'
+    'desc desc desc desc';
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 8fr);
+  grid-template-columns: minmax(0, 10fr) repeat(3, minmax(0, 1fr));
+
+  .title {
+    grid-area: title;
+  }
+
+  .tracking {
+    grid-area: tracking;
+  }
+
+  .priority {
+    grid-area: priority;
+  }
+
+  .description {
+    grid-area: desc;
+  }
 }

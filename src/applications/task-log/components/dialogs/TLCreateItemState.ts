@@ -1,4 +1,3 @@
-import { create } from 'domain';
 import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';

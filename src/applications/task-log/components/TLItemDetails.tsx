@@ -6,7 +6,6 @@ import { ITodo, TLPriority } from '../model/TLTodo';
 import { tlDatabase } from '../store/TLDatabase';
 import { TLPriorityInput } from './core/input/TLPriorityInput';
 import { TLTrackerButton } from './core/input/TLTrackerButton';
-import { TLPriorityIcon } from './core/TLPriorityIcon';
 
 import CompleteIcon from '../../../../dist/assets/task-log/bp.svg';
 
@@ -44,10 +43,7 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
           <TLTrackerButton tracked={todo.tracked} onChange={this.onTrackIconClick} />
         </div>
         <div className={'priority'}>
-          {/* <div className={'icon-container'}> */}
-          {/* <TLPriorityIcon priority={todo.priority} /> */}
           <TLPriorityInput priority={todo.priority} onSelect={this.onPriorityClick} />
-          {/* </div> */}
         </div>
 
         <div className={'description-box'}>{todo.description}</div>

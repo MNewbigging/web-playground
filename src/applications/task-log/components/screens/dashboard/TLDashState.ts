@@ -71,6 +71,7 @@ export class TLDashState {
       return;
     }
 
+    tlDialogsState.updateDetailsDialogTodo(todo);
     this.updateTrackedTodos(todo);
     this.updateRecentTodos(todo);
   }

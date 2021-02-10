@@ -1,15 +1,35 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo } from '../../model/TLTodo';
+import { TLPriority } from '../../model/TLTodo';
+import { TLPriorityInput } from '../core/input/TLPriorityInput';
+import { TLEditItemState } from './TLEditItemState';
 
 import './tl-edit-item.scss';
 
 interface EditProps {
-  todo: ITodo;
+  editState: TLEditItemState;
 }
 
-export class TLEditItem extends React.PureComponent<ITodo> {
+@observer
+export class TLEditItem extends React.PureComponent<EditProps> {
   public render() {
-    return <div className={'tl-edit-item'}></div>;
+    const { editState } = this.props;
+    return (
+      <div className={'tl-edit-item'}>
+        <div className={'title'}></div>
+
+        <div className={'tracking'}></div>
+
+        <div className={'priority'}>
+          <TLPriorityInput
+            onSelect={(prio: TLPriority) => editState.setPriority(prio)}
+            priority={editState.priority}
+          />
+        </div>
+
+        <div className={'description'}></div>
+      </div>
+    );
   }
 }

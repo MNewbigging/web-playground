@@ -3,8 +3,10 @@ import React from 'react';
 
 import { TLPriority } from '../../model/TLTodo';
 import { TLPriorityInput } from '../core/input/TLPriorityInput';
+import { TLTextInput } from '../core/input/TLTextInput';
 import { TLTrackerButton } from '../core/input/TLTrackerButton';
 import { TLEditItemState } from './TLEditItemState';
+import { TLTextArea } from '../core/input/TLTextArea';
 
 import './tl-edit-item.scss';
 
@@ -18,7 +20,13 @@ export class TLEditItem extends React.PureComponent<EditProps> {
     const { editState } = this.props;
     return (
       <div className={'tl-edit-item'}>
-        <div className={'title'}></div>
+        <div className={'title'}>
+          <TLTextInput
+            placeholder={'TITLE'}
+            onChange={editState.setTitle}
+            value={editState.title}
+          />
+        </div>
 
         <div className={'tracking'}>
           <TLTrackerButton
@@ -34,7 +42,13 @@ export class TLEditItem extends React.PureComponent<EditProps> {
           />
         </div>
 
-        <div className={'description'}></div>
+        <div className={'description'}>
+          <TLTextArea
+            placeholder={'DESCRIPTION'}
+            onChange={editState.setDescription}
+            value={editState.description}
+          />
+        </div>
       </div>
     );
   }

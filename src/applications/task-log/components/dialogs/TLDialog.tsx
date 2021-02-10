@@ -9,6 +9,7 @@ interface DialogProps {
   state: DialogState;
   title: string;
   onCancel: () => void;
+  cancelText?: string;
   onAccept?: () => void;
   acceptText?: string;
   className?: string;
@@ -20,12 +21,13 @@ export const TLDialog: React.FC<DialogProps> = ({
   state,
   title,
   onCancel,
+  cancelText,
   onAccept,
   acceptText,
   className,
   keepOpen,
 }) => {
-  const closeBtnText = onAccept ? 'CANCEL' : 'CLOSE';
+  const closeBtnText = cancelText !== undefined ? cancelText : onAccept ? 'CANCEL' : 'CLOSE';
   const acceptBtnText = acceptText ?? 'ACCEPT';
   const optClass = className ?? '';
   return (

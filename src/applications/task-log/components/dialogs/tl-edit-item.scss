@@ -10,11 +10,12 @@
     'title complete tracking priority'
     'title ... ... ...'
     'desc desc desc desc';
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 8fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 10fr);
   grid-template-columns: minmax(0, 10fr) repeat(3, minmax(0, 1fr));
 
   .title {
     grid-area: title;
+    font-size: 2vw;
   }
 
   .complete {
@@ -31,5 +32,7 @@
 
   .description {
     grid-area: desc;
+    margin-top: 30px;
+    font-size: 1.5vw;
   }
 }

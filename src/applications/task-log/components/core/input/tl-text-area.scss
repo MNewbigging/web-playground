@@ -10,11 +10,10 @@
   border-bottom: 4px solid $color-white-dim;
   color: $color-white-dim;
   width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-  max-height: 180px;
-  min-height: 20px;
+  height: 100%;
+  max-height: 100%;
   resize: vertical;
+  white-space: pre;
 
   &:focus {
     border-bottom: 4px solid $color-white-bright;

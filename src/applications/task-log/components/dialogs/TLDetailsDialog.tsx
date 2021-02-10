@@ -22,6 +22,7 @@ export class TLDetailsDialog extends React.PureComponent<TLDDProps> {
         state={tlDialogsState.detailsDialogState}
         title={'ITEM_DETAILS'}
         onCancel={() => tlDialogsState.closeDetailsDialog()}
+        cancelText={'CLOSE'}
         onAccept={() => tlDialogsState.openEditdialog(todo)}
         acceptText={'EDIT'}
         className={'details-dialog'}

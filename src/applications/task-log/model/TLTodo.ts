@@ -11,6 +11,8 @@ export interface ITodo {
   priority: TLPriority;
   tracked: boolean;
   created: string;
+  completed: boolean;
+  completedDate: string;
   // recurring
   // deadline
 }

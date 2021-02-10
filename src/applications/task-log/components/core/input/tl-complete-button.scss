@@ -1,0 +1,15 @@
+@import '../../../task-log-colours.scss';
+
+.complete-icon {
+  fill: $color-white-dim;
+  &.tracked {
+    svg {
+      fill: $color-white-mid;
+    }
+  }
+  &:hover {
+    svg {
+      fill: $color-white-bright;
+    }
+  }
+}

@@ -2,7 +2,6 @@ import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';
 import { ITodo, TLPriority } from '../../model/TLTodo';
-import { tlDatabase } from '../../store/TLDatabase';
 
 export class TLEditItemState {
   @observable public title: string;
@@ -47,14 +46,15 @@ export class TLEditItemState {
 
   public getEditedTodo() {
     const dayCreated = this.todo === undefined ? new Date().toUTCString() : this.created;
-    const item: ITodo = {
+    return {
       id: this.id,
       title: this.title,
       description: this.description,
       priority: this.priority,
       tracked: this.tracked,
       created: dayCreated,
+      completed: this.todo.completed ?? false,
+      completedDate: this.todo.completedDate ?? '',
     };
-    return item;
   }
 }

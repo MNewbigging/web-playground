@@ -2,13 +2,13 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { ITodo } from '../../model/TLTodo';
+import { tlDatabase } from '../../store/TLDatabase';
 import { TLDialog } from './TLDialog';
 import { tlDialogsState } from './TLDialogsState';
 import { TLEditItem } from './TLEditItem';
 import { TLEditItemState } from './TLEditItemState';
 
 import './tl-edit-dialog.scss';
-import { tlDatabase } from '../../store/TLDatabase';
 
 interface EditDialogProps {
   todo?: ITodo;
@@ -42,7 +42,6 @@ export class TLEditDialog extends React.PureComponent<EditDialogProps> {
 
   private readonly onEditItem = () => {
     const todo = this.editState.getEditedTodo();
-
     tlDatabase.updateTodo(todo);
   };
 }

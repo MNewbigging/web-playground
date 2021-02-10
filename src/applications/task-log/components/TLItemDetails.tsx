@@ -6,6 +6,7 @@ import { ITodo, TLPriority } from '../model/TLTodo';
 import { tlDatabase } from '../store/TLDatabase';
 import { TLPriorityInput } from './core/input/TLPriorityInput';
 import { TLTrackerButton } from './core/input/TLTrackerButton';
+import { TLCompleteButton } from './core/input/TLCompleteButton';
 
 import CompleteIcon from '../../../../dist/assets/task-log/bp.svg';
 
@@ -37,7 +38,7 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
         <div className={'title'}>{todo.title}</div>
 
         <div className={'complete'}>
-          <CompleteIcon />
+          <TLCompleteButton complete={todo.completed} onChange={this.onCompleteIconClick} />
         </div>
         <div className={'tracking'}>
           <TLTrackerButton tracked={todo.tracked} onChange={this.onTrackIconClick} />
@@ -50,6 +51,13 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
       </>
     );
   }
+
+  // TODO - do edits on a new todo and send that to avoid re-renders when editing existing todo
+  private readonly onCompleteIconClick = (val: boolean) => {
+    const { todo } = this.props;
+    todo.completed = val;
+    tlDatabase.updateTodo(todo);
+  };
 
   private readonly onTrackIconClick = (val: boolean) => {
     const { todo } = this.props;

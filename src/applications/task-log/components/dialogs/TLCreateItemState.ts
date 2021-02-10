@@ -36,6 +36,8 @@ export class TLCreateItemState {
       priority: this.priority,
       tracked: this.tracked,
       created: today,
+      completed: false,
+      completedDate: '',
     };
     tlDatabase.createTodo(item);
   }

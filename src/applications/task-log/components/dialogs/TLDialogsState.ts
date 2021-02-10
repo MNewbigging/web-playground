@@ -45,10 +45,8 @@ class TLDialogsState {
   }
 
   @action public updateDetailsDialogTodo(todo: ITodo) {
-    console.log('updaing');
-    if (this.detailsTodo.id === todo.id) {
+    if (this.detailsTodo?.id === todo.id) {
       this.detailsTodo = todo;
-      console.log('updated');
     }
   }
 

@@ -31,9 +31,16 @@
 
   .title {
     flex: 1 1 100%;
+    text-overflow: ellipsis;
   }
 
-  .track-icon {
+  .complete {
+    flex: 1 1 40px;
+    padding: 5px;
+    margin-right: 5px;
+  }
+
+  .tracking {
     flex: 1 1 40px;
     padding: 5px;
     margin-right: 5px;

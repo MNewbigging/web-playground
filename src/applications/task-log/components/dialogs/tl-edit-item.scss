@@ -2,11 +2,12 @@
 
 .tl-edit-item {
   height: 500px;
+  padding: 20px;
   background-color: $color-black-mid;
 
   display: grid;
   grid-template-areas:
-    'title ... tracking priority'
+    'title complete tracking priority'
     'title ... ... ...'
     'desc desc desc desc';
   grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 8fr);
@@ -14,6 +15,10 @@
 
   .title {
     grid-area: title;
+  }
+
+  .complete {
+    grid-area: complete;
   }
 
   .tracking {

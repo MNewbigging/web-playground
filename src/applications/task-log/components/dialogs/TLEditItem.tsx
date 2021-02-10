@@ -3,6 +3,7 @@ import React from 'react';
 
 import { TLPriority } from '../../model/TLTodo';
 import { TLPriorityInput } from '../core/input/TLPriorityInput';
+import { TLTrackerButton } from '../core/input/TLTrackerButton';
 import { TLEditItemState } from './TLEditItemState';
 
 import './tl-edit-item.scss';
@@ -19,7 +20,12 @@ export class TLEditItem extends React.PureComponent<EditProps> {
       <div className={'tl-edit-item'}>
         <div className={'title'}></div>
 
-        <div className={'tracking'}></div>
+        <div className={'tracking'}>
+          <TLTrackerButton
+            tracked={editState.tracked}
+            onChange={(val: boolean) => editState.setTracked(val)}
+          />
+        </div>
 
         <div className={'priority'}>
           <TLPriorityInput

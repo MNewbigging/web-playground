@@ -1,5 +1,7 @@
 import { action, observable } from 'mobx';
 
+import { ITodo } from '../../model/TLTodo';
+
 export enum DialogState {
   OPEN = 'open',
   CLOSING = 'closing',
@@ -9,6 +11,7 @@ export enum DialogState {
 class TLDialogsState {
   @observable public createDialogState = DialogState.CLOSED;
   @observable public detailsDialogState = DialogState.CLOSED;
+  public detailsTodo?: ITodo;
 
   private readonly dialogCloseDelay = 500;
 
@@ -25,7 +28,8 @@ class TLDialogsState {
     }, this.dialogCloseDelay);
   }
 
-  @action public openDetailsDialog() {
+  @action public openDetailsDialog(todo: ITodo) {
+    this.detailsTodo = todo;
     this.detailsDialogState = DialogState.OPEN;
   }
 

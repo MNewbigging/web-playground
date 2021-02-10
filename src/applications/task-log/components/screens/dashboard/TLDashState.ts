@@ -19,7 +19,7 @@ export class TLDashState {
     const todo = this.trackedTodos.find((item) => item.id === id);
     if (todo) {
       this.selectedTodo = todo;
-      tlDialogsState.openDetailsDialog();
+      tlDialogsState.openDetailsDialog(todo);
     }
   }
 
@@ -27,7 +27,7 @@ export class TLDashState {
     const todo = this.recentTodos.find((item) => item.id === id);
     if (todo) {
       this.selectedTodo = todo;
-      tlDialogsState.openDetailsDialog();
+      tlDialogsState.openDetailsDialog(todo);
     }
   }
 

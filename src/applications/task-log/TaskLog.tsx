@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { TLCreateDialog } from './components/dialogs/TLCreateDialog';
+import { TLAllDialogs } from './components/dialogs/TLAllDialogs';
 import { TLDash } from './components/screens/dashboard/TLDash';
 import { TLTodo } from './components/screens/todo/TLTodo';
 import { TLHeader } from './components/TLHeader';
@@ -16,7 +16,7 @@ export class TaskLog extends React.Component {
   public render() {
     return (
       <div className={'tl-background'}>
-        <TLCreateDialog />
+        <TLAllDialogs />
         <TLHeader time={this.tlState.timeStr} />
         <TLNavbar tlState={this.tlState} />
         <div className={'tl-content'}>{this.renderContentPanel()}</div>

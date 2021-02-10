@@ -3,7 +3,6 @@ import React from 'react';
 
 import { TLList } from '../../core/list/TLList';
 import { TLPanel } from '../../core/TLPanel';
-import { TLDetailsDialog } from '../../dialogs/TLDetailsDialog';
 import { TLDashState } from './TLDashState';
 
 import './tl-dash.scss';
@@ -18,7 +17,6 @@ export class TLDash extends React.PureComponent<DashProps> {
     const { dashState } = this.props;
     return (
       <>
-        <TLDetailsDialog todo={dashState.selectedTodo} />
         <div className={'tl-dashboard'}>
           <TLPanel className={'tracked-items'} title={'TRACKED_ITEMS'}>
             <TLList

@@ -13,6 +13,7 @@ export class TLDashState {
 
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);
+    todoStore.registerListener(TLTodoStoreContext.CLEAR, this.clearTodosListener);
   }
 
   @action public selectTrackedTodo(id: string) {
@@ -31,10 +32,17 @@ export class TLDashState {
     }
   }
 
+  @action private readonly clearTodosListener = (_changeType: ChangeType, _id?: string) => {
+    this.trackedTodos = [];
+    this.recentTodos = [];
+    this.selectedTodo = undefined;
+    console.log('deleted items in dash state');
+  };
+
   private readonly todoListener = (changeType: ChangeType, id?: string) => {
     switch (changeType) {
       case ChangeType.LOAD:
-        //
+        this.onLoadTodos();
         break;
       case ChangeType.CREATE:
         this.onNewTodo(id);
@@ -48,12 +56,20 @@ export class TLDashState {
     }
   };
 
+  @action private onLoadTodos() {
+    todoStore.allTodos.forEach((todo) => this.addTodo(todo));
+  }
+
   @action private onNewTodo(id?: string) {
     const todo = todoStore.getTodo(id);
     if (!todo) {
       return;
     }
 
+    this.addTodo(todo);
+  }
+
+  @action private addTodo(todo: ITodo) {
     // If todo is tracked
     if (todo.tracked) {
       this.trackedTodos.push(todo);

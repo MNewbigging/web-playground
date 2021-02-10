@@ -3,6 +3,7 @@ import React from 'react';
 
 import { TLAllDialogs } from './components/dialogs/TLAllDialogs';
 import { TLDash } from './components/screens/dashboard/TLDash';
+import { TLSettings } from './components/screens/settings/TLSettings';
 import { TLTodo } from './components/screens/todo/TLTodo';
 import { TLHeader } from './components/TLHeader';
 import { TLNavbar } from './components/TLNavbar';
@@ -31,7 +32,7 @@ export class TaskLog extends React.Component {
       case TLScreen.TODO:
         return <TLTodo todoState={this.tlState.todoState} />;
       case TLScreen.SETTINGS:
-        return <div>SETTINGS</div>;
+        return <TLSettings />;
     }
   }
 }

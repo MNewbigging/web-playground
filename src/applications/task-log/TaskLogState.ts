@@ -19,7 +19,8 @@ export class TaskLogState {
 
   constructor() {
     this.runClock();
-    tlDatabase.reset();
+    //tlDatabase.reset();
+    tlDatabase.load();
   }
 
   @action public setScreen(tlScreen: TLScreen) {

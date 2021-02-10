@@ -25,4 +25,6 @@ export abstract class TLBaseStore<TContext> {
       callback(changeType, id);
     });
   }
+
+  public abstract clear(): void;
 }

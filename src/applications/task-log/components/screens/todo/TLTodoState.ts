@@ -10,16 +10,23 @@ export class TLTodoState {
 
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);
+    todoStore.registerListener(TLTodoStoreContext.CLEAR, this.clearTodosListener);
   }
 
   @action public selectTodo(id: string) {
     this.selectedTodo = this.todos.find((item) => item.id === id);
   }
 
+  @action private readonly clearTodosListener = (changeType: ChangeType, id?: string) => {
+    this.todos = [];
+    this.selectedTodo = undefined;
+    console.log('deleted items in todo state');
+  };
+
   private readonly todoListener = (changeType: ChangeType, id?: string) => {
     switch (changeType) {
       case ChangeType.LOAD:
-        //
+        this.onLoadTodos();
         break;
       case ChangeType.CREATE:
         this.onNewTodo(id);
@@ -32,6 +39,10 @@ export class TLTodoState {
         break;
     }
   };
+
+  @action private onLoadTodos() {
+    todoStore.allTodos.forEach((todo) => this.todos.push(todo));
+  }
 
   @action private onNewTodo(id?: string) {
     const todo = todoStore.getTodo(id);

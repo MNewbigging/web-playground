@@ -10,9 +10,12 @@ class TLDatabase {
   private database?: IDBDatabase;
 
   public reset() {
+    console.log('deleting database...');
     const req = indexedDB.deleteDatabase(this.dbName);
     req.onsuccess = (_e: Event) => {
       this.database = undefined;
+      console.log('deleted database');
+      todoStore.clear();
       this.load();
     };
   }
@@ -69,13 +72,8 @@ class TLDatabase {
     };
   }
 
-  private copyTodoValues(old: ITodo, updated: ITodo) {
-    // For above update, needs to use same object so must copy values by hand
-    old.tracked = updated.tracked;
-    old.priority = updated.priority;
-  }
-
-  private load() {
+  public load() {
+    console.log('loading database');
     const openRequest = indexedDB.open(this.dbName);
     openRequest.onupgradeneeded = (_e: Event) => {
       this.database = openRequest.result;
@@ -83,7 +81,27 @@ class TLDatabase {
     };
     openRequest.onsuccess = (_e: Event) => {
       this.database = openRequest.result;
+
+      const objStore = this.database
+        .transaction(this.todoStoreName, 'readonly')
+        .objectStore(this.todoStoreName);
+
+      const getReq = objStore.getAll();
+      getReq.onerror = (_ev: Event) => console.log('get all items from db failed');
+      getReq.onsuccess = (_ev: Event) => {
+        todoStore.loadTodos(getReq.result);
+      };
     };
+  }
+
+  private copyTodoValues(old: ITodo, updated: ITodo) {
+    // For above update, needs to use same object so must copy values by hand
+    old.tracked = updated.tracked;
+    old.priority = updated.priority;
+    old.title = updated.title;
+    old.description = updated.description;
+    old.completed = updated.completed;
+    old.completedDate = updated.completedDate;
   }
 }
 

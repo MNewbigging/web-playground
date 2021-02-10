@@ -4,11 +4,10 @@ import React from 'react';
 import { ITodo, TLPriority } from '../model/TLTodo';
 
 import { tlDatabase } from '../store/TLDatabase';
+import { TLCompleteButton } from './core/input/TLCompleteButton';
 import { TLPriorityInput } from './core/input/TLPriorityInput';
 import { TLTrackerButton } from './core/input/TLTrackerButton';
-import { TLCompleteButton } from './core/input/TLCompleteButton';
-
-import CompleteIcon from '../../../../dist/assets/task-log/bp.svg';
+import { tlDialogsState } from './dialogs/TLDialogsState';
 
 import './tl-item-details.scss';
 
@@ -35,7 +34,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
     const { todo } = this.props;
     return (
       <>
-        <div className={'title'}>{todo.title}</div>
+        <div className={'title'} onClick={this.onEditClick}>
+          {todo.title}
+        </div>
 
         <div className={'complete'}>
           <TLCompleteButton complete={todo.completed} onChange={this.onCompleteIconClick} />
@@ -47,15 +48,22 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
           <TLPriorityInput priority={todo.priority} onSelect={this.onPriorityClick} />
         </div>
 
-        <div className={'description-box'}>{todo.description}</div>
+        <div className={'description-box'} onClick={this.onEditClick}>
+          {todo.description}
+        </div>
       </>
     );
   }
+
+  private readonly onEditClick = () => {
+    tlDialogsState.openEditdialog(this.props.todo);
+  };
 
   // TODO - do edits on a new todo and send that to avoid re-renders when editing existing todo
   private readonly onCompleteIconClick = (val: boolean) => {
     const { todo } = this.props;
     todo.completed = val;
+    todo.completedDate = new Date().toUTCString();
     tlDatabase.updateTodo(todo);
   };
 

@@ -41,6 +41,7 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
   private readonly onCompleteIconClick = (val: boolean) => {
     const { todo } = this.props;
     todo.completed = val;
+    todo.completedDate = new Date().toUTCString();
     tlDatabase.updateTodo(todo);
   };
 

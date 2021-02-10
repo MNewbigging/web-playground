@@ -8,6 +8,7 @@ export class TLEditItemState {
   @observable public description: string;
   @observable public priority: TLPriority;
   @observable public tracked: boolean;
+
   private readonly id: string;
   private readonly created: string;
 

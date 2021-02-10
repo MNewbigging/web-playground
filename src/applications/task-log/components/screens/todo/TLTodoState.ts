@@ -3,7 +3,6 @@ import { action, observable } from 'mobx';
 import { ITodo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
-import { tlDialogsState } from '../../dialogs/TLDialogsState';
 
 export class TLTodoState {
   @observable public todos: ITodo[] = [];
@@ -54,7 +53,11 @@ export class TLTodoState {
     if (idx < 0) {
       return;
     }
-
+    // Update the todo
     this.todos[idx] = todo;
+    // Since new object, update ref to selected if matches new item
+    if (this.selectedTodo?.id === todo.id) {
+      this.selectedTodo = todo;
+    }
   }
 }

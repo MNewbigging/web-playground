@@ -16,7 +16,6 @@ interface TodoProps {
 export class TLTodo extends React.PureComponent<TodoProps> {
   public render() {
     const { todoState } = this.props;
-    console.log('tltodo render');
     return (
       <div className={'tl-todo'}>
         <TLPanel className={'todo-filter'} title={'FILTER'}></TLPanel>

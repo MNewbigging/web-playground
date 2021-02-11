@@ -8,6 +8,7 @@ import './tl-checklist.scss';
 
 interface ChecklistProps {
   items: TLCheckListItemData[];
+  onItemSelect: (item: TLCheckListItemData, val: boolean) => void;
 }
 
 @observer
@@ -27,7 +28,7 @@ export class TLChecklist extends React.PureComponent<ChecklistProps> {
         <div className={'complete-icon'}>
           <TLCompleteButton
             complete={item.completed}
-            onChange={() => console.log('clicked bp item')}
+            onChange={(val: boolean) => this.props.onItemSelect(item, val)}
           />
         </div>
         <div className={'item-text'}>{item.text}</div>

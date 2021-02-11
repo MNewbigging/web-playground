@@ -13,7 +13,7 @@ interface ListPanelProps {
 export class TLItemsPanel extends React.PureComponent<ListPanelProps> {
   public render() {
     const { todoState } = this.props;
-    console.log('items panel render');
+
     return (
       <TLPanel className={'todo-list'} title={'TODO_ITEMS'}>
         <TLList

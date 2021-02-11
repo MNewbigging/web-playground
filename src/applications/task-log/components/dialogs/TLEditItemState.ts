@@ -71,7 +71,7 @@ export class TLEditItemState {
       created: dayCreated,
       completed: this.todo?.completed ?? false,
       completedDate: this.todo?.completedDate ?? '',
-      checklistItems: this.checklistItems,
+      checklistItems: this.checklistItems ?? [],
     };
   }
 }

@@ -79,9 +79,10 @@ class TLDatabase {
   }
 
   public load() {
-    console.log('loading database');
+    console.log('loading database...');
     const openRequest = indexedDB.open(this.dbName);
     openRequest.onupgradeneeded = (_e: Event) => {
+      console.log('upgrading database...');
       this.database = openRequest.result;
       this.database.createObjectStore(this.todoStoreName, { keyPath: 'id' });
     };
@@ -95,6 +96,7 @@ class TLDatabase {
       const getReq = objStore.getAll();
       getReq.onerror = (_ev: Event) => console.log('get all items from db failed');
       getReq.onsuccess = (_ev: Event) => {
+        console.log('got items from db: ', getReq.result);
         todoStore.loadTodos(getReq.result);
       };
     };
@@ -102,10 +104,11 @@ class TLDatabase {
 
   private copyTodoValues(old: ITodo, updated: ITodo) {
     // For above update, needs to use same object so must copy values by hand
-    old.tracked = updated.tracked;
-    old.priority = updated.priority;
     old.title = updated.title;
     old.description = updated.description;
+    old.checklistItems = updated.checklistItems;
+    old.priority = updated.priority;
+    old.tracked = updated.tracked;
     old.completed = updated.completed;
     old.completedDate = updated.completedDate;
   }

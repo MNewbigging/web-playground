@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo, TLPriority } from '../model/TLTodo';
+import { ITodo, TLCheckListItemData, TLPriority } from '../model/TLTodo';
 
 import { tlDatabase } from '../store/TLDatabase';
 import { TLCompleteButton } from './core/input/TLCompleteButton';
@@ -55,7 +55,7 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
           ))}
         </div>
         <div className={'checklist-box'} onClick={this.onEditClick}>
-          <TLChecklist items={todo.checklistItems} />
+          <TLChecklist items={todo.checklistItems} onItemSelect={this.onCheckItemClick} />
         </div>
       </>
     );
@@ -83,5 +83,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
     const { todo } = this.props;
     todo.priority = prio;
     tlDatabase.updateTodo(todo);
+  };
+
+  private readonly onCheckItemClick = (item: TLCheckListItemData, val: boolean) => {
+    const { todo } = this.props;
   };
 }

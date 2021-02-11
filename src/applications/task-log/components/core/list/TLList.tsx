@@ -24,7 +24,6 @@ export class TLList extends React.PureComponent<ListProps> {
         selected={item.id === selectedId}
       />
     ));
-    console.log('render list');
 
     return <div className={'tl-list'}>{listItems}</div>;
   }

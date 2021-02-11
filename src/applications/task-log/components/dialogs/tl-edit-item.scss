@@ -5,17 +5,22 @@
   overflow-y: auto;
   padding: 20px;
   background-color: $color-black-mid;
-
+  transition: all 0.3s linear;
   display: grid;
   grid-template-areas:
     'title complete tracking priority'
     'desc desc desc desc'
     'check check check check';
-  grid-template-rows: 60px minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-rows: 60px minmax(0, 2fr) 40px;
   grid-template-columns: minmax(0, 10fr) repeat(3, minmax(0, 1fr));
+
+  &.cli-open {
+    grid-template-rows: 60px minmax(0, 1fr) minmax(0, 1fr);
+  }
 
   .title {
     grid-area: title;
+    font-size: $font-size-large;
   }
 
   .complete {

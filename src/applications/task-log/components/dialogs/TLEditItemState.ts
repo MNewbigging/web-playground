@@ -8,6 +8,8 @@ export class TLEditItemState {
   @observable public description: string;
   @observable public priority: TLPriority;
   @observable public tracked: boolean;
+  @observable public checklistInputActive = false;
+  public checklistItems: string[];
 
   private readonly id: string;
   private readonly created: string;
@@ -19,6 +21,7 @@ export class TLEditItemState {
       this.description = '';
       this.priority = TLPriority.MID;
       this.tracked = false;
+      this.checklistItems = [];
     } else {
       this.id = todo.id;
       this.title = todo.title;
@@ -26,6 +29,10 @@ export class TLEditItemState {
       this.priority = todo.priority;
       this.tracked = todo.tracked;
       this.created = todo.created;
+      this.checklistItems = todo.checklistItems;
+      if (this.checklistItems.length) {
+        this.checklistInputActive = true;
+      }
     }
   }
 
@@ -45,8 +52,18 @@ export class TLEditItemState {
     this.tracked = track;
   };
 
+  @action public setCliState(val: boolean) {
+    this.checklistInputActive = val;
+  }
+
+  @action public setChecklistItems(items: string[]) {
+    this.checklistItems = items;
+    console.log('setting items, ', items);
+  }
+
   public getEditedTodo() {
     const dayCreated = this.todo === undefined ? new Date().toUTCString() : this.created;
+    console.log('creating todo with items: ', this.checklistItems);
     return {
       id: this.id,
       title: this.title,
@@ -56,6 +73,7 @@ export class TLEditItemState {
       created: dayCreated,
       completed: this.todo?.completed ?? false,
       completedDate: this.todo?.completedDate ?? '',
+      checklistItems: this.checklistItems,
     };
   }
 }

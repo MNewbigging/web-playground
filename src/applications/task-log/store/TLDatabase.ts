@@ -38,7 +38,13 @@ class TLDatabase {
     const objectStore = transaction.objectStore(this.todoStoreName);
 
     // Make request to add to that store
-    objectStore.add(todo);
+    console.log('adding to db: ', todo);
+    try {
+      objectStore.add(todo);
+    } catch (e) {
+      console.log('error adding to db: ', e);
+    }
+
     // addReq.onerror = (_e: Event) => console.log('add request error: ', addReq.error.code);
     // addReq.onsuccess = (_e: Event) => {
     //   console.log('added to object store');

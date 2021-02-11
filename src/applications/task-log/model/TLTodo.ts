@@ -8,6 +8,7 @@ export interface ITodo {
   id: string;
   title: string;
   description: string;
+  checklistItems: string[];
   priority: TLPriority;
   tracked: boolean;
   created: string;

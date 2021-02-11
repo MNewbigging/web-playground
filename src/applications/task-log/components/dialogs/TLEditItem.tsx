@@ -19,8 +19,9 @@ interface EditProps {
 export class TLEditItem extends React.PureComponent<EditProps> {
   public render() {
     const { editState } = this.props;
+    const cliOpen = editState.checklistInputActive ? 'cli-open' : 'cli-closed';
     return (
-      <div className={'tl-edit-item'}>
+      <div className={'tl-edit-item ' + cliOpen}>
         <div className={'title'}>
           <TLTextInput
             placeholder={'TITLE'}
@@ -51,7 +52,11 @@ export class TLEditItem extends React.PureComponent<EditProps> {
           />
         </div>
         <div className={'checklist'}>
-          <TLChecklistInput />
+          <TLChecklistInput
+            existingItems={editState.checklistItems}
+            onOpenClose={(val: boolean) => editState.setCliState(val)}
+            onChange={(items: string[]) => editState.setChecklistItems(items)}
+          />
         </div>
       </div>
     );

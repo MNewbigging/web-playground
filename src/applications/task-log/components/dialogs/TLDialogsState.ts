@@ -23,6 +23,7 @@ class TLDialogsState {
 
   @action public closeCreateDialog() {
     this.createDialogState = DialogState.CLOSING;
+
     setTimeout(() => {
       if (this.createDialogState === DialogState.CLOSING) {
         this.createDialogState = DialogState.CLOSED;

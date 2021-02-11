@@ -1,0 +1,20 @@
+@import '../../../task-log-colours.scss';
+
+.checklist-item {
+  flex: 0 0 40px;
+  margin-bottom: 10px;
+  display: flex;
+
+  .bullet {
+    flex: 0 0 30px;
+    height: 30px;
+    svg {
+      fill: $color-white-mid;
+    }
+  }
+
+  .item-text {
+    flex: 1 1 auto;
+    padding: 0px 10px 10px 10px;
+  }
+}

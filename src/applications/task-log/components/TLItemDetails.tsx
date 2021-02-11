@@ -10,6 +10,7 @@ import { TLTrackerButton } from './core/input/TLTrackerButton';
 import { tlDialogsState } from './dialogs/TLDialogsState';
 
 import './tl-item-details.scss';
+import { TLChecklist } from './core/list/TLChecklist';
 
 interface DetailsProps {
   todo?: ITodo;
@@ -52,6 +53,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
           {todo.description.split('\n').map((line, i) => (
             <div key={i}>{line}</div>
           ))}
+        </div>
+        <div className={'checklist-box'} onClick={this.onEditClick}>
+          <TLChecklist items={todo.checklistItems} />
         </div>
       </>
     );

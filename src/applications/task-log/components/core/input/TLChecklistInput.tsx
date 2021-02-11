@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TLChecklistInputState } from './TLChecklistInputState';
-import { TLChecklistItem } from './TLChecklistItem';
+import { TLChecklistItem } from './TLChecklistInputItem';
 
 import './tl-checklist-input.scss';
 import { TLCompleteButton } from './TLCompleteButton';

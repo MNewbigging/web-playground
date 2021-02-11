@@ -11,9 +11,9 @@
   display: grid;
   grid-template-areas:
     'title complete tracked priority'
-    'title ... ... ...'
-    'desc desc desc desc';
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 8fr);
+    'desc desc desc desc'
+    'check check check check';
+  grid-template-rows: 60px auto auto;
   grid-template-columns: minmax(0, 10fr) repeat(3, minmax(0, 1fr));
 
   .title {
@@ -42,6 +42,11 @@
     grid-area: desc;
     font-size: 1.5vw;
     margin-top: 30px;
+    overflow-y: auto;
+  }
+
+  .checklist-box {
+    grid-area: check;
     overflow-y: auto;
   }
 

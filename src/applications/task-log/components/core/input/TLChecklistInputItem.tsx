@@ -5,7 +5,7 @@ import { IChecklistItem } from './TLChecklistInputState';
 import { TLCompleteButton } from './TLCompleteButton';
 import { TLTextInput } from './TLTextInput';
 
-import './tl-checklist-item.scss';
+import './tl-checklist-input-item.scss';
 
 interface CLIProps {
   item: IChecklistItem;

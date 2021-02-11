@@ -49,7 +49,9 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
         </div>
 
         <div className={'description-box'} onClick={this.onEditClick}>
-          {todo.description}
+          {todo.description.split('\n').map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
         </div>
       </>
     );

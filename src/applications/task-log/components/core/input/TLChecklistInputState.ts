@@ -1,20 +1,16 @@
 import { action, observable } from 'mobx';
-import { RandomId } from '../../../../../lib/RandomId';
 
-export interface IChecklistItem {
-  id: string;
-  text: string;
-}
+import { TLCheckListItemData } from '../../../model/TLTodo';
 
 export class TLChecklistInputState {
   @observable public active = false;
-  @observable public items: IChecklistItem[] = [];
+  @observable public items: TLCheckListItemData[] = [];
 
-  constructor(existingItems: string[]) {
-    existingItems.forEach((item, i) => {
+  constructor(existingItems: TLCheckListItemData[]) {
+    existingItems.forEach((item) => {
       this.items.push({
-        id: i.toString(),
-        text: item,
+        text: item.text,
+        completed: item.completed,
       });
     });
 
@@ -34,21 +30,18 @@ export class TLChecklistInputState {
   }
 
   @action public addNewItem() {
-    const newItem: IChecklistItem = {
-      id: RandomId.newId(4),
+    const newItem: TLCheckListItemData = {
       text: '',
+      completed: false,
     };
     this.items.push(newItem);
   }
 
-  @action public removeItem(id: string) {
-    this.items = this.items.filter((item) => item.id !== id);
+  @action public removeItem(item: TLCheckListItemData) {
+    this.items = this.items.filter((current) => current !== item);
   }
 
-  @action public setItemText(id: string, text: string) {
-    const itemToUpdate = this.items.find((item) => item.id === id);
-    if (itemToUpdate) {
-      itemToUpdate.text = text;
-    }
+  @action public setItemText(item: TLCheckListItemData, text: string) {
+    item.text = text;
   }
 }

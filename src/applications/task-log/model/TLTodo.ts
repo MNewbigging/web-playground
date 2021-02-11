@@ -4,11 +4,16 @@ export enum TLPriority {
   HI,
 }
 
+export interface TLCheckListItemData {
+  text: string;
+  completed: boolean;
+}
+
 export interface ITodo {
   id: string;
   title: string;
   description: string;
-  checklistItems: string[];
+  checklistItems: TLCheckListItemData[];
   priority: TLPriority;
   tracked: boolean;
   created: string;

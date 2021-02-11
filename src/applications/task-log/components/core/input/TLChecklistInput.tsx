@@ -1,16 +1,17 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { TLChecklistInputState } from './TLChecklistInputState';
+import { TLCheckListItemData } from '../../../model/TLTodo';
 import { TLChecklistItem } from './TLChecklistInputItem';
-
-import './tl-checklist-input.scss';
+import { TLChecklistInputState } from './TLChecklistInputState';
 import { TLCompleteButton } from './TLCompleteButton';
 
+import './tl-checklist-input.scss';
+
 interface CLProps {
-  existingItems: string[];
+  existingItems: TLCheckListItemData[];
   onOpenClose: (val: boolean) => void;
-  onChange: (items: string[]) => void;
+  onChange: (items: TLCheckListItemData[]) => void;
 }
 
 @observer
@@ -33,12 +34,12 @@ export class TLChecklistInput extends React.PureComponent<CLProps> {
   private renderChecklistInput() {
     return (
       <div className={'cl-input'} onClick={this.onCloseChecklist}>
-        {this.clState.items.map((item) => (
+        {this.clState.items.map((item, i) => (
           <TLChecklistItem
-            key={item.id}
-            item={item}
-            onChange={(val: string) => this.onItemChange(item.id, val)}
-            onRemove={() => this.clState.removeItem(item.id)}
+            key={'cli-' + i}
+            itemText={item.text}
+            onChange={(val: string) => this.onItemChange(item, val)}
+            onRemove={() => this.clState.removeItem(item)}
           />
         ))}
         <div className={'add-item'}>
@@ -51,9 +52,9 @@ export class TLChecklistInput extends React.PureComponent<CLProps> {
     );
   }
 
-  private readonly onItemChange = (id: string, val: string) => {
-    this.clState.setItemText(id, val);
-    this.props.onChange(this.clState.items.map((item) => item.text));
+  private readonly onItemChange = (item: TLCheckListItemData, val: string) => {
+    this.clState.setItemText(item, val);
+    this.props.onChange(this.clState.items);
   };
 
   private readonly onCloseChecklist = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

@@ -1,7 +1,7 @@
 import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';
-import { ITodo, TLPriority } from '../../model/TLTodo';
+import { ITodo, TLCheckListItemData, TLPriority } from '../../model/TLTodo';
 
 export class TLEditItemState {
   @observable public title: string;
@@ -9,7 +9,7 @@ export class TLEditItemState {
   @observable public priority: TLPriority;
   @observable public tracked: boolean;
   @observable public checklistInputActive = false;
-  public checklistItems: string[];
+  public checklistItems: TLCheckListItemData[];
 
   private readonly id: string;
   private readonly created: string;
@@ -29,7 +29,7 @@ export class TLEditItemState {
       this.priority = todo.priority;
       this.tracked = todo.tracked;
       this.created = todo.created;
-      this.checklistItems = todo.checklistItems;
+      this.checklistItems = todo.checklistItems ?? [];
       if (this.checklistItems.length) {
         this.checklistInputActive = true;
       }
@@ -56,14 +56,12 @@ export class TLEditItemState {
     this.checklistInputActive = val;
   }
 
-  @action public setChecklistItems(items: string[]) {
+  @action public setChecklistItems(items: TLCheckListItemData[]) {
     this.checklistItems = items;
-    console.log('setting items, ', items);
   }
 
   public getEditedTodo() {
     const dayCreated = this.todo === undefined ? new Date().toUTCString() : this.created;
-    console.log('creating todo with items: ', this.checklistItems);
     return {
       id: this.id,
       title: this.title,

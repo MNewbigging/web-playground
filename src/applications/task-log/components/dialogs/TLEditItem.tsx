@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { TLPriority } from '../../model/TLTodo';
+import { TLCheckListItemData, TLPriority } from '../../model/TLTodo';
 import { TLChecklistInput } from '../core/input/TLChecklistInput';
 import { TLPriorityInput } from '../core/input/TLPriorityInput';
 import { TLTextArea } from '../core/input/TLTextArea';
@@ -55,7 +55,7 @@ export class TLEditItem extends React.PureComponent<EditProps> {
           <TLChecklistInput
             existingItems={editState.checklistItems}
             onOpenClose={(val: boolean) => editState.setCliState(val)}
-            onChange={(items: string[]) => editState.setChecklistItems(items)}
+            onChange={(items: TLCheckListItemData[]) => editState.setChecklistItems(items)}
           />
         </div>
       </div>

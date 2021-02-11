@@ -7,10 +7,10 @@ import { tlDatabase } from '../store/TLDatabase';
 import { TLCompleteButton } from './core/input/TLCompleteButton';
 import { TLPriorityInput } from './core/input/TLPriorityInput';
 import { TLTrackerButton } from './core/input/TLTrackerButton';
+import { TLChecklist } from './core/list/TLChecklist';
 import { tlDialogsState } from './dialogs/TLDialogsState';
 
 import './tl-item-details.scss';
-import { TLChecklist } from './core/list/TLChecklist';
 
 interface DetailsProps {
   todo?: ITodo;

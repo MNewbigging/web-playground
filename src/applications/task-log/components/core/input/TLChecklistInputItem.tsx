@@ -1,14 +1,13 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { IChecklistItem } from './TLChecklistInputState';
 import { TLCompleteButton } from './TLCompleteButton';
 import { TLTextInput } from './TLTextInput';
 
 import './tl-checklist-input-item.scss';
 
 interface CLIProps {
-  item: IChecklistItem;
+  itemText: string;
   onChange: (val: string) => void;
   onRemove: () => void;
 }
@@ -16,7 +15,7 @@ interface CLIProps {
 @observer
 export class TLChecklistItem extends React.PureComponent<CLIProps> {
   public render() {
-    const { item, onChange, onRemove } = this.props;
+    const { itemText, onChange, onRemove } = this.props;
     return (
       <div className={'checklist-item'}>
         <div className={'bullet'}>
@@ -26,7 +25,7 @@ export class TLChecklistItem extends React.PureComponent<CLIProps> {
           <TLTextInput
             placeholder={'Do the thing'}
             onChange={(val: string) => onChange(val)}
-            value={item.text}
+            value={itemText}
           />
         </div>
       </div>

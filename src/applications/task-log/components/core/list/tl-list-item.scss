@@ -6,6 +6,8 @@
   width: 100%;
   padding: 5px 10px;
   background-color: $color-black-bright;
+  color: $color-white-mid;
+  font-size: $font-size-medium;
   margin-bottom: 2px;
   box-sizing: border-box;
 
@@ -32,22 +34,24 @@
   .title {
     flex: 1 1 100%;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .complete {
-    flex: 1 1 40px;
+    flex: 0 0 40px;
     padding: 5px;
     margin-right: 5px;
   }
 
   .tracking {
-    flex: 1 1 40px;
+    flex: 0 0 40px;
     padding: 5px;
     margin-right: 5px;
   }
 
   .priority {
-    flex: 1 1 30px;
+    flex: 0 0 30px;
     padding: 5px;
   }
 }

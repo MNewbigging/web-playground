@@ -18,6 +18,7 @@ export class TLTextInput extends React.PureComponent<TextInputProps> {
         placeholder={placeholder}
         value={value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+        maxLength={75}
       />
     );
   }

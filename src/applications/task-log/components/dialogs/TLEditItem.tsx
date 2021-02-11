@@ -2,11 +2,12 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TLPriority } from '../../model/TLTodo';
+import { TLChecklistInput } from '../core/input/TLChecklistInput';
 import { TLPriorityInput } from '../core/input/TLPriorityInput';
+import { TLTextArea } from '../core/input/TLTextArea';
 import { TLTextInput } from '../core/input/TLTextInput';
 import { TLTrackerButton } from '../core/input/TLTrackerButton';
 import { TLEditItemState } from './TLEditItemState';
-import { TLTextArea } from '../core/input/TLTextArea';
 
 import './tl-edit-item.scss';
 
@@ -48,6 +49,9 @@ export class TLEditItem extends React.PureComponent<EditProps> {
             onChange={editState.setDescription}
             value={editState.description}
           />
+        </div>
+        <div className={'checklist'}>
+          <TLChecklistInput />
         </div>
       </div>
     );

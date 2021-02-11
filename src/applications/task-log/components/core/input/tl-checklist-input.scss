@@ -1,0 +1,29 @@
+@import '../../../task-log-colours.scss';
+
+.tl-checklist-input {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid $color-white-dim;
+  color: $color-white-dim;
+  transition: height 0.3s linear;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.inactive {
+    &:hover {
+      border-color: $color-white-mid;
+      color: $color-white-mid;
+      cursor: pointer;
+    }
+  }
+
+  &.active {
+    border-color: $color-white-bright;
+    color: $color-white-bright;
+    height: 100%;
+  }
+}

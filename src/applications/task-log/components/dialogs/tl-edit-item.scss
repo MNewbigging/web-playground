@@ -1,16 +1,17 @@
 @import '../../task-log-colours.scss';
 
 .tl-edit-item {
-  height: 500px;
+  height: 550px;
+  overflow-y: auto;
   padding: 20px;
   background-color: $color-black-mid;
 
   display: grid;
   grid-template-areas:
     'title complete tracking priority'
-    'title ... ... ...'
-    'desc desc desc desc';
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 10fr);
+    'desc desc desc desc'
+    'check check check check';
+  grid-template-rows: 60px minmax(0, 2fr) minmax(0, 1fr);
   grid-template-columns: minmax(0, 10fr) repeat(3, minmax(0, 1fr));
 
   .title {
@@ -32,5 +33,10 @@
   .description {
     grid-area: desc;
     margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .checklist {
+    grid-area: check;
   }
 }

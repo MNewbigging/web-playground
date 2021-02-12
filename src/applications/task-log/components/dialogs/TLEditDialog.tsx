@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo } from '../../model/TLTodo';
+import { Todo } from '../../model/TLTodo';
 import { tlDatabase } from '../../store/TLDatabase';
 import { TLDialog } from './TLDialog';
 import { tlDialogsState } from './TLDialogsState';
@@ -11,7 +11,7 @@ import { TLEditItemState } from './TLEditItemState';
 import './tl-edit-dialog.scss';
 
 interface EditDialogProps {
-  todo?: ITodo;
+  todo?: Todo;
 }
 
 @observer

@@ -1,12 +1,12 @@
 import { action, observable } from 'mobx';
 
-import { ITodo } from '../../../model/TLTodo';
+import { Todo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
 
 export class TLTodoState {
-  @observable public todos: ITodo[] = [];
-  @observable public selectedTodo?: ITodo;
+  @observable public todos: Todo[] = [];
+  @observable public selectedTodo?: Todo;
 
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);

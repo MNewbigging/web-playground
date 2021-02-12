@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo } from '../../../model/TLTodo';
+import { Todo } from '../../../model/TLTodo';
 import { TLListItem } from './TLListItem';
 
 import './tl-list.scss';
 
 interface ListProps {
-  items: ITodo[];
+  items: Todo[];
   onItemSelect?: (id: string) => void;
   selectedId?: string;
 }

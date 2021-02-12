@@ -1,7 +1,7 @@
 import { action, observable } from 'mobx';
 
 import { RandomId } from '../../../../lib/RandomId';
-import { ITodo, TLCheckListItemData, TLPriority } from '../../model/TLTodo';
+import { ITodoDTO, TLCheckListItemData, TLPriority, Todo } from '../../model/TLTodo';
 
 export class TLEditItemState {
   @observable public title: string;
@@ -14,7 +14,7 @@ export class TLEditItemState {
   private readonly id: string;
   private readonly created: string;
 
-  constructor(private readonly todo?: ITodo) {
+  constructor(private readonly todo?: Todo) {
     if (todo === undefined) {
       this.id = RandomId.newId(5);
       this.title = '';
@@ -60,18 +60,18 @@ export class TLEditItemState {
     this.checklistItems = items;
   }
 
-  public getEditedTodo() {
+  public getEditedTodo(): ITodoDTO {
     const dayCreated = this.todo === undefined ? new Date().toUTCString() : this.created;
     return {
       id: this.id,
       title: this.title,
       description: this.description,
+      checklistItems: JSON.stringify(this.checklistItems),
       priority: this.priority,
       tracked: this.tracked,
       created: dayCreated,
       completed: this.todo?.completed ?? false,
       completedDate: this.todo?.completedDate ?? '',
-      checklistItems: this.checklistItems ?? [],
     };
   }
 }

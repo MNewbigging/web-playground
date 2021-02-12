@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 
 import React from 'react';
 
-import { ITodo } from '../../model/TLTodo';
+import { Todo } from '../../model/TLTodo';
 import { TLItemDetails } from '../TLItemDetails';
 import { TLDialog } from './TLDialog';
 import { tlDialogsState } from './TLDialogsState';
@@ -10,7 +10,7 @@ import { tlDialogsState } from './TLDialogsState';
 import './tl-details-dialog.scss';
 
 interface TLDDProps {
-  todo?: ITodo;
+  todo?: Todo;
 }
 
 @observer
@@ -37,7 +37,7 @@ export class TLDetailsDialog extends React.PureComponent<TLDDProps> {
     return <div>Oops, something went wrong!</div>;
   }
 
-  private renderTodoDetails(todo: ITodo) {
+  private renderTodoDetails(todo: Todo) {
     return (
       <div className={'details-dialog-children'}>
         <TLItemDetails todo={todo} />

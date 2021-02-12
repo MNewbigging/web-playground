@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo, TLCheckListItemData, TLPriority } from '../model/TLTodo';
+import { Todo, TLCheckListItemData, TLPriority } from '../model/TLTodo';
 
 import { tlDatabase } from '../store/TLDatabase';
+import { TLTodoChangeActions } from '../store/TLTodoChangeActions';
 import { TLCompleteButton } from './core/input/TLCompleteButton';
 import { TLPriorityInput } from './core/input/TLPriorityInput';
 import { TLTrackerButton } from './core/input/TLTrackerButton';
@@ -13,7 +14,7 @@ import { tlDialogsState } from './dialogs/TLDialogsState';
 import './tl-item-details.scss';
 
 interface DetailsProps {
-  todo?: ITodo;
+  todo?: Todo;
 }
 
 @observer
@@ -68,21 +69,17 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
   // TODO - do edits on a new todo and send that to avoid re-renders when editing existing todo
   private readonly onCompleteIconClick = (val: boolean) => {
     const { todo } = this.props;
-    todo.completed = val;
-    todo.completedDate = new Date().toUTCString();
-    tlDatabase.updateTodo(todo);
+    TLTodoChangeActions.updateTodoCompleted(todo.toDto(), val);
   };
 
   private readonly onTrackIconClick = (val: boolean) => {
     const { todo } = this.props;
-    todo.tracked = val;
-    tlDatabase.updateTodo(todo);
+    TLTodoChangeActions.updateTodoTracked(todo.toDto(), val);
   };
 
   private readonly onPriorityClick = (prio: TLPriority) => {
     const { todo } = this.props;
-    todo.priority = prio;
-    tlDatabase.updateTodo(todo);
+    TLTodoChangeActions.updateTodoPriority(todo.toDto(), prio);
   };
 
   private readonly onCheckItemClick = (item: TLCheckListItemData, val: boolean) => {

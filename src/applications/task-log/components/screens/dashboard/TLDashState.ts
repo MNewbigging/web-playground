@@ -1,15 +1,15 @@
 import { action, observable } from 'mobx';
 
-import { ITodo } from '../../../model/TLTodo';
+import { Todo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
 import { tlDialogsState } from '../../dialogs/TLDialogsState';
 
 export class TLDashState {
-  @observable public trackedTodos: ITodo[] = [];
-  @observable public recentTodos: ITodo[] = [];
+  @observable public trackedTodos: Todo[] = [];
+  @observable public recentTodos: Todo[] = [];
 
-  @observable public selectedTodo?: ITodo;
+  @observable public selectedTodo?: Todo;
 
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);
@@ -69,7 +69,7 @@ export class TLDashState {
     this.addTodo(todo);
   }
 
-  @action private addTodo(todo: ITodo) {
+  @action private addTodo(todo: Todo) {
     // If todo is tracked
     if (todo.tracked) {
       this.trackedTodos.push(todo);
@@ -92,7 +92,7 @@ export class TLDashState {
     this.updateRecentTodos(todo);
   }
 
-  @action private updateTrackedTodos(todo: ITodo) {
+  @action private updateTrackedTodos(todo: Todo) {
     const currentTodoIdx = this.trackedTodos.findIndex((current) => current.id === todo.id);
     if (todo.tracked) {
       if (currentTodoIdx > -1) {
@@ -110,7 +110,7 @@ export class TLDashState {
     }
   }
 
-  @action private updateRecentTodos(todo: ITodo) {
+  @action private updateRecentTodos(todo: Todo) {
     const idx = this.recentTodos.findIndex((current) => current.id === todo.id);
     if (idx < 0) {
       return;
@@ -119,7 +119,7 @@ export class TLDashState {
     this.recentTodos[idx] = todo;
   }
 
-  private todoIsRecent(todo: ITodo): boolean {
+  private todoIsRecent(todo: Todo): boolean {
     const today = new Date();
     const created = new Date(todo.created);
     const dayInMs = 86400000;

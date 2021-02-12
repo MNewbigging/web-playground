@@ -1,16 +1,17 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { ITodo } from '../../../model/TLTodo';
+import { Todo } from '../../../model/TLTodo';
 import { TLCompleteButton } from '../input/TLCompleteButton';
 import { tlDatabase } from '../../../store/TLDatabase';
 import { TLTrackerButton } from '../input/TLTrackerButton';
 import { TLPriorityIcon } from '../TLPriorityIcon';
 
 import './tl-list-item.scss';
+import { TLTodoChangeActions } from '../../../store/TLTodoChangeActions';
 
 interface TLItemProps {
-  todo: ITodo;
+  todo: Todo;
   onSelect?: () => void;
   selected?: boolean;
 }
@@ -40,16 +41,11 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
 
   private readonly onCompleteIconClick = (val: boolean) => {
     const { todo } = this.props;
-    todo.completed = val;
-    todo.completedDate = new Date().toUTCString();
-    tlDatabase.updateTodo(todo);
+    TLTodoChangeActions.updateTodoCompleted(todo.toDto(), val);
   };
 
   private readonly onTrackIconClick = (val: boolean) => {
     const { todo } = this.props;
-    // Causes icon to change before item disappears; two renders
-    // can do edits on a different todo and send that
-    todo.tracked = val;
-    tlDatabase.updateTodo(todo);
+    TLTodoChangeActions.updateTodoTracked(todo.toDto(), val);
   };
 }

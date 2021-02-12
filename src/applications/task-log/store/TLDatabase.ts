@@ -1,5 +1,7 @@
-import { ITodo } from '../model/TLTodo';
+import { ITodoDTO } from '../model/TLTodo';
+import { ChangeType } from './TLBaseStore';
 
+import { TLTodoChangeActions } from './TLTodoChangeActions';
 import { todoStore } from './TLTodoStore';
 
 class TLDatabase {
@@ -20,7 +22,7 @@ class TLDatabase {
     };
   }
 
-  public createTodo(todo: ITodo) {
+  public createTodo(todo: ITodoDTO) {
     if (!this.database) {
       return;
     }
@@ -28,7 +30,7 @@ class TLDatabase {
     // Open a readwrite transaction
     const transaction = this.database.transaction(this.todoStoreName, 'readwrite');
     transaction.oncomplete = (_e: Event) => {
-      todoStore.addTodo(todo);
+      TLTodoChangeActions.crudTodo(ChangeType.CREATE, todo);
     };
     transaction.onerror = (_e: Event) => {
       console.error('transaction error ', transaction.error.code);
@@ -44,21 +46,13 @@ class TLDatabase {
     } catch (e) {
       console.log('error adding to db: ', e);
     }
-
-    // addReq.onerror = (_e: Event) => console.log('add request error: ', addReq.error.code);
-    // addReq.onsuccess = (_e: Event) => {
-    //   console.log('added to object store');
-    //   const getReq = objectStore.get(todo.id);
-    //   getReq.onerror = (_ev: Event) => console.log('get request error: ', getReq.error.code);
-    //   getReq.onsuccess = (_ev: Event) => console.log('get request result: ', getReq.result);
-    // };
   }
 
-  public updateTodo(todo: ITodo) {
+  public updateTodo(todo: ITodoDTO) {
     // Open a readwrite transaction
     const transaction = this.database.transaction(this.todoStoreName, 'readwrite');
     transaction.oncomplete = (_e: Event) => {
-      todoStore.updateTodo(todo);
+      TLTodoChangeActions.crudTodo(ChangeType.UPDATE, todo);
     };
     transaction.onerror = (_e: Event) => {
       console.error('transaction error ', transaction.error.code);
@@ -71,8 +65,8 @@ class TLDatabase {
     const getReq = objStore.get(todo.id);
     getReq.onsuccess = (_e: Event) => {
       // Copy over all values to data from todo that might have changed
-      const data: ITodo = getReq.result;
-      this.copyTodoValues(data, todo);
+      const data: ITodoDTO = getReq.result;
+      TLTodoChangeActions.copyTodoValues(data, todo);
       const updateReq = objStore.put(data);
       updateReq.onerror = () => console.log('failed put');
     };
@@ -97,20 +91,9 @@ class TLDatabase {
       getReq.onerror = (_ev: Event) => console.log('get all items from db failed');
       getReq.onsuccess = (_ev: Event) => {
         console.log('got items from db: ', getReq.result);
-        todoStore.loadTodos(getReq.result);
+        TLTodoChangeActions.loadTodos(getReq.result);
       };
     };
-  }
-
-  private copyTodoValues(old: ITodo, updated: ITodo) {
-    // For above update, needs to use same object so must copy values by hand
-    old.title = updated.title;
-    old.description = updated.description;
-    old.checklistItems = updated.checklistItems;
-    old.priority = updated.priority;
-    old.tracked = updated.tracked;
-    old.completed = updated.completed;
-    old.completedDate = updated.completedDate;
   }
 }
 

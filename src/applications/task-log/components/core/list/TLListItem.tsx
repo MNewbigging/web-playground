@@ -2,13 +2,12 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { Todo } from '../../../model/TLTodo';
+import { TLTodoChangeActions } from '../../../store/TLTodoChangeActions';
 import { TLCompleteButton } from '../input/TLCompleteButton';
-import { tlDatabase } from '../../../store/TLDatabase';
 import { TLTrackerButton } from '../input/TLTrackerButton';
 import { TLPriorityIcon } from '../TLPriorityIcon';
 
 import './tl-list-item.scss';
-import { TLTodoChangeActions } from '../../../store/TLTodoChangeActions';
 
 interface TLItemProps {
   todo: Todo;

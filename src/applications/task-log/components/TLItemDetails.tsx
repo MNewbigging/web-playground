@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { Todo, TLCheckListItemData, TLPriority } from '../model/TLTodo';
-
+import { TLCheckListItemData, TLPriority, Todo } from '../model/TLTodo';
 import { tlDatabase } from '../store/TLDatabase';
 import { TLTodoChangeActions } from '../store/TLTodoChangeActions';
 import { TLCompleteButton } from './core/input/TLCompleteButton';
@@ -84,5 +83,7 @@ export class TLItemDetails extends React.PureComponent<DetailsProps> {
 
   private readonly onCheckItemClick = (item: TLCheckListItemData, val: boolean) => {
     const { todo } = this.props;
+    item.completed = val;
+    tlDatabase.updateTodo(todo.toDto());
   };
 }

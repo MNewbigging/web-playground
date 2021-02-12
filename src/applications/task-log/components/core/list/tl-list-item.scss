@@ -55,3 +55,27 @@
     padding: 5px;
   }
 }
+
+.li-context-menu {
+  width: 120px;
+  background-color: $color-dialog-bg;
+  border: 1px solid $color-white-mid;
+  color: $color-white-dim;
+  font-size: $font-size-small;
+  padding: 5px;
+
+  display: flex;
+  flex-direction: column;
+
+  .context-menu-item {
+    flex: 0 0 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: $color-white-bright;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,8 +1,10 @@
+import { ContextMenuTarget, Menu, MenuItem } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
 import { Todo } from '../../../model/TLTodo';
 import { TLTodoChangeActions } from '../../../store/TLTodoChangeActions';
+import { tlDialogsState } from '../../dialogs/TLDialogsState';
 import { TLCompleteButton } from '../input/TLCompleteButton';
 import { TLTrackerButton } from '../input/TLTrackerButton';
 import { TLPriorityIcon } from '../TLPriorityIcon';
@@ -16,7 +18,8 @@ interface TLItemProps {
 }
 
 @observer
-export class TLListItem extends React.PureComponent<TLItemProps> {
+@ContextMenuTarget
+export class TLListItem extends React.Component<TLItemProps> {
   public render() {
     const { todo, onSelect, selected } = this.props;
     const { title, priority, tracked, completed } = todo;
@@ -37,6 +40,19 @@ export class TLListItem extends React.PureComponent<TLItemProps> {
       </div>
     );
   }
+
+  public renderContextMenu() {
+    return (
+      <Menu className={'li-context-menu'}>
+        <MenuItem className={'context-menu-item'} text={'EDIT_ITEM'} onClick={this.onContextEdit} />
+        <MenuItem className={'context-menu-item'} text={'DELETE_ITEM'} />
+      </Menu>
+    );
+  }
+
+  private readonly onContextEdit = () => {
+    tlDialogsState.openEditdialog(this.props.todo);
+  };
 
   private readonly onCompleteIconClick = (val: boolean) => {
     const { todo } = this.props;

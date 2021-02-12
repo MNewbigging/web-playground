@@ -51,7 +51,8 @@ export class TLDashState {
         this.onUpdateTodo(id);
         break;
       case ChangeType.DELETE:
-        //
+        // tslint:disable-next-line: no-unused-expression
+        id && this.onDeleteTodo(id);
         break;
     }
   };
@@ -117,6 +118,11 @@ export class TLDashState {
     }
 
     this.recentTodos[idx] = todo;
+  }
+
+  @action private onDeleteTodo(id: string) {
+    this.trackedTodos = this.trackedTodos.filter((todo) => todo.id !== id);
+    this.recentTodos = this.recentTodos.filter((todo) => todo.id !== id);
   }
 
   private todoIsRecent(todo: Todo): boolean {

@@ -41,6 +41,11 @@ class TLTodoStore extends TLBaseStore<TLTodoStoreContext> {
     );
     this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.UPDATE, replacement.id);
   }
+
+  public deleteTodo(id: string) {
+    this.allTodos = this.allTodos.filter((todo) => todo.id !== id);
+    this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.DELETE, id);
+  }
 }
 
 export const todoStore = new TLTodoStore();

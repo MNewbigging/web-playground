@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { Todo } from '../../../model/TLTodo';
+import { tlDatabase } from '../../../store/TLDatabase';
 import { TLTodoChangeActions } from '../../../store/TLTodoChangeActions';
 import { tlDialogsState } from '../../dialogs/TLDialogsState';
 import { TLCompleteButton } from '../input/TLCompleteButton';
@@ -45,13 +46,21 @@ export class TLListItem extends React.Component<TLItemProps> {
     return (
       <Menu className={'li-context-menu'}>
         <MenuItem className={'context-menu-item'} text={'EDIT_ITEM'} onClick={this.onContextEdit} />
-        <MenuItem className={'context-menu-item'} text={'DELETE_ITEM'} />
+        <MenuItem
+          className={'context-menu-item'}
+          text={'DELETE_ITEM'}
+          onClick={this.onContextDelete}
+        />
       </Menu>
     );
   }
 
   private readonly onContextEdit = () => {
     tlDialogsState.openEditdialog(this.props.todo);
+  };
+
+  private readonly onContextDelete = () => {
+    tlDatabase.deleteTodo(this.props.todo.id);
   };
 
   private readonly onCompleteIconClick = (val: boolean) => {

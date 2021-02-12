@@ -22,6 +22,30 @@ class TLDatabase {
     };
   }
 
+  public load() {
+    console.log('loading database...');
+    const openRequest = indexedDB.open(this.dbName);
+    openRequest.onupgradeneeded = (_e: Event) => {
+      console.log('upgrading database...');
+      this.database = openRequest.result;
+      this.database.createObjectStore(this.todoStoreName, { keyPath: 'id' });
+    };
+    openRequest.onsuccess = (_e: Event) => {
+      this.database = openRequest.result;
+
+      const objStore = this.database
+        .transaction(this.todoStoreName, 'readonly')
+        .objectStore(this.todoStoreName);
+
+      const getReq = objStore.getAll();
+      getReq.onerror = (_ev: Event) => console.log('get all items from db failed');
+      getReq.onsuccess = (_ev: Event) => {
+        console.log('got items from db: ', getReq.result);
+        TLTodoChangeActions.loadTodos(getReq.result);
+      };
+    };
+  }
+
   public createTodo(todo: ITodoDTO) {
     if (!this.database) {
       return;
@@ -72,27 +96,15 @@ class TLDatabase {
     };
   }
 
-  public load() {
-    console.log('loading database...');
-    const openRequest = indexedDB.open(this.dbName);
-    openRequest.onupgradeneeded = (_e: Event) => {
-      console.log('upgrading database...');
-      this.database = openRequest.result;
-      this.database.createObjectStore(this.todoStoreName, { keyPath: 'id' });
-    };
-    openRequest.onsuccess = (_e: Event) => {
-      this.database = openRequest.result;
+  public deleteTodo(id: string) {
+    const objStore = this.database
+      .transaction(this.todoStoreName, 'readwrite')
+      .objectStore(this.todoStoreName);
 
-      const objStore = this.database
-        .transaction(this.todoStoreName, 'readonly')
-        .objectStore(this.todoStoreName);
-
-      const getReq = objStore.getAll();
-      getReq.onerror = (_ev: Event) => console.log('get all items from db failed');
-      getReq.onsuccess = (_ev: Event) => {
-        console.log('got items from db: ', getReq.result);
-        TLTodoChangeActions.loadTodos(getReq.result);
-      };
+    const delReq = objStore.delete(id);
+    delReq.onerror = (_ev: Event) => console.log('error deleting item from db');
+    delReq.onsuccess = (_ev: Event) => {
+      todoStore.deleteTodo(id);
     };
   }
 }

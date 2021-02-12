@@ -35,7 +35,8 @@ export class TLTodoState {
         this.onUpdateTodo(id);
         break;
       case ChangeType.DELETE:
-        //
+        // tslint:disable-next-line: no-unused-expression
+        id && this.onDeleteTodo(id);
         break;
     }
   };
@@ -70,5 +71,9 @@ export class TLTodoState {
     if (this.selectedTodo?.id === todo.id) {
       this.selectedTodo = todo;
     }
+  }
+
+  @action private onDeleteTodo(id: string) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
   }
 }

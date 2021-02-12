@@ -39,7 +39,7 @@ export class TLChecklistInput extends React.PureComponent<CLProps> {
             key={'cli-' + i}
             itemText={item.text}
             onChange={(val: string) => this.onItemChange(item, val)}
-            onRemove={() => this.clState.removeItem(item)}
+            onRemove={() => this.onItemRemove(item)}
           />
         ))}
         <div className={'add-item'}>
@@ -54,6 +54,11 @@ export class TLChecklistInput extends React.PureComponent<CLProps> {
 
   private readonly onItemChange = (item: TLCheckListItemData, val: string) => {
     this.clState.setItemText(item, val);
+    this.props.onChange(this.clState.items);
+  };
+
+  private readonly onItemRemove = (item: TLCheckListItemData) => {
+    this.clState.removeItem(item);
     this.props.onChange(this.clState.items);
   };
 

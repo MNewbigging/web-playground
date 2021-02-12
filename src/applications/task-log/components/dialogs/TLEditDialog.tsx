@@ -42,6 +42,7 @@ export class TLEditDialog extends React.PureComponent<EditDialogProps> {
 
   private readonly onEditItem = () => {
     const todo = this.editState.getEditedTodo();
+    console.log('after edit dto: ', todo);
     tlDatabase.updateTodo(todo);
   };
 }

@@ -73,8 +73,4 @@ export class TaskLogState {
     const remainingSeconds = 60 - time.getSeconds();
     setTimeout(() => this.runClock(), remainingSeconds * 1000);
   }
-
-  @action public setTod(tod: TLOverlayTOD) {
-    this.tlOverlayTod = tod;
-  }
 }

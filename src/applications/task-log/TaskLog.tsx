@@ -28,13 +28,10 @@ export class TaskLog extends React.Component {
   private renderContentPanel() {
     switch (this.tlState.tlScreen) {
       case TLScreen.DASH:
-        this.tlState.setTod(TLOverlayTOD.MORNING);
         return <TLDash dashState={this.tlState.dashState} />;
       case TLScreen.TODO:
-        this.tlState.setTod(TLOverlayTOD.DAY);
         return <TLTodo todoState={this.tlState.todoState} />;
       case TLScreen.SETTINGS:
-        this.tlState.setTod(TLOverlayTOD.NIGHT);
         return <TLSettings />;
     }
   }

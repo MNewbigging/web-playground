@@ -3,6 +3,7 @@
 
 .tl-panel {
   color: $color-white-bright;
+
   background-color: $color-black-dim;
   box-sizing: border-box;
   border-left: 4px solid $color-white-dim;
@@ -18,5 +19,6 @@
     display: flex;
     align-items: center;
     padding-left: 10px;
+    letter-spacing: 0.25em;
   }
 }

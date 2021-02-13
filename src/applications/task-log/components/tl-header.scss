@@ -3,20 +3,26 @@
 
 .tl-header {
   grid-area: header;
+  z-index: 1;
+  color: $color-white-mid;
+  font-size: $font-size-medium;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  align-items: flex-end;
 
-  &__time {
-    color: $color-white-bright;
+  &__date-time {
     align-self: flex-end;
-    font-size: 14pt;
+    display: flex;
+
+    .date {
+      margin-right: 40px;
+    }
   }
 
   &__hr {
-    width: 90%;
+    width: calc(90% - 20px);
     height: 20px;
-    align-self: flex-end;
 
     > hr {
       transform-origin: 100% 50%;

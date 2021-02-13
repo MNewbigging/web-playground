@@ -4,6 +4,8 @@ import { TLDashState } from './components/screens/dashboard/TLDashState';
 import { TLTodoState } from './components/screens/todo/TLTodoState';
 import { tlDatabase } from './store/TLDatabase';
 
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
 export enum TLScreen {
   DASH = 'dash',
   TODO = 'todo',
@@ -12,6 +14,7 @@ export enum TLScreen {
 
 export class TaskLogState {
   @observable.ref public timeStr: string;
+  @observable.ref public dateStr: string;
   @observable public tlScreen = TLScreen.DASH;
 
   public todoState = new TLTodoState();
@@ -41,6 +44,10 @@ export class TaskLogState {
     }
 
     this.timeStr = `${hours}:${mins}`;
+
+    const day = DAYS[time.getDay()];
+    const date = time.getDate();
+    this.dateStr = `${day} ${date}`;
 
     // Find how many seconds til next minute passes
     const remainingSeconds = 60 - time.getSeconds();

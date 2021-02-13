@@ -3,6 +3,7 @@ export enum ChangeType {
   CREATE,
   UPDATE,
   DELETE,
+  BULK_DELETE,
 }
 
 export type Listener = (changeType: ChangeType, id?: string) => void;

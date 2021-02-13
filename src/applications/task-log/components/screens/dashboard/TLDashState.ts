@@ -36,7 +36,6 @@ export class TLDashState {
     this.trackedTodos = [];
     this.recentTodos = [];
     this.selectedTodo = undefined;
-    console.log('deleted items in dash state');
   };
 
   private readonly todoListener = (changeType: ChangeType, id?: string) => {
@@ -54,6 +53,9 @@ export class TLDashState {
         // tslint:disable-next-line: no-unused-expression
         id && this.onDeleteTodo(id);
         break;
+      case ChangeType.BULK_DELETE:
+        this.clearTodosListener(changeType);
+        this.onLoadTodos();
     }
   };
 

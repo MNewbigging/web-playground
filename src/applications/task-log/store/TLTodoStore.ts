@@ -25,6 +25,10 @@ class TLTodoStore extends TLBaseStore<TLTodoStoreContext> {
     return this.allTodos.find((todo) => todo.id === id);
   }
 
+  public getAllCompletedTodosIds() {
+    return this.allTodos.filter((todo) => todo.completed).map((todo) => todo.id);
+  }
+
   public loadTodos(todos: Todo[]) {
     this.allTodos = todos;
     this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.LOAD);
@@ -45,6 +49,11 @@ class TLTodoStore extends TLBaseStore<TLTodoStoreContext> {
   public deleteTodo(id: string) {
     this.allTodos = this.allTodos.filter((todo) => todo.id !== id);
     this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.DELETE, id);
+  }
+
+  public bulkDeleteTodos(ids: string[]) {
+    this.allTodos = this.allTodos.filter((todo) => !ids.includes(todo.id));
+    this.notifyListeners(TLTodoStoreContext.TODOS, ChangeType.BULK_DELETE);
   }
 }
 

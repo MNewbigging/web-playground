@@ -17,13 +17,12 @@ export class TLTodoState {
     this.selectedTodo = this.todos.find((item) => item.id === id);
   }
 
-  @action private readonly clearTodosListener = (changeType: ChangeType, id?: string) => {
+  @action private readonly clearTodosListener = (_changeType: ChangeType, _id?: string) => {
     this.todos = [];
     this.selectedTodo = undefined;
-    console.log('deleted items in todo state');
   };
 
-  private readonly todoListener = (changeType: ChangeType, id?: string) => {
+  @action private readonly todoListener = (changeType: ChangeType, id?: string) => {
     switch (changeType) {
       case ChangeType.LOAD:
         this.onLoadTodos();
@@ -38,6 +37,9 @@ export class TLTodoState {
         // tslint:disable-next-line: no-unused-expression
         id && this.onDeleteTodo(id);
         break;
+      case ChangeType.BULK_DELETE:
+        this.clearTodosListener(changeType);
+        this.onLoadTodos();
     }
   };
 

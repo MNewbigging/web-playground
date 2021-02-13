@@ -107,6 +107,18 @@ class TLDatabase {
       todoStore.deleteTodo(id);
     };
   }
+
+  public bulkDelete(ids: string[]) {
+    const transaction = this.database.transaction(this.todoStoreName, 'readwrite');
+    transaction.onerror = (_ev: Event) => console.log('error bullk deleting from db');
+    transaction.oncomplete = (_ev: Event) => {
+      todoStore.bulkDeleteTodos(ids);
+    };
+    const objStore = transaction.objectStore(this.todoStoreName);
+    ids.forEach((id) => {
+      objStore.delete(id);
+    });
+  }
 }
 
 export const tlDatabase = new TLDatabase();

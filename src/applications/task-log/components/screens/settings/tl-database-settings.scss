@@ -1,4 +1,16 @@
+@import '../../../task-log-colours.scss';
+
 .db-settings {
   height: 100%;
   padding: 0px 10px 10px 10px;
+  font-size: $font-size-small;
+  color: $color-white-bright;
+
+  .setting-item {
+    margin-bottom: 20px;
+    .button {
+      margin-top: 5px;
+      max-width: 100px;
+    }
+  }
 }

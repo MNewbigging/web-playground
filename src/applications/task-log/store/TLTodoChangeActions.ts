@@ -26,6 +26,11 @@ export class TLTodoChangeActions {
     tlDatabase.updateTodo(dto);
   }
 
+  public static deleteAllCompletedTodos() {
+    const ids = todoStore.getAllCompletedTodosIds();
+    tlDatabase.bulkDelete(ids);
+  }
+
   // FROM DATABASE TO STORE
   public static crudTodo(changeType: ChangeType, dto: ITodoDTO) {
     const todo = new Todo(dto);

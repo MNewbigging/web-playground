@@ -12,10 +12,17 @@ export enum TLScreen {
   SETTINGS = 'settings',
 }
 
+export enum TLOverlayTOD {
+  MORNING = 'morning',
+  DAY = 'day',
+  NIGHT = 'night',
+}
+
 export class TaskLogState {
   @observable.ref public timeStr: string;
   @observable.ref public dateStr: string;
   @observable public tlScreen = TLScreen.DASH;
+  @observable.ref public tlOverlayTod = TLOverlayTOD.MORNING;
 
   public todoState = new TLTodoState();
   public dashState = new TLDashState();
@@ -32,11 +39,12 @@ export class TaskLogState {
 
   @action private runClock() {
     const time = new Date();
-    let hours = time.getHours().toString();
+    const hours = time.getHours();
+    let hoursStr = hours.toString();
     let mins = time.getMinutes().toString();
 
-    if (hours.length < 2) {
-      hours = '0' + hours;
+    if (hoursStr.length < 2) {
+      hoursStr = '0' + hours;
     }
 
     if (mins.length < 2) {
@@ -49,8 +57,24 @@ export class TaskLogState {
     const date = time.getDate();
     this.dateStr = `${day} ${date}`;
 
+    switch (true) {
+      case hours >= 4 && hours < 12:
+        this.tlOverlayTod = TLOverlayTOD.MORNING;
+        break;
+      case hours >= 12 && hours < 18:
+        this.tlOverlayTod = TLOverlayTOD.DAY;
+        break;
+      default:
+        this.tlOverlayTod = TLOverlayTOD.NIGHT;
+        break;
+    }
+
     // Find how many seconds til next minute passes
     const remainingSeconds = 60 - time.getSeconds();
     setTimeout(() => this.runClock(), remainingSeconds * 1000);
+  }
+
+  @action public setTod(tod: TLOverlayTOD) {
+    this.tlOverlayTod = tod;
   }
 }

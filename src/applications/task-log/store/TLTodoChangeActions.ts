@@ -13,6 +13,7 @@ export class TLTodoChangeActions {
   public static updateTodoCompleted(dto: ITodoDTO, completed: boolean) {
     dto.completed = completed;
     dto.completedDate = new Date().toUTCString();
+    dto.tracked = false;
     tlDatabase.updateTodo(dto);
   }
 

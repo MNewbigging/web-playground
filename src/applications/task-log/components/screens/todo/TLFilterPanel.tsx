@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react';
 import React from 'react';
-import { TLTextInput } from '../../core/input/TLTextInput';
 
+import { TLPriority } from '../../../model/TLTodo';
+import { TLCompleteButton } from '../../core/input/TLCompleteButton';
+import { TLPriorityInput } from '../../core/input/TLPriorityInput';
+import { TLTextInput } from '../../core/input/TLTextInput';
+import { TLTrackerButton } from '../../core/input/TLTrackerButton';
 import { TLFilterPanelState } from './TLFilterPanelState';
 
 import './tl-filter-panel.scss';
-import { TLCompleteButton } from '../../core/input/TLCompleteButton';
-import { TLTrackerButton } from '../../core/input/TLTrackerButton';
-import { TLPriorityInput } from '../../core/input/TLPriorityInput';
-import { TLPriority } from '../../../model/TLTodo';
 
 interface FilterProps {
   fpState: TLFilterPanelState;
@@ -21,7 +21,6 @@ export class TLFilterPanel extends React.PureComponent<FilterProps> {
     return (
       <div className={'tl-filter-panel'}>
         <div className={'filter-line'}>
-          <div className={'label'}>FILTER_BY</div>
           <div className={'name-input'}>
             <TLTextInput
               placeholder={'NAME'}

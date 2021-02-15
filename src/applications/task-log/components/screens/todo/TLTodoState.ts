@@ -7,6 +7,7 @@ import { TLFilterPanelState } from './TLFilterPanelState';
 
 export class TLTodoState {
   @observable public todos: Todo[] = [];
+  @observable public visTodos: Todo[] = [];
   @observable public selectedTodo?: Todo;
 
   public fpState = new TLFilterPanelState();
@@ -16,12 +17,29 @@ export class TLTodoState {
     todoStore.registerListener(TLTodoStoreContext.CLEAR, this.clearTodosListener);
   }
 
+  @action public runFilter() {
+    const filterers = this.fpState.getFilterOperations();
+    let filteredTodos = this.todos;
+
+    filterers.forEach((filterer) => {
+      filteredTodos = filteredTodos.filter(filterer);
+    });
+
+    this.visTodos = filteredTodos;
+  }
+
+  @action public clearFilter() {
+    this.fpState.clearFilters();
+    this.visTodos = this.todos;
+  }
+
   @action public selectTodo(id: string) {
     this.selectedTodo = this.todos.find((item) => item.id === id);
   }
 
   @action private readonly clearTodosListener = (_changeType: ChangeType, _id?: string) => {
     this.todos = [];
+    this.visTodos = [];
     this.selectedTodo = undefined;
   };
 
@@ -47,7 +65,10 @@ export class TLTodoState {
   };
 
   @action private onLoadTodos() {
-    todoStore.allTodos.forEach((todo) => this.todos.push(todo));
+    todoStore.allTodos.forEach((todo) => {
+      this.todos.push(todo);
+      this.visTodos.push(todo);
+    });
   }
 
   @action private onNewTodo(id?: string) {
@@ -57,6 +78,8 @@ export class TLTodoState {
     }
 
     this.todos.push(todo);
+    // run filter to see if it should be made visible
+    this.runFilter();
   }
 
   @action private onUpdateTodo(id?: string) {
@@ -76,9 +99,16 @@ export class TLTodoState {
     if (this.selectedTodo?.id === todo.id) {
       this.selectedTodo = todo;
     }
+    // Also update visible todo ref for it
+    const vIdx = this.visTodos.findIndex((old) => old.id === todo.id);
+    if (vIdx < 0) {
+      return;
+    }
+    this.visTodos[vIdx] = todo;
   }
 
   @action private onDeleteTodo(id: string) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
+    this.visTodos = this.visTodos.filter((todo) => todo.id !== id);
   }
 }

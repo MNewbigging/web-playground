@@ -17,7 +17,7 @@ export class TLItemsPanel extends React.PureComponent<ListPanelProps> {
     return (
       <TLPanel className={'todo-list'} title={'TODO_ITEMS'}>
         <TLList
-          items={todoState.todos}
+          items={todoState.visTodos}
           onItemSelect={(id: string) => todoState.selectTodo(id)}
           selectedId={todoState.selectedTodo?.id}
         />

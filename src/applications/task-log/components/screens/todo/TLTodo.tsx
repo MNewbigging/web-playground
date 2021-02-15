@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
+import { TLButton, TLButtonIntent } from '../../core/TLButton';
 import { TLPanel } from '../../core/TLPanel';
 import { TLItemDetails } from '../../TLItemDetails';
 import { TLFilterPanel } from './TLFilterPanel';
@@ -19,13 +20,35 @@ export class TLTodo extends React.PureComponent<TodoProps> {
     const { todoState } = this.props;
     return (
       <div className={'tl-todo'}>
-        <TLPanel className={'todo-filter'} title={'FILTER_ITEMS'}>
+        <TLPanel
+          className={'todo-filter'}
+          title={'FILTER_ITEMS'}
+          actionRail={this.renderFilterPanelActionRail()}
+        >
           <TLFilterPanel fpState={todoState.fpState} />
         </TLPanel>
         <TLItemsPanel todoState={todoState} />
         <TLPanel className={'todo-detail'} title={'ITEM_DETAILS'}>
           <TLItemDetails todo={todoState.selectedTodo} />
         </TLPanel>
+      </div>
+    );
+  }
+
+  private renderFilterPanelActionRail() {
+    const { todoState } = this.props;
+    return (
+      <div className={'filter-action-rail'}>
+        <TLButton
+          intent={TLButtonIntent.ACCEPT}
+          text={'FILTER'}
+          onClick={() => todoState.runFilter()}
+        />
+        <TLButton
+          intent={TLButtonIntent.REJECT}
+          text={'CLEAR'}
+          onClick={() => todoState.clearFilter()}
+        />
       </div>
     );
   }

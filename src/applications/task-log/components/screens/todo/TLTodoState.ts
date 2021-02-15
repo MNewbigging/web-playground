@@ -26,6 +26,12 @@ export class TLTodoState {
     });
 
     this.visTodos = filteredTodos;
+
+    // If selected not visible now, remove it
+    const stillVis = this.visTodos.find((todo) => todo.id === this.selectedTodo?.id);
+    if (!stillVis) {
+      this.selectedTodo = undefined;
+    }
   }
 
   @action public clearFilter() {

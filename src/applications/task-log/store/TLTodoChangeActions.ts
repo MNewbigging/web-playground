@@ -18,8 +18,11 @@ export class TLTodoChangeActions {
   }
 
   public static updateTodoTracked(dto: ITodoDTO, tracked: boolean) {
-    dto.tracked = tracked;
-    tlDatabase.updateTodo(dto);
+    // Can't track a completed task
+    if (!dto.completed) {
+      dto.tracked = tracked;
+      tlDatabase.updateTodo(dto);
+    }
   }
 
   public static updateTodoPriority(dto: ITodoDTO, priority: TLPriority) {

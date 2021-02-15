@@ -73,8 +73,8 @@ export class TLDashState {
   }
 
   @action private addTodo(todo: Todo) {
-    // If todo is tracked
-    if (todo.tracked) {
+    // If todo is tracke1d and uncompleted
+    if (todo.tracked && !todo.completed) {
       this.trackedTodos.push(todo);
     }
 

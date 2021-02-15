@@ -26,7 +26,7 @@ export class TLFilterPanel extends React.PureComponent<FilterProps> {
         <div className={'filter-line'}>
           <div className={'name-input'}>
             <TLTextInput
-              placeholder={'NAME'}
+              placeholder={'TITLE'}
               value={fpState.nameFilter}
               onChange={(val: string) => fpState.setNameFilter(val)}
             />

@@ -18,6 +18,9 @@ interface FilterProps {
 export class TLFilterPanel extends React.PureComponent<FilterProps> {
   public render() {
     const { fpState } = this.props;
+    const completeClass = fpState.completedFilter === undefined ? 'inactive' : 'active';
+    const trackedclass = fpState.trackedFilter === undefined ? 'inactive' : 'active';
+
     return (
       <div className={'tl-filter-panel'}>
         <div className={'filter-line'}>
@@ -28,15 +31,15 @@ export class TLFilterPanel extends React.PureComponent<FilterProps> {
               onChange={(val: string) => fpState.setNameFilter(val)}
             />
           </div>
-          <div className={'icon'}>
+          <div className={'icon ' + completeClass}>
             <TLCompleteButton
-              complete={fpState.completedFilter}
+              complete={fpState.completedFilter ?? false}
               onChange={(val: boolean) => fpState.setCompleteFilter(val)}
             />
           </div>
-          <div className={'icon'}>
+          <div className={'icon ' + trackedclass}>
             <TLTrackerButton
-              tracked={fpState.trackedFilter}
+              tracked={fpState.trackedFilter ?? false}
               onChange={(val: boolean) => fpState.setTrackedFilter(val)}
             />
           </div>

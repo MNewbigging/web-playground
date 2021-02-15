@@ -15,8 +15,8 @@ export class TLFilterPanelState {
 
   @action public clearFilters() {
     this.nameFilter = '';
-    this.completedFilter = false;
-    this.trackedFilter = false;
+    this.completedFilter = undefined;
+    this.trackedFilter = undefined;
     this.priorityFilter = TLPriority.NONE;
   }
 
@@ -25,11 +25,19 @@ export class TLFilterPanelState {
   }
 
   @action public setCompleteFilter(completed: boolean) {
-    this.completedFilter = completed;
+    if (this.completedFilter === undefined) {
+      this.completedFilter = false;
+    } else {
+      this.completedFilter = completed;
+    }
   }
 
   @action public setTrackedFilter(tracked: boolean) {
-    this.trackedFilter = tracked;
+    if (this.trackedFilter === undefined) {
+      this.trackedFilter = false;
+    } else {
+      this.trackedFilter = tracked;
+    }
   }
 
   @action public setPriorityFilter(priority: TLPriority) {
@@ -45,12 +53,12 @@ export class TLFilterPanelState {
     }
 
     // Completed
-    if (this.completedFilter) {
+    if (this.completedFilter !== undefined) {
       filterers.push(this.completedFilterer);
     }
 
     // Tracked
-    if (this.trackedFilter) {
+    if (this.trackedFilter !== undefined) {
       filterers.push(this.trackedFilterer);
     }
 
@@ -67,6 +75,7 @@ export class TLFilterPanelState {
   };
 
   private readonly completedFilterer = (todo: Todo) => {
+    console.log(`todo: ${todo.completed} vs this: ${this.completedFilter}`);
     return todo.completed === this.completedFilter;
   };
 

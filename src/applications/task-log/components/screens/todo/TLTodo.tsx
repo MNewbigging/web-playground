@@ -3,6 +3,7 @@ import React from 'react';
 
 import { TLPanel } from '../../core/TLPanel';
 import { TLItemDetails } from '../../TLItemDetails';
+import { TLFilterPanel } from './TLFilterPanel';
 import { TLItemsPanel } from './TLItemsPanel';
 import { TLTodoState } from './TLTodoState';
 
@@ -18,7 +19,9 @@ export class TLTodo extends React.PureComponent<TodoProps> {
     const { todoState } = this.props;
     return (
       <div className={'tl-todo'}>
-        <TLPanel className={'todo-filter'} title={'FILTER'}></TLPanel>
+        <TLPanel className={'todo-filter'} title={'FILTER_ITEMS'}>
+          <TLFilterPanel fpState={todoState.fpState} />
+        </TLPanel>
         <TLItemsPanel todoState={todoState} />
         <TLPanel className={'todo-detail'} title={'ITEM_DETAILS'}>
           <TLItemDetails todo={todoState.selectedTodo} />

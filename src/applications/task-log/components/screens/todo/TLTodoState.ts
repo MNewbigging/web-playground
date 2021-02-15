@@ -3,10 +3,13 @@ import { action, observable } from 'mobx';
 import { Todo } from '../../../model/TLTodo';
 import { ChangeType } from '../../../store/TLBaseStore';
 import { TLTodoStoreContext, todoStore } from '../../../store/TLTodoStore';
+import { TLFilterPanelState } from './TLFilterPanelState';
 
 export class TLTodoState {
   @observable public todos: Todo[] = [];
   @observable public selectedTodo?: Todo;
+
+  public fpState = new TLFilterPanelState();
 
   constructor() {
     todoStore.registerListener(TLTodoStoreContext.TODOS, this.todoListener);

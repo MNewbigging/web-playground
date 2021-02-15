@@ -1,0 +1,39 @@
+@import '../../../task-log-colours.scss';
+
+.tl-filter-panel {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  svg {
+    fill: $color-white-mid;
+  }
+
+  .filter-line {
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .label {
+      margin-right: 10px;
+    }
+
+    .name-input {
+      flex: 1 1 50%;
+      //margin-right: 10px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
+
+    .prio {
+      margin-left: 2px;
+      margin-top: 10px;
+    }
+  }
+}

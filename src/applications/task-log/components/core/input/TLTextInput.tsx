@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import './tl-text-input.scss';
@@ -8,6 +9,7 @@ interface TextInputProps {
   placeholder: string;
 }
 
+@observer
 export class TLTextInput extends React.PureComponent<TextInputProps> {
   public render() {
     const { onChange, placeholder, value } = this.props;

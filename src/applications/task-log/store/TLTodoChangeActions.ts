@@ -49,8 +49,29 @@ export class TLTodoChangeActions {
   }
 
   public static loadTodos(dtos: ITodoDTO[]) {
-    const todos = dtos.map((dto) => new Todo(dto));
-    todoStore.loadTodos(todos);
+    // Delete any completed tasks over a week old
+    const dayInMs = 86400000;
+    const weekInMs = dayInMs * 7;
+    const today = new Date().getTime();
+    const oldDtoIds: string[] = [];
+    const validTodos: Todo[] = [];
+
+    dtos.forEach((dto) => {
+      if (dto.completed) {
+        const completedDate = new Date(dto.completedDate).getTime();
+        if (today - completedDate >= weekInMs) {
+          oldDtoIds.push(dto.id);
+        }
+      } else {
+        validTodos.push(new Todo(dto));
+      }
+    });
+
+    if (oldDtoIds.length) {
+      tlDatabase.bulkDelete(oldDtoIds, true);
+    }
+
+    todoStore.loadTodos(validTodos);
   }
 
   // Some reason need this for indexeddb; must get same object back with changed props

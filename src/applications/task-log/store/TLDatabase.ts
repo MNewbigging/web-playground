@@ -108,10 +108,13 @@ class TLDatabase {
     };
   }
 
-  public bulkDelete(ids: string[]) {
+  public bulkDelete(ids: string[], quiet?: boolean) {
     const transaction = this.database.transaction(this.todoStoreName, 'readwrite');
     transaction.onerror = (_ev: Event) => console.log('error bullk deleting from db');
     transaction.oncomplete = (_ev: Event) => {
+      if (quiet) {
+        return;
+      }
       todoStore.bulkDeleteTodos(ids);
     };
     const objStore = transaction.objectStore(this.todoStoreName);

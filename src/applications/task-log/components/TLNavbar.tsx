@@ -34,7 +34,7 @@ export class TLNavbar extends React.PureComponent<TLNProps> {
         </div>
         <div className={'tl-navbar__block mid'}>
           <TLButton
-            intent={TLButtonIntent.NEUTRAL}
+            intent={TLButtonIntent.ACCEPT}
             text={'CREATE'}
             onClick={() => tlDialogsState.openCreateDialog()}
           />

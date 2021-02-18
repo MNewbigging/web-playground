@@ -51,7 +51,7 @@ export class TaskLogState {
       mins = '0' + mins;
     }
 
-    this.timeStr = `${hours}:${mins}`;
+    this.timeStr = `${hoursStr}:${mins}`;
 
     const day = DAYS[time.getDay()];
     const date = time.getDate();

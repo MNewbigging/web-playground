@@ -15,7 +15,7 @@
   background-position: top;
   display: grid;
   grid-template-areas:
-    'header header header header'
+    'leave header header header'
     'nav  content content content';
   grid-template-rows: minmax(0, 1fr) minmax(0, 9fr);
   grid-template-columns: minmax(0, 1fr) minmax(0, 9fr);
@@ -51,6 +51,11 @@
 
 hr {
   border: 1px solid $color-white-dim;
+}
+
+.tl-leave {
+  z-index: 1;
+  grid-area: leave;
 }
 
 .tl-content {

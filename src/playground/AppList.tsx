@@ -6,11 +6,13 @@ import { AppState, PlaygroundState } from './PlaygroundState';
 // Popover content for each app card
 import { DSInfoPopover } from '../applications/desk-scene/DSInfoPopover';
 import { MRInfoPopover } from '../applications/memo-rune/MRInfoPopover';
+import { TLInfoPopover } from '../applications/task-log/TLInfoPopover';
 import { WBInfoPopover } from '../applications/word-bash/WBInfoPopover';
 
 // Import the styles for each app card from their application folder
 import '../applications/desk-scene/desk-scene-card.scss';
 import '../applications/memo-rune/memo-rune-card.scss';
+import '../applications/task-log/task-log-card.scss';
 import '../applications/word-bash/word-bash-card.scss';
 import './app-list.scss';
 
@@ -41,17 +43,17 @@ export class AppList extends React.Component<AppListProps> {
           toApp={() => pgState.toApp(AppState.MEMO_RUNE)}
           popoverContent={<MRInfoPopover />}
         />
-        <AppCard
+        {/* <AppCard
           classname={'connect-four-card'}
           title={'Connect Four'}
           toApp={() => pgState.toApp(AppState.CONNECT_FOUR)}
           popoverContent={<div>TODO</div>}
-        />
+        /> */}
         <AppCard
           classname={'task-log-card'}
-          title={'Task Log'}
+          title={'TASK LOG'}
           toApp={() => pgState.toApp(AppState.TASK_LOG)}
-          popoverContent={<div>todo</div>}
+          popoverContent={<TLInfoPopover />}
         />
       </div>
     );

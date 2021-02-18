@@ -26,7 +26,7 @@ export class Playground extends React.Component {
       case AppState.CONNECT_FOUR:
         return <ConnectFour toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
       case AppState.TASK_LOG:
-        return <TaskLog />;
+        return <TaskLog toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
     }
   }
 }

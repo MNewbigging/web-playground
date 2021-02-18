@@ -7,6 +7,7 @@ export enum AppState {
   MEMO_RUNE,
   CONNECT_FOUR,
   TASK_LOG,
+  BLETHER,
 }
 
 export class PlaygroundState {

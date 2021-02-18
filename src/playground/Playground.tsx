@@ -2,6 +2,7 @@ import React from 'react';
 
 import { observer } from 'mobx-react';
 
+import { Blether } from '../applications/blether/Blether';
 import { ConnectFour } from '../applications/connect-four/ConnectFour';
 import { DeskScene } from '../applications/desk-scene/DeskScene';
 import { MemoRune } from '../applications/memo-rune/MemoRune';
@@ -12,7 +13,7 @@ import { AppState, PlaygroundState } from './PlaygroundState';
 
 @observer
 export class Playground extends React.Component {
-  private pgState = new PlaygroundState();
+  private readonly pgState = new PlaygroundState();
   public render() {
     switch (this.pgState.appState) {
       case AppState.PLAYGROUND:
@@ -27,6 +28,8 @@ export class Playground extends React.Component {
         return <ConnectFour toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
       case AppState.TASK_LOG:
         return <TaskLog toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
+      case AppState.BLETHER:
+        return <Blether />;
     }
   }
 }

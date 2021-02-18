@@ -55,6 +55,12 @@ export class AppList extends React.Component<AppListProps> {
           toApp={() => pgState.toApp(AppState.TASK_LOG)}
           popoverContent={<TLInfoPopover />}
         />
+        <AppCard
+          classname={'blether-card'}
+          title={'blether'}
+          toApp={() => pgState.toApp(AppState.BLETHER)}
+          popoverContent={<div>todo</div>}
+        />
       </div>
     );
   }

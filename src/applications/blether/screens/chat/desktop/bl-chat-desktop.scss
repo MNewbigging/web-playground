@@ -32,7 +32,6 @@
     .leave {
       flex: 0 0 30px;
       height: 30px;
-      border: 1px solid black;
     }
   }
 
@@ -48,12 +47,16 @@
       border: 1px solid black;
       border-radius: 25px;
       height: 100%;
-      font-size: $font-size-small;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .label,
+      .id {
+        font-size: $font-size-medium;
+      }
 
       .id,
       .button {

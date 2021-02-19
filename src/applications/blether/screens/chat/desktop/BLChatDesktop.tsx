@@ -1,8 +1,10 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import '../../../blether-classes.scss';
 import './bl-chat-desktop.scss';
 
+@observer
 export class BLChatDesktop extends React.PureComponent {
   public render() {
     return (

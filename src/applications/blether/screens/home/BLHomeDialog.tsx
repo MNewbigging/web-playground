@@ -24,10 +24,24 @@ export class BLHomeDialog extends React.PureComponent {
         );
         break;
       case BLHomeDialogForm.HOST:
-        form = <BLHostForm toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)} />;
+        form = (
+          <BLHostForm
+            toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)}
+            name={this.homeState.name}
+            onNameChange={(name: string) => this.homeState.setName(name)}
+          />
+        );
         break;
       case BLHomeDialogForm.JOIN:
-        form = <BLJoinForm toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)} />;
+        form = (
+          <BLJoinForm
+            toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)}
+            name={this.homeState.name}
+            onNameChange={(name: string) => this.homeState.setName(name)}
+            joinId={this.homeState.joinId}
+            onJoinIdChange={(id: string) => this.homeState.setJoinId(id)}
+          />
+        );
     }
 
     return (

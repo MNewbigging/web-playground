@@ -13,7 +13,7 @@ export class BLHostForm extends React.PureComponent<HostFormProps> {
     return (
       <div className={'host-form'}>
         <div className={'form'}>
-          <div>What's your name?</div>
+          <div className={'label'}>What's your name?</div>
           <input type={'text'} className={'input'} />
           <div className={'button medium'}>Start a blether</div>
         </div>

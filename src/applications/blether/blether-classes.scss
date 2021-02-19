@@ -21,18 +21,20 @@
     width: 50%;
     height: 25%;
     margin-top: 5%;
-    font-size: 3vw;
+    font-size: $font-size-large;
   }
 
   &.medium {
     height: 15%;
     white-space: pre-wrap;
-    padding: 10px 10% 10px 10%;
+    padding: 12px 10% 12px 10%;
+    font-size: $font-size-medium;
   }
 
   &.small {
     width: auto;
     height: auto;
+    font-size: $font-size-small;
   }
 
   &.minimal {

@@ -6,8 +6,14 @@ export enum BletherScreen {
   CHAT,
 }
 
+export enum BletherViewMode {
+  DESKTOP,
+  MOBILE,
+}
+
 export class BletherState {
   @observable public bScreen = BletherScreen.HOME;
+  @observable public viewMode = BletherViewMode.DESKTOP;
 
   public peer: Peer;
   public conn?: Peer.DataConnection;
@@ -17,6 +23,9 @@ export class BletherState {
   @observable status = 'Waiting';
 
   constructor() {
+    // Check initial window size
+    this.checkViewMode(window.innerWidth);
+
     this.peer = new Peer();
 
     this.peer.on('open', (id: string) => {
@@ -28,6 +37,14 @@ export class BletherState {
       //this.conn = conn;
       this.connections.push(conn);
     });
+  }
+
+  public checkViewMode(w: number) {
+    if (w < 760) {
+      this.viewMode = BletherViewMode.MOBILE;
+    } else {
+      this.viewMode = BletherViewMode.DESKTOP;
+    }
   }
 
   public setConnectionId(id: string) {

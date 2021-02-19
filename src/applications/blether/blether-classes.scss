@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all linear 0.2s;
 
   &:hover {
     cursor: pointer;
@@ -15,6 +16,13 @@
 
   &:active {
     box-shadow: 0px 0px 10px $color-black-shadow;
+  }
+
+  &.inactive {
+    background-color: $color-black-shadow;
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 
   &.large {
@@ -39,6 +47,9 @@
 
   &.minimal {
     border: none;
+    &:hover {
+      box-shadow: 0px 0px 2px $color-black-shadow;
+    }
   }
 }
 

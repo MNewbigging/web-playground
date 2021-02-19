@@ -8,12 +8,14 @@ interface HostFormProps {
   toHome: () => void;
   name: string;
   onNameChange: (name: string) => void;
+  onHost: () => void;
 }
 
 @observer
 export class BLHostForm extends React.PureComponent<HostFormProps> {
   public render() {
-    const { toHome, name, onNameChange } = this.props;
+    const { toHome, name, onNameChange, onHost } = this.props;
+    const buttonState = name.length ? 'active' : 'inactive';
     return (
       <div className={'host-form'}>
         <div className={'form'}>
@@ -27,7 +29,9 @@ export class BLHostForm extends React.PureComponent<HostFormProps> {
             }
             maxLength={30}
           />
-          <div className={'button medium'}>Start a blether</div>
+          <div className={'button medium ' + buttonState} onClick={onHost}>
+            Start a blether
+          </div>
         </div>
         <div className={'back'}>
           <div onClick={toHome} className={'button small minimal'}>

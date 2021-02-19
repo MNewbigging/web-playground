@@ -16,6 +16,7 @@ interface JoinFormProps {
 export class BLJoinForm extends React.PureComponent<JoinFormProps> {
   public render() {
     const { toHome, name, onNameChange, joinId, onJoinIdChange } = this.props;
+    const buttonState = name.length && joinId.length ? 'active' : 'inactive';
     return (
       <div className={'join-form'}>
         <div className={'form'}>
@@ -40,7 +41,7 @@ export class BLJoinForm extends React.PureComponent<JoinFormProps> {
             }
           />
 
-          <div className={'button medium'}>Join a blether</div>
+          <div className={'button medium ' + buttonState}>Join a blether</div>
         </div>
         <div className={'back'}>
           <div className={'button small minimal'} onClick={toHome}>

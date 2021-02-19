@@ -11,15 +11,19 @@ export class BLHomeDialogState {
   @observable public name = '';
   @observable public joinId = '';
 
-  @action setHomeForm(form: BLHomeDialogForm) {
+  @action public setHomeForm(form: BLHomeDialogForm) {
     this.form = form;
   }
 
-  @action setName(name: string) {
+  @action public setName(name: string) {
     this.name = name;
   }
 
-  @action setJoinId(id: string) {
+  @action public setJoinId(id: string) {
     this.joinId = id;
+  }
+
+  public nameIsValid() {
+    return this.name.length > 0;
   }
 }

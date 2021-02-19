@@ -29,6 +29,7 @@ export class BLHomeDialog extends React.PureComponent {
             toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)}
             name={this.homeState.name}
             onNameChange={(name: string) => this.homeState.setName(name)}
+            onHost={this.onHost}
           />
         );
         break;
@@ -51,4 +52,13 @@ export class BLHomeDialog extends React.PureComponent {
       </div>
     );
   }
+
+  private readonly onHost = () => {
+    // Check if valid name was given
+    if (this.homeState.nameIsValid()) {
+      // start chat
+    } else {
+      // shake input
+    }
+  };
 }

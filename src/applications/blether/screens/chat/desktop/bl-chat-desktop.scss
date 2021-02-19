@@ -1,0 +1,68 @@
+@import '../../../blether-variables.scss';
+
+.chat-desktop {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-areas: 'panel chat';
+  grid-template-rows: 100%;
+  grid-template-columns: minmax(250px, 1fr) minmax(0, 4fr);
+}
+
+.panel {
+  grid-area: panel;
+  border-right: 1px solid $color-black-shadow;
+
+  display: flex;
+  flex-direction: column;
+
+  .top-bar {
+    flex: 0 0 auto;
+    border-bottom: 1px solid black;
+    padding: 10px;
+
+    display: flex;
+
+    .name {
+      flex: 1 1 auto;
+      font-size: $font-size-medium;
+    }
+
+    .leave {
+      flex: 0 0 30px;
+      height: 30px;
+      border: 1px solid black;
+    }
+  }
+
+  .participants {
+    flex: 1 1 auto;
+  }
+
+  .chat-id {
+    flex: 0 0 150px;
+    padding: 10px;
+
+    .id-box {
+      border: 1px solid black;
+      border-radius: 25px;
+      height: 100%;
+      font-size: $font-size-small;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .id,
+      .button {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.chat {
+  grid-area: chat;
+}

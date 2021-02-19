@@ -37,12 +37,7 @@ export class Blether extends React.PureComponent {
       }
     }
 
-    return (
-      <div className={'blether-app'}>
-        <div className={'overlay'}></div>
-        {screen}
-      </div>
-    );
+    return <div className={'blether-app'}>{screen}</div>;
   }
 
   private readonly onResizeWindow = () => {

@@ -41,7 +41,9 @@ export class BLJoinForm extends React.PureComponent<JoinFormProps> {
             }
           />
 
-          <div className={'button medium ' + buttonState}>Join a blether</div>
+          <div className={'button medium ' + buttonState} onClick={this.onJoin}>
+            Join a blether
+          </div>
         </div>
         <div className={'back'}>
           <div className={'button small minimal'} onClick={toHome}>
@@ -51,4 +53,11 @@ export class BLJoinForm extends React.PureComponent<JoinFormProps> {
       </div>
     );
   }
+
+  private readonly onJoin = () => {
+    const { name } = this.props;
+    if (name.length) {
+      //onJoin();
+    }
+  };
 }

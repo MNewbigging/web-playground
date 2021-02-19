@@ -29,7 +29,7 @@ export class BLHostForm extends React.PureComponent<HostFormProps> {
             }
             maxLength={30}
           />
-          <div className={'button medium ' + buttonState} onClick={onHost}>
+          <div className={'button medium ' + buttonState} onClick={this.onHost}>
             Start a blether
           </div>
         </div>
@@ -41,4 +41,12 @@ export class BLHostForm extends React.PureComponent<HostFormProps> {
       </div>
     );
   }
+
+  private readonly onHost = () => {
+    // Check name is long enough before calling
+    const { name, onHost } = this.props;
+    if (name.length) {
+      onHost();
+    }
+  };
 }

@@ -25,7 +25,7 @@ export class Blether extends React.PureComponent {
 
     let screen: JSX.Element;
     if (this.bState.bScreen === BletherScreen.HOME) {
-      screen = <BLHomeDialog />;
+      screen = <BLHomeDialog onHost={() => this.bState.hostChat()} />;
     } else {
       switch (this.bState.viewMode) {
         case BletherViewMode.DESKTOP:

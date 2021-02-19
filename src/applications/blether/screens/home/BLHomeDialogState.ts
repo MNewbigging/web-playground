@@ -22,8 +22,4 @@ export class BLHomeDialogState {
   @action public setJoinId(id: string) {
     this.joinId = id;
   }
-
-  public nameIsValid() {
-    return this.name.length > 0;
-  }
 }

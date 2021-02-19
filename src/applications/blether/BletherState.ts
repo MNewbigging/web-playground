@@ -47,6 +47,10 @@ export class BletherState {
     }
   }
 
+  public hostChat() {
+    this.bScreen = BletherScreen.CHAT;
+  }
+
   public setConnectionId(id: string) {
     this.connectId = id;
   }

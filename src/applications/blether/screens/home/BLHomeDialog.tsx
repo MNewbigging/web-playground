@@ -8,8 +8,12 @@ import { BLHostForm } from './BLHostForm';
 import './bl-home-dialog.scss';
 import { BLJoinForm } from './BLJoinForm';
 
+interface HomeProps {
+  onHost: () => void;
+}
+
 @observer
-export class BLHomeDialog extends React.PureComponent {
+export class BLHomeDialog extends React.PureComponent<HomeProps> {
   private readonly homeState = new BLHomeDialogState();
 
   public render() {
@@ -29,7 +33,7 @@ export class BLHomeDialog extends React.PureComponent {
             toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)}
             name={this.homeState.name}
             onNameChange={(name: string) => this.homeState.setName(name)}
-            onHost={this.onHost}
+            onHost={this.props.onHost}
           />
         );
         break;
@@ -52,13 +56,4 @@ export class BLHomeDialog extends React.PureComponent {
       </div>
     );
   }
-
-  private readonly onHost = () => {
-    // Check if valid name was given
-    if (this.homeState.nameIsValid()) {
-      // start chat
-    } else {
-      // shake input
-    }
-  };
 }

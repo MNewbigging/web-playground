@@ -1,12 +1,14 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
-import { BLHomeDialogState, BLHomeDialogForm } from './BLHomeDialogState';
+import { BLHomeDialogForm, BLHomeDialogState } from './BLHomeDialogState';
 import { BLHomeForm } from './BLHomeForm';
+import { BLHostForm } from './BLHostForm';
 
 import './bl-home-dialog.scss';
+import { BLJoinForm } from './BLJoinForm';
 
-// will need props from state for callbacks
-
+@observer
 export class BLHomeDialog extends React.PureComponent {
   private readonly homeState = new BLHomeDialogState();
 
@@ -14,7 +16,18 @@ export class BLHomeDialog extends React.PureComponent {
     let form: JSX.Element;
     switch (this.homeState.form) {
       case BLHomeDialogForm.HOME:
-        form = <BLHomeForm />;
+        form = (
+          <BLHomeForm
+            onHost={() => this.homeState.setHomeForm(BLHomeDialogForm.HOST)}
+            onJoin={() => this.homeState.setHomeForm(BLHomeDialogForm.JOIN)}
+          />
+        );
+        break;
+      case BLHomeDialogForm.HOST:
+        form = <BLHostForm toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)} />;
+        break;
+      case BLHomeDialogForm.JOIN:
+        form = <BLJoinForm toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)} />;
     }
 
     return (

@@ -5,4 +5,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .button {
+    transform: translate(0, -50%);
+  }
 }

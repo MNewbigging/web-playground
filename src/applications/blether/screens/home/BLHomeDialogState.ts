@@ -4,7 +4,6 @@ export enum BLHomeDialogForm {
   HOME,
   HOST,
   JOIN,
-  JOIN_DETAILS,
 }
 
 export class BLHomeDialogState {

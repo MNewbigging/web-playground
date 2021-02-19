@@ -3,8 +3,7 @@
 .button {
   border: 1px solid $color-main-border;
   border-radius: 100px;
-  transform: translate(0, -50%);
-
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +19,27 @@
 
   &.large {
     width: 50%;
-    height: 20%;
+    height: 25%;
     margin-top: 5%;
+    font-size: 3vw;
   }
+
+  &.medium {
+    height: 15%;
+    white-space: pre-wrap;
+    padding: 10px 10% 10px 10%;
+  }
+
+  &.small {
+    width: auto;
+    height: auto;
+  }
+
+  &.minimal {
+    border: none;
+  }
+}
+
+.input {
+  text-align: center;
 }

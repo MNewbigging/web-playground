@@ -10,7 +10,7 @@ export class BLChatDesktop extends React.PureComponent {
         <div className={'panel'}>
           <div className={'top-bar'}>
             <div className={'name'}>Group name</div>
-            <div className={'leave'}></div>
+            <div className={'button small'}>exit</div>
           </div>
           <div className={'participants'}></div>
           <div className={'chat-id'}>
@@ -21,7 +21,13 @@ export class BLChatDesktop extends React.PureComponent {
             </div>
           </div>
         </div>
-        <div className={'chat'}></div>
+
+        <div className={'chat'}>
+          <div className={'log'}></div>
+          <div className={'input-area'}>
+            <input className={'input'} type={'text'} />
+          </div>
+        </div>
       </div>
     );
   }

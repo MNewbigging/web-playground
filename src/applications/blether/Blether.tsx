@@ -9,8 +9,12 @@ import { BLHomeDialog } from './screens/home/BLHomeDialog';
 import './blether.scss';
 import { BLChatState } from './screens/chat/BLChatState';
 
+interface BletherProps {
+  toApp: () => void;
+}
+
 @observer
-export class Blether extends React.PureComponent {
+export class Blether extends React.PureComponent<BletherProps> {
   private readonly bState = new BletherState();
 
   componentDidMount() {
@@ -25,7 +29,7 @@ export class Blether extends React.PureComponent {
     let screen: JSX.Element;
 
     if (this.bState.bScreen === BletherScreen.HOME || !this.bState.participant?.ready) {
-      screen = <BLHomeDialog bState={this.bState} />;
+      screen = <BLHomeDialog bState={this.bState} toApp={this.props.toApp} />;
     } else {
       if (this.bState.chatState === undefined && this.bState.participant) {
         this.bState.chatState = new BLChatState(this.bState.participant);

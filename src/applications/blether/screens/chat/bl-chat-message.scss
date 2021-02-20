@@ -1,3 +1,5 @@
+@import '../../blether-variables.scss';
+
 .chat-message {
   flex: 0 0 auto;
   border: 1px solid black;
@@ -6,6 +8,7 @@
   width: fit-content;
   word-wrap: normal;
   margin-top: 10px;
+  background-color: white;
 
   display: grid;
   grid-template-areas:
@@ -26,18 +29,20 @@
 
   .sender {
     grid-area: name;
-    // bigger font weight
-    // their colour
+    font-weight: 500;
+    color: $color-text !important;
   }
 
   .time {
     grid-area: time;
 
+    color: $color-text !important;
     display: flex;
     justify-content: flex-end;
   }
 
   .content {
     grid-area: text;
+    color: $color-text !important;
   }
 }

@@ -26,7 +26,7 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
       <div className={'chat-mobile'}>
         {this.renderDrawer()}
         <div className={'top-bar'}>
-          <div className={'name'}>Group name</div>
+          <div className={'name'}>blether</div>
           <div className={'drawer button small'} onClick={this.toggleDrawer}>
             ...
           </div>
@@ -66,7 +66,7 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
       >
         <div className={'drawer-body'}>
           <div className={'top-bar'}>
-            <div className={'name'}>Group name</div>
+            <div className={'name'}>blether</div>
             <div className={'exit button small'} onClick={onExit}>
               exit
             </div>
@@ -78,7 +78,7 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
           <div className={'chat-id'}>
             <div className={'id-box'}>
               <div className={'label'}>Invite others to join:</div>
-              <div className={'id'}>{participant.hostId}</div>
+              <input id={'id'} readOnly className={'id input'} value={participant.hostId} />
               <div className={'button small'} onClick={() => this.copyChatId()}>
                 Copy to clipboard
               </div>
@@ -124,11 +124,8 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
   }
 
   private copyChatId() {
-    const tempInput = document.createElement('input');
-    tempInput.value = this.props.participant.hostId;
-    document.body.appendChild(tempInput);
-    tempInput.select();
+    const input = document.getElementById('id') as HTMLInputElement;
+    input.select();
     document.execCommand('copy');
-    document.removeChild(tempInput);
   }
 }

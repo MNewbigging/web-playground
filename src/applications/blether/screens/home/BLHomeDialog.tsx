@@ -11,12 +11,13 @@ import './bl-home-dialog.scss';
 
 interface HomeProps {
   bState: BletherState;
+  toApp: () => void;
 }
 
 @observer
 export class BLHomeDialog extends React.PureComponent<HomeProps> {
   public render() {
-    const { bState } = this.props;
+    const { bState, toApp } = this.props;
 
     let form: JSX.Element;
     switch (bState.homeState.form) {
@@ -25,6 +26,7 @@ export class BLHomeDialog extends React.PureComponent<HomeProps> {
           <BLHomeForm
             onHost={() => bState.homeState.setHomeForm(BLHomeDialogForm.HOST)}
             onJoin={() => bState.homeState.setHomeForm(BLHomeDialogForm.JOIN)}
+            onExit={toApp}
           />
         );
         break;

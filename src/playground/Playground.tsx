@@ -29,7 +29,7 @@ export class Playground extends React.Component {
       case AppState.TASK_LOG:
         return <TaskLog toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
       case AppState.BLETHER:
-        return <Blether />;
+        return <Blether toApp={() => this.pgState.toApp(AppState.PLAYGROUND)} />;
     }
   }
 }

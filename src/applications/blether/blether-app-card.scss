@@ -1,0 +1,15 @@
+@import './blether-variables.scss';
+
+.blether-card {
+  background-color: $color-main-accent;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .app-card-title {
+    font-size: 16pt;
+    letter-spacing: 2px;
+  }
+}

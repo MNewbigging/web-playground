@@ -19,7 +19,7 @@
   }
 
   &.inactive {
-    background-color: $color-black-shadow;
+    background-color: $color-button-inactive;
     &:hover {
       cursor: not-allowed;
     }
@@ -55,4 +55,5 @@
 
 .input {
   text-align: center;
+  color: $color-text !important;
 }

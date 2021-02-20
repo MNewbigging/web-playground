@@ -13,6 +13,7 @@
 .panel {
   grid-area: panel;
   border-right: 1px solid $color-black-shadow;
+  background-color: $color-main-accent;
 
   display: flex;
   flex-direction: column;
@@ -48,6 +49,8 @@
       border: 1px solid black;
       border-radius: 25px;
       margin-bottom: 15px;
+      background-color: white;
+      color: $color-text;
 
       display: flex;
       justify-content: center;
@@ -72,6 +75,7 @@
       .label,
       .id {
         font-size: $font-size-medium;
+        width: 98%;
       }
 
       .id,
@@ -115,6 +119,7 @@
       border-radius: 100px;
       text-align: left;
       padding: 0px 10px;
+      background-color: white;
     }
   }
 }

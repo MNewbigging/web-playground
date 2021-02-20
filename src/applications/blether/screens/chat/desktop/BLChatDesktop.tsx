@@ -21,7 +21,7 @@ export class BLChatDesktop extends React.PureComponent<ChatProps> {
             <div className={'name'}>Group name</div>
             <div className={'button small'}>exit</div>
           </div>
-          <div className={'participants'}></div>
+          <div className={'participants'}>{this.renderParticipants()}</div>
           <div className={'chat-id'}>
             <div className={'id-box'}>
               <div className={'label'}>Invite others to join:</div>
@@ -39,5 +39,16 @@ export class BLChatDesktop extends React.PureComponent<ChatProps> {
         </div>
       </div>
     );
+  }
+
+  private renderParticipants() {
+    const { participant } = this.props;
+    return participant.participantNames.map((name, i) => {
+      return (
+        <div key={name + i} className={'item'}>
+          {name}
+        </div>
+      );
+    });
   }
 }

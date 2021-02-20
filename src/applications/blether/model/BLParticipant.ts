@@ -3,6 +3,7 @@ import Peer from 'peerjs';
 
 export abstract class BLParticipant {
   @observable public ready = false;
+  @observable public participantNames: string[] = [];
   public name: string;
   public id: string;
   @observable public hostId: string;
@@ -10,9 +11,11 @@ export abstract class BLParticipant {
 
   constructor(name: string) {
     this.name = name;
+
     this.peer = new Peer();
     this.peer.on('open', (id: string) => {
       this.id = id;
+      this.participantNames.push(this.name);
       this.onPeerOpen(id);
     });
 

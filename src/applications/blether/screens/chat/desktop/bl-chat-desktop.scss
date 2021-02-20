@@ -37,6 +37,21 @@
 
   .participants {
     flex: 1 1 auto;
+    padding: 15px 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    .item {
+      flex: 0 0 40px;
+      border: 1px solid black;
+      border-radius: 25px;
+      margin-bottom: 15px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .chat-id {

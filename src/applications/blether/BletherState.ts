@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 import { BLGuest } from './model/BLGuest';
 import { BLHost } from './model/BLHost';
 import { BLParticipant } from './model/BLParticipant';
+import { BLChatState } from './screens/chat/BLChatState';
 import { BLHomeDialogState } from './screens/home/BLHomeDialogState';
 
 export enum BletherScreen {
@@ -20,6 +21,7 @@ export class BletherState {
   public participant?: BLParticipant;
   @observable public joining = false;
   public homeState = new BLHomeDialogState();
+  public chatState?: BLChatState;
 
   constructor() {
     // Check initial window size
@@ -53,6 +55,11 @@ export class BletherState {
       this.joining = false;
       this.bScreen = BletherScreen.HOME;
     }
+  }
+
+  public exitChat() {
+    this.participant.disconnect();
+    this.cancelJoin();
   }
 
   private readonly onHostError = (err: any) => {

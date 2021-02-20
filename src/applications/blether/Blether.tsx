@@ -7,6 +7,7 @@ import { BLChatMobile } from './screens/chat/mobile/BLChatMobile';
 import { BLHomeDialog } from './screens/home/BLHomeDialog';
 
 import './blether.scss';
+import { BLChatState } from './screens/chat/BLChatState';
 
 @observer
 export class Blether extends React.PureComponent {
@@ -26,12 +27,24 @@ export class Blether extends React.PureComponent {
     if (this.bState.bScreen === BletherScreen.HOME || !this.bState.participant?.ready) {
       screen = <BLHomeDialog bState={this.bState} />;
     } else {
+      if (this.bState.chatState === undefined && this.bState.participant) {
+        this.bState.chatState = new BLChatState(this.bState.participant);
+      }
+
       switch (this.bState.viewMode) {
         case BletherViewMode.DESKTOP:
-          screen = <BLChatDesktop participant={this.bState.participant} />;
+          screen = (
+            <BLChatDesktop
+              participant={this.bState.participant}
+              chatState={this.bState.chatState}
+              onExit={() => this.bState.exitChat()}
+            />
+          );
           break;
         case BletherViewMode.MOBILE:
-          screen = <BLChatMobile participant={this.bState.participant} />;
+          screen = (
+            <BLChatMobile participant={this.bState.participant} chatState={this.bState.chatState} />
+          );
           break;
       }
     }

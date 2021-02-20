@@ -1,28 +1,33 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
+import { BLContentMessage, BLMessageType, BLNoteMessage } from '../../../model/BLMessages';
 import { BLParticipant } from '../../../model/BLParticipant';
+import { BLChatMessage } from '../BLChatMessage';
+import { BLChatNotification } from '../BLChatNotification';
 import { BLChatState } from '../BLChatState';
 
 import '../../../blether-classes.scss';
 import './bl-chat-desktop.scss';
-import { BLChatMessage } from '../BLChatMessage';
 
 interface ChatProps {
   participant: BLParticipant;
+  chatState: BLChatState;
+  onExit: () => void;
 }
 
 @observer
 export class BLChatDesktop extends React.PureComponent<ChatProps> {
-  private readonly chatState = new BLChatState(this.props.participant);
   public render() {
-    const { participant } = this.props;
+    const { participant, chatState, onExit } = this.props;
     return (
       <div className={'chat-desktop'}>
         <div className={'panel'}>
           <div className={'top-bar'}>
             <div className={'name'}>Group name</div>
-            <div className={'button small'}>exit</div>
+            <div className={'button small'} onClick={onExit}>
+              exit
+            </div>
           </div>
           <div className={'participants'}>{this.renderParticipants()}</div>
           <div className={'chat-id'}>
@@ -42,13 +47,13 @@ export class BLChatDesktop extends React.PureComponent<ChatProps> {
             <input
               className={'input'}
               type={'text'}
-              value={this.chatState.inputText}
+              value={chatState.inputText}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                this.chatState.setInputText(event.target.value)
+                chatState.setInputText(event.target.value)
               }
               onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => {
                 if (event.key === 'Enter') {
-                  this.chatState.sendMessage();
+                  chatState.sendMessage();
                 }
               }}
             />
@@ -76,7 +81,15 @@ export class BLChatDesktop extends React.PureComponent<ChatProps> {
       .slice()
       .reverse()
       .map((msg, i) => {
-        return <BLChatMessage key={'msg-' + i} participantId={participant.id} message={msg} />;
+        if (msg.type === BLMessageType.CONTENT) {
+          const message = msg as BLContentMessage;
+          return (
+            <BLChatMessage key={'msg-' + i} participantId={participant.id} message={message} />
+          );
+        } else {
+          const note = msg as BLNoteMessage;
+          return <BLChatNotification key={'msg-' + i} note={note} />;
+        }
       });
   }
 }

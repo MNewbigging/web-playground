@@ -5,6 +5,7 @@ import {
   BLBaseMessage,
   BLContentMessage,
   BLMessageType,
+  BLNoteMessage,
   BLParticipantNamesMessage,
 } from './BLMessages';
 import { BLParticipant } from './BLParticipant';
@@ -48,21 +49,26 @@ export class BLGuest extends BLParticipant {
     this.host.send(JSON.stringify(msg));
   }
 
+  public disconnect(): void {
+    this.host.close();
+    this.peer.disconnect();
+  }
+
   @action protected parseMessage(message: BLBaseMessage) {
-    console.log('parsing message');
     switch (message.type) {
       case BLMessageType.PARTICIPANT_NAMES:
         const nameMsg = message as BLParticipantNamesMessage;
         this.participantNames = nameMsg.names;
-        console.log('setting party names: ', this.participantNames);
         break;
       case BLMessageType.CONTENT:
         const contentMsg = message as BLContentMessage;
         this.chatLog.push(contentMsg);
-        console.log('added to chat log: ', this.chatLog);
+        break;
+      case BLMessageType.NOTE:
+        const noteMsg = message as BLNoteMessage;
+        this.chatLog.push(noteMsg);
         break;
     }
-
     return;
   }
 }

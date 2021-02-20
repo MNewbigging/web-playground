@@ -4,6 +4,7 @@ export enum BLMessageType {
   POLL = 'poll',
   PARTICIPANT_NAMES = 'participant-names',
   CONTENT = 'content',
+  NOTE = 'note',
 }
 
 export abstract class BLBaseMessage {
@@ -31,5 +32,11 @@ export class BLContentMessage extends BLBaseMessage {
     this.content = content;
     this.senderName = senderName;
     this.timestamp = timestamp;
+  }
+}
+
+export class BLNoteMessage extends BLBaseMessage {
+  constructor(id: string, public content: string) {
+    super(BLMessageType.NOTE, id);
   }
 }

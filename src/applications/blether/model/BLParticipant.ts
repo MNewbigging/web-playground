@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import Peer from 'peerjs';
 
-import { BLBaseMessage, BLContentMessage } from './BLMessages';
+import { BLBaseMessage, BLContentMessage, BLNoteMessage } from './BLMessages';
 
 export abstract class BLParticipant {
   // Info about itself
@@ -13,7 +13,7 @@ export abstract class BLParticipant {
 
   // Info about the chat
   @observable public participantNames: string[] = [];
-  @observable public chatLog: BLContentMessage[] = [];
+  @observable public chatLog: (BLContentMessage | BLNoteMessage)[] = [];
 
   constructor(name: string, onError: (err: any) => void) {
     this.name = name;
@@ -39,4 +39,6 @@ export abstract class BLParticipant {
   protected abstract parseMessage(msg: BLBaseMessage): void;
 
   public abstract sendMessage(msg: BLBaseMessage): void;
+
+  public abstract disconnect(): void;
 }

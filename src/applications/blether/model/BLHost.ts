@@ -5,6 +5,7 @@ import {
   BLBaseMessage,
   BLContentMessage,
   BLMessageType,
+  BLNoteMessage,
   BLParticipantNamesMessage,
 } from './BLMessages';
 import { BLParticipant } from './BLParticipant';
@@ -35,15 +36,19 @@ export class BLHost extends BLParticipant {
       // Handle when this guest leaves (doesn't catch when they close tab)
       conn.on('close', () => this.onGuestDisconnect(conn.peer));
 
-      // Add this guest, update all guests of new arrival
+      // Add this guest
       this.participantNames.push(conn.label);
       this.guests.push(conn);
-      this.onUpdateGuests();
+
+      // Update other guests of new arrival
+      this.updateGuestsOfPartyNames();
+      const noteMsg = new BLNoteMessage(this.id, `${conn.label} has joined!`);
+      this.chatLog.push(noteMsg);
+      this.sendMessage(noteMsg);
     });
   };
 
   protected parseMessage(msg: BLBaseMessage): void {
-    console.log('parsing message');
     switch (msg.type) {
       case BLMessageType.CONTENT:
         const contentMsg = msg as BLContentMessage;
@@ -57,11 +62,15 @@ export class BLHost extends BLParticipant {
     const msgData = JSON.stringify(msg);
     this.guests.forEach((guest) => {
       if (omit !== undefined && guest.peer === omit) {
-        console.log('not sending to: ', omit);
         return;
       }
       guest.send(msgData);
     });
+  }
+
+  public disconnect(): void {
+    this.guests.forEach((guest) => guest.close());
+    this.peer.disconnect();
   }
 
   @action private readonly onGuestDisconnect = (guestId: string) => {
@@ -70,14 +79,20 @@ export class BLHost extends BLParticipant {
       return;
     }
 
+    // Update guests of new names list
     console.log('guest has left: ', guest.label);
     this.guests = this.guests.filter((g) => g.peer !== guestId);
     this.participantNames = this.participantNames.filter((name) => name !== guest.label);
-    this.onUpdateGuests();
+    this.updateGuestsOfPartyNames();
+
+    // Send note message
+    const noteMsg = new BLNoteMessage(this.id, `${guest.label} has left!`);
+    this.chatLog.push(noteMsg);
+    this.sendMessage(noteMsg);
   };
 
-  private onUpdateGuests() {
-    // Update all participants of new guest's names
+  private updateGuestsOfPartyNames() {
+    // Update all participants of new guest list
     const guestNames = JSON.stringify(
       new BLParticipantNamesMessage(this.id, this.participantNames)
     );

@@ -38,6 +38,7 @@
   .participants {
     flex: 1 1 auto;
     padding: 15px 5px;
+    overflow: auto;
 
     display: flex;
     flex-direction: column;

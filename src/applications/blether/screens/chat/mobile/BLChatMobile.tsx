@@ -2,18 +2,25 @@ import { Drawer } from '@blueprintjs/core';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import React from 'react';
+
+import { BLContentMessage, BLMessageType, BLNoteMessage } from '../../../model/BLMessages';
 import { BLParticipant } from '../../../model/BLParticipant';
+import { BLChatMessage } from '../BLChatMessage';
+import { BLChatNotification } from '../BLChatNotification';
+import { BLChatState } from '../BLChatState';
 
 import './bl-chat-mobile.scss';
 
 interface ChatProps {
   participant: BLParticipant;
+  chatState: BLChatState;
 }
 
 @observer
 export class BLChatMobile extends React.PureComponent<ChatProps> {
   @observable private drawerOpen = false;
   public render() {
+    const { chatState } = this.props;
     return (
       <div className={'chat-mobile'}>
         {this.renderDrawer()}
@@ -23,9 +30,21 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
             ...
           </div>
         </div>
-        <div className={'log'}></div>
+        <div className={'log'}>{this.renderChatLog()}</div>
         <div className={'input-area'}>
-          <input className={'input'} type={'text'} />
+          <input
+            className={'input'}
+            type={'text'}
+            value={chatState.inputText}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              chatState.setInputText(event.target.value)
+            }
+            onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => {
+              if (event.key === 'Enter') {
+                chatState.sendMessage();
+              }
+            }}
+          />
         </div>
       </div>
     );
@@ -74,5 +93,24 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
         </div>
       );
     });
+  }
+
+  private renderChatLog() {
+    const { participant } = this.props;
+    // need to reverse order for flex column-reverse
+    return participant.chatLog
+      .slice()
+      .reverse()
+      .map((msg, i) => {
+        if (msg.type === BLMessageType.CONTENT) {
+          const message = msg as BLContentMessage;
+          return (
+            <BLChatMessage key={'msg-' + i} participantId={participant.id} message={message} />
+          );
+        } else {
+          const note = msg as BLNoteMessage;
+          return <BLChatNotification key={'msg-' + i} note={note} />;
+        }
+      });
   }
 }

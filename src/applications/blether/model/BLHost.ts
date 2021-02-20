@@ -7,8 +7,8 @@ import { BLParticipant } from './BLParticipant';
 export class BLHost extends BLParticipant {
   public guests: Peer.DataConnection[] = [];
 
-  constructor(name: string) {
-    super(name);
+  constructor(name: string, onError: (err: any) => void) {
+    super(name, onError);
     this.peer.on('connection', this.onConnection);
   }
 

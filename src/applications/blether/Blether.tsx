@@ -22,8 +22,8 @@ export class Blether extends React.PureComponent {
 
   public render() {
     let screen: JSX.Element;
-    console.log('blether render: ', this.bState.participant?.ready);
-    if (this.bState.bScreen === BletherScreen.HOME || !this.bState.participant.ready) {
+
+    if (this.bState.bScreen === BletherScreen.HOME || !this.bState.participant?.ready) {
       screen = (
         <BLHomeDialog
           onHost={(name: string) => this.bState.hostChat(name)}

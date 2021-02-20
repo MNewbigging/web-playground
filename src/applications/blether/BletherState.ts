@@ -33,13 +33,13 @@ export class BletherState {
   }
 
   public hostChat(name: string) {
-    this.participant = new BLHost(name);
+    this.participant = new BLHost(name, this.onHostError);
     this.bScreen = BletherScreen.CHAT;
   }
 
   public joinChat(name: string, hostId: string) {
     if (this.participant === undefined) {
-      this.participant = new BLGuest(name, hostId);
+      this.participant = new BLGuest(name, hostId, this.onGuestError);
       this.joining = true;
       this.bScreen = BletherScreen.CHAT;
     }
@@ -52,4 +52,13 @@ export class BletherState {
       this.bScreen = BletherScreen.HOME;
     }
   }
+
+  private readonly onHostError = (err: any) => {
+    console.log('host error: ', err);
+  };
+
+  private readonly onGuestError = (err: any) => {
+    console.log('guest error: ', err);
+    this.cancelJoin();
+  };
 }

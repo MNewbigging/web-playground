@@ -9,12 +9,12 @@ export abstract class BLParticipant {
   @observable public hostId: string;
   public peer: Peer;
 
-  constructor(name: string) {
+  constructor(name: string, onError: (err: any) => void) {
     this.name = name;
 
     this.peer = new Peer();
     this.peer.on('open', (id: string) => {
-      this.peer.on('error', (err: any) => console.log('error: ', err));
+      this.peer.on('error', (err: any) => onError(err));
       this.peer.on('disconnected', () => console.log(this.id + ' peer was disconnected'));
 
       this.id = id;

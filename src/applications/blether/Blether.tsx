@@ -21,15 +21,19 @@ export class Blether extends React.PureComponent {
   }
 
   public render() {
-    console.log('blether render');
-
     let screen: JSX.Element;
-    if (this.bState.bScreen === BletherScreen.HOME) {
-      screen = <BLHomeDialog onHost={() => this.bState.hostChat()} />;
+    console.log('blether render: ', this.bState.participant?.ready);
+    if (this.bState.bScreen === BletherScreen.HOME || !this.bState.participant.ready) {
+      screen = (
+        <BLHomeDialog
+          onHost={(name: string) => this.bState.hostChat(name)}
+          onJoin={(name: string, id: string) => this.bState.joinChat(name, id)}
+        />
+      );
     } else {
       switch (this.bState.viewMode) {
         case BletherViewMode.DESKTOP:
-          screen = <BLChatDesktop />;
+          screen = <BLChatDesktop participant={this.bState.participant} />;
           break;
         case BletherViewMode.MOBILE:
           screen = <BLChatMobile />;

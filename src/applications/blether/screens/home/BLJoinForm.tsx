@@ -10,6 +10,7 @@ interface JoinFormProps {
   onNameChange: (name: string) => void;
   joinId: string;
   onJoinIdChange: (id: string) => void;
+  onJoin: (name: string, id: string) => void;
 }
 
 @observer
@@ -55,9 +56,9 @@ export class BLJoinForm extends React.PureComponent<JoinFormProps> {
   }
 
   private readonly onJoin = () => {
-    const { name } = this.props;
-    if (name.length) {
-      //onJoin();
+    const { name, joinId, onJoin } = this.props;
+    if (name.length && joinId.length) {
+      onJoin(name, joinId);
     }
   };
 }

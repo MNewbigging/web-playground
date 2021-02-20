@@ -1,5 +1,7 @@
 import { observable } from 'mobx';
-import Peer from 'peerjs';
+import { BLGuest } from './model/BLGuest';
+import { BLHost } from './model/BLHost';
+import { BLParticipant } from './model/BLParticipant';
 
 export enum BletherScreen {
   HOME,
@@ -14,29 +16,11 @@ export enum BletherViewMode {
 export class BletherState {
   @observable public bScreen = BletherScreen.HOME;
   @observable public viewMode = BletherViewMode.DESKTOP;
-
-  public peer: Peer;
-  public conn?: Peer.DataConnection;
-  @observable public connections: Peer.DataConnection[] = [];
-  @observable peerId = '';
-  @observable connectId = '';
-  @observable status = 'Waiting';
+  public participant?: BLParticipant;
 
   constructor() {
     // Check initial window size
     this.checkViewMode(window.innerWidth);
-
-    this.peer = new Peer();
-
-    this.peer.on('open', (id: string) => {
-      this.peerId = id;
-    });
-
-    // Receiving a connection
-    this.peer.on('connection', (conn: Peer.DataConnection) => {
-      //this.conn = conn;
-      this.connections.push(conn);
-    });
   }
 
   public checkViewMode(w: number) {
@@ -47,22 +31,13 @@ export class BletherState {
     }
   }
 
-  public hostChat() {
+  public hostChat(name: string) {
+    this.participant = new BLHost(name);
     this.bScreen = BletherScreen.CHAT;
   }
 
-  public setConnectionId(id: string) {
-    this.connectId = id;
+  public joinChat(name: string, hostId: string) {
+    this.participant = new BLGuest(name, hostId);
+    this.bScreen = BletherScreen.CHAT;
   }
-
-  public connect() {
-    if (!this.connectId) {
-      return;
-    }
-
-    // Making a connection
-    this.connections.push(this.peer.connect(this.connectId));
-  }
-
-  private receive() {}
 }

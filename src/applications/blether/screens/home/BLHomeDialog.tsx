@@ -9,7 +9,8 @@ import './bl-home-dialog.scss';
 import { BLJoinForm } from './BLJoinForm';
 
 interface HomeProps {
-  onHost: () => void;
+  onHost: (name: string) => void;
+  onJoin: (name: string, id: string) => void;
 }
 
 @observer
@@ -45,6 +46,7 @@ export class BLHomeDialog extends React.PureComponent<HomeProps> {
             onNameChange={(name: string) => this.homeState.setName(name)}
             joinId={this.homeState.joinId}
             onJoinIdChange={(id: string) => this.homeState.setJoinId(id)}
+            onJoin={(name: string, id: string) => this.props.onJoin(name, id)}
           />
         );
     }

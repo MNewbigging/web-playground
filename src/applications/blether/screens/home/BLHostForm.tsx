@@ -8,13 +8,13 @@ interface HostFormProps {
   toHome: () => void;
   name: string;
   onNameChange: (name: string) => void;
-  onHost: () => void;
+  onHost: (name: string) => void;
 }
 
 @observer
 export class BLHostForm extends React.PureComponent<HostFormProps> {
   public render() {
-    const { toHome, name, onNameChange, onHost } = this.props;
+    const { toHome, name, onNameChange } = this.props;
     const buttonState = name.length ? 'active' : 'inactive';
     return (
       <div className={'host-form'}>
@@ -46,7 +46,7 @@ export class BLHostForm extends React.PureComponent<HostFormProps> {
     // Check name is long enough before calling
     const { name, onHost } = this.props;
     if (name.length) {
-      onHost();
+      onHost(name);
     }
   };
 }

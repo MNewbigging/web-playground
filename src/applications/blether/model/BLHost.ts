@@ -29,6 +29,12 @@ export class BLHost extends BLParticipant {
 
     conn.on('open', () => {
       console.log('connection to guest now open');
+      // Check this conn is unique
+      const exists = this.guests.find((guest) => guest.peer === conn.peer);
+      if (exists) {
+        conn.close();
+        return;
+      }
 
       // Allow for receiving data from guest
       conn.on('data', this.onReceive);

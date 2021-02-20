@@ -43,7 +43,11 @@ export class Blether extends React.PureComponent {
           break;
         case BletherViewMode.MOBILE:
           screen = (
-            <BLChatMobile participant={this.bState.participant} chatState={this.bState.chatState} />
+            <BLChatMobile
+              participant={this.bState.participant}
+              chatState={this.bState.chatState}
+              onExit={() => this.bState.exitChat()}
+            />
           );
           break;
       }

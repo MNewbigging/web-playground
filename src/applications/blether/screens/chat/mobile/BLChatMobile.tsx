@@ -14,6 +14,7 @@ import './bl-chat-mobile.scss';
 interface ChatProps {
   participant: BLParticipant;
   chatState: BLChatState;
+  onExit: () => void;
 }
 
 @observer
@@ -45,13 +46,16 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
               }
             }}
           />
+          <div className={'send button small'} onClick={() => chatState.sendMessage()}>
+            send
+          </div>
         </div>
       </div>
     );
   }
 
   private renderDrawer() {
-    const { participant } = this.props;
+    const { participant, onExit } = this.props;
     return (
       <Drawer
         size={'80%'}
@@ -63,6 +67,9 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
         <div className={'drawer-body'}>
           <div className={'top-bar'}>
             <div className={'name'}>Group name</div>
+            <div className={'exit button small'} onClick={onExit}>
+              exit
+            </div>
             <div className={'drawer button small'} onClick={this.toggleDrawer}>
               ...
             </div>
@@ -72,7 +79,9 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
             <div className={'id-box'}>
               <div className={'label'}>Invite others to join:</div>
               <div className={'id'}>{participant.hostId}</div>
-              <div className={'button small'}>Copy to clipboard</div>
+              <div className={'button small'} onClick={() => this.copyChatId()}>
+                Copy to clipboard
+              </div>
             </div>
           </div>
         </div>
@@ -112,5 +121,14 @@ export class BLChatMobile extends React.PureComponent<ChatProps> {
           return <BLChatNotification key={'msg-' + i} note={note} />;
         }
       });
+  }
+
+  private copyChatId() {
+    const tempInput = document.createElement('input');
+    tempInput.value = this.props.participant.hostId;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.removeChild(tempInput);
   }
 }

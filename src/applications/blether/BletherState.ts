@@ -17,6 +17,7 @@ export class BletherState {
   @observable public bScreen = BletherScreen.HOME;
   @observable public viewMode = BletherViewMode.DESKTOP;
   public participant?: BLParticipant;
+  @observable public joining = false;
 
   constructor() {
     // Check initial window size
@@ -37,7 +38,18 @@ export class BletherState {
   }
 
   public joinChat(name: string, hostId: string) {
-    this.participant = new BLGuest(name, hostId);
-    this.bScreen = BletherScreen.CHAT;
+    if (this.participant === undefined) {
+      this.participant = new BLGuest(name, hostId);
+      this.joining = true;
+      this.bScreen = BletherScreen.CHAT;
+    }
+  }
+
+  public cancelJoin() {
+    if (this.participant !== undefined) {
+      this.participant = undefined;
+      this.joining = false;
+      this.bScreen = BletherScreen.HOME;
+    }
   }
 }

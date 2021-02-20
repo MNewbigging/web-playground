@@ -22,4 +22,9 @@ export class BLHomeDialogState {
   @action public setJoinId(id: string) {
     this.joinId = id;
   }
+
+  @action public clearFields() {
+    this.name = '';
+    this.joinId = '';
+  }
 }

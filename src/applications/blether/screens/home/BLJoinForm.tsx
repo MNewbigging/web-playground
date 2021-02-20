@@ -1,3 +1,4 @@
+import { Spinner } from '@blueprintjs/core';
 import { observer } from 'mobx-react';
 import React from 'react';
 
@@ -11,13 +12,15 @@ interface JoinFormProps {
   joinId: string;
   onJoinIdChange: (id: string) => void;
   onJoin: (name: string, id: string) => void;
+  joining: boolean;
 }
 
 @observer
 export class BLJoinForm extends React.PureComponent<JoinFormProps> {
   public render() {
-    const { toHome, name, onNameChange, joinId, onJoinIdChange } = this.props;
+    const { toHome, name, onNameChange, joinId, onJoinIdChange, joining } = this.props;
     const buttonState = name.length && joinId.length ? 'active' : 'inactive';
+
     return (
       <div className={'join-form'}>
         <div className={'form'}>
@@ -43,7 +46,7 @@ export class BLJoinForm extends React.PureComponent<JoinFormProps> {
           />
 
           <div className={'button medium ' + buttonState} onClick={this.onJoin}>
-            Join a blether
+            {joining ? <Spinner size={20} /> : <span>Join a blether</span>}
           </div>
         </div>
         <div className={'back'}>

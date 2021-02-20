@@ -28,6 +28,8 @@ export class Blether extends React.PureComponent {
         <BLHomeDialog
           onHost={(name: string) => this.bState.hostChat(name)}
           onJoin={(name: string, id: string) => this.bState.joinChat(name, id)}
+          joining={this.bState.joining}
+          onJoinCancel={() => this.bState.cancelJoin()}
         />
       );
     } else {

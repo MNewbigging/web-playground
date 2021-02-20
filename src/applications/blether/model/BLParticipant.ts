@@ -14,13 +14,12 @@ export abstract class BLParticipant {
 
     this.peer = new Peer();
     this.peer.on('open', (id: string) => {
+      this.peer.on('error', (err: any) => console.log('error: ', err));
+      this.peer.on('disconnected', () => console.log(this.id + ' peer was disconnected'));
+
       this.id = id;
-      this.participantNames.push(this.name);
       this.onPeerOpen(id);
     });
-
-    this.peer.on('error', (err: any) => console.log('error: ', err));
-    this.peer.on('disconnected', () => console.log(this.id + ' peer was disconnected'));
   }
 
   protected abstract onPeerOpen(id: string): void;

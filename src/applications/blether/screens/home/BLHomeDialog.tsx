@@ -11,6 +11,8 @@ import { BLJoinForm } from './BLJoinForm';
 interface HomeProps {
   onHost: (name: string) => void;
   onJoin: (name: string, id: string) => void;
+  joining: boolean;
+  onJoinCancel: () => void;
 }
 
 @observer
@@ -31,7 +33,10 @@ export class BLHomeDialog extends React.PureComponent<HomeProps> {
       case BLHomeDialogForm.HOST:
         form = (
           <BLHostForm
-            toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)}
+            toHome={() => {
+              this.homeState.setHomeForm(BLHomeDialogForm.HOME);
+              this.homeState.clearFields();
+            }}
             name={this.homeState.name}
             onNameChange={(name: string) => this.homeState.setName(name)}
             onHost={this.props.onHost}
@@ -41,12 +46,13 @@ export class BLHomeDialog extends React.PureComponent<HomeProps> {
       case BLHomeDialogForm.JOIN:
         form = (
           <BLJoinForm
-            toHome={() => this.homeState.setHomeForm(BLHomeDialogForm.HOME)}
+            toHome={this.onBackFromJoin}
             name={this.homeState.name}
             onNameChange={(name: string) => this.homeState.setName(name)}
             joinId={this.homeState.joinId}
             onJoinIdChange={(id: string) => this.homeState.setJoinId(id)}
             onJoin={(name: string, id: string) => this.props.onJoin(name, id)}
+            joining={this.props.joining}
           />
         );
     }
@@ -58,4 +64,10 @@ export class BLHomeDialog extends React.PureComponent<HomeProps> {
       </div>
     );
   }
+
+  private readonly onBackFromJoin = () => {
+    this.homeState.setHomeForm(BLHomeDialogForm.HOME);
+    this.homeState.clearFields();
+    this.props.onJoinCancel();
+  };
 }

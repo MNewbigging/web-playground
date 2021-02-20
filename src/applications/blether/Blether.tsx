@@ -2,11 +2,11 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { BletherScreen, BletherState, BletherViewMode } from './BletherState';
+import { BLChatDesktop } from './screens/chat/desktop/BLChatDesktop';
+import { BLChatMobile } from './screens/chat/mobile/BLChatMobile';
 import { BLHomeDialog } from './screens/home/BLHomeDialog';
 
 import './blether.scss';
-import { BLChatDesktop } from './screens/chat/desktop/BLChatDesktop';
-import { BLChatMobile } from './screens/chat/mobile/BLChatMobile';
 
 @observer
 export class Blether extends React.PureComponent {
@@ -24,14 +24,7 @@ export class Blether extends React.PureComponent {
     let screen: JSX.Element;
 
     if (this.bState.bScreen === BletherScreen.HOME || !this.bState.participant?.ready) {
-      screen = (
-        <BLHomeDialog
-          onHost={(name: string) => this.bState.hostChat(name)}
-          onJoin={(name: string, id: string) => this.bState.joinChat(name, id)}
-          joining={this.bState.joining}
-          onJoinCancel={() => this.bState.cancelJoin()}
-        />
-      );
+      screen = <BLHomeDialog bState={this.bState} />;
     } else {
       switch (this.bState.viewMode) {
         case BletherViewMode.DESKTOP:

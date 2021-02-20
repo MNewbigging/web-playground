@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 import { BLGuest } from './model/BLGuest';
 import { BLHost } from './model/BLHost';
 import { BLParticipant } from './model/BLParticipant';
+import { BLHomeDialogState } from './screens/home/BLHomeDialogState';
 
 export enum BletherScreen {
   HOME,
@@ -17,6 +18,9 @@ export class BletherState {
   @observable public bScreen = BletherScreen.HOME;
   @observable public viewMode = BletherViewMode.DESKTOP;
   public participant?: BLParticipant;
+
+  public homeState = new BLHomeDialogState();
+
   @observable public joining = false;
 
   constructor() {

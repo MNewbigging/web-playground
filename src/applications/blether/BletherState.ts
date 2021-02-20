@@ -18,10 +18,8 @@ export class BletherState {
   @observable public bScreen = BletherScreen.HOME;
   @observable public viewMode = BletherViewMode.DESKTOP;
   public participant?: BLParticipant;
-
-  public homeState = new BLHomeDialogState();
-
   @observable public joining = false;
+  public homeState = new BLHomeDialogState();
 
   constructor() {
     // Check initial window size

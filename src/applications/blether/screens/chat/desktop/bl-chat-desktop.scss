@@ -90,6 +90,11 @@
   .log {
     flex: 1 1 auto;
     width: 100%;
+    padding: 20px;
+    overflow: auto;
+
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .input-area {

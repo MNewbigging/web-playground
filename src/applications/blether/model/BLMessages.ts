@@ -7,23 +7,29 @@ export enum BLMessageType {
 }
 
 export abstract class BLBaseMessage {
-  constructor(public type: BLMessageType) {}
+  constructor(public type: BLMessageType, public senderId: string) {}
 }
 
 export class BLPollMessage extends BLBaseMessage {
-  constructor() {
-    super(BLMessageType.POLL);
+  constructor(id: string) {
+    super(BLMessageType.POLL, id);
   }
 }
 
 export class BLParticipantNamesMessage extends BLBaseMessage {
-  constructor(public names: string[]) {
-    super(BLMessageType.PARTICIPANT_NAMES);
+  constructor(id: string, public names: string[]) {
+    super(BLMessageType.PARTICIPANT_NAMES, id);
   }
 }
 
 export class BLContentMessage extends BLBaseMessage {
-  constructor(public content: string) {
-    super(BLMessageType.CONTENT);
+  public content: string;
+  public senderName: string;
+  public timestamp: string;
+  constructor(id: string, content: string, senderName: string, timestamp: string) {
+    super(BLMessageType.CONTENT, id);
+    this.content = content;
+    this.senderName = senderName;
+    this.timestamp = timestamp;
   }
 }

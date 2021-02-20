@@ -1,7 +1,12 @@
 import { action } from 'mobx';
 import Peer from 'peerjs';
 
-import { BLParticipantNamesMessage } from './BLMessages';
+import {
+  BLBaseMessage,
+  BLContentMessage,
+  BLMessageType,
+  BLParticipantNamesMessage,
+} from './BLMessages';
 import { BLParticipant } from './BLParticipant';
 
 export class BLHost extends BLParticipant {
@@ -37,9 +42,27 @@ export class BLHost extends BLParticipant {
     });
   };
 
-  protected readonly onReceive = (data: any) => {
-    console.log(this.id + ' received: ', data);
-  };
+  protected parseMessage(msg: BLBaseMessage): void {
+    console.log('parsing message');
+    switch (msg.type) {
+      case BLMessageType.CONTENT:
+        const contentMsg = msg as BLContentMessage;
+        this.chatLog.push(contentMsg);
+        this.sendMessage(msg, msg.senderId);
+        break;
+    }
+  }
+
+  public sendMessage(msg: BLBaseMessage, omit?: string) {
+    const msgData = JSON.stringify(msg);
+    this.guests.forEach((guest) => {
+      if (omit !== undefined && guest.peer === omit) {
+        console.log('not sending to: ', omit);
+        return;
+      }
+      guest.send(msgData);
+    });
+  }
 
   @action private readonly onGuestDisconnect = (guestId: string) => {
     const guest = this.guests.find((g) => g.peer === guestId);
@@ -55,7 +78,9 @@ export class BLHost extends BLParticipant {
 
   private onUpdateGuests() {
     // Update all participants of new guest's names
-    const guestNames = JSON.stringify(new BLParticipantNamesMessage(this.participantNames));
+    const guestNames = JSON.stringify(
+      new BLParticipantNamesMessage(this.id, this.participantNames)
+    );
     this.guests.forEach((conn) => conn.send(guestNames));
   }
 }

@@ -1,19 +1,26 @@
 import { observable } from 'mobx';
 import Peer from 'peerjs';
 
+import { BLBaseMessage, BLContentMessage } from './BLMessages';
+
 export abstract class BLParticipant {
+  // Info about itself
   @observable public ready = false;
-  @observable public participantNames: string[] = [];
+  @observable public hostId: string;
   public name: string;
   public id: string;
-  @observable public hostId: string;
   public peer: Peer;
+
+  // Info about the chat
+  @observable public participantNames: string[] = [];
+  @observable public chatLog: BLContentMessage[] = [];
 
   constructor(name: string, onError: (err: any) => void) {
     this.name = name;
 
     this.peer = new Peer();
     this.peer.on('open', (id: string) => {
+      console.log('my id is: ', id);
       this.peer.on('error', (err: any) => onError(err));
       this.peer.on('disconnected', () => console.log(this.id + ' peer was disconnected'));
 
@@ -24,5 +31,12 @@ export abstract class BLParticipant {
 
   protected abstract onPeerOpen(id: string): void;
 
-  protected abstract onReceive(data: any): void;
+  protected onReceive = (data: any): void => {
+    console.log(this.name + ' received: ', data);
+    this.parseMessage(JSON.parse(data));
+  };
+
+  protected abstract parseMessage(msg: BLBaseMessage): void;
+
+  public abstract sendMessage(msg: BLBaseMessage): void;
 }

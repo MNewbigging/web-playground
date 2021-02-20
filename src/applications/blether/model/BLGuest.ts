@@ -1,6 +1,12 @@
+import content from '*.svg';
 import { action } from 'mobx';
 import Peer from 'peerjs';
-import { BLBaseMessage, BLMessageType, BLParticipantNamesMessage } from './BLMessages';
+import {
+  BLBaseMessage,
+  BLContentMessage,
+  BLMessageType,
+  BLParticipantNamesMessage,
+} from './BLMessages';
 import { BLParticipant } from './BLParticipant';
 
 export class BLGuest extends BLParticipant {
@@ -38,19 +44,22 @@ export class BLGuest extends BLParticipant {
     });
   };
 
-  protected readonly onReceive = (data: any) => {
-    console.log(this.id + ' received: ', data);
+  public sendMessage(msg: BLBaseMessage) {
+    this.host.send(JSON.stringify(msg));
+  }
 
-    // Parse the data
-    this.parseMessage(JSON.parse(data));
-  };
-
-  @action private parseMessage(message: BLBaseMessage): message is BLBaseMessage {
+  @action protected parseMessage(message: BLBaseMessage) {
     console.log('parsing message');
     switch (message.type) {
       case BLMessageType.PARTICIPANT_NAMES:
-        const pnMsg = message as BLParticipantNamesMessage;
-        this.participantNames = pnMsg.names;
+        const nameMsg = message as BLParticipantNamesMessage;
+        this.participantNames = nameMsg.names;
+        console.log('setting party names: ', this.participantNames);
+        break;
+      case BLMessageType.CONTENT:
+        const contentMsg = message as BLContentMessage;
+        this.chatLog.push(contentMsg);
+        console.log('added to chat log: ', this.chatLog);
         break;
     }
 

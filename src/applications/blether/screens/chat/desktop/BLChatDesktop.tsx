@@ -2,9 +2,11 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { BLParticipant } from '../../../model/BLParticipant';
+import { BLChatState } from '../BLChatState';
 
 import '../../../blether-classes.scss';
 import './bl-chat-desktop.scss';
+import { BLChatMessage } from '../BLChatMessage';
 
 interface ChatProps {
   participant: BLParticipant;
@@ -12,6 +14,7 @@ interface ChatProps {
 
 @observer
 export class BLChatDesktop extends React.PureComponent<ChatProps> {
+  private readonly chatState = new BLChatState(this.props.participant);
   public render() {
     const { participant } = this.props;
     return (
@@ -32,9 +35,23 @@ export class BLChatDesktop extends React.PureComponent<ChatProps> {
         </div>
 
         <div className={'chat'}>
-          <div className={'log'}></div>
+          <div id={'log'} className={'log'}>
+            {this.renderChatLog()}
+          </div>
           <div className={'input-area'}>
-            <input className={'input'} type={'text'} />
+            <input
+              className={'input'}
+              type={'text'}
+              value={this.chatState.inputText}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                this.chatState.setInputText(event.target.value)
+              }
+              onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => {
+                if (event.key === 'Enter') {
+                  this.chatState.sendMessage();
+                }
+              }}
+            />
           </div>
         </div>
       </div>
@@ -50,5 +67,16 @@ export class BLChatDesktop extends React.PureComponent<ChatProps> {
         </div>
       );
     });
+  }
+
+  private renderChatLog() {
+    const { participant } = this.props;
+    // need to reverse array for column-reverse order
+    return participant.chatLog
+      .slice()
+      .reverse()
+      .map((msg, i) => {
+        return <BLChatMessage key={'msg-' + i} participantId={participant.id} message={msg} />;
+      });
   }
 }

@@ -1,12 +1,17 @@
 import { Drawer } from '@blueprintjs/core';
-import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import React from 'react';
+import { BLParticipant } from '../../../model/BLParticipant';
 
 import './bl-chat-mobile.scss';
 
+interface ChatProps {
+  participant: BLParticipant;
+}
+
 @observer
-export class BLChatMobile extends React.PureComponent {
+export class BLChatMobile extends React.PureComponent<ChatProps> {
   @observable private drawerOpen = false;
   public render() {
     return (
@@ -27,9 +32,10 @@ export class BLChatMobile extends React.PureComponent {
   }
 
   private renderDrawer() {
+    const { participant } = this.props;
     return (
       <Drawer
-        size={Drawer.SIZE_LARGE}
+        size={'80%'}
         isOpen={this.drawerOpen}
         canEscapeKeyClose
         canOutsideClickClose
@@ -42,11 +48,11 @@ export class BLChatMobile extends React.PureComponent {
               ...
             </div>
           </div>
-          <div className={'participants'}></div>
+          <div className={'participants'}>{this.renderParticipants()}</div>
           <div className={'chat-id'}>
             <div className={'id-box'}>
               <div className={'label'}>Invite others to join:</div>
-              <div className={'id'}>akdj20sdkj200</div>
+              <div className={'id'}>{participant.hostId}</div>
               <div className={'button small'}>Copy to clipboard</div>
             </div>
           </div>
@@ -58,4 +64,15 @@ export class BLChatMobile extends React.PureComponent {
   private readonly toggleDrawer = () => {
     this.drawerOpen = !this.drawerOpen;
   };
+
+  private renderParticipants() {
+    const { participant } = this.props;
+    return participant.participantNames.map((name, i) => {
+      return (
+        <div key={name + i} className={'item'}>
+          {name}
+        </div>
+      );
+    });
+  }
 }
